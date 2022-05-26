@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'tratata';
+  src:
+    url('./fonts/tratata.ttf?tc30l') format('truetype'),
+    url('./fonts/tratata.woff?tc30l') format('woff'),
+    url('./fonts/tratata.svg?tc30l#tratata') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="x-icon-"], [class*=" x-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'tratata' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.x-icon-wallet:before {
+  content: "\e850";
+}
+.x-icon-translate:before {
+  content: "\e8e2";
+}
+.x-icon-activity:before {
+  content: "\e90d";
+}
+.x-icon-error:before {
+  content: "\e901";
+}
+.x-icon-warn:before {
+  content: "\e902";
+}
+.x-icon-a-left:before {
+  content: "\e903";
+}
+.x-icon-a-right:before {
+  content: "\e904";
+}
+.x-icon-download:before {
+  content: "\e90f";
+}
+.x-icon-edit-l:before {
+  content: "\e905";
+}
+.x-icon-fea:before {
+  content: "\e906";
+}
+.x-icon-info:before {
+  content: "\e907";
+}
+.x-icon-layers:before {
+  content: "\e911";
+}
+.x-icon-load:before {
+  content: "\e908";
+}
+.x-icon-menu:before {
+  content: "\e90a";
+}
+.x-icon-moon:before {
+  content: "\e900";
+}
+.x-icon-plus:before {
+  content: "\e90e";
+}
+.x-icon-settings:before {
+  content: "\e909";
+}
+.x-icon-trash:before {
+  content: "\e90b";
+}
+.x-icon-upload:before {
+  content: "\e912";
+}
+.x-icon-cross:before {
+  content: "\e90c";
+}
