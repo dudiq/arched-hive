@@ -20,6 +20,7 @@
     "mobx": "^6.6.0",
     "mobx-react-lite": "^3.4.0",
     "preact": "^10.7.2",
+    "preact-router": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.10.0"
   },

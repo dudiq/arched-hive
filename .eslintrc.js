@@ -27,7 +27,12 @@ module.exports = {
     'import/no-anonymous-default-export': 'off',
     'import/no-duplicates': 'warn',
     'import/newline-after-import': 'warn',
-    'no-unused-vars': ['error', { argsIgnorePattern: '_' }],
+    // 'no-unused-vars': ['error', { argsIgnorePattern: '_' }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '_', varsIgnorePattern: '_[iI]gnored', ignoreRestSiblings: true },
+    ],
+    'no-useless-constructor': 'off',
     'import/order': [
       'error',
       {
