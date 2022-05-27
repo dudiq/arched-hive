@@ -1,8 +1,8 @@
 import { render } from 'preact'
-import { HelloUi } from './ui/hello-ui'
+import { Routing } from './ui/routing'
 
 export function startRender() {
   const node = document.getElementById('root')
   if (!node) return
-  render(<HelloUi />, node)
+  render(<Routing />, node)
 }

@@ -4244,6 +4244,11 @@ preact-router@^4.0.1:
   resolved "https://registry.yarnpkg.com/preact-router/-/preact-router-4.0.1.tgz#9f04578cbda7939bd15237278159d43d09f962ae"
   integrity sha512-xPyHVLouc5oKIlKu9iEElplNygJYkOn/vfXfZhcoOFqzfAZHZMmT3FsQb0yyPkdt1rwTLFAxek6/5CFkofocSQ==
 
+preact-transitioning@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/preact-transitioning/-/preact-transitioning-1.3.1.tgz#2ab57299de298ae0f99f88eca8895bd570102419"
+  integrity sha512-1K3G9KoHBWpXfoiCS3qU24tdoAs4z2KtwsWAoWcrUiiH1hszhN72RajvgoOKuU2UIBDIVNNzcFiXnUxMSTqz/g==
+
 preact@^10.7.2:
   version "10.7.2"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.7.2.tgz#5c632ba194b87345dcaee6598b3b6529b58e6a12"
