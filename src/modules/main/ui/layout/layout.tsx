@@ -2,8 +2,8 @@ import { ComponentChildren } from 'preact'
 import { Container, Header, Footer, Content } from './layout-styles'
 
 type Props = {
-  headerSlot: ComponentChildren
-  footerSlot: ComponentChildren
+  headerSlot?: ComponentChildren
+  footerSlot?: ComponentChildren
   contentSlot: ComponentChildren
 }
 

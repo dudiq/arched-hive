@@ -8,6 +8,7 @@ import VitePluginLinaria from 'vite-plugin-linaria'
 
 export default defineConfig({
   esbuild: false,
+  cacheDir: '../.cache',
   build: {
     outDir: '../dist',
   },
@@ -15,6 +16,7 @@ export default defineConfig({
     swcReact({
       reactFresh: false,
       swcOptions: {
+        sourceMaps: true,
         jsc: {
           target: 'es2015',
           keepClassNames: true,

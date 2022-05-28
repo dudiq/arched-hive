@@ -1,6 +1,6 @@
 import { Module, Container, Inject } from '@pv/di'
 import { startRender } from './start-render'
-import { ScreensService } from './interface/services/screens.service/screens.service'
+import { ScreensService } from './interface/services/screens.service'
 
 @Module()
 export class MainModule {

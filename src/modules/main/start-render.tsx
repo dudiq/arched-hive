@@ -1,8 +1,8 @@
 import { render } from 'preact'
-import { Routing } from './ui/routing'
+import { Main } from './ui/main'
 
 export function startRender() {
   const node = document.getElementById('root')
   if (!node) return
-  render(<Routing />, node)
+  render(<Main />, node)
 }

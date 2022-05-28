@@ -15,21 +15,25 @@ type FactoryResult<T> = {
   useModuleContext: () => ResultFields<T>
 }
 
+function createContextByFields<T>(fields: Fields<T>): Context<T> {
+  const keys = Object.keys(fields) as Array<keyof T>
+  const instances = keys.reduce<T>((acc, fieldKey) => {
+    const ClassName = fields[fieldKey]
+    acc[fieldKey] = Container.get(ClassName)
+    return acc
+  }, {} as ResultFields<T>)
+
+  // @ts-ignore
+  return createContext.call(this, instances) as Context<T>
+}
+
 export function hookContextFactory<T>(fields: Fields<T>): FactoryResult<T> {
   let cachedContext: Context<T> | null = null
 
-  const useModuleContext = function useFactoryContext() {
-    if (!cachedContext) {
-      const keys = Object.keys(fields) as Array<keyof T>
-      const instances = keys.reduce<T>((acc, fieldKey) => {
-        const ClassName = fields[fieldKey]
-        acc[fieldKey] = Container.get(ClassName)
-        return acc
-      }, {} as ResultFields<T>)
-
-      cachedContext = createContext(instances)
+  const useModuleContext = () => {
+    if (cachedContext === null) {
+      cachedContext = createContextByFields(fields)
     }
-
     return useContext(cachedContext)
   }
 

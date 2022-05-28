@@ -68,3 +68,4 @@ package-lock.json
 .idea
 /build
 /*.log
+.cache
