@@ -11,6 +11,7 @@ export default defineConfig({
   cacheDir: '../.cache',
   build: {
     outDir: '../dist',
+    emptyOutDir: true,
   },
   plugins: [
     swcReact({
