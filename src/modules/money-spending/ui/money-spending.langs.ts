@@ -1,4 +1,4 @@
-import { addBlock } from 'jr-translate'
+import { addBlock } from '@pv/interface/services/i18n'
 
 addBlock({
   data: {

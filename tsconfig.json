@@ -5,7 +5,7 @@
     "useDefineForClassFields": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "dom"],
     "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": false,

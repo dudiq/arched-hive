@@ -1,5 +1,5 @@
 import { Service, Inject } from '@pv/di'
-import { RoutesStore } from '../../stores/routes.store'
+import { RoutesStore } from '@pv/interface/stores/routes.store'
 import { routes } from './routes'
 
 @Service()

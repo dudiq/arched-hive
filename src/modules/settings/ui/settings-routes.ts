@@ -1,5 +1,5 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
-import { Settings } from '@pv/modules/settings/ui/settings'
+import { Settings } from './settings'
 
 export const settingsRoutes: RouteEntity[] = [
   {
@@ -8,5 +8,7 @@ export const settingsRoutes: RouteEntity[] = [
     },
     component: Settings,
     documentTitle: 'Settings',
+    withHeader: true,
+    withNavigation: true,
   },
 ]

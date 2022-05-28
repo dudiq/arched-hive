@@ -1,5 +1,5 @@
 import { Module, Container, Inject } from '@pv/di'
-import { startRender } from './start-render'
+import { AppModule } from '@pv/modules/app'
 import { ScreensService } from './interface/services/screens.service'
 
 @Module()
@@ -7,18 +7,16 @@ export class MainModule {
   constructor(
     @Inject()
     private screensService: ScreensService,
+    @Inject()
+    private appModule: AppModule,
   ) {}
 
   async start() {
     return new Promise<void>((resolve) => {
-      this.render()
+      this.screensService.handlerRegisterRoutes()
+      this.appModule.start()
       resolve()
     })
-  }
-
-  private render() {
-    this.screensService.handlerRegisterRoutes()
-    startRender()
   }
 
   static getInstance() {

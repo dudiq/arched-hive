@@ -1,3 +1,4 @@
+export type IconSize = 'small' | 'normal' | 'big' | 'huge'
 export type IconNames =
   | 'wallet'
   | 'translate'

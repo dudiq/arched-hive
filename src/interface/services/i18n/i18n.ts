@@ -1,6 +1,6 @@
-import { setLangs, translate, addBlock, getLang } from 'jr-translate'
+import { setLangs, translate, addBlock, getLang, setLang } from 'jr-translate'
 
 export const t = translate
-export { addBlock, getLang }
+export { addBlock, getLang, setLang }
 
 setLangs(['en', 'ru'])

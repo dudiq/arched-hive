@@ -1,6 +1,16 @@
-import { t } from '@pv/interface/services/i18n'
 import './money-spending.langs'
+import { Button } from '@pv/ui-kit/button'
+import { Icon } from '@pv/ui-kit/icon'
+import { ButtonWrapper } from './money-spending-styles'
 
 export function MoneySpending() {
-  return <div>{t('moneySpending.add')}</div>
+  return (
+    <>
+      <ButtonWrapper>
+        <Button shape="circle">
+          <Icon iconName="plus" iconSize="huge" />
+        </Button>
+      </ButtonWrapper>
+    </>
+  )
 }

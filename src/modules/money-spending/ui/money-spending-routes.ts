@@ -1,5 +1,5 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
-import {MoneySpending} from "./money-spending";
+import { MoneySpending } from './money-spending'
 
 export const moneySpendingRoutes: RouteEntity[] = [
   {
@@ -8,5 +8,7 @@ export const moneySpendingRoutes: RouteEntity[] = [
     },
     component: MoneySpending,
     documentTitle: 'Money spending',
+    withHeader: true,
+    withNavigation: true,
   },
 ]
