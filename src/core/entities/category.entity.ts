@@ -1,7 +1,7 @@
 export type CategoryEntity = {
   id: string
-  catId?: string
   title: string
+  catId?: string
   dateBegin?: number
   dateEnd?: number
 }

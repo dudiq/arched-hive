@@ -11,29 +11,29 @@ addBlock({
         'Build',
         'Сборка'
       ],
-      import: [
-        'Import',
-        'Импорт',
+      importDone: [
+        'Data added, import done',
+        'Данные добавлены, импорт завершен'
+      ],
+      importError: [
+        'Import file error!',
+        'Ошибка при импорте'
       ],
       importFin: [
-        'Import .fin',
-        'Импорт .fin',
+        'Import as .fin',
+        'Импорт как .fin',
       ],
-      export: [
-        'Export',
-        'Экспорт',
+      exportError: [
+        'Export error',
+        'Ошибка при экспорте'
       ],
       exportFin: [
-        'Export .fin',
-        'Экспорт .fin',
+        'Export as .fin',
+        'Экспорт как .fin',
       ],
       exportCsv: [
-        'Export .csv',
-        'Экспорт .csv',
-      ],
-      danger: [
-        'Danger area!',
-        'Опасная зона',
+        'Export as .csv',
+        'Экспорт как .csv',
       ],
       sureDrop: [
         'All data will be lost! Are you sure?',

@@ -6,13 +6,15 @@ type OptionsType<T> = {
 
 type Maybe<T> = T | undefined | null
 
+const PREFIX = '@finanso:'
+
 export class LocalStorageItem<T> {
   value: Maybe<T>
 
   constructor(private readonly key: string, private readonly options?: OptionsType<T>) {
     this.value = this.getValue()
     window.addEventListener('storage', (event) => {
-      if (!event.key || event.key === key) {
+      if (!event.key || event.key === this.usedKey) {
         this.value = this.getValue()
       }
     })
@@ -22,16 +24,20 @@ export class LocalStorageItem<T> {
     })
   }
 
+  get usedKey() {
+    return `${PREFIX}-${this.key}`
+  }
+
   set(value: T) {
     this.value = value
     try {
       const storedValue = JSON.stringify({ value })
-      window.localStorage.setItem(this.key, storedValue)
+      window.localStorage.setItem(this.usedKey, storedValue)
     } catch (e) {}
   }
 
   private getValue(): Maybe<T> {
-    const storedValue = window.localStorage.getItem(this.key)
+    const storedValue = window.localStorage.getItem(this.usedKey)
     if (!storedValue) {
       return this.options?.initialValue
     }
@@ -43,6 +49,6 @@ export class LocalStorageItem<T> {
   }
 
   remove() {
-    return window.localStorage.removeItem(this.key)
+    return window.localStorage.removeItem(this.usedKey)
   }
 }

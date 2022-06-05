@@ -1,6 +1,8 @@
 import { hookContextFactory } from '@pv/interface/services/hook-context-factory'
-import { ImportAction } from './actions/import.action'
+import { SettingsAction } from './actions/settings.action'
+import { SettingsStore } from './stores/settings.store'
 
 export const { useModuleContext: useSettingsContext } = hookContextFactory({
-  importAction: ImportAction,
+  settingsAction: SettingsAction,
+  settingsStore: SettingsStore,
 })

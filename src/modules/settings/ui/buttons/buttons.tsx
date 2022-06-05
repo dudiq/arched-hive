@@ -6,18 +6,22 @@ import { Container, DangerRow } from './buttons-styles'
 import { RowBlock } from './row-block'
 
 export const Buttons = observer(() => {
-  const { importAction } = useSettingsContext()
+  const { settingsAction } = useSettingsContext()
   return (
     <Container>
-      <RowBlock>
-        <UploadButton onChange={importAction.handleImportFiles}>
+      <RowBlock icon="upload">
+        <UploadButton onChange={settingsAction.handleImportFiles}>
           {t('settings.importFin')}
         </UploadButton>
       </RowBlock>
-      <RowBlock>{t('settings.exportFin')}</RowBlock>
-      <RowBlock>{t('settings.exportCsv')}</RowBlock>
-      <DangerRow>
-        <RowBlock>{t('settings.dropAll')}</RowBlock>
+      <RowBlock icon="download" onClick={settingsAction.handleExportAsFin}>
+        {t('settings.exportFin')}
+      </RowBlock>
+      <RowBlock icon="download" onClick={settingsAction.handleExportAsCsv}>
+        {t('settings.exportCsv')}
+      </RowBlock>
+      <DangerRow onClick={settingsAction.handleDropAllData}>
+        <RowBlock icon="trash">{t('settings.dropAll')}</RowBlock>
       </DangerRow>
     </Container>
   )

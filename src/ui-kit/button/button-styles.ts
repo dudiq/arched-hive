@@ -7,7 +7,7 @@ export const Container = styled.button`
   color: var(--clr-primary-text);
   box-shadow: 1px 1px 4px 0 var(--clr-shadow);
   min-height: 42px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   &[data-shape='rect'] {
     border-radius: 4px;

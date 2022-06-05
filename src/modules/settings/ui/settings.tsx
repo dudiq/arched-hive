@@ -4,6 +4,9 @@ import { useThemeContext } from '@pv/modules/theme'
 import { useLanguageContext } from '@pv/modules/language'
 import { List } from '@pv/ui-kit/list'
 import { t } from '@pv/interface/services/i18n'
+import { useSettingsContext } from '@pv/modules/settings/interface/use-settings-context'
+import { BlockLoader } from '@pv/ui-kit/loader'
+import { ScrollContainer } from '@pv/ui-kit/scroll-container'
 import { BuildVersion } from './build-version'
 import { ListBlock } from './list-block'
 import { LangSwitch } from './settings-styles'
@@ -14,8 +17,9 @@ import './settings.langs'
 export const Settings = observer(() => {
   const { themeStore, themeAction } = useThemeContext()
   const { langAction } = useLanguageContext()
+  const { settingsStore } = useSettingsContext()
   return (
-    <>
+    <ScrollContainer>
       <List>
         <ListBlock
           onClick={themeAction.handleToggleTheme}
@@ -34,6 +38,7 @@ export const Settings = observer(() => {
       </List>
       <Buttons />
       <BuildVersion />
-    </>
+      {settingsStore.isLoading && <BlockLoader />}
+    </ScrollContainer>
   )
 })

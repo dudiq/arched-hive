@@ -1,7 +1,7 @@
 import { ComponentChildren } from 'preact'
 import { observer } from 'mobx-react-lite'
 import { useLayout } from '@pv/modules/app/ui/layout/use-layout'
-import { Container, Header, Footer, Content, ContentWrapper } from './layout-styles'
+import { Container, Header, Footer, Content } from './layout-styles'
 
 type Props = {
   headerSlot?: ComponentChildren
@@ -14,9 +14,7 @@ export const Layout = observer(({ contentSlot, headerSlot, footerSlot }: Props) 
   return (
     <Container>
       {usedRoute?.withHeader && <Header>{headerSlot}</Header>}
-      <Content>
-        <ContentWrapper>{contentSlot}</ContentWrapper>
-      </Content>
+      <Content>{contentSlot}</Content>
       {usedRoute?.withNavigation && <Footer>{footerSlot}</Footer>}
     </Container>
   )

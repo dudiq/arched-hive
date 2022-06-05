@@ -5,7 +5,7 @@ import { LanguageEntity } from '@pv/modules/language/core/language.entity'
 
 @Store()
 export class LangStore {
-  private langStorage = new LocalStorageItem<LanguageEntity>('@lang', {
+  private langStorage = new LocalStorageItem<LanguageEntity>('lang', {
     initialValue: getLang() as LanguageEntity,
   })
 

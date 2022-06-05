@@ -20,5 +20,27 @@ addBlock({
         'Настройки',
       ],
     },
+    firstView: {
+      t: [
+        'Select Category',
+        'Выбор категорий',
+      ],
+      select: [
+        'At first you need to choose which categories to use:',
+        'Для начала нужно выбрать, какие категории использовать:',
+      ],
+      use: [
+        'Use selected',
+        'Использовать выбранное',
+      ],
+      import: [
+        'Go to import',
+        'Перейти в импорт',
+      ],
+      or: [
+        'or...',
+        'или...',
+      ],
+    },
   }
 })

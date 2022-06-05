@@ -17,6 +17,8 @@ module.exports = {
     'max-params': 'off',
     'max-params-no-constructor/max-params-no-constructor': ['error', 5],
 
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/ban-types': 'off',

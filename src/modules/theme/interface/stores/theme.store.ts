@@ -6,7 +6,7 @@ const DEFAULT_VALUE = 'light'
 
 @Store()
 export class ThemeStore {
-  private themeStorage = new LocalStorageItem<ThemeEntity>('@theme', {
+  private themeStorage = new LocalStorageItem<ThemeEntity>('theme', {
     initialValue: DEFAULT_VALUE,
   })
 

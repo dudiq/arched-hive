@@ -11,3 +11,9 @@ export const BuildVersion = styled.div`
   color: var(--clr-6);
   font-size: var(--text-size-tiny);
 `
+
+export const Loader = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+`
