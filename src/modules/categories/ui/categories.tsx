@@ -13,7 +13,7 @@ export const Categories = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
 
   useEffect(() => {
-    categoriesAction.handleLoadCategoryList()
+    categoriesAction.handleInitialLoadCategoryList()
   }, [categoriesAction])
 
   return (

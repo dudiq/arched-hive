@@ -5,3 +5,7 @@ export const ButtonWrapper = styled.div`
   right: 20px;
   bottom: 20px;
 `
+
+export const LoadMoreWrapper = styled.div`
+  padding: 20px;
+`

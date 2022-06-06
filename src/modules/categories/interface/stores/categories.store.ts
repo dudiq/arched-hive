@@ -27,6 +27,10 @@ export class CategoriesStore {
     this.categoryList = value
   }
 
+  dropCategories() {
+    this.categoryList = []
+  }
+
   setFilter(callback: FilterCbType) {
     this.filter = callback
   }

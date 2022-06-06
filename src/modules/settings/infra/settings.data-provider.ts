@@ -17,7 +17,7 @@ export class SettingsDataProvider extends DatabaseDataProvider {
       this.client.expense.bulkAdd(input.expense),
     ])
 
-    return this.ok()
+    return this.ok(true)
   }
 
   async dropData() {
@@ -27,7 +27,7 @@ export class SettingsDataProvider extends DatabaseDataProvider {
       this.client.pouch.clear(),
     ])
 
-    return this.ok()
+    return this.ok(true)
   }
 
   async getAllData() {

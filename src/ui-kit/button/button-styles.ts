@@ -2,13 +2,22 @@ import { styled } from '@linaria/react'
 
 export const Container = styled.button`
   padding: 0 10px;
-  background-color: var(--clr-primary);
   border: none;
-  color: var(--clr-primary-text);
   box-shadow: 1px 1px 4px 0 var(--clr-shadow);
   min-height: 42px;
   display: inline-flex;
   align-items: center;
+
+  background-color: var(--clr-primary);
+  color: var(--clr-primary-text);
+
+  transition: all 0.2s ease;
+
+  &[data-variant='secondary'] {
+    background-color: var(--clr-3);
+    color: var(--clr-1);
+  }
+
   &[data-shape='rect'] {
     border-radius: 4px;
   }

@@ -5,6 +5,7 @@ import { t } from '@pv/interface/services/i18n'
 import { ExportDatabaseValueObject } from '../../core/value-object/export-database.value-object'
 import { SettingsAdapter } from '../../infra/settings.adapter'
 import { FileService } from './file.service'
+import { DropAllService } from './drop-all.service'
 
 @Service()
 export class ImportFinService {
@@ -15,6 +16,8 @@ export class ImportFinService {
     private fileService: FileService,
     @Inject()
     private settingsAdapter: SettingsAdapter,
+    @Inject()
+    private dropAllService: DropAllService,
   ) {}
 
   private static decompressFromBase64<T>(data: string): T | null {
@@ -38,6 +41,7 @@ export class ImportFinService {
     if (!result.dbVersion) return
     if (!result.data) return
 
+    this.dropAllService.dropRelatedStores()
     const importResult = await this.settingsAdapter.importData(result.data)
     if (importResult.isErr()) {
       await this.messageBoxService.alert(t('settings.importError'))

@@ -7,7 +7,11 @@ export class DatabaseDataProvider {
     return this.databaseClient
   }
 
-  ok<T>(result?: T) {
+  ok<T>(result: T) {
     return { data: result, error: undefined }
+  }
+
+  error<T>(result: T) {
+    return { data: undefined, error: result }
   }
 }

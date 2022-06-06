@@ -27,7 +27,9 @@ export class CategoriesAction {
     this.categoriesService.removeCategory()
   }
 
-  async handleLoadCategoryList() {
+  async handleInitialLoadCategoryList() {
+    if (!this.categoriesStore.isEmptyCategories) return
+
     this.categoriesStore.setIsLoading(true)
     await this.categoriesService.loadCategories()
     this.categoriesStore.setIsLoading(false)

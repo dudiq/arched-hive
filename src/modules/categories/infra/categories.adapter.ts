@@ -17,9 +17,9 @@ export class CategoriesAdapter {
 
   async addCategory(category: CategoryEntity): PromisedResult<boolean, CategoriesErrorsInstances> {
     try {
-      const { error, data } = await this.categoriesDataProvider.addCategory(category)
+      const { error } = await this.categoriesDataProvider.addCategory(category)
 
-      if (error || !data) return Result.Err(new CategoriesErrors.AddResponse(error))
+      if (error) return Result.Err(new CategoriesErrors.AddResponse(error))
 
       return Result.Ok(true)
     } catch (e) {
@@ -31,7 +31,7 @@ export class CategoriesAdapter {
     try {
       const { error, data } = await this.categoriesDataProvider.getCategories()
 
-      if (error || !data) return Result.Err(new CategoriesErrors.GetListResponse(error))
+      if (error) return Result.Err(new CategoriesErrors.GetListResponse(error))
 
       return Result.Ok(data)
     } catch (e) {
@@ -44,9 +44,9 @@ export class CategoriesAdapter {
     title: string,
   ): PromisedResult<boolean, CategoriesErrorsInstances> {
     try {
-      const { error, data } = await this.categoriesDataProvider.updateCategoryTitle(id, title)
+      const { error } = await this.categoriesDataProvider.updateCategoryTitle(id, title)
 
-      if (error || !data) return Result.Err(new CategoriesErrors.UpdateCategoryResponse(error))
+      if (error) return Result.Err(new CategoriesErrors.UpdateCategoryResponse(error))
 
       return Result.Ok(true)
     } catch (e) {
@@ -56,9 +56,9 @@ export class CategoriesAdapter {
 
   async removeCategory(id: string): PromisedResult<boolean, CategoriesErrorsInstances> {
     try {
-      const { error, data } = await this.categoriesDataProvider.removeCategory(id)
+      const { error } = await this.categoriesDataProvider.removeCategory(id)
 
-      if (error || !data) return Result.Err(new CategoriesErrors.RemoveCategoryResponse(error))
+      if (error) return Result.Err(new CategoriesErrors.RemoveCategoryResponse(error))
 
       return Result.Ok(true)
     } catch (e) {

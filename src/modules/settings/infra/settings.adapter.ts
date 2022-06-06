@@ -40,7 +40,7 @@ export class SettingsAdapter {
   async getAllData(): PromisedResult<ImportDataValueObject, SettingsErrorsInstances> {
     try {
       const { error, data } = await this.settingsDataProvider.getAllData()
-      if (error || !data) return Result.Err(new SettingsErrors.LoadDataResponse(error))
+      if (error) return Result.Err(new SettingsErrors.LoadDataResponse(error))
 
       return Result.Ok(data)
     } catch (e) {

@@ -8,6 +8,6 @@ export class AppDataProvider extends DatabaseDataProvider {
     await this.client.category.clear()
     await this.client.category.bulkAdd(categories)
 
-    return this.ok()
+    return this.ok(true)
   }
 }
