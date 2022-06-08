@@ -1,7 +1,7 @@
 import { Inject, Service } from '@pv/di'
 import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
-import { guid } from '@pv/infra/guid'
+import { guid } from '@pv/utils/guid'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
 import { CategoriesAdapter } from '../../infra/categories.adapter'
 import { CategoriesStore } from '../../interface/stores/categories.store'

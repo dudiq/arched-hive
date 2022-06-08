@@ -7,6 +7,7 @@ import { Loader } from '@pv/ui-kit/loader'
 import { Link } from '@pv/ui-kit/link'
 import { t } from '@pv/interface/services/i18n'
 import { MoneyForm } from '@pv/modules/money-spending/ui/money-form'
+import { useToggle } from '@pv/utils/use-toggle'
 import { ButtonWrapper, LoadMoreWrapper } from './money-spending-styles'
 import { ExpenseRow } from './expense-row'
 import { TodayCost } from './today-cost'
@@ -14,6 +15,8 @@ import { useMoneySpending } from './use-money-spending'
 
 export const MoneySpending = observer(() => {
   const { anchorRef, moneySpendingStore, moneySpendingAction } = useMoneySpending()
+
+  const toggleModal = useToggle()
 
   return (
     <>
@@ -33,14 +36,9 @@ export const MoneySpending = observer(() => {
         </Swap>
       </ScrollContainer>
       <ButtonWrapper>
-        <Button
-          shape="circle"
-          iconName="plus"
-          iconSize="huge"
-          onClick={moneySpendingStore.moneySpendingToggle.handleOpen}
-        />
+        <Button shape="circle" iconName="plus" iconSize="huge" onClick={toggleModal.handleOpen} />
       </ButtonWrapper>
-      <MoneyForm isVisible={moneySpendingStore.moneySpendingToggle.isOpen} />
+      <MoneyForm isVisible={toggleModal.isOpen} onClose={toggleModal.handleClose} />
     </>
   )
 })
