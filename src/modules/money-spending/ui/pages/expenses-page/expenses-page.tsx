@@ -6,16 +6,16 @@ import { Link } from '@pv/ui-kit/link'
 import { t } from '@pv/interface/services/i18n'
 import { MoneyForm } from '@pv/modules/money-spending/ui/money-form'
 import { useToggle } from '@pv/utils/use-toggle'
-import { LoadMoreWrapper } from './money-spending-styles'
+import { LoadMoreWrapper } from './expenses-page-styles'
 import { TodayCost } from './today-cost'
-import { useMoneySpending } from './use-money-spending'
+import { useExpensesPage } from './use-expenses-page'
 import { Controls } from './controls'
 import { ExpenseList } from './expense-list'
 
-import './money-spending.langs'
+import './expenses-page.langs'
 
-export const MoneySpending = observer(() => {
-  const { anchorRef, moneySpendingStore, moneySpendingAction } = useMoneySpending()
+export const ExpensesPage = observer(() => {
+  const { anchorRef, moneySpendingStore, moneySpendingAction } = useExpensesPage()
 
   const toggleModal = useToggle()
 

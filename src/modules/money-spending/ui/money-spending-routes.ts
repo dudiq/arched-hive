@@ -1,14 +1,14 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
 import { Routes } from '@pv/contants/routes'
-import { MoneySpending } from './money-spending'
+import { ExpensesPage } from './pages/expenses-page'
 
 export const moneySpendingRoutes: RouteEntity[] = [
   {
     route: {
       path: Routes.expense,
     },
-    component: MoneySpending,
-    documentTitle: 'Money spending',
+    component: ExpensesPage,
+    documentTitle: 'Expenses',
     withHeader: true,
     withNavigation: true,
   },
