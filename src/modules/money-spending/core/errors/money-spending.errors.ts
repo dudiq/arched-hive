@@ -6,6 +6,9 @@ export namespace MoneySpendingErrors {
 
   export const GetCategoriesResponse = createErrorClass('Failed load categories')
   export const UnexpectedErrorGetCategories = createErrorClass('Unexpected load categories')
+
+  export const RemoveExpenseResponse = createErrorClass('Failed remove expense')
+  export const UnexpectedErrorRemoveExpense = createErrorClass('Unexpected remove expense')
 }
 
 export type MoneySpendingErrorsInstances = InstanceType<

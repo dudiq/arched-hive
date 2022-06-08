@@ -103,6 +103,12 @@ export class MoneySpendingStore {
     this.pouches = value
   }
 
+  removeExpenseById(id: string) {
+    const index = this.expenses.findIndex((item) => item.id === id)
+    if (index === -1) return
+    this.expenses.splice(index, 1)
+  }
+
   dropEntities() {
     this.setOffset(0)
     this.setExpenses([])

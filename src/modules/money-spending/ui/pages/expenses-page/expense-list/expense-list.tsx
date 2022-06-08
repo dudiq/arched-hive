@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { useCallback } from 'preact/compat'
+import { useCallback, useMemo } from 'preact/compat'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
 import { ExpenseRow } from './expense-row'
@@ -18,15 +18,20 @@ export const ExpenseList = observer(() => {
   )
 
   const selectedId = moneyFormStore.currentExpenseView?.id
+  const isFocusItem = useMemo(() => {
+    return !!selectedId
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <RowsContainer onClick={onClick}>
       {moneySpendingStore.expensesView.map((expenseView) => {
         const key = `${expenseView.id}-${expenseView.cost}-${expenseView.catParentTitle}-${expenseView.catTitle}`
         const isSelected = expenseView.id === selectedId
+        const isScrollTo = isSelected && isFocusItem
         return (
           <Row key={key} data-expense-id={expenseView.id}>
-            <ExpenseRow expenseView={expenseView} isSelected={isSelected} />
+            <ExpenseRow expenseView={expenseView} isSelected={isSelected} isScrollTo={isScrollTo} />
           </Row>
         )
       })}

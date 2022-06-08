@@ -1,6 +1,7 @@
 import { ExpenseViewEntity } from '@pv/core/entities/expense-view.entity'
 import { getMoney } from '@pv/interface/services/i18n'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { useEffect, useRef } from 'preact/compat'
 import { Dot } from '../../dot'
 import {
   Container,
@@ -15,9 +16,10 @@ import {
 type Props = {
   expenseView: ExpenseViewEntity
   isSelected: boolean
+  isScrollTo?: boolean
 }
 
-export function ExpenseRow({ expenseView, isSelected }: Props) {
+export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
   const { moneySpendingStore } = useMoneySpendingContext()
   const date = new Date(expenseView.time)
   const now = new Date()
@@ -31,8 +33,19 @@ export function ExpenseRow({ expenseView, isSelected }: Props) {
   const minutes = rawMinutes < 10 ? `0${rawMinutes}` : rawMinutes
   const isToday = expenseView.time >= moneySpendingStore.startTime
 
+  const refEl = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    if (!isScrollTo) return
+    if (!refEl.current) return
+    refEl.current.scrollIntoView({
+      block: 'center',
+      inline: 'center',
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <Container data-is-selected={isSelected}>
+    <Container data-is-selected={isSelected} ref={refEl}>
       <LeftBlock>
         <Title>
           {expenseView.catParentTitle ? `${expenseView.catParentTitle} / ` : ''}{' '}

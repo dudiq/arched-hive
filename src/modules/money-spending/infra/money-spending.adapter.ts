@@ -50,4 +50,16 @@ export class MoneySpendingAdapter {
       return Result.Err(new MoneySpendingErrors.UnexpectedErrorGetCategories(e))
     }
   }
+
+  async removeExpense(id: string) {
+    try {
+      const { error, data } = await this.moneySpendingDataProvider.removeExpense(id)
+
+      if (error) return Result.Err(new MoneySpendingErrors.RemoveExpenseResponse(error))
+
+      return Result.Ok(data)
+    } catch (e) {
+      return Result.Err(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e))
+    }
+  }
 }

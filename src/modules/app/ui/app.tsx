@@ -2,6 +2,7 @@ import { Router } from 'wouter-preact'
 import { ThemeDefine } from '@pv/modules/theme'
 import { useLanguageContext } from '@pv/modules/language'
 import { observer } from 'mobx-react-lite'
+import { useFocus } from '@pv/modules/focus'
 import { Layout } from './layout'
 import { ScreensSwitch } from './screens-switch'
 import { HistoryAdapter } from './history-adapter'
@@ -12,6 +13,7 @@ import './app.langs'
 
 export const App = observer(() => {
   const { langStore } = useLanguageContext()
+  useFocus()
   return (
     <>
       <Loader />

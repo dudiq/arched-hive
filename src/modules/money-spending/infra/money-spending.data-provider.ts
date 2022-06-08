@@ -29,4 +29,13 @@ export class MoneySpendingDataProvider extends DatabaseDataProvider {
     const categories = await this.client.category.toArray()
     return this.ok(categories)
   }
+
+  async removeExpense(id: string) {
+    const fields = {
+      dateEnd: Date.now(),
+    }
+    const result = this.client.expense.where('id').equals(id).modify(fields)
+
+    return this.ok(result)
+  }
 }
