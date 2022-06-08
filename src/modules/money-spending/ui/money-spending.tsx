@@ -1,5 +1,3 @@
-import './money-spending.langs'
-import { Button } from '@pv/ui-kit/button'
 import { ScrollContainer } from '@pv/ui-kit/scroll-container'
 import { observer } from 'mobx-react-lite'
 import { Swap } from '@pv/ui-kit/swap'
@@ -8,10 +6,13 @@ import { Link } from '@pv/ui-kit/link'
 import { t } from '@pv/interface/services/i18n'
 import { MoneyForm } from '@pv/modules/money-spending/ui/money-form'
 import { useToggle } from '@pv/utils/use-toggle'
-import { ButtonWrapper, LoadMoreWrapper } from './money-spending-styles'
-import { ExpenseRow } from './expense-row'
+import { LoadMoreWrapper } from './money-spending-styles'
 import { TodayCost } from './today-cost'
 import { useMoneySpending } from './use-money-spending'
+import { Controls } from './controls'
+import { ExpenseList } from './expense-list'
+
+import './money-spending.langs'
 
 export const MoneySpending = observer(() => {
   const { anchorRef, moneySpendingStore, moneySpendingAction } = useMoneySpending()
@@ -23,10 +24,7 @@ export const MoneySpending = observer(() => {
       <ScrollContainer>
         <Swap is={moneySpendingStore.isInitialLoading} isSlot={<Loader />}>
           <TodayCost />
-          {moneySpendingStore.expensesView.map((expenseView) => {
-            const key = `${expenseView.id}-${expenseView.cost}-${expenseView.catParentTitle}-${expenseView.catTitle}`
-            return <ExpenseRow key={key} expenseView={expenseView} />
-          })}
+          <ExpenseList />
           <div ref={anchorRef} />
           <LoadMoreWrapper>
             <Link onClick={moneySpendingAction.handleLoadNextExpenses}>
@@ -35,9 +33,7 @@ export const MoneySpending = observer(() => {
           </LoadMoreWrapper>
         </Swap>
       </ScrollContainer>
-      <ButtonWrapper>
-        <Button shape="circle" iconName="plus" iconSize="huge" onClick={toggleModal.handleOpen} />
-      </ButtonWrapper>
+      <Controls />
       <MoneyForm isVisible={toggleModal.isOpen} onClose={toggleModal.handleClose} />
     </>
   )

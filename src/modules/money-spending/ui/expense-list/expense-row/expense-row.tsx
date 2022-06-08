@@ -1,7 +1,7 @@
 import { ExpenseViewEntity } from '@pv/core/entities/expense-view.entity'
 import { getMoney } from '@pv/interface/services/i18n'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { Dot } from '../dot'
+import { Dot } from '../../dot'
 import {
   Container,
   LeftBlock,
@@ -14,9 +14,10 @@ import {
 
 type Props = {
   expenseView: ExpenseViewEntity
+  isSelected: boolean
 }
 
-export function ExpenseRow({ expenseView }: Props) {
+export function ExpenseRow({ expenseView, isSelected }: Props) {
   const { moneySpendingStore } = useMoneySpendingContext()
   const date = new Date(expenseView.time)
   const now = new Date()
@@ -31,7 +32,7 @@ export function ExpenseRow({ expenseView }: Props) {
   const isToday = expenseView.time >= moneySpendingStore.startTime
 
   return (
-    <Container>
+    <Container data-is-selected={isSelected}>
       <LeftBlock>
         <Title>
           {expenseView.catParentTitle ? `${expenseView.catParentTitle} / ` : ''}{' '}

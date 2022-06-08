@@ -4,6 +4,10 @@ export const Container = styled.div`
   display: flex;
   padding: 10px;
   border-top: 1px solid var(--clr-5);
+
+  &[data-is-selected='true'] {
+    background-color: var(--clr-hover);
+  }
 `
 
 export const LeftBlock = styled.div`

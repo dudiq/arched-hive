@@ -7,13 +7,10 @@ import { ThemeEntity } from '@pv/modules/theme'
 import { ExpenseViewService } from '@pv/interface/services/expense-view.service'
 import { getMoney } from '@pv/interface/services/i18n'
 import { LangStore } from '@pv/modules/language'
-import { Toggle } from '@pv/interface/services/toggle'
 
 @Store()
 export class MoneySpendingStore {
   private pouchLocalStorage = new LocalStorageItem<ThemeEntity>('pouch')
-
-  moneySpendingToggle = new Toggle()
 
   offset = 0
 
@@ -76,6 +73,10 @@ export class MoneySpendingStore {
 
   get expensesView() {
     return this.expenseViewService.getExpenseViewList(this.expenses, this.categories)
+  }
+
+  getExpenseViewById(id: string) {
+    return this.expensesView.find((item) => item.id === id) || null
   }
 
   setIsLoading(value: boolean) {

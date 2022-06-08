@@ -6,12 +6,13 @@ import { ButtonWrapper, Item } from './controls-styles'
 export const Controls = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
   const isChildCategory = !categoriesStore.selectedCategory?.catId
-  const plusButtonVariant = categoriesStore.selectedCategoryId ? 'primary' : 'secondary'
+  const isSelectedCategory = !!categoriesStore.selectedCategoryId
+  const plusButtonVariant = isSelectedCategory ? 'primary' : 'secondary'
 
   return (
     <ButtonWrapper>
       <Item>
-        {categoriesStore.selectedCategoryId && (
+        {isSelectedCategory && (
           <Button
             shape="circle"
             iconName="trash"
@@ -21,7 +22,7 @@ export const Controls = observer(() => {
         )}
       </Item>
       <Item>
-        {categoriesStore.selectedCategoryId && (
+        {isSelectedCategory && (
           <Button
             shape="circle"
             iconName="edit-l"
