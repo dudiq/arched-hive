@@ -40,4 +40,22 @@ export class ExpenseSelectionAction {
   handleDropSelectedCategory() {
     this.moneySpendingStore.setSelectedCategoryId('')
   }
+
+  handleChangeCost(value: string) {
+    this.expenseSelectionStore.setCurrentCost(Number(value))
+  }
+
+  handlePushCost() {
+    this.expenseSelectionStore.pushCurrentToCostList()
+  }
+
+  handlePop() {
+    this.expenseSelectionStore.removeLastFromCostList()
+  }
+
+  handleChangeDesc(value: string) {
+    this.expenseSelectionStore.setCurrentDesc(value)
+  }
+
+  handleApply() {}
 }

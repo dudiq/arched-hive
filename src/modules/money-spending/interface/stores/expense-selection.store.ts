@@ -5,6 +5,29 @@ import { ExpenseViewEntity } from '@pv/core/entities/expense-view.entity'
 export class ExpenseSelectionStore {
   currentExpenseView: ExpenseViewEntity | null = null
 
+  costList: number[] = []
+
+  currentCost = 0
+
+  currentDesc = ''
+
+  setCurrentCost(value: number) {
+    this.currentCost = value
+  }
+
+  setCurrentDesc(value: string) {
+    this.currentDesc = value
+  }
+
+  pushCurrentToCostList() {
+    this.costList.push(this.currentCost)
+    this.currentCost = 0
+  }
+
+  removeLastFromCostList() {
+    this.costList.pop()
+  }
+
   setCurrentExpenseView(value: ExpenseViewEntity | null) {
     this.currentExpenseView = value
       ? {
@@ -15,10 +38,6 @@ export class ExpenseSelectionStore {
 
   get isEditing() {
     return !!this.currentExpenseView
-  }
-
-  get parentCategoryId() {
-    return this.currentExpenseView?.catParentId
   }
 
   get categoryId() {

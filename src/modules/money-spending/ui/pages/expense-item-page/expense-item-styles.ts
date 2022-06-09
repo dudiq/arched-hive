@@ -6,3 +6,5 @@ export const ButtonWrapper = styled.div`
   bottom: 20px;
   display: flex;
 `
+
+export const Block = styled.div``
