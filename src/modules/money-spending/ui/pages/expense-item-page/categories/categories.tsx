@@ -6,7 +6,8 @@ import { t } from '@pv/interface/services/i18n'
 import { CategoryTag, Header } from './categories-styles'
 
 export const Categories = observer(() => {
-  const { moneySpendingStore, moneySpendingAction } = useMoneySpendingContext()
+  const { moneySpendingStore, moneySpendingAction, expenseSelectionAction } =
+    useMoneySpendingContext()
   const { selectedCategoryId } = moneySpendingStore
   const isCategorySelected = !!selectedCategoryId
 
@@ -30,7 +31,7 @@ export const Categories = observer(() => {
           <CategoryTag
             key={category.id}
             onClick={() => {
-              moneySpendingAction.handleSelectCategoryId(category.id)
+              expenseSelectionAction.handleSelectCategoryId(category.id)
             }}
             data-is-selected={isSelected}
           >

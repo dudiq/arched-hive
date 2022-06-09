@@ -10,13 +10,13 @@ import { Categories } from './categories'
 import './expense-item-page.langs'
 
 export const ExpenseItemPage = observer(() => {
-  const { moneySpendingAction } = useMoneySpendingContext()
+  const { moneySpendingAction, expenseSelectionAction } = useMoneySpendingContext()
   const { focusStore } = useFocusContext()
   useEffect(() => {
     return () => {
-      moneySpendingAction.handleSelectCategoryId('')
+      expenseSelectionAction.handleSelectCategoryId('')
     }
-  }, [moneySpendingAction])
+  }, [expenseSelectionAction])
 
   return (
     <>

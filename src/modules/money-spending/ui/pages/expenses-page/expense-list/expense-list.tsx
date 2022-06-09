@@ -6,18 +6,19 @@ import { ExpenseRow } from './expense-row'
 import { Row, RowsContainer } from './expense-list-styles'
 
 export const ExpenseList = observer(() => {
-  const { moneySpendingAction, moneyFormStore, expensesViewStore } = useMoneySpendingContext()
+  const { expenseSelectionAction, expenseSelectionStore, expensesViewStore } =
+    useMoneySpendingContext()
 
   const onClick = useCallback(
     (e: any) => {
       const expenseId = getAttrFromElement(e.target as HTMLElement, 'data-expense-id')
       if (!expenseId) return
-      moneySpendingAction.handleToggleSelectedExpense(expenseId)
+      expenseSelectionAction.handleToggleSelectedExpense(expenseId)
     },
-    [moneySpendingAction],
+    [expenseSelectionAction],
   )
 
-  const selectedId = moneyFormStore.currentExpenseView?.id
+  const selectedId = expenseSelectionStore.currentExpenseView?.id
   const isFocusItem = useMemo(() => {
     return !!selectedId
     // eslint-disable-next-line react-hooks/exhaustive-deps

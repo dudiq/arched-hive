@@ -2,7 +2,7 @@ import { Store } from '@pv/di'
 import { ExpenseViewEntity } from '@pv/core/entities/expense-view.entity'
 
 @Store()
-export class MoneyFormStore {
+export class ExpenseSelectionStore {
   currentExpenseView: ExpenseViewEntity | null = null
 
   setCurrentExpenseView(value: ExpenseViewEntity | null) {

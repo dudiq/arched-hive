@@ -50,6 +50,7 @@ export class MoneySpendingStore {
   get visibleCategories() {
     if (this.isCalculatorVisible) {
       const selectedCategory = this.selectedCategory
+      if (!selectedCategory) return []
       return [selectedCategory]
     }
 

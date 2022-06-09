@@ -4,7 +4,7 @@ import { MoneySpendingStore } from '@pv/modules/money-spending/interface/stores/
 import { PouchesAdapter } from '@pv/modules/pouches'
 import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
-import { MoneyFormStore } from '@pv/modules/money-spending/interface/stores/money-form.store'
+import { ExpenseSelectionStore } from '@pv/modules/money-spending/interface/stores/expense-selection.store'
 
 const LIMIT_DEFAULT = 50
 
@@ -20,7 +20,7 @@ export class MoneySpendingService {
     @Inject()
     private pouchesAdapter: PouchesAdapter,
     @Inject()
-    private moneyFormStore: MoneyFormStore,
+    private expenseSelectionStore: ExpenseSelectionStore,
   ) {}
 
   async initialLoadData() {
@@ -79,6 +79,6 @@ export class MoneySpendingService {
 
     this.moneySpendingStore.setOffset(this.moneySpendingStore.offset - 1)
     this.moneySpendingStore.removeExpenseById(id)
-    this.moneyFormStore.setCurrentExpenseView(null)
+    this.expenseSelectionStore.setCurrentExpenseView(null)
   }
 }

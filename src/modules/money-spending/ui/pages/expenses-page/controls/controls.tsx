@@ -4,8 +4,9 @@ import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/us
 import { ButtonWrapper, Item } from './controls-styles'
 
 export const Controls = observer(() => {
-  const { moneyFormStore, moneySpendingAction } = useMoneySpendingContext()
-  const { isEditing } = moneyFormStore
+  const { expenseSelectionStore, moneySpendingAction, expenseSelectionAction } =
+    useMoneySpendingContext()
+  const { isEditing } = expenseSelectionStore
 
   return (
     <ButtonWrapper>
@@ -15,7 +16,7 @@ export const Controls = observer(() => {
             shape="circle"
             iconName="trash"
             iconSize="huge"
-            onClick={moneySpendingAction.handleRemoveExpense}
+            onClick={expenseSelectionAction.handleRemoveExpense}
           />
         )}
       </Item>
