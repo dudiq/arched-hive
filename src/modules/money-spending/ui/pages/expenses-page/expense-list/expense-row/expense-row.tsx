@@ -20,18 +20,18 @@ type Props = {
 }
 
 export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
-  const { moneySpendingStore } = useMoneySpendingContext()
+  const { expensesViewStore } = useMoneySpendingContext()
   const date = new Date(expenseView.time)
   const now = new Date()
   const isSameYear = now.getFullYear() === date.getFullYear()
 
   const time = isSameYear
-    ? moneySpendingStore.dateFormatter.format(date)
-    : moneySpendingStore.dateYearFormatter.format(date)
+    ? expensesViewStore.dateFormatter.format(date)
+    : expensesViewStore.dateYearFormatter.format(date)
   const hours = date.getHours()
   const rawMinutes = date.getMinutes()
   const minutes = rawMinutes < 10 ? `0${rawMinutes}` : rawMinutes
-  const isToday = expenseView.time >= moneySpendingStore.startTime
+  const isToday = expenseView.time >= expensesViewStore.startTime
 
   const refEl = useRef<HTMLDivElement | null>(null)
   useEffect(() => {

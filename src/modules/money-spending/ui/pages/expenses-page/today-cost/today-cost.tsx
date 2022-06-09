@@ -5,13 +5,13 @@ import { Dot } from '../dot'
 import { Container, Item, Money } from './today-cost-styles'
 
 export const TodayCost = observer(() => {
-  const { moneySpendingStore } = useMoneySpendingContext()
+  const { expensesViewStore } = useMoneySpendingContext()
   return (
     <Container>
       <Item>{t('expense.today')}</Item>
       <Item>
         <Money>
-          {moneySpendingStore.todayCost}
+          {expensesViewStore.todayCost}
           <Dot />
         </Money>
       </Item>

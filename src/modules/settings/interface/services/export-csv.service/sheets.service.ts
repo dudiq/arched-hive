@@ -1,8 +1,8 @@
 import { Inject, Service } from '@pv/di'
 import { ImportDataValueObject } from '@pv/modules/settings/core/value-object/import-data.value-object'
-import { ExpenseViewService } from '@pv/interface/services/expense-view.service'
 import { t } from '@pv/interface/services/i18n'
 import { ExpenseViewEntity } from '@pv/core/entities/expense-view.entity'
+import { ExpensesViewStore } from '@pv/modules/money-spending'
 
 import './export-csv.langs'
 
@@ -18,7 +18,7 @@ const SEPARATOR = '\t'
 export class SheetsService {
   constructor(
     @Inject()
-    private expenseViewService: ExpenseViewService,
+    private expenseViewStore: ExpensesViewStore,
   ) {}
 
   private static getFullNum(num: number) {
@@ -41,7 +41,10 @@ export class SheetsService {
       }
     })
 
-    const expenseViewList = this.expenseViewService.getExpenseViewList(data.expense, data.category)
+    const expenseViewList = this.expenseViewStore.mapExpenseToExpenseViewEntityList(
+      data.expense,
+      data.category,
+    )
     expenseViewList.forEach((item) => {
       const pouchId = item.pouchId
       const list = pouchMap[pouchId]

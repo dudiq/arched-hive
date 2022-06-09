@@ -1,18 +1,17 @@
-import { Inject, Store } from '@pv/di'
+import { Store } from '@pv/di'
 import { ExpenseEntity } from '@pv/core/entities/expense.entity'
 import { PouchEntity } from '@pv/core/entities/pouch.entity'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
 import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
 import { ThemeEntity } from '@pv/modules/theme'
-import { ExpenseViewService } from '@pv/interface/services/expense-view.service'
-import { getMoney } from '@pv/interface/services/i18n'
-import { LangStore } from '@pv/modules/language'
 
 @Store()
 export class MoneySpendingStore {
   private pouchLocalStorage = new LocalStorageItem<ThemeEntity>('pouch')
 
   offset = 0
+
+  selectedCategoryId = ''
 
   isLoading = true
 
@@ -22,47 +21,47 @@ export class MoneySpendingStore {
 
   categories: CategoryEntity[] = []
 
-  constructor(
-    @Inject()
-    private expenseViewService: ExpenseViewService,
-    @Inject()
-    private langStore: LangStore,
-  ) {}
+  get selectedParentCategory() {
+    return this.categories.find((item) => item.catId === this.selectedCategoryId)
+  }
+
+  get selectedCategory() {
+    return this.categories.find((item) => item.id === this.selectedCategoryId)
+  }
+
+  get isCalculatorVisible() {
+    if (!this.selectedCategoryId) return false
+    return !this.selectedParentCategory
+  }
+
+  get parentCategoryTitle() {
+    if (!this.selectedCategoryId) return ''
+
+    const category = this.selectedCategory
+    if (!category) return ''
+    if (!category.catId) return category.title
+    if (category.catId) {
+      const parentCategory = this.categories.find((item) => item.id === category.catId)
+      return parentCategory?.title || ''
+    }
+    return ''
+  }
+
+  get visibleCategories() {
+    if (this.isCalculatorVisible) {
+      const selectedCategory = this.selectedCategory
+      return [selectedCategory]
+    }
+
+    return this.categories.filter((category) => {
+      if (category.catId === this.selectedCategoryId) return true
+      if (!this.selectedCategoryId && !category.catId) return true
+      return false
+    })
+  }
 
   get isInitialLoading() {
     return this.offset === 0 && this.isLoading
-  }
-
-  get dateFormatter() {
-    return new Intl.DateTimeFormat(this.langStore.currentLanguage, {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-    })
-  }
-
-  get dateYearFormatter() {
-    return new Intl.DateTimeFormat(this.langStore.currentLanguage, {
-      year: 'numeric',
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-    })
-  }
-
-  get startTime() {
-    const edgeDate = new Date()
-    edgeDate.setHours(0, 0, 0, 0)
-    return edgeDate.getTime()
-  }
-
-  get todayCost() {
-    const startTime = this.startTime
-    const sum = this.expenses.reduce((acc, expense) => {
-      if (expense.time <= startTime) return acc
-      return acc + expense.cost
-    }, 0)
-    return getMoney(sum)
   }
 
   get currentPouch() {
@@ -71,12 +70,14 @@ export class MoneySpendingStore {
     return this.pouches.find(({ id }) => pouchId === id)
   }
 
-  get expensesView() {
-    return this.expenseViewService.getExpenseViewList(this.expenses, this.categories)
-  }
+  setSelectedCategoryId(id: string) {
+    if (this.selectedCategoryId !== id) {
+      this.selectedCategoryId = id
+      return
+    }
 
-  getExpenseViewById(id: string) {
-    return this.expensesView.find((item) => item.id === id) || null
+    const currentCategory = this.selectedCategory
+    this.selectedCategoryId = currentCategory?.catId || ''
   }
 
   setIsLoading(value: boolean) {

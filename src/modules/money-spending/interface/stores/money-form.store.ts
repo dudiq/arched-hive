@@ -7,9 +7,21 @@ export class MoneyFormStore {
 
   setCurrentExpenseView(value: ExpenseViewEntity | null) {
     this.currentExpenseView = value
+      ? {
+          ...value,
+        }
+      : null
   }
 
   get isEditing() {
     return !!this.currentExpenseView
+  }
+
+  get parentCategoryId() {
+    return this.currentExpenseView?.catParentId
+  }
+
+  get categoryId() {
+    return this.currentExpenseView?.catId
   }
 }

@@ -4,6 +4,7 @@ import { Routes } from '@pv/contants/routes'
 import { MoneySpendingService } from '../services/money-spending.service'
 import { MoneySpendingStore } from '../stores/money-spending.store'
 import { MoneyFormStore } from '../stores/money-form.store'
+import { ExpensesViewStore } from '../stores/expenses-view.store'
 
 @Action()
 export class MoneySpendingAction {
@@ -14,6 +15,8 @@ export class MoneySpendingAction {
     private moneySpendingStore: MoneySpendingStore,
     @Inject()
     private moneyFormStore: MoneyFormStore,
+    @Inject()
+    private expensesViewStore: ExpensesViewStore,
     @Inject()
     private historyService: HistoryService,
   ) {}
@@ -37,7 +40,7 @@ export class MoneySpendingAction {
       this.moneyFormStore.setCurrentExpenseView(null)
       return
     }
-    const expense = this.moneySpendingStore.getExpenseViewById(nextId)
+    const expense = this.expensesViewStore.getExpenseViewById(nextId)
     this.moneyFormStore.setCurrentExpenseView(expense)
   }
 
@@ -53,5 +56,13 @@ export class MoneySpendingAction {
 
   handleOpenExpenseList() {
     this.historyService.push(Routes.expense)
+  }
+
+  handleSelectCategoryId(id: string) {
+    this.moneySpendingStore.setSelectedCategoryId(id)
+  }
+
+  handleDropSelectedCategory() {
+    this.moneySpendingStore.setSelectedCategoryId('')
   }
 }

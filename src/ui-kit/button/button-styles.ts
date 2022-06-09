@@ -18,6 +18,11 @@ export const Container = styled.button`
     color: var(--clr-1);
   }
 
+  &[data-variant='flat'] {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
   &[data-shape='rect'] {
     border-radius: 4px;
   }
@@ -27,5 +32,17 @@ export const Container = styled.button`
     display: flex;
     justify-content: center;
     height: 52px;
+  }
+
+  &:hover,
+  &:active {
+    box-shadow: 2px 2px 6px 0 var(--clr-shadow);
+  }
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+  &[data-has-icon='true'] {
+    padding-left: 6px;
   }
 `

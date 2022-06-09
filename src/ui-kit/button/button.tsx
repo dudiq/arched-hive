@@ -1,13 +1,13 @@
 import { ComponentChildren } from 'preact'
 import { IconNames, IconSize } from '@pv/ui-kit/icon/types'
 import { Icon } from '@pv/ui-kit/icon'
-import { Container } from './button-styles'
+import { Container, Wrapper } from './button-styles'
 
 type Props = {
   children?: ComponentChildren
   iconName?: IconNames
   iconSize?: IconSize
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'flat'
   shape?: 'rect' | 'circle'
   isDisabled?: boolean
   onClick?: () => void
@@ -22,10 +22,11 @@ export function Button({
   isDisabled,
   shape = 'rect',
 }: Props) {
+  const hasChildren = !!children
   return (
     <Container onClick={onClick} disabled={isDisabled} data-shape={shape} data-variant={variant}>
       {iconName && <Icon iconName={iconName} iconSize={iconSize} />}
-      {children}
+      {hasChildren && <Wrapper data-has-icon={!!iconName}>{children}</Wrapper>}
     </Container>
   )
 }

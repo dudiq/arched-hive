@@ -6,7 +6,7 @@ import { ExpenseRow } from './expense-row'
 import { Row, RowsContainer } from './expense-list-styles'
 
 export const ExpenseList = observer(() => {
-  const { moneySpendingAction, moneySpendingStore, moneyFormStore } = useMoneySpendingContext()
+  const { moneySpendingAction, moneyFormStore, expensesViewStore } = useMoneySpendingContext()
 
   const onClick = useCallback(
     (e: any) => {
@@ -25,7 +25,7 @@ export const ExpenseList = observer(() => {
 
   return (
     <RowsContainer onClick={onClick}>
-      {moneySpendingStore.expensesView.map((expenseView) => {
+      {expensesViewStore.expensesView.map((expenseView) => {
         const key = `${expenseView.id}-${expenseView.cost}-${expenseView.catParentTitle}-${expenseView.catTitle}`
         const isSelected = expenseView.id === selectedId
         const isScrollTo = isSelected && isFocusItem
