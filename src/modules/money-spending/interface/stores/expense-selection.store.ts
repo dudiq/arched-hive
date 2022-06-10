@@ -11,6 +11,11 @@ export class ExpenseSelectionStore {
 
   currentDesc = ''
 
+  clear() {
+    this.currentCost = 0
+    this.costList = []
+  }
+
   setCurrentCost(value: number) {
     this.currentCost = value
   }
@@ -42,5 +47,9 @@ export class ExpenseSelectionStore {
 
   get categoryId() {
     return this.currentExpenseView?.catId
+  }
+
+  get costsView() {
+    return this.costList.join(' + ')
   }
 }

@@ -6,9 +6,10 @@ import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/us
 import { useEffect } from 'preact/compat'
 import { Block, ButtonWrapper } from './expense-item-styles'
 import { Categories } from './categories'
-import { Calculator } from './calculator'
-
 import { Desc } from './desc'
+import { PadTitle } from './pad-title'
+import { PadBlock } from './pad-block'
+
 import './expense-item-page.langs'
 
 export const ExpenseItemPage = observer(() => {
@@ -28,8 +29,8 @@ export const ExpenseItemPage = observer(() => {
         {moneySpendingStore.isCalculatorVisible && (
           <Block>
             <Desc />
-            <Calculator />
-            <Button onClick={expenseSelectionAction.handleApply}>apply</Button>
+            <PadTitle />
+            <PadBlock />
           </Block>
         )}
       </ScrollContainer>

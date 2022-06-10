@@ -41,6 +41,12 @@ export class ExpenseSelectionAction {
     this.moneySpendingStore.setSelectedCategoryId('')
   }
 
+  handleAddNumber(value: string) {
+    const currentCost = this.expenseSelectionStore.currentCost
+    const nextCost = currentCost * 10 + Number(value)
+    this.expenseSelectionStore.setCurrentCost(nextCost)
+  }
+
   handleChangeCost(value: string) {
     this.expenseSelectionStore.setCurrentCost(Number(value))
   }
@@ -49,13 +55,19 @@ export class ExpenseSelectionAction {
     this.expenseSelectionStore.pushCurrentToCostList()
   }
 
-  handlePop() {
+  handlePopCost() {
     this.expenseSelectionStore.removeLastFromCostList()
+  }
+
+  handleClear() {
+    this.expenseSelectionStore.clear()
   }
 
   handleChangeDesc(value: string) {
     this.expenseSelectionStore.setCurrentDesc(value)
   }
+
+  handleSetFloat() {}
 
   handleApply() {}
 }
