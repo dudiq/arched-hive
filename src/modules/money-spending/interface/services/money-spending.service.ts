@@ -5,6 +5,8 @@ import { PouchesAdapter } from '@pv/modules/pouches'
 import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
 import { ExpenseSelectionStore } from '@pv/modules/money-spending/interface/stores/expense-selection.store'
+import { HistoryService } from '@pv/interface/services/history.service'
+import { Routes } from '@pv/contants/routes'
 
 const LIMIT_DEFAULT = 50
 
@@ -21,6 +23,8 @@ export class MoneySpendingService {
     private pouchesAdapter: PouchesAdapter,
     @Inject()
     private expenseSelectionStore: ExpenseSelectionStore,
+    @Inject()
+    private historyService: HistoryService,
   ) {}
 
   async initialLoadData() {
@@ -42,6 +46,11 @@ export class MoneySpendingService {
     }
     this.moneySpendingStore.setPouches(pouchesResult.getValue())
     this.moneySpendingStore.setCategories(categoriesResult.getValue())
+    if (this.moneySpendingStore.categories.length === 0) {
+      // open empty settings
+      this.historyService.push(Routes.empty)
+      return
+    }
 
     await this.loadExpenses(0)
   }

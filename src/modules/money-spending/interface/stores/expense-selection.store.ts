@@ -52,4 +52,10 @@ export class ExpenseSelectionStore {
   get costsView() {
     return this.costList.join(' + ')
   }
+
+  get totalCostView() {
+    return this.costList.reduce((acc, item) => {
+      return acc + item
+    }, this.currentCost)
+  }
 }
