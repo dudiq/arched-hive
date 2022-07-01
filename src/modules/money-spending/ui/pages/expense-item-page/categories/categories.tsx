@@ -33,7 +33,7 @@ export const Categories = observer(() => {
             onClick={() => {
               expenseSelectionAction.handleSelectCategoryId(category.id)
             }}
-            data-is-selected={isSelected}
+            isSelected={isSelected}
           >
             {category.title}
           </CategoryTag>

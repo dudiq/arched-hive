@@ -42,13 +42,7 @@ export class ExpenseSelectionAction {
   }
 
   handleAddNumber(value: string) {
-    const currentCost = this.expenseSelectionStore.currentCost
-    const nextCost = currentCost * 10 + Number(value)
-    this.expenseSelectionStore.setCurrentCost(nextCost)
-  }
-
-  handleChangeCost(value: string) {
-    this.expenseSelectionStore.setCurrentCost(Number(value))
+    this.expenseSelectionStore.addNumberToCost(value)
   }
 
   handlePushCost() {
@@ -67,7 +61,12 @@ export class ExpenseSelectionAction {
     this.expenseSelectionStore.setCurrentDesc(value)
   }
 
-  handleSetFloat() {}
+  handleSetFloat() {
+    this.expenseSelectionStore.setFloat(true)
+  }
 
-  handleApply() {}
+  handleApply() {
+    //const newExpenses = this.expenseSelectionStore.getExpenses()
+    //console.log('newExpenses', newExpenses)
+  }
 }

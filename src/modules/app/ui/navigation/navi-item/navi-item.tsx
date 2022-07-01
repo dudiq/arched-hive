@@ -15,7 +15,7 @@ export const NaviItem = observer(({ isMatch, path, icon, title }: Props) => {
   const { isMatched, handleChangePage } = useNaviItem({ isMatch, path })
 
   return (
-    <Container data-is-matched={isMatched} onClick={handleChangePage}>
+    <Container isMatched={isMatched} onClick={handleChangePage}>
       <Icon iconName={icon} />
       <Title>{title}</Title>
     </Container>

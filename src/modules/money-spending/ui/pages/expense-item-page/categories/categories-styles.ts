@@ -7,17 +7,14 @@ export const Header = styled.div`
   margin-left: 6px;
 `
 
-export const CategoryTag = styled.button`
+export const CategoryTag = styled.button<{ isSelected: boolean }>`
   background-color: transparent;
   border-radius: 10px;
   height: 32px;
   margin: 4px;
   color: var(--clr-primary-text);
-  border: 1px solid var(--clr-primary);
+  border: 1px solid
+    ${(props) => (props.isSelected ? 'var(--clr-primary-text)' : 'var(--clr-primary)')};
   display: inline-flex;
   align-items: center;
-
-  &[data-is-selected='true'] {
-    border: 1px solid var(--clr-primary-text);
-  }
 `

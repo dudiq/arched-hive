@@ -24,12 +24,7 @@ export const TreeList = observer(() => {
         const isActive = item.id === selectedId
         const key = `${item.id}-${item.title}-${item.catId}`
         return (
-          <TreeItem
-            key={key}
-            data-is-active={isActive}
-            data-is-root={isRoot}
-            data-category-id={item.id}
-          >
+          <TreeItem key={key} isActive={isActive} isRoot={isRoot} data-category-id={item.id}>
             {item.title}
           </TreeItem>
         )

@@ -9,7 +9,7 @@ type Props = {
 
 export function ListCell({ children, isCentered, isFullwidth }: Props) {
   return (
-    <ListCellWrapper data-is-centered={isCentered} data-is-fullwidth={isFullwidth}>
+    <ListCellWrapper isCentered={isCentered} isFullWidth={isFullwidth}>
       {children}
     </ListCellWrapper>
   )

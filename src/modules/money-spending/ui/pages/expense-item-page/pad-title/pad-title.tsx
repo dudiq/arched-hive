@@ -8,7 +8,7 @@ export const PadTitle = observer(() => {
   return (
     <Container>
       <CostView>{expenseSelectionStore.costsView}</CostView>
-      <CurrentCost>{expenseSelectionStore.currentCost}</CurrentCost>
+      <CurrentCost>{expenseSelectionStore.currentCostView}</CurrentCost>
       <TotalCost>= {expenseSelectionStore.totalCostView}</TotalCost>
     </Container>
   )

@@ -2,13 +2,14 @@ import { ComponentChildren } from 'preact'
 import { IconNames, IconSize } from '@pv/ui-kit/icon/types'
 import { Icon } from '@pv/ui-kit/icon'
 import { Container, Wrapper } from './button-styles'
+import { ButtonShape, ButtonVariant } from './types'
 
 type Props = {
   children?: ComponentChildren
   iconName?: IconNames
   iconSize?: IconSize
-  variant?: 'primary' | 'secondary' | 'flat'
-  shape?: 'rect' | 'circle'
+  variant?: ButtonVariant
+  shape?: ButtonShape
   isDisabled?: boolean
   onClick?: () => void
 }

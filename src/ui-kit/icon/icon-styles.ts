@@ -1,16 +1,18 @@
 import { styled } from '@linaria/react'
+import { IconSize } from '@pv/ui-kit/icon/types'
 
-export const IconWrapper = styled.span`
-  &[data-size='small'] {
-    font-size: 10px;
-  }
-  &[data-size='normal'] {
-    font-size: 14px;
-  }
-  &[data-size='big'] {
-    font-size: 18px;
-  }
-  &[data-size='huge'] {
-    font-size: 28px;
-  }
+export const IconWrapper = styled.span<{ size: IconSize }>`
+  font-size: ${(props) => {
+    switch (props.size) {
+      case 'small':
+        return '10px'
+      case 'big':
+        return '18px'
+      case 'huge':
+        return '28px'
+      default:
+      case 'normal':
+        return '14px'
+    }
+  }};
 `

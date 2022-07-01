@@ -1,4 +1,5 @@
 import { styled } from '@linaria/react'
+import { css } from '@linaria/core'
 
 export const ListContainer = styled.div``
 
@@ -13,12 +14,18 @@ export const ListRow = styled.div`
   }
 `
 
-export const ListCellWrapper = styled.div`
+export const ListCellWrapper = styled.div<{ isCentered?: boolean; isFullWidth?: boolean }>`
   display: flex;
-  &[data-is-centered] {
-    justify-content: center;
-  }
-  &[data-is-fullwidth] {
-    flex: 1;
-  }
+  ${(props) =>
+    props.isCentered
+      ? css`
+          justify-content: center;
+        `
+      : ''}
+  ${(props) =>
+    props.isFullWidth
+      ? css`
+          flex: 1;
+        `
+      : ''}
 `

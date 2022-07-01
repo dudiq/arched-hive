@@ -12,7 +12,7 @@ export const PadBlock = observer(() => {
         <PadButton data-action="1">1</PadButton>
         <PadButton data-action="2">2</PadButton>
         <PadButton data-action="3">3</PadButton>
-        <PadButton data-action="clear" data-type="secondary">
+        <PadButton data-action="clear" viewType="secondary">
           C
         </PadButton>
       </Row>
@@ -20,7 +20,7 @@ export const PadBlock = observer(() => {
         <PadButton data-action="4">4</PadButton>
         <PadButton data-action="5">5</PadButton>
         <PadButton data-action="6">6</PadButton>
-        <PadButton data-action="backspace" data-type="secondary">
+        <PadButton data-action="backspace" viewType="secondary">
           <Icon iconName="a-left" iconSize="big" />
         </PadButton>
       </Row>
@@ -28,14 +28,14 @@ export const PadBlock = observer(() => {
         <PadButton data-action="7">7</PadButton>
         <PadButton data-action="8">8</PadButton>
         <PadButton data-action="9">9</PadButton>
-        <PadButton data-action="plus" data-type="secondary">
+        <PadButton data-action="plus" viewType="secondary">
           <Icon iconName="plus" iconSize="big" />
         </PadButton>
       </Row>
       <Row>
         <PadButton data-action="dot">.</PadButton>
         <PadButton data-action="0">0</PadButton>
-        <PadButton data-action="apply" data-width="half" data-type="apply" onClick={handleApply}>
+        <PadButton data-action="apply" widthFill="half" viewType="apply" onClick={handleApply}>
           {t('moneySpending.add')}
         </PadButton>
       </Row>

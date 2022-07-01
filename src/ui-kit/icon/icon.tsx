@@ -8,5 +8,5 @@ type Props = {
 }
 
 export function Icon({ iconName, iconSize = 'normal' }: Props) {
-  return <IconWrapper className={`x-icon-${iconName}`} data-size={iconSize} />
+  return <IconWrapper className={`x-icon-${iconName}`} size={iconSize} />
 }
