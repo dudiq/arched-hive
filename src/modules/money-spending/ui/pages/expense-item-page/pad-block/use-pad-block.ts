@@ -36,6 +36,5 @@ export function usePadBlock() {
 
   return {
     handleClick,
-    handleApply: expenseSelectionAction.handleApply,
   }
 }

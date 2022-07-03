@@ -56,7 +56,8 @@ export class MoneySpendingService {
   }
 
   async loadExpenses(offset: number) {
-    const currentPouchId = this.moneySpendingStore.currentPouch?.id
+    //console.log('--- loadExpenses', offset)
+    const currentPouchId = this.moneySpendingStore.currentPouch?.id || null
 
     const result = await this.moneySpendingAdapter.getExpenses({
       offset,
@@ -89,5 +90,34 @@ export class MoneySpendingService {
     this.moneySpendingStore.setOffset(this.moneySpendingStore.offset - 1)
     this.moneySpendingStore.removeExpenseById(id)
     this.expenseSelectionStore.setCurrentExpenseView(null)
+  }
+
+  async handleApply() {
+    this.moneySpendingStore.setIsLoading(true)
+
+    const pouchId = this.moneySpendingStore.currentPouch?.id || null
+    const catId = this.moneySpendingStore.selectedCategoryId
+    const desc = this.expenseSelectionStore.currentDesc
+
+    const newExpenses = this.expenseSelectionStore.getExpenses()
+    // console.log('newExpenses', newExpenses)
+
+    for (const cost of newExpenses) {
+      await this.moneySpendingAdapter.addExpense({
+        pouchId,
+        catId,
+        cost,
+        desc,
+      })
+      // if (result.isErr()) {
+      //   //TODO: add error processing
+      //   return
+      // }
+      this.expenseSelectionStore.dropData()
+    }
+
+    this.historyService.push(Routes.expense)
+    // await this.initialLoadData()
+    this.moneySpendingStore.setIsLoading(false)
   }
 }

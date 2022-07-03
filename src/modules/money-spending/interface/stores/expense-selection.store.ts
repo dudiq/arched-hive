@@ -109,4 +109,12 @@ export class ExpenseSelectionStore {
   getExpenses() {
     return [...this.costList, this.currentCost * 100 + this.floatCost]
   }
+
+  dropData() {
+    this.costList = []
+    this.currentCost = 0
+    this.isFloat = false
+    this.floatCost = 0
+    this.currentDesc = ''
+  }
 }

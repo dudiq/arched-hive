@@ -5,7 +5,7 @@ import { PadButton, Row, Container } from './pad-block-styles'
 import { usePadBlock } from './use-pad-block'
 
 export const PadBlock = observer(() => {
-  const { handleClick, handleApply } = usePadBlock()
+  const { handleClick } = usePadBlock()
   return (
     <Container onClick={handleClick}>
       <Row>
@@ -35,7 +35,7 @@ export const PadBlock = observer(() => {
       <Row>
         <PadButton data-action="dot">.</PadButton>
         <PadButton data-action="0">0</PadButton>
-        <PadButton data-action="apply" widthFill="half" viewType="apply" onClick={handleApply}>
+        <PadButton data-action="apply" widthFill="half" viewType="apply">
           {t('moneySpending.add')}
         </PadButton>
       </Row>

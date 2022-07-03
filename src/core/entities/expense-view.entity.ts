@@ -1,8 +1,10 @@
+import { PouchId } from '@pv/core/entities/pouch.entity'
+
 export type ExpenseViewEntity = {
   id: string
   catId: string
   cost: number
-  pouchId: string
+  pouchId: PouchId
   time: number
   state: number
   catTitle: string

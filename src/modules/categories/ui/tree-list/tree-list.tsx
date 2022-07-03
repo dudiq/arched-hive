@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { useCallback } from 'preact/compat'
 import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
-import { Container, TreeItem } from './tree-list-styles'
+import { Container, extendedClasses, TreeItem } from './tree-list-styles'
 
 export const TreeList = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
@@ -24,7 +24,11 @@ export const TreeList = observer(() => {
         const isActive = item.id === selectedId
         const key = `${item.id}-${item.title}-${item.catId}`
         return (
-          <TreeItem key={key} isActive={isActive} isRoot={isRoot} data-category-id={item.id}>
+          <TreeItem
+            key={key}
+            data-category-id={item.id}
+            className={extendedClasses({ isActive, isRoot })}
+          >
             {item.title}
           </TreeItem>
         )

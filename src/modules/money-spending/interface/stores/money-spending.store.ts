@@ -90,10 +90,12 @@ export class MoneySpendingStore {
   }
 
   setExpenses(value: ExpenseEntity[]) {
+    // console.log('setExpenses', value)
     this.expenses = value
   }
 
   addExpenses(value: ExpenseEntity[]) {
+    // console.log('addExpenses', value)
     this.expenses = [...this.expenses, ...value]
   }
 

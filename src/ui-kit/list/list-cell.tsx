@@ -1,4 +1,4 @@
-import { ListCellWrapper } from '@pv/ui-kit/list/list-styles'
+import { extendedClasses, ListCellWrapper } from '@pv/ui-kit/list/list-styles'
 import { ComponentChildren } from 'preact'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 export function ListCell({ children, isCentered, isFullwidth }: Props) {
   return (
-    <ListCellWrapper isCentered={isCentered} isFullWidth={isFullwidth}>
+    <ListCellWrapper className={extendedClasses({ isFullwidth, isCentered })}>
       {children}
     </ListCellWrapper>
   )

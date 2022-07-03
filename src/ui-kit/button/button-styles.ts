@@ -1,6 +1,52 @@
 import { styled } from '@linaria/react'
-import { css } from '@linaria/core'
+import { css, cx } from '@linaria/core'
 import { ButtonShape, ButtonVariant } from './types'
+
+const variantClass = (variant?: ButtonVariant) => {
+  switch (variant) {
+    case 'secondary':
+      return css`
+        background-color: var(--clr-3);
+        color: var(--clr-1);
+      `
+    case 'flat':
+      return css`
+        background-color: transparent;
+        box-shadow: none;
+      `
+    default:
+      return ''
+  }
+}
+
+const shapeClass = (shape?: ButtonShape) => {
+  switch (shape) {
+    case 'circle':
+      return css`
+        border-radius: 50%;
+        width: 52px;
+        display: flex;
+        justify-content: center;
+        height: 52px;
+      `
+    case 'rect':
+      return css`
+        border-radius: 4px;
+      `
+    default:
+      return ''
+  }
+}
+
+export const extendedClasses = ({
+  variant,
+  shape,
+}: {
+  variant?: ButtonVariant
+  shape?: ButtonShape
+}) => {
+  return cx(variantClass(variant), shapeClass(shape))
+}
 
 export const Container = styled.button<{ variant?: ButtonVariant; shape?: ButtonShape }>`
   padding: 0 10px;
@@ -14,41 +60,7 @@ export const Container = styled.button<{ variant?: ButtonVariant; shape?: Button
   color: var(--clr-primary-text);
 
   transition: all 0.2s ease;
-  ${(props) => {
-    switch (props.variant) {
-      case 'secondary':
-        return css`
-          background-color: var(--clr-3);
-          color: var(--clr-1);
-        `
-      case 'flat':
-        return css`
-          background-color: transparent;
-          box-shadow: none;
-        `
-      default:
-        return ''
-    }
-  }}
-
-  ${(props) => {
-    switch (props.shape) {
-      case 'circle':
-        return css`
-          border-radius: 50%;
-          width: 52px;
-          display: flex;
-          justify-content: center;
-          height: 52px;
-        `
-      case 'rect':
-        return css`
-          border-radius: 4px;
-        `
-      default:
-        return ''
-    }
-  }}
+  ${(props) => variantClass(props.variant)};
 
   &:hover,
   &:active {

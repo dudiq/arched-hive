@@ -7,6 +7,7 @@ import {
 } from '@pv/modules/money-spending/core/errors/money-spending.errors'
 import { ExpenseEntity } from '@pv/core/entities/expense.entity'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
+import { PouchId } from '@pv/core/entities/pouch.entity'
 import { MoneySpendingDataProvider } from './money-spending.data-provider'
 
 @Adapter()
@@ -20,7 +21,7 @@ export class MoneySpendingAdapter {
     offset,
     limit,
   }: {
-    pouchId?: string
+    pouchId: PouchId
     offset: number
     limit: number
   }): PromisedResult<ExpenseEntity[], MoneySpendingErrorsInstances> {
@@ -60,6 +61,33 @@ export class MoneySpendingAdapter {
       return Result.Ok(data)
     } catch (e) {
       return Result.Err(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e))
+    }
+  }
+
+  async addExpense({
+    desc,
+    cost,
+    catId,
+    pouchId,
+  }: {
+    desc?: string
+    cost: number
+    catId: string
+    pouchId: PouchId
+  }) {
+    try {
+      const { error, data } = await this.moneySpendingDataProvider.addExpense({
+        desc,
+        cost,
+        catId,
+        pouchId,
+      })
+
+      if (error) return Result.Err(new MoneySpendingErrors.AddExpenseResponse(error))
+
+      return Result.Ok(data)
+    } catch (e) {
+      return Result.Err(new MoneySpendingErrors.UnexpectedErrorAddExpense(e))
     }
   }
 }

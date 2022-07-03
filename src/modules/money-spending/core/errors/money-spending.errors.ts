@@ -9,6 +9,9 @@ export namespace MoneySpendingErrors {
 
   export const RemoveExpenseResponse = createErrorClass('Failed remove expense')
   export const UnexpectedErrorRemoveExpense = createErrorClass('Unexpected remove expense')
+
+  export const AddExpenseResponse = createErrorClass('Failed add expense')
+  export const UnexpectedErrorAddExpense = createErrorClass('Unexpected add expense')
 }
 
 export type MoneySpendingErrorsInstances = InstanceType<

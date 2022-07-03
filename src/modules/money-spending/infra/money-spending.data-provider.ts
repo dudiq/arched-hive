@@ -1,5 +1,7 @@
 import { DataProvider } from '@pv/di'
 import { DatabaseDataProvider } from '@pv/infra/database.data-provider'
+import { guid } from '@pv/utils/guid'
+import { PouchId } from '@pv/core/entities/pouch.entity'
 
 type GetExpensesType = {
   pouchId?: string
@@ -37,5 +39,28 @@ export class MoneySpendingDataProvider extends DatabaseDataProvider {
     const result = this.client.expense.where('id').equals(id).modify(fields)
 
     return this.ok(result)
+  }
+
+  async addExpense({
+    desc,
+    cost,
+    catId,
+    pouchId,
+  }: {
+    pouchId: PouchId
+    cost: number
+    desc?: string
+    catId: string
+  }) {
+    this.client.expense.add({
+      id: guid(),
+      cost,
+      desc,
+      time: new Date().getTime(),
+      state: -1,
+      pouchId,
+      catId,
+    })
+    return this.ok(true)
   }
 }

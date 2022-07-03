@@ -1,3 +1,5 @@
+import { PouchId } from '@pv/core/entities/pouch.entity'
+
 export type ExpenseEntity = {
   id: string
   catId: string
@@ -5,7 +7,7 @@ export type ExpenseEntity = {
   dateBegin?: number
   dateEnd?: number
   desc?: string
-  pouchId: string
+  pouchId: PouchId
   time: number
   state: number
 }

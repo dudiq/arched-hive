@@ -66,7 +66,6 @@ export class ExpenseSelectionAction {
   }
 
   handleApply() {
-    //const newExpenses = this.expenseSelectionStore.getExpenses()
-    //console.log('newExpenses', newExpenses)
+    this.moneySpendingService.handleApply()
   }
 }
