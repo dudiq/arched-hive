@@ -52,14 +52,15 @@ export class CategoriesService {
   }
 
   async addCategory() {
+    const parentCategoryId = this.categoriesStore.selectedCategoryId
     const { isApplied, data: categoryName } = await this.messageBoxService.prompt(
-      t('category.addNew'),
+      parentCategoryId ? t('category.addSubNew') : t('category.addNew'),
     )
     if (!isApplied) return
 
     const node: CategoryEntity = {
       id: guid(),
-      catId: this.categoriesStore.selectedCategoryId,
+      catId: parentCategoryId,
       title: categoryName,
     }
 

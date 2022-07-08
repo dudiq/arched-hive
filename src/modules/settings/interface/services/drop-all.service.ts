@@ -26,6 +26,7 @@ export class DropAllService {
     if (result.isErr()) {
       //TODO: add error processing
     }
+    this.dropRelatedStores()
   }
 
   dropRelatedStores() {

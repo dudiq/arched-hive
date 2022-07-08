@@ -22,11 +22,13 @@ export const ExpensesPage = observer(() => {
           <TodayCost />
           <ExpenseList />
           <div ref={anchorRef} />
-          <LoadMoreWrapper>
-            <Link onClick={moneySpendingAction.handleLoadNextExpenses}>
-              {t('expense.loadMore')}
-            </Link>
-          </LoadMoreWrapper>
+          {moneySpendingStore.isShowMoreVisible && (
+            <LoadMoreWrapper>
+              <Link onClick={moneySpendingAction.handleLoadNextExpenses}>
+                {t('expense.loadMore')}
+              </Link>
+            </LoadMoreWrapper>
+          )}
         </Swap>
       </ScrollContainer>
       <Controls />

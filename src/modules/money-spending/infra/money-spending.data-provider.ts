@@ -4,7 +4,7 @@ import { guid } from '@pv/utils/guid'
 import { PouchId } from '@pv/core/entities/pouch.entity'
 
 type GetExpensesType = {
-  pouchId?: string
+  pouchId: PouchId
   offset: number
   limit: number
 }

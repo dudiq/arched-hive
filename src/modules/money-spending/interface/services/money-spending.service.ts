@@ -7,8 +7,7 @@ import { t } from '@pv/interface/services/i18n'
 import { ExpenseSelectionStore } from '@pv/modules/money-spending/interface/stores/expense-selection.store'
 import { HistoryService } from '@pv/interface/services/history.service'
 import { Routes } from '@pv/contants/routes'
-
-const LIMIT_DEFAULT = 50
+import { LIMIT_DEFAULT } from '../constants'
 
 @Service()
 export class MoneySpendingService {
@@ -55,9 +54,14 @@ export class MoneySpendingService {
     await this.loadExpenses(0)
   }
 
+  async reloadExpenses() {
+    this.moneySpendingStore.setExpenses([])
+    this.moneySpendingStore.setOffset(0)
+    await this.loadExpenses(0)
+  }
+
   async loadExpenses(offset: number) {
-    //console.log('--- loadExpenses', offset)
-    const currentPouchId = this.moneySpendingStore.currentPouch?.id || null
+    const currentPouchId = this.moneySpendingStore.currentPouchId
 
     const result = await this.moneySpendingAdapter.getExpenses({
       offset,
@@ -113,8 +117,10 @@ export class MoneySpendingService {
       //   //TODO: add error processing
       //   return
       // }
-      this.expenseSelectionStore.dropData()
     }
+    this.expenseSelectionStore.dropData()
+
+    await this.reloadExpenses()
 
     this.historyService.push(Routes.expense)
     // await this.initialLoadData()

@@ -4,6 +4,7 @@ import { PouchEntity } from '@pv/core/entities/pouch.entity'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
 import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
 import { ThemeEntity } from '@pv/modules/theme'
+import { LIMIT_DEFAULT } from '../constants'
 
 @Store()
 export class MoneySpendingStore {
@@ -20,6 +21,10 @@ export class MoneySpendingStore {
   pouches: PouchEntity[] = []
 
   categories: CategoryEntity[] = []
+
+  get isShowMoreVisible() {
+    return this.expenses.length > LIMIT_DEFAULT
+  }
 
   get selectedParentCategory() {
     return this.categories.find((item) => item.catId === this.selectedCategoryId)
@@ -71,6 +76,11 @@ export class MoneySpendingStore {
     return this.pouches.find(({ id }) => pouchId === id)
   }
 
+  get currentPouchId() {
+    const pouch = this.currentPouch
+    return pouch?.id || null
+  }
+
   setSelectedCategoryId(id: string) {
     if (this.selectedCategoryId !== id) {
       this.selectedCategoryId = id
@@ -90,12 +100,10 @@ export class MoneySpendingStore {
   }
 
   setExpenses(value: ExpenseEntity[]) {
-    // console.log('setExpenses', value)
     this.expenses = value
   }
 
   addExpenses(value: ExpenseEntity[]) {
-    // console.log('addExpenses', value)
     this.expenses = [...this.expenses, ...value]
   }
 
