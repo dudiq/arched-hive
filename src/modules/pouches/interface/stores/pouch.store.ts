@@ -9,7 +9,13 @@ export class PouchStore {
 
   isLoading = true
 
+  isModalVisible = false
+
   pouches: PouchEntity[] = []
+
+  setModalVisible(value: boolean) {
+    this.isModalVisible = value
+  }
 
   get currentPouch() {
     const pouchId = this.pouchLocalStorage.value

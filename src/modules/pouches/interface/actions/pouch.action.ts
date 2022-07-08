@@ -11,5 +11,11 @@ export class PouchAction {
     private pouchService: PouchService,
   ) {}
 
-  handleOpenPouchesList() {}
+  handleOpenPouchesList() {
+    this.pouchStore.setModalVisible(true)
+  }
+
+  handleClosePouchesList() {
+    this.pouchStore.setModalVisible(false)
+  }
 }

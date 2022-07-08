@@ -1,6 +1,7 @@
 import { ComponentChildren } from 'preact'
-import { useModal } from '@pv/ui-kit/modal/use-modal'
-import { Container } from '@pv/ui-kit/modal/modal-styles'
+import { useModal } from './use-modal'
+import { Container, Overlay } from './modal-styles'
+import { useModalHandleClose } from './use-modal-handle-close'
 
 type Props = {
   onClose: () => void
@@ -10,7 +11,13 @@ type Props = {
 
 export function ModalContainer({ children, isVisible, onClose }: Props) {
   const { isContainerShown } = useModal({ onClose, isVisible })
+  const { handleClose } = useModalHandleClose()
 
   if (!isContainerShown) return null
-  return <Container>{children}</Container>
+  return (
+    <>
+      <Overlay onClick={handleClose} />
+      <Container>{children}</Container>
+    </>
+  )
 }
