@@ -10,3 +10,7 @@ export const Container = styled.div`
 export const Title = styled.div`
   font-size: var(--text-size-hard);
 `
+
+export const SlotContainer = styled.div`
+  margin-left: auto;
+`

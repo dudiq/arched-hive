@@ -1,7 +1,7 @@
 import { ComponentChildren } from 'preact'
 import { observer } from 'mobx-react-lite'
-import { useLayout } from '@pv/modules/app/ui/layout/use-layout'
-import { Container, Header, Footer, Content } from './layout-styles'
+import { useCurrentRoute } from '@pv/interface/use-current-route'
+import { Container, HeaderContainer, FooterContainer, Content } from './layout-styles'
 
 type Props = {
   headerSlot?: ComponentChildren
@@ -10,12 +10,13 @@ type Props = {
 }
 
 export const Layout = observer(({ contentSlot, headerSlot, footerSlot }: Props) => {
-  const { usedRoute } = useLayout()
+  const { currentRoute } = useCurrentRoute()
+  const isHeaderVisible = currentRoute?.withHeader || currentRoute?.header
   return (
     <Container>
-      {usedRoute?.withHeader && <Header>{headerSlot}</Header>}
+      {isHeaderVisible && <HeaderContainer>{headerSlot}</HeaderContainer>}
       <Content>{contentSlot}</Content>
-      {usedRoute?.withNavigation && <Footer>{footerSlot}</Footer>}
+      {currentRoute?.withNavigation && <FooterContainer>{footerSlot}</FooterContainer>}
     </Container>
   )
 })

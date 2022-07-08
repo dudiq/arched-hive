@@ -1,5 +1,7 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
 import { Routes } from '@pv/contants/routes'
+import { t } from '@pv/interface/services/i18n'
+import { PouchSelection } from '@pv/modules/pouches'
 import { ExpensesPage } from './pages/expenses-page'
 import { ExpenseItemPage } from './pages/expense-item-page'
 
@@ -9,8 +11,10 @@ export const moneySpendingRoutes: RouteEntity[] = [
       path: Routes.expense,
     },
     component: ExpensesPage,
-    documentTitle: 'Expenses',
-    withHeader: true,
+    header: {
+      title: () => t('pages.expense'),
+      component: PouchSelection,
+    },
     withNavigation: true,
   },
   {
@@ -18,6 +22,5 @@ export const moneySpendingRoutes: RouteEntity[] = [
       path: Routes.expenseItem,
     },
     component: ExpenseItemPage,
-    documentTitle: 'Expense',
   },
 ]

@@ -14,5 +14,5 @@ export const Content = styled.div`
   display: flex;
   flex: 1;
 `
-export const Header = styled.div``
-export const Footer = styled.div``
+export const HeaderContainer = styled.div``
+export const FooterContainer = styled.div``

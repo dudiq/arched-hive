@@ -1,7 +1,7 @@
 import { Inject, Service } from '@pv/di'
 import { MoneySpendingAdapter } from '@pv/modules/money-spending/infra/money-spending.adapter'
 import { MoneySpendingStore } from '@pv/modules/money-spending/interface/stores/money-spending.store'
-import { PouchesAdapter } from '@pv/modules/pouches'
+import { PouchService, PouchStore } from '@pv/modules/pouches'
 import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
 import { ExpenseSelectionStore } from '@pv/modules/money-spending/interface/stores/expense-selection.store'
@@ -19,9 +19,11 @@ export class MoneySpendingService {
     @Inject()
     private moneySpendingAdapter: MoneySpendingAdapter,
     @Inject()
-    private pouchesAdapter: PouchesAdapter,
-    @Inject()
     private expenseSelectionStore: ExpenseSelectionStore,
+    @Inject()
+    private pouchService: PouchService,
+    @Inject()
+    private pouchStore: PouchStore,
     @Inject()
     private historyService: HistoryService,
   ) {}
@@ -30,20 +32,16 @@ export class MoneySpendingService {
     this.moneySpendingStore.setExpenses([])
     this.moneySpendingStore.setOffset(0)
 
-    const [categoriesResult, pouchesResult] = await Promise.all([
+    const [categoriesResult] = await Promise.all([
       this.moneySpendingAdapter.getCategories(),
-      this.pouchesAdapter.getPouches(),
+      this.pouchService.loadPouches(),
     ])
 
     if (categoriesResult.isErr()) {
       // TODO: add error processing
       return
     }
-    if (pouchesResult.isErr()) {
-      // TODO: add error processing
-      return
-    }
-    this.moneySpendingStore.setPouches(pouchesResult.getValue())
+
     this.moneySpendingStore.setCategories(categoriesResult.getValue())
     if (this.moneySpendingStore.categories.length === 0) {
       // open empty settings
@@ -61,7 +59,7 @@ export class MoneySpendingService {
   }
 
   async loadExpenses(offset: number) {
-    const currentPouchId = this.moneySpendingStore.currentPouchId
+    const currentPouchId = this.pouchStore.currentPouchId
 
     const result = await this.moneySpendingAdapter.getExpenses({
       offset,
@@ -99,7 +97,7 @@ export class MoneySpendingService {
   async handleApply() {
     this.moneySpendingStore.setIsLoading(true)
 
-    const pouchId = this.moneySpendingStore.currentPouch?.id || null
+    const pouchId = this.pouchStore.currentPouchId
     const catId = this.moneySpendingStore.selectedCategoryId
     const desc = this.expenseSelectionStore.currentDesc
 

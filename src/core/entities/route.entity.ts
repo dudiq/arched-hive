@@ -5,7 +5,10 @@ export type RouteEntity = {
     path?: string
     exact?: boolean
   }
-  documentTitle: string
+  header?: {
+    title: () => string
+    component?: ComponentType<unknown>
+  }
   component: ComponentType<unknown>
   withHeader?: boolean
   withNavigation?: boolean

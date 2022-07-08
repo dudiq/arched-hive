@@ -1,15 +1,10 @@
 import { Store } from '@pv/di'
 import { ExpenseEntity } from '@pv/core/entities/expense.entity'
-import { PouchEntity } from '@pv/core/entities/pouch.entity'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
-import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
-import { ThemeEntity } from '@pv/modules/theme'
 import { LIMIT_DEFAULT } from '../constants'
 
 @Store()
 export class MoneySpendingStore {
-  private pouchLocalStorage = new LocalStorageItem<ThemeEntity>('pouch')
-
   offset = 0
 
   selectedCategoryId = ''
@@ -17,8 +12,6 @@ export class MoneySpendingStore {
   isLoading = true
 
   expenses: ExpenseEntity[] = []
-
-  pouches: PouchEntity[] = []
 
   categories: CategoryEntity[] = []
 
@@ -70,17 +63,6 @@ export class MoneySpendingStore {
     return this.offset === 0 && this.isLoading
   }
 
-  get currentPouch() {
-    const pouchId = this.pouchLocalStorage.value
-    if (!pouchId) return undefined
-    return this.pouches.find(({ id }) => pouchId === id)
-  }
-
-  get currentPouchId() {
-    const pouch = this.currentPouch
-    return pouch?.id || null
-  }
-
   setSelectedCategoryId(id: string) {
     if (this.selectedCategoryId !== id) {
       this.selectedCategoryId = id
@@ -111,10 +93,6 @@ export class MoneySpendingStore {
     this.categories = value
   }
 
-  setPouches(value: PouchEntity[]) {
-    this.pouches = value
-  }
-
   removeExpenseById(id: string) {
     const index = this.expenses.findIndex((item) => item.id === id)
     if (index === -1) return
@@ -125,6 +103,5 @@ export class MoneySpendingStore {
     this.setOffset(0)
     this.setExpenses([])
     this.setCategories([])
-    this.setPouches([])
   }
 }

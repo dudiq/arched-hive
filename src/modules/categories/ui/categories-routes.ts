@@ -1,5 +1,6 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
 import { Routes } from '@pv/contants/routes'
+import { t } from '@pv/interface/services/i18n'
 import { Categories } from './categories'
 
 export const categoriesRoutes: RouteEntity[] = [
@@ -7,8 +8,10 @@ export const categoriesRoutes: RouteEntity[] = [
     route: {
       path: Routes.categories,
     },
+    header: {
+      title: () => t('pages.category'),
+    },
     component: Categories,
-    documentTitle: 'Money spending',
     withHeader: true,
     withNavigation: true,
   },

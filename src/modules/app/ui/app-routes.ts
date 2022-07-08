@@ -9,15 +9,11 @@ export const appRoutes: RouteEntity[] = [
       path: Routes.empty,
     },
     component: EmptyPage,
-    documentTitle: 'Empty data',
-    withHeader: false,
     withNavigation: true,
   },
   {
     route: {},
     component: NotFoundPage,
-    documentTitle: 'Not found',
-    withHeader: false,
     withNavigation: true,
   },
 ]

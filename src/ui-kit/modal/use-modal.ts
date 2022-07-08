@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'preact/compat'
 import { guid } from '@pv/utils/guid'
-import { useSearchLocation } from '@pv/utils/use-search-location'
+import { useSearchLocation } from '@pv/interface/use-search-location'
 
 type Args = {
   isVisible: boolean
