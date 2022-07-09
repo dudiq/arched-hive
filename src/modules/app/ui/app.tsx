@@ -11,6 +11,9 @@ import { Navigation } from './navigation'
 import { Loader } from './loader'
 import './app.langs'
 
+// @ts-ignore
+const baseUrl = import.meta.env.VITE_BASE_URL.slice(0, -1)
+
 export const App = observer(() => {
   const { langStore } = useLanguageContext()
   useFocus()
@@ -18,7 +21,7 @@ export const App = observer(() => {
     <>
       <Loader />
       <ThemeDefine />
-      <Router>
+      <Router base={baseUrl}>
         <HistoryAdapter />
         <Layout
           key={langStore.currentLanguage}

@@ -15773,6 +15773,7 @@ addBlock({
   }
 });
 
+const baseUrl = "/improved-lamp/".slice(0, -1);
 const App = observer(() => {
   const {
     langStore
@@ -15780,6 +15781,7 @@ const App = observer(() => {
   useFocus();
   return /*#__PURE__*/e(d$1, {
     children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(Router, {
+      base: baseUrl,
       children: [/*#__PURE__*/e(HistoryAdapter, {}), /*#__PURE__*/e(Layout, {
         headerSlot: /*#__PURE__*/e(Header$1, {}),
         contentSlot: /*#__PURE__*/e(ScreensSwitch, {}),
@@ -20586,8 +20588,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '2c6996cd04e52b74755b0e492854db4547fe2e59',
-  buildTime: new Date(1657396580809)
+  changeset: '7b0c831a560d7fc934f1cff1cb942b9b1ac63ff8',
+  buildTime: new Date(1657398287722)
 };
 
 var buildVersionStyles_1ys16xi = '';
