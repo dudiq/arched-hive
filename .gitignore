@@ -69,3 +69,5 @@ package-lock.json
 /build
 /*.log
 .cache
+
+src/build-version.ts

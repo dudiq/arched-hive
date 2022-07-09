@@ -34,6 +34,7 @@ export class SheetsService {
       },
     }
     data.pouch.forEach((item) => {
+      if (!item.id) return
       pouchMap[item.id] = {
         id: item.id,
         name: item.name,
@@ -47,7 +48,7 @@ export class SheetsService {
     )
     expenseViewList.forEach((item) => {
       const pouchId = item.pouchId
-      const list = pouchMap[pouchId]
+      const list = pouchId ? pouchMap[pouchId] : null
       if (list) {
         list.rows.push(item)
       } else {

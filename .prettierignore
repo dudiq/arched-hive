@@ -1,3 +1,4 @@
 dist
 *.langs.ts
 .cache
+docs
