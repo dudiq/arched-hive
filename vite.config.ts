@@ -13,6 +13,7 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
   },
+  base: '/improved-lamp/',
   plugins: [
     swcReact({
       reactFresh: false,

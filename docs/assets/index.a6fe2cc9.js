@@ -20586,8 +20586,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '4fc19ad20bb3566e24dd173e94e698e036d5ddca',
-  buildTime: new Date(1657396351363)
+  changeset: '2c6996cd04e52b74755b0e492854db4547fe2e59',
+  buildTime: new Date(1657396580809)
 };
 
 var buildVersionStyles_1ys16xi = '';
