@@ -15812,7 +15812,7 @@ const useHashLocation = () => {
   return [path, navigate];
 };
 
-const baseUrl = "/improved-lamp/#/".slice(0, -1);
+const baseUrl = "/improved-lamp/".slice(0, -1);
 const App = observer(() => {
   const {
     langStore
@@ -20637,8 +20637,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '701d783c0e28bea173da7c1b50dd0bf7e520067d',
-  buildTime: new Date(1657447459374)
+  changeset: '0fc64b9ec0bcb5c21676dfa66f16896346ba6d97',
+  buildTime: new Date(1657447668499)
 };
 
 var buildVersionStyles_1ys16xi = '';
