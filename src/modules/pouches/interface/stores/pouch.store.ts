@@ -5,7 +5,7 @@ import { t } from '@pv/interface/services/i18n'
 
 @Store()
 export class PouchStore {
-  private pouchLocalStorage = new LocalStorageItem<string>('pouch')
+  private pouchLocalStorage = new LocalStorageItem<PouchId>('pouch')
 
   isLoading = true
 

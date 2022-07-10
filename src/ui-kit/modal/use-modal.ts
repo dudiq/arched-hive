@@ -19,7 +19,7 @@ export function useModal({ isVisible, onClose }: Args) {
   const [usedLocation, setLocation] = useSearchLocation()
   const hash = window.location.hash
 
-  const [basePath, searchLocation] = usedLocation.split('?')
+  const [basePath, searchLocation] = (usedLocation as string).split('?')
 
   useEffect(() => {
     // on mount
