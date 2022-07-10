@@ -16,8 +16,9 @@ export class MoneySpendingDataProvider extends DatabaseDataProvider {
       .orderBy('time')
       .reverse()
       .filter((item) => {
-        if (!item.dateEnd) return true
-        if (pouchId && item.pouchId !== pouchId) return true
+        if (item.dateEnd) return false
+        if (!pouchId && !item.pouchId) return true
+        if (item.pouchId === pouchId) return true
         return false
       })
       .offset(offset)
