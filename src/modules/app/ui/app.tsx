@@ -10,6 +10,7 @@ import { Header } from './header'
 import { Navigation } from './navigation'
 import { Loader } from './loader'
 import './app.langs'
+import { useHashLocation } from './use-hash-location'
 
 // @ts-ignore
 const baseUrl = import.meta.env.VITE_BASE_URL.slice(0, -1)
@@ -21,7 +22,7 @@ export const App = observer(() => {
     <>
       <Loader />
       <ThemeDefine />
-      <Router base={baseUrl}>
+      <Router base={baseUrl} hook={useHashLocation}>
         <HistoryAdapter />
         <Layout
           key={langStore.currentLanguage}

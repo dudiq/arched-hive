@@ -6,10 +6,11 @@ import inspect from 'vite-plugin-inspect'
 import preact from '@preact/preset-vite'
 // @ts-ignore
 import VitePluginLinaria from 'vite-plugin-linaria'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default ({ mode }: any) => {
   // Load app-level env vars to node-level env vars.
-  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return defineConfig({
     esbuild: false,
@@ -20,6 +21,7 @@ export default ({ mode }: any) => {
     },
     base: process.env.VITE_BASE_URL,
     plugins: [
+      VitePWA({ registerType: 'autoUpdate' }),
       swcReact({
         reactFresh: false,
         swcOptions: {

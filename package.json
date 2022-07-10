@@ -57,6 +57,7 @@
     "vite": "^2.6.4",
     "vite-plugin-inspect": "^0.5.1",
     "vite-plugin-linaria": "^1.0.0",
+    "vite-plugin-pwa": "^0.12.2",
     "vite-plugin-swc-react": "^0.1.12"
   }
 }
