@@ -7217,260 +7217,6 @@ function S(n,t){for(var e in t)n[e]=t[e];return n}function C(n,t){for(var e in n
 
 var o=0;function e(_,e,n,t,f){var l,s,u={};for(s in e)"ref"==s?l=e[s]:u[s]=e[s];var a={type:_,props:u,key:n,ref:l,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--o,__source:f,__self:t};if("function"==typeof _&&(l=_.defaultProps))for(s in l)void 0===u[s]&&(u[s]=l[s]);return l$1.vnode&&l$1.vnode(a),a}
 
-/**
- * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
- */
-const eventPopstate = "popstate";
-const eventPushState = "pushState";
-const eventReplaceState = "replaceState";
-const events = [eventPopstate, eventPushState, eventReplaceState];
-
-var locationHook = ({ base = "" } = {}) => {
-  const [{ path, search }, update] = y(() => ({
-    path: currentPathname(base),
-    search: location.search,
-  })); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const prevHash = s(path + search);
-
-  _(() => {
-    // this function checks if the location has been changed since the
-    // last render and updates the state only when needed.
-    // unfortunately, we can't rely on `path` value here, since it can be stale,
-    // that's why we store the last pathname in a ref.
-    const checkForUpdates = () => {
-      const pathname = currentPathname(base);
-      const search = location.search;
-      const hash = pathname + search;
-
-      if (prevHash.current !== hash) {
-        prevHash.current = hash;
-        update({ path: pathname, search });
-      }
-    };
-
-    events.forEach((e) => addEventListener(e, checkForUpdates));
-
-    // it's possible that an update has occurred between render and the effect handler,
-    // so we run additional check on mount to catch these updates. Based on:
-    // https://gist.github.com/bvaughn/e25397f70e8c65b0ae0d7c90b731b189
-    checkForUpdates();
-
-    return () => events.forEach((e) => removeEventListener(e, checkForUpdates));
-  }, [base]);
-
-  // the 2nd argument of the `useLocation` return value is a function
-  // that allows to perform a navigation.
-  //
-  // the function reference should stay the same between re-renders, so that
-  // it can be passed down as an element prop without any performance concerns.
-  const navigate = T$1(
-    (to, { replace = false } = {}) =>
-      history[replace ? eventReplaceState : eventPushState](
-        null,
-        "",
-        // handle nested routers and absolute paths
-        to[0] === "~" ? to.slice(1) : base + to
-      ),
-    [base]
-  );
-
-  return [path, navigate];
-};
-
-// While History API does have `popstate` event, the only
-// proper way to listen to changes via `push/replaceState`
-// is to monkey-patch these methods.
-//
-// See https://stackoverflow.com/a/4585031
-if (typeof history !== "undefined") {
-  for (const type of [eventPushState, eventReplaceState]) {
-    const original = history[type];
-
-    history[type] = function () {
-      const result = original.apply(this, arguments);
-      const event = new Event(type);
-      event.arguments = arguments;
-
-      dispatchEvent(event);
-      return result;
-    };
-  }
-}
-
-const currentPathname = (base, path = location.pathname) =>
-  !path.toLowerCase().indexOf(base.toLowerCase())
-    ? path.slice(base.length) || "/"
-    : "~" + path;
-
-// creates a matcher function
-function makeMatcher(makeRegexpFn = pathToRegexp) {
-  let cache = {};
-
-  // obtains a cached regexp version of the pattern
-  const getRegexp = (pattern) =>
-    cache[pattern] || (cache[pattern] = makeRegexpFn(pattern));
-
-  return (pattern, path) => {
-    const { regexp, keys } = getRegexp(pattern || "");
-    const out = regexp.exec(path);
-
-    if (!out) return [false, null];
-
-    // formats an object with matched params
-    const params = keys.reduce((params, key, i) => {
-      params[key.name] = out[i + 1];
-      return params;
-    }, {});
-
-    return [true, params];
-  };
-}
-
-// escapes a regexp string (borrowed from path-to-regexp sources)
-// https://github.com/pillarjs/path-to-regexp/blob/v3.0.0/index.js#L202
-const escapeRx = (str) => str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
-
-// returns a segment representation in RegExp based on flags
-// adapted and simplified version from path-to-regexp sources
-const rxForSegment = (repeat, optional, prefix) => {
-  let capture = repeat ? "((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*)" : "([^\\/]+?)";
-  if (optional && prefix) capture = "(?:\\/" + capture + ")";
-  return capture + (optional ? "?" : "");
-};
-
-const pathToRegexp = (pattern) => {
-  const groupRx = /:([A-Za-z0-9_]+)([?+*]?)/g;
-
-  let match = null,
-    lastIndex = 0,
-    keys = [],
-    result = "";
-
-  while ((match = groupRx.exec(pattern)) !== null) {
-    const [_, segment, mod] = match;
-
-    // :foo  [1]      (  )
-    // :foo? [0 - 1]  ( o)
-    // :foo+ [1 - ∞]  (r )
-    // :foo* [0 - ∞]  (ro)
-    const repeat = mod === "+" || mod === "*";
-    const optional = mod === "?" || mod === "*";
-    const prefix = optional && pattern[match.index - 1] === "/" ? 1 : 0;
-
-    const prev = pattern.substring(lastIndex, match.index - prefix);
-
-    keys.push({ name: segment });
-    lastIndex = groupRx.lastIndex;
-
-    result += escapeRx(prev) + rxForSegment(repeat, optional, prefix);
-  }
-
-  result += escapeRx(pattern.substring(lastIndex));
-  return { keys, regexp: new RegExp("^" + result + "(?:\\/)?$", "i") };
-};
-
-/*
- * Part 1, Hooks API: useRouter, useRoute and useLocation
- */
-
-// one of the coolest features of `createContext`:
-// when no value is provided — default object is used.
-// allows us to use the router context as a global ref to store
-// the implicitly created router (see `useRouter` below)
-const RouterCtx = D$1({});
-
-const buildRouter = ({
-  hook = locationHook,
-  base = "",
-  matcher = makeMatcher(),
-} = {}) => ({ hook, base, matcher });
-
-const useRouter = () => {
-  const globalRef = q$1(RouterCtx);
-
-  // either obtain the router from the outer context (provided by the
-  // `<Router /> component) or create an implicit one on demand.
-  return globalRef.v || (globalRef.v = buildRouter());
-};
-
-const useLocation = () => {
-  const router = useRouter();
-  return router.hook(router);
-};
-
-const useRoute = (pattern) => {
-  const [path] = useLocation();
-  return useRouter().matcher(pattern, path);
-};
-
-/*
- * Part 2, Low Carb Router API: Router, Route, Link, Switch
- */
-
-const Router = (props) => {
-  const ref = s();
-
-  // this little trick allows to avoid having unnecessary
-  // calls to potentially expensive `buildRouter` method.
-  // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
-  const value = ref.current || (ref.current = { v: buildRouter(props) });
-
-  return v$1(RouterCtx.Provider, {
-    value,
-    children: props.children,
-  });
-};
-
-const Route = ({ path, match, component, children }) => {
-  const useRouteMatch = useRoute(path);
-
-  // `props.match` is present - Route is controlled by the Switch
-  const [matches, params] = match || useRouteMatch;
-
-  if (!matches) return null;
-
-  // React-Router style `component` prop
-  if (component) return v$1(component, { params });
-
-  // support render prop or plain children
-  return typeof children === "function" ? children(params) : children;
-};
-
-const flattenChildren = (children) => {
-  return Array.isArray(children)
-    ? [].concat(
-        ...children.map((c) =>
-          c && c.type === d$1
-            ? flattenChildren(c.props.children)
-            : flattenChildren(c)
-        )
-      )
-    : [children];
-};
-
-const Switch = ({ children, location }) => {
-  const { matcher } = useRouter();
-  const [originalLocation] = useLocation();
-
-  for (const element of flattenChildren(children)) {
-    let match = 0;
-
-    if (
-      i$1(element) &&
-      // we don't require an element to be of type Route,
-      // but we do require it to contain a truthy `path` prop.
-      // this allows to use different components that wrap Route
-      // inside of a switch, for example <AnimatedRoute />.
-      (match = element.props.path
-        ? matcher(element.props.path, location || originalLocation)
-        : [true, {}])[0]
-    )
-      return B$1(element, { match });
-  }
-
-  return null;
-};
-
 function createContextByFields(fields) {
   const keys = Object.keys(fields);
   const instances = keys.reduce((acc, fieldKey) => {
@@ -8488,6 +8234,260 @@ function useFocus() {
   }, [focusAction.handleStartTyping, focusAction.handleStopTyping]);
 }
 
+/**
+ * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
+ */
+const eventPopstate = "popstate";
+const eventPushState = "pushState";
+const eventReplaceState = "replaceState";
+const events = [eventPopstate, eventPushState, eventReplaceState];
+
+var locationHook = ({ base = "" } = {}) => {
+  const [{ path, search }, update] = y(() => ({
+    path: currentPathname(base),
+    search: location.search,
+  })); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  const prevHash = s(path + search);
+
+  _(() => {
+    // this function checks if the location has been changed since the
+    // last render and updates the state only when needed.
+    // unfortunately, we can't rely on `path` value here, since it can be stale,
+    // that's why we store the last pathname in a ref.
+    const checkForUpdates = () => {
+      const pathname = currentPathname(base);
+      const search = location.search;
+      const hash = pathname + search;
+
+      if (prevHash.current !== hash) {
+        prevHash.current = hash;
+        update({ path: pathname, search });
+      }
+    };
+
+    events.forEach((e) => addEventListener(e, checkForUpdates));
+
+    // it's possible that an update has occurred between render and the effect handler,
+    // so we run additional check on mount to catch these updates. Based on:
+    // https://gist.github.com/bvaughn/e25397f70e8c65b0ae0d7c90b731b189
+    checkForUpdates();
+
+    return () => events.forEach((e) => removeEventListener(e, checkForUpdates));
+  }, [base]);
+
+  // the 2nd argument of the `useLocation` return value is a function
+  // that allows to perform a navigation.
+  //
+  // the function reference should stay the same between re-renders, so that
+  // it can be passed down as an element prop without any performance concerns.
+  const navigate = T$1(
+    (to, { replace = false } = {}) =>
+      history[replace ? eventReplaceState : eventPushState](
+        null,
+        "",
+        // handle nested routers and absolute paths
+        to[0] === "~" ? to.slice(1) : base + to
+      ),
+    [base]
+  );
+
+  return [path, navigate];
+};
+
+// While History API does have `popstate` event, the only
+// proper way to listen to changes via `push/replaceState`
+// is to monkey-patch these methods.
+//
+// See https://stackoverflow.com/a/4585031
+if (typeof history !== "undefined") {
+  for (const type of [eventPushState, eventReplaceState]) {
+    const original = history[type];
+
+    history[type] = function () {
+      const result = original.apply(this, arguments);
+      const event = new Event(type);
+      event.arguments = arguments;
+
+      dispatchEvent(event);
+      return result;
+    };
+  }
+}
+
+const currentPathname = (base, path = location.pathname) =>
+  !path.toLowerCase().indexOf(base.toLowerCase())
+    ? path.slice(base.length) || "/"
+    : "~" + path;
+
+// creates a matcher function
+function makeMatcher(makeRegexpFn = pathToRegexp) {
+  let cache = {};
+
+  // obtains a cached regexp version of the pattern
+  const getRegexp = (pattern) =>
+    cache[pattern] || (cache[pattern] = makeRegexpFn(pattern));
+
+  return (pattern, path) => {
+    const { regexp, keys } = getRegexp(pattern || "");
+    const out = regexp.exec(path);
+
+    if (!out) return [false, null];
+
+    // formats an object with matched params
+    const params = keys.reduce((params, key, i) => {
+      params[key.name] = out[i + 1];
+      return params;
+    }, {});
+
+    return [true, params];
+  };
+}
+
+// escapes a regexp string (borrowed from path-to-regexp sources)
+// https://github.com/pillarjs/path-to-regexp/blob/v3.0.0/index.js#L202
+const escapeRx = (str) => str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
+
+// returns a segment representation in RegExp based on flags
+// adapted and simplified version from path-to-regexp sources
+const rxForSegment = (repeat, optional, prefix) => {
+  let capture = repeat ? "((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*)" : "([^\\/]+?)";
+  if (optional && prefix) capture = "(?:\\/" + capture + ")";
+  return capture + (optional ? "?" : "");
+};
+
+const pathToRegexp = (pattern) => {
+  const groupRx = /:([A-Za-z0-9_]+)([?+*]?)/g;
+
+  let match = null,
+    lastIndex = 0,
+    keys = [],
+    result = "";
+
+  while ((match = groupRx.exec(pattern)) !== null) {
+    const [_, segment, mod] = match;
+
+    // :foo  [1]      (  )
+    // :foo? [0 - 1]  ( o)
+    // :foo+ [1 - ∞]  (r )
+    // :foo* [0 - ∞]  (ro)
+    const repeat = mod === "+" || mod === "*";
+    const optional = mod === "?" || mod === "*";
+    const prefix = optional && pattern[match.index - 1] === "/" ? 1 : 0;
+
+    const prev = pattern.substring(lastIndex, match.index - prefix);
+
+    keys.push({ name: segment });
+    lastIndex = groupRx.lastIndex;
+
+    result += escapeRx(prev) + rxForSegment(repeat, optional, prefix);
+  }
+
+  result += escapeRx(pattern.substring(lastIndex));
+  return { keys, regexp: new RegExp("^" + result + "(?:\\/)?$", "i") };
+};
+
+/*
+ * Part 1, Hooks API: useRouter, useRoute and useLocation
+ */
+
+// one of the coolest features of `createContext`:
+// when no value is provided — default object is used.
+// allows us to use the router context as a global ref to store
+// the implicitly created router (see `useRouter` below)
+const RouterCtx = D$1({});
+
+const buildRouter = ({
+  hook = locationHook,
+  base = "",
+  matcher = makeMatcher(),
+} = {}) => ({ hook, base, matcher });
+
+const useRouter = () => {
+  const globalRef = q$1(RouterCtx);
+
+  // either obtain the router from the outer context (provided by the
+  // `<Router /> component) or create an implicit one on demand.
+  return globalRef.v || (globalRef.v = buildRouter());
+};
+
+const useLocation = () => {
+  const router = useRouter();
+  return router.hook(router);
+};
+
+const useRoute = (pattern) => {
+  const [path] = useLocation();
+  return useRouter().matcher(pattern, path);
+};
+
+/*
+ * Part 2, Low Carb Router API: Router, Route, Link, Switch
+ */
+
+const Router = (props) => {
+  const ref = s();
+
+  // this little trick allows to avoid having unnecessary
+  // calls to potentially expensive `buildRouter` method.
+  // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
+  const value = ref.current || (ref.current = { v: buildRouter(props) });
+
+  return v$1(RouterCtx.Provider, {
+    value,
+    children: props.children,
+  });
+};
+
+const Route = ({ path, match, component, children }) => {
+  const useRouteMatch = useRoute(path);
+
+  // `props.match` is present - Route is controlled by the Switch
+  const [matches, params] = match || useRouteMatch;
+
+  if (!matches) return null;
+
+  // React-Router style `component` prop
+  if (component) return v$1(component, { params });
+
+  // support render prop or plain children
+  return typeof children === "function" ? children(params) : children;
+};
+
+const flattenChildren = (children) => {
+  return Array.isArray(children)
+    ? [].concat(
+        ...children.map((c) =>
+          c && c.type === d$1
+            ? flattenChildren(c.props.children)
+            : flattenChildren(c)
+        )
+      )
+    : [children];
+};
+
+const Switch = ({ children, location }) => {
+  const { matcher } = useRouter();
+  const [originalLocation] = useLocation();
+
+  for (const element of flattenChildren(children)) {
+    let match = 0;
+
+    if (
+      i$1(element) &&
+      // we don't require an element to be of type Route,
+      // but we do require it to contain a truthy `path` prop.
+      // this allows to use different components that wrap Route
+      // inside of a switch, for example <AnimatedRoute />.
+      (match = element.props.path
+        ? matcher(element.props.path, location || originalLocation)
+        : [true, {}])[0]
+    )
+      return B$1(element, { match });
+  }
+
+  return null;
+};
+
 var __decorate$F = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -8812,17 +8812,6 @@ function ScreensSwitch() {
   });
 }
 
-function HistoryAdapter() {
-  const [pathname, setLocation] = useLocation();
-  const {
-    historyStore,
-    routerHistory
-  } = useHistoryContext();
-  routerHistory.setHistory(setLocation);
-  historyStore.updateState(pathname);
-  return null;
-}
-
 var separatorStyles_rka3su = '';
 
 const Separator = /*#__PURE__*/styled$1("div")({
@@ -8846,8 +8835,7 @@ const SlotContainer = /*#__PURE__*/styled$1("div")({
 });
 
 const Header$1 = observer(() => {
-  var ref, ref1; // const { title } = useHeader()
-
+  var ref, ref1;
   const {
     currentRoute
   } = useCurrentRoute();
@@ -15755,6 +15743,67 @@ function Loader$1() {
   return null;
 }
 
+// ---------------- hash support ------------------------
+
+const currentLocation = (base, path = window.location.hash.replace('#', '')) => !path.toLowerCase().indexOf(base.toLowerCase()) ? path.slice(base.length) || '/' : `~${path}`;
+
+const base = '';
+const useHashLocation = () => {
+  const [{
+    path
+  }, setState] = y({
+    path: currentLocation(base),
+    search: ''
+  });
+  const prevHash = s(path);
+  _(() => {
+    // this function is called whenever the hash changes
+    const handler = () => {
+      const baseHash = currentLocation(base);
+
+      if (prevHash.current !== baseHash) {
+        prevHash.current = baseHash;
+        const [newLoc, newSearch] = baseHash.split('?');
+        setState({
+          path: newLoc,
+          search: newSearch
+        });
+      }
+    }; // subscribe to hash changes
+
+
+    window.addEventListener('hashchange', handler);
+    return () => window.removeEventListener('hashchange', handler); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [base]);
+  const navigate = T$1(to => {
+    window.location.hash = to[0] === '~' ? to.slice(1) : base + to;
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [base]);
+  return [path, navigate];
+};
+
+function HistoryAdapter() {
+  const [pathname, setLocation] = useLocation();
+  const {
+    historyStore,
+    routerHistory
+  } = useHistoryContext();
+  routerHistory.setHistory(setLocation);
+  historyStore.updateState(pathname);
+  return null;
+}
+
+const baseUrl = ({}).VITE_BASE_URL.slice(0, -1);
+function BaseRouter({
+  children
+}) {
+  return /*#__PURE__*/e(Router, {
+    base: baseUrl,
+    hook: useHashLocation,
+    children: [/*#__PURE__*/e(HistoryAdapter, {}), children]
+  });
+}
+
 addBlock({
   data: {
     pages: {
@@ -15773,20 +15822,18 @@ addBlock({
   }
 });
 
-const baseUrl = "/improved-lamp/".slice(0, -1);
 const App = observer(() => {
   const {
     langStore
   } = useLanguageContext();
   useFocus();
   return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(Router, {
-      base: baseUrl,
-      children: [/*#__PURE__*/e(HistoryAdapter, {}), /*#__PURE__*/e(Layout, {
+    children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(BaseRouter, {
+      children: /*#__PURE__*/e(Layout, {
         headerSlot: /*#__PURE__*/e(Header$1, {}),
         contentSlot: /*#__PURE__*/e(ScreensSwitch, {}),
         footerSlot: /*#__PURE__*/e(Navigation, {})
-      }, langStore.currentLanguage)]
+      }, langStore.currentLanguage)
     })]
   });
 });
@@ -18134,30 +18181,39 @@ function useModal({
 }) {
   const [isContainerShown, setContainerShown] = y(isVisible);
   const idRef = s('');
+  const prevStateRef = s(false);
 
   if (!idRef.current) {
     idRef.current = guid();
   }
 
-  const [location, setLocation, hashLocation] = useSearchLocation();
+  const [usedLocation, setLocation] = useSearchLocation();
+  const hash = window.location.hash;
+  const searchLocation = usedLocation.split('?')[1] || '';
   _(() => {
     // on mount
-    const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set(PARAM_ID, idRef.current); // @ts-ignore
+    const queryParams = new URLSearchParams(searchLocation);
+    queryParams.set(PARAM_ID, idRef.current);
+    const newLocation = `${usedLocation}?${queryParams.toString()}`; // @ts-ignore
 
-    setLocation(`${location}?${queryParams.toString()}`); // eslint-disable-next-line react-hooks/exhaustive-deps
+    setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   _(() => {
-    const queryParams = new URLSearchParams(window.location.search);
+    const searchFromHash = hash.split('?')[1] || '';
+    const queryParams = new URLSearchParams(searchFromHash);
     const id = queryParams.get(PARAM_ID);
+    const isShown = id === idRef.current;
+    const isStateChanged = prevStateRef.current !== isShown;
+    prevStateRef.current = isShown;
+    if (!isStateChanged) return;
 
     if (id) {
-      setContainerShown(id === idRef.current);
+      setContainerShown(isShown);
       return;
     }
 
     onClose();
-  }, [hashLocation, onClose]);
+  }, [hash, onClose]);
   return {
     isContainerShown
   };
@@ -18528,7 +18584,7 @@ var __decorate$e = globalThis && globalThis.__decorate || function (decorators, 
 };
 let MoneySpendingStore = class MoneySpendingStore {
   get isShowMoreVisible() {
-    return this.expenses.length > LIMIT_DEFAULT;
+    return this.expenses.length >= LIMIT_DEFAULT;
   }
 
   get selectedParentCategory() {
@@ -20588,8 +20644,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '7b0c831a560d7fc934f1cff1cb942b9b1ac63ff8',
-  buildTime: new Date(1657398287722)
+  changeset: 'e380ef64e673030a518e6e9ea9371cbaded10b2f',
+  buildTime: new Date(1657452985391)
 };
 
 var buildVersionStyles_1ys16xi = '';
