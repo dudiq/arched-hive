@@ -15773,7 +15773,46 @@ addBlock({
   }
 });
 
-const baseUrl = "/improved-lamp/".slice(0, -1);
+// ---------------- hash support ------------------------
+
+const currentLocation = (base, path = window.location.hash.replace('#', '')) => !path.toLowerCase().indexOf(base.toLowerCase()) ? path.slice(base.length) || '/' : `~${path}`;
+
+const base = '';
+const useHashLocation = () => {
+  const [{
+    path
+  }, setState] = y({
+    path: currentLocation(base),
+    search: ''
+  });
+  const prevHash = s(path);
+  _(() => {
+    // this function is called whenever the hash changes
+    const handler = () => {
+      const baseHash = currentLocation(base);
+
+      if (prevHash.current !== baseHash) {
+        prevHash.current = baseHash;
+        const [newLoc, newSearch] = baseHash.split('?');
+        setState({
+          path: newLoc,
+          search: newSearch
+        });
+      }
+    }; // subscribe to hash changes
+
+
+    window.addEventListener('hashchange', handler);
+    return () => window.removeEventListener('hashchange', handler); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [base]);
+  const navigate = T$1(to => {
+    window.location.hash = to[0] === '~' ? to.slice(1) : base + to;
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+  [base]);
+  return [path, navigate];
+};
+
+const baseUrl = "/improved-lamp/#/".slice(0, -1);
 const App = observer(() => {
   const {
     langStore
@@ -15782,6 +15821,7 @@ const App = observer(() => {
   return /*#__PURE__*/e(d$1, {
     children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(Router, {
       base: baseUrl,
+      hook: useHashLocation,
       children: [/*#__PURE__*/e(HistoryAdapter, {}), /*#__PURE__*/e(Layout, {
         headerSlot: /*#__PURE__*/e(Header$1, {}),
         contentSlot: /*#__PURE__*/e(ScreensSwitch, {}),
@@ -18134,30 +18174,39 @@ function useModal({
 }) {
   const [isContainerShown, setContainerShown] = y(isVisible);
   const idRef = s('');
+  const prevStateRef = s(false);
 
   if (!idRef.current) {
     idRef.current = guid();
   }
 
-  const [location, setLocation, hashLocation] = useSearchLocation();
+  const [usedLocation, setLocation] = useSearchLocation();
+  const hash = window.location.hash;
+  const searchLocation = usedLocation.split('?')[1] || '';
   _(() => {
     // on mount
-    const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set(PARAM_ID, idRef.current); // @ts-ignore
+    const queryParams = new URLSearchParams(searchLocation);
+    queryParams.set(PARAM_ID, idRef.current);
+    const newLocation = `${usedLocation}?${queryParams.toString()}`; // @ts-ignore
 
-    setLocation(`${location}?${queryParams.toString()}`); // eslint-disable-next-line react-hooks/exhaustive-deps
+    setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   _(() => {
-    const queryParams = new URLSearchParams(window.location.search);
+    const searchFromHash = hash.split('?')[1] || '';
+    const queryParams = new URLSearchParams(searchFromHash);
     const id = queryParams.get(PARAM_ID);
+    const isShown = id === idRef.current;
+    const isStateChanged = prevStateRef.current !== isShown;
+    prevStateRef.current = isShown;
+    if (!isStateChanged) return;
 
     if (id) {
-      setContainerShown(id === idRef.current);
+      setContainerShown(isShown);
       return;
     }
 
     onClose();
-  }, [hashLocation, onClose]);
+  }, [hash, onClose]);
   return {
     isContainerShown
   };
@@ -20588,8 +20637,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '7b0c831a560d7fc934f1cff1cb942b9b1ac63ff8',
-  buildTime: new Date(1657398287722)
+  changeset: '701d783c0e28bea173da7c1b50dd0bf7e520067d',
+  buildTime: new Date(1657447459374)
 };
 
 var buildVersionStyles_1ys16xi = '';
