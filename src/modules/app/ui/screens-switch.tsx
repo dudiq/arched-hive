@@ -1,19 +1,20 @@
-import { Switch, Route } from 'wouter-preact'
-import { useRoutesContext } from '@pv/interface/use-router-context'
+import { useCurrentRoute } from '@pv/interface/use-current-route'
+import { observer } from 'mobx-react-lite'
+import { Swap } from '@pv/ui-kit/swap'
+import { NotFoundPage } from '@pv/modules/app/ui/not-found-page'
 
-export function ScreensSwitch() {
-  const { routesStore } = useRoutesContext()
+export const ScreensSwitch = observer(() => {
+  const { currentRoute } = useCurrentRoute()
 
+  const ScreenComponent = currentRoute?.component
+  const isPageExist = currentRoute && ScreenComponent
   return (
-    <Switch>
-      {routesStore.routes.map((routeItem) => {
-        const { route, component: ScreenComponent } = routeItem
-        return (
-          <Route key={route.path} path={route.path}>
-            <ScreenComponent />
-          </Route>
-        )
-      })}
-    </Switch>
+    <>
+      <Swap is={!isPageExist} isSlot={<NotFoundPage />}>
+        <Swap is={!currentRoute?.route.path} isSlot={<NotFoundPage />}>
+          {ScreenComponent && <ScreenComponent />}
+        </Swap>
+      </Swap>
+    </>
   )
-}
+})
