@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const ContainerBg = styled.div`
   z-index: 2;
-  max-height: 90vh;
+  max-height: 100vh;
   overflow: auto;
   min-width: 320px;
   background-color: var(--clr-2);
