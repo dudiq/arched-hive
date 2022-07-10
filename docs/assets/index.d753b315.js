@@ -1324,7 +1324,7 @@ var ContainerInstance = /** @class */ (function () {
         return !!this.findService(identifier);
     };
     ContainerInstance.prototype.get = function (identifier) {
-        var globalContainer = Container$m.of(undefined);
+        var globalContainer = Container$n.of(undefined);
         var globalService = globalContainer.findService(identifier);
         var scopedService = this.findService(identifier);
         if (globalService && globalService.global === true)
@@ -1534,7 +1534,7 @@ var ContainerInstance = /** @class */ (function () {
     ContainerInstance.prototype.initializeParams = function (target, paramTypes) {
         var _this = this;
         return paramTypes.map(function (paramType, index) {
-            var paramHandler = Container$m.handlers.find(function (handler) {
+            var paramHandler = Container$n.handlers.find(function (handler) {
                 /**
                  * @Inject()-ed values are stored as parameter handlers and they reference their target
                  * when created. So when a class is extended the @Inject()-ed values are not inherited
@@ -1567,7 +1567,7 @@ var ContainerInstance = /** @class */ (function () {
      */
     ContainerInstance.prototype.applyPropertyHandlers = function (target, instance) {
         var _this = this;
-        Container$m.handlers.forEach(function (handler) {
+        Container$n.handlers.forEach(function (handler) {
             if (typeof handler.index === 'number')
                 return;
             if (handler.object.constructor !== target && !(target.prototype instanceof handler.object.constructor))
@@ -1607,7 +1607,7 @@ var ContainerInstance = /** @class */ (function () {
 /**
  * Service container.
  */
-var Container$m = /** @class */ (function () {
+var Container$n = /** @class */ (function () {
     function Container() {
     }
     /**
@@ -1776,7 +1776,7 @@ function Inject(typeOrIdentifier) {
         if (typeWrapper === undefined || typeWrapper.eagerType === undefined || typeWrapper.eagerType === Object) {
             throw new CannotInjectValueError(target, propertyName);
         }
-        Container$m.registerHandler({
+        Container$n.registerHandler({
             object: target,
             propertyName: propertyName,
             index: index,
@@ -1818,7 +1818,7 @@ function Service(optionsOrServiceIdentifier) {
             serviceMetadata.eager = optionsOrServiceIdentifier.eager || false;
             serviceMetadata.transient = optionsOrServiceIdentifier.transient || false;
         }
-        Container$m.set(serviceMetadata);
+        Container$n.set(serviceMetadata);
     };
 }
 
@@ -7209,7 +7209,7 @@ function Module() {
   };
 }
 
-var n$1,l$1,u$1,i$1,t$2,o$2,r$1,f$1,e$2={},c$1=[],s$1=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function a$1(n,l){for(var u in l)n[u]=l[u];return n}function h$1(n){var l=n.parentNode;l&&l.removeChild(n);}function v$1(l,u,i){var t,o,r,f={};for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(r in l.defaultProps)void 0===f[r]&&(f[r]=l.defaultProps[r]);return y$1(l,f,t,o,null)}function y$1(n,i,t,o,r){var f={type:n,props:i,key:t,ref:o,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==r?++u$1:r};return null==r&&null!=l$1.vnode&&l$1.vnode(f),f}function p$1(){return {current:null}}function d$1(n){return n.children}function _$1(n,l){this.props=n,this.context=l;}function k$2(n,l){if(null==l)return n.__?k$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?k$2(n):null}function b$1(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return b$1(n)}}function m$1(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!g$2.__r++||r$1!==l$1.debounceRendering)&&((r$1=l$1.debounceRendering)||o$2)(g$2);}function g$2(){for(var n;g$2.__r=t$2.length;)n=t$2.sort(function(n,l){return n.__v.__b-l.__v.__b}),t$2=[],n.some(function(n){var l,u,i,t,o,r;n.__d&&(o=(t=(l=n).__v).__e,(r=l.__P)&&(u=[],(i=a$1({},t)).__v=t.__v+1,j$2(r,t,i,l.__n,void 0!==r.ownerSVGElement,null!=t.__h?[o]:null,u,null==o?k$2(t):o,t.__h),z$2(u,t),t.__e!=o&&b$1(t)));});}function w$2(n,l,u,i,t,o,r,f,s,a){var h,v,p,_,b,m,g,w=i&&i.__k||c$1,A=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(_=u.__k[h]=null==(_=l[h])||"boolean"==typeof _?null:"string"==typeof _||"number"==typeof _||"bigint"==typeof _?y$1(null,_,null,null,_):Array.isArray(_)?y$1(d$1,{children:_},null,null,null):_.__b>0?y$1(_.type,_.props,_.key,null,_.__v):_)){if(_.__=u,_.__b=u.__b+1,null===(p=w[h])||p&&_.key==p.key&&_.type===p.type)w[h]=void 0;else for(v=0;v<A;v++){if((p=w[v])&&_.key==p.key&&_.type===p.type){w[v]=void 0;break}p=null;}j$2(n,_,p=p||e$2,t,o,r,f,s,a),b=_.__e,(v=_.ref)&&p.ref!=v&&(g||(g=[]),p.ref&&g.push(p.ref,null,_),g.push(v,_.__c||b,_)),null!=b?(null==m&&(m=b),"function"==typeof _.type&&_.__k===p.__k?_.__d=s=x$2(_,s,n):s=P$1(n,_,p,w,b,s),"function"==typeof u.type&&(u.__d=s)):s&&p.__e==s&&s.parentNode!=n&&(s=k$2(p));}for(u.__e=m,h=A;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=k$2(i,h+1)),N$1(w[h],w[h]));if(g)for(h=0;h<g.length;h++)M$1(g[h],g[++h],g[++h]);}function x$2(n,l,u){for(var i,t=n.__k,o=0;t&&o<t.length;o++)(i=t[o])&&(i.__=n,l="function"==typeof i.type?x$2(i,l,u):P$1(u,i,i,t,i.__e,l));return l}function A$2(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){A$2(n,l);}):l.push(n)),l}function P$1(n,l,u,i,t,o){var r,f,e;if(void 0!==l.__d)r=l.__d,l.__d=void 0;else if(null==u||t!=o||null==t.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(t),r=null;else {for(f=o,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,o),r=o;}return void 0!==r?r:t.nextSibling}function C$1(n,l,u,i,t){var o;for(o in u)"children"===o||"key"===o||o in l||H$1(n,o,null,u[o],i);for(o in l)t&&"function"!=typeof l[o]||"children"===o||"key"===o||"value"===o||"checked"===o||u[o]===l[o]||H$1(n,o,l[o],u[o],i);}function $$1(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||s$1.test(l)?u:u+"px";}function H$1(n,l,u,i,t){var o;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||$$1(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||$$1(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=u,u?i||n.addEventListener(l,o?T$2:I$1,o):n.removeEventListener(l,o?T$2:I$1,o);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l));}}function I$1(n){this.l[n.type+!1](l$1.event?l$1.event(n):n);}function T$2(n){this.l[n.type+!0](l$1.event?l$1.event(n):n);}function j$2(n,u,i,t,o,r,f,e,c){var s,h,v,y,p,k,b,m,g,x,A,P,C,$=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,r=[e]),(s=l$1.__b)&&s(u);try{n:if("function"==typeof $){if(m=u.props,g=(s=$.contextType)&&t[s.__c],x=s?g?g.props.value:s.__:t,i.__c?b=(h=u.__c=i.__c).__=h.__E:("prototype"in $&&$.prototype.render?u.__c=h=new $(m,x):(u.__c=h=new _$1(m,x),h.constructor=$,h.render=O$1),g&&g.sub(h),h.props=m,h.state||(h.state={}),h.context=x,h.__n=t,v=h.__d=!0,h.__h=[]),null==h.__s&&(h.__s=h.state),null!=$.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=a$1({},h.__s)),a$1(h.__s,$.getDerivedStateFromProps(m,h.__s))),y=h.props,p=h.state,v)null==$.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else {if(null==$.getDerivedStateFromProps&&m!==y&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(m,x),!h.__e&&null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(m,h.__s,x)||u.__v===i.__v){h.props=m,h.state=h.__s,u.__v!==i.__v&&(h.__d=!1),h.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),h.__h.length&&f.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(m,h.__s,x),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(y,p,k);});}if(h.context=x,h.props=m,h.__v=u,h.__P=n,A=l$1.__r,P=0,"prototype"in $&&$.prototype.render)h.state=h.__s,h.__d=!1,A&&A(u),s=h.render(h.props,h.state,h.context);else do{h.__d=!1,A&&A(u),s=h.render(h.props,h.state,h.context),h.state=h.__s;}while(h.__d&&++P<25);h.state=h.__s,null!=h.getChildContext&&(t=a$1(a$1({},t),h.getChildContext())),v||null==h.getSnapshotBeforeUpdate||(k=h.getSnapshotBeforeUpdate(y,p)),C=null!=s&&s.type===d$1&&null==s.key?s.props.children:s,w$2(n,Array.isArray(C)?C:[C],u,i,t,o,r,f,e,c),h.base=u.__e,u.__h=null,h.__h.length&&f.push(h),b&&(h.__E=h.__=null),h.__e=!1;}else null==r&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=L$1(i.__e,u,i,t,o,r,f,c);(s=l$1.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=r)&&(u.__e=e,u.__h=!!c,r[r.indexOf(e)]=null),l$1.__e(n,u,i);}}function z$2(n,u){l$1.__c&&l$1.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$1.__e(n,u.__v);}});}function L$1(l,u,i,t,o,r,f,c){var s,a,v,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(o=!0),null!=r)for(;_<r.length;_++)if((s=r[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,r[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=o?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),r=null,c=!1;}if(null===d)y===p||c&&l.data===p||(l.data=p);else {if(r=r&&n$1.call(l.childNodes),a=(y=i.props||e$2).dangerouslySetInnerHTML,v=p.dangerouslySetInnerHTML,!c){if(null!=r)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(v||a)&&(v&&(a&&v.__html==a.__html||v.__html===l.innerHTML)||(l.innerHTML=v&&v.__html||""));}if(C$1(l,p,y,o,c),v)u.__k=[];else if(_=u.props.children,w$2(l,Array.isArray(_)?_:[_],u,i,t,o&&"foreignObject"!==d,r,f,r?r[0]:i.__k&&k$2(i,0),c),null!=r)for(_=r.length;_--;)null!=r[_]&&h$1(r[_]);c||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&H$1(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&H$1(l,"checked",_,y.checked,!1));}return l}function M$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$1.__e(n,i);}}function N$1(n,u,i){var t,o;if(l$1.unmount&&l$1.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||M$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$1.__e(n,u);}t.base=t.__P=null;}if(t=n.__k)for(o=0;o<t.length;o++)t[o]&&N$1(t[o],u,"function"!=typeof n.type);i||null==n.__e||h$1(n.__e),n.__e=n.__d=void 0;}function O$1(n,l,u){return this.constructor(n,u)}function S$1(u,i,t){var o,r,f;l$1.__&&l$1.__(u,i),r=(o="function"==typeof t)?null:t&&t.__k||i.__k,f=[],j$2(i,u=(!o&&t||i).__k=v$1(d$1,null,[u]),r||e$2,e$2,void 0!==i.ownerSVGElement,!o&&t?[t]:r?null:i.firstChild?n$1.call(i.childNodes):null,f,!o&&t?t:r?r.__e:i.firstChild,o),z$2(f,u);}function q$2(n,l){S$1(n,l,q$2);}function B$1(l,u,i){var t,o,r,f=a$1({},l.props);for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),y$1(l.type,f,t||l.key,o||l.ref,null)}function D$1(n,l){var u={__c:l="__cC"+f$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(m$1);},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=c$1.slice,l$1={__e:function(n,l,u,i){for(var t,o,r;l=l.__;)if((t=l.__c)&&!t.__)try{if((o=t.constructor)&&null!=o.getDerivedStateFromError&&(t.setState(o.getDerivedStateFromError(n)),r=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),r=t.__d),r)return t.__E=t}catch(l){n=l;}throw n}},u$1=0,i$1=function(n){return null!=n&&void 0===n.constructor},_$1.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=a$1({},this.state),"function"==typeof n&&(n=n(a$1({},u),this.props)),n&&a$1(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),m$1(this));},_$1.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$1(this));},_$1.prototype.render=d$1,t$2=[],o$2="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,g$2.__r=0,f$1=0;
+var n$1,l$1,u$1,t$2,o$2,r$1,f$1,e$2={},c$1=[],s$1=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function a$1(n,l){for(var u in l)n[u]=l[u];return n}function h$1(n){var l=n.parentNode;l&&l.removeChild(n);}function v$1(l,u,i){var t,o,r,f={};for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(r in l.defaultProps)void 0===f[r]&&(f[r]=l.defaultProps[r]);return y$1(l,f,t,o,null)}function y$1(n,i,t,o,r){var f={type:n,props:i,key:t,ref:o,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==r?++u$1:r};return null==r&&null!=l$1.vnode&&l$1.vnode(f),f}function p$1(){return {current:null}}function d$1(n){return n.children}function _$1(n,l){this.props=n,this.context=l;}function k$2(n,l){if(null==l)return n.__?k$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?k$2(n):null}function b$1(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return b$1(n)}}function m$1(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!g$2.__r++||r$1!==l$1.debounceRendering)&&((r$1=l$1.debounceRendering)||o$2)(g$2);}function g$2(){for(var n;g$2.__r=t$2.length;)n=t$2.sort(function(n,l){return n.__v.__b-l.__v.__b}),t$2=[],n.some(function(n){var l,u,i,t,o,r;n.__d&&(o=(t=(l=n).__v).__e,(r=l.__P)&&(u=[],(i=a$1({},t)).__v=t.__v+1,j$2(r,t,i,l.__n,void 0!==r.ownerSVGElement,null!=t.__h?[o]:null,u,null==o?k$2(t):o,t.__h),z$2(u,t),t.__e!=o&&b$1(t)));});}function w$2(n,l,u,i,t,o,r,f,s,a){var h,v,p,_,b,m,g,w=i&&i.__k||c$1,A=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(_=u.__k[h]=null==(_=l[h])||"boolean"==typeof _?null:"string"==typeof _||"number"==typeof _||"bigint"==typeof _?y$1(null,_,null,null,_):Array.isArray(_)?y$1(d$1,{children:_},null,null,null):_.__b>0?y$1(_.type,_.props,_.key,null,_.__v):_)){if(_.__=u,_.__b=u.__b+1,null===(p=w[h])||p&&_.key==p.key&&_.type===p.type)w[h]=void 0;else for(v=0;v<A;v++){if((p=w[v])&&_.key==p.key&&_.type===p.type){w[v]=void 0;break}p=null;}j$2(n,_,p=p||e$2,t,o,r,f,s,a),b=_.__e,(v=_.ref)&&p.ref!=v&&(g||(g=[]),p.ref&&g.push(p.ref,null,_),g.push(v,_.__c||b,_)),null!=b?(null==m&&(m=b),"function"==typeof _.type&&_.__k===p.__k?_.__d=s=x$2(_,s,n):s=P$1(n,_,p,w,b,s),"function"==typeof u.type&&(u.__d=s)):s&&p.__e==s&&s.parentNode!=n&&(s=k$2(p));}for(u.__e=m,h=A;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=k$2(i,h+1)),N$1(w[h],w[h]));if(g)for(h=0;h<g.length;h++)M$1(g[h],g[++h],g[++h]);}function x$2(n,l,u){for(var i,t=n.__k,o=0;t&&o<t.length;o++)(i=t[o])&&(i.__=n,l="function"==typeof i.type?x$2(i,l,u):P$1(u,i,i,t,i.__e,l));return l}function A$2(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){A$2(n,l);}):l.push(n)),l}function P$1(n,l,u,i,t,o){var r,f,e;if(void 0!==l.__d)r=l.__d,l.__d=void 0;else if(null==u||t!=o||null==t.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(t),r=null;else {for(f=o,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,o),r=o;}return void 0!==r?r:t.nextSibling}function C$1(n,l,u,i,t){var o;for(o in u)"children"===o||"key"===o||o in l||H$1(n,o,null,u[o],i);for(o in l)t&&"function"!=typeof l[o]||"children"===o||"key"===o||"value"===o||"checked"===o||u[o]===l[o]||H$1(n,o,l[o],u[o],i);}function $$1(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||s$1.test(l)?u:u+"px";}function H$1(n,l,u,i,t){var o;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||$$1(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||$$1(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=u,u?i||n.addEventListener(l,o?T$2:I$1,o):n.removeEventListener(l,o?T$2:I$1,o);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l));}}function I$1(n){this.l[n.type+!1](l$1.event?l$1.event(n):n);}function T$2(n){this.l[n.type+!0](l$1.event?l$1.event(n):n);}function j$2(n,u,i,t,o,r,f,e,c){var s,h,v,y,p,k,b,m,g,x,A,P,C,$=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,r=[e]),(s=l$1.__b)&&s(u);try{n:if("function"==typeof $){if(m=u.props,g=(s=$.contextType)&&t[s.__c],x=s?g?g.props.value:s.__:t,i.__c?b=(h=u.__c=i.__c).__=h.__E:("prototype"in $&&$.prototype.render?u.__c=h=new $(m,x):(u.__c=h=new _$1(m,x),h.constructor=$,h.render=O$1),g&&g.sub(h),h.props=m,h.state||(h.state={}),h.context=x,h.__n=t,v=h.__d=!0,h.__h=[]),null==h.__s&&(h.__s=h.state),null!=$.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=a$1({},h.__s)),a$1(h.__s,$.getDerivedStateFromProps(m,h.__s))),y=h.props,p=h.state,v)null==$.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else {if(null==$.getDerivedStateFromProps&&m!==y&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(m,x),!h.__e&&null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(m,h.__s,x)||u.__v===i.__v){h.props=m,h.state=h.__s,u.__v!==i.__v&&(h.__d=!1),h.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),h.__h.length&&f.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(m,h.__s,x),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(y,p,k);});}if(h.context=x,h.props=m,h.__v=u,h.__P=n,A=l$1.__r,P=0,"prototype"in $&&$.prototype.render)h.state=h.__s,h.__d=!1,A&&A(u),s=h.render(h.props,h.state,h.context);else do{h.__d=!1,A&&A(u),s=h.render(h.props,h.state,h.context),h.state=h.__s;}while(h.__d&&++P<25);h.state=h.__s,null!=h.getChildContext&&(t=a$1(a$1({},t),h.getChildContext())),v||null==h.getSnapshotBeforeUpdate||(k=h.getSnapshotBeforeUpdate(y,p)),C=null!=s&&s.type===d$1&&null==s.key?s.props.children:s,w$2(n,Array.isArray(C)?C:[C],u,i,t,o,r,f,e,c),h.base=u.__e,u.__h=null,h.__h.length&&f.push(h),b&&(h.__E=h.__=null),h.__e=!1;}else null==r&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=L$1(i.__e,u,i,t,o,r,f,c);(s=l$1.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=r)&&(u.__e=e,u.__h=!!c,r[r.indexOf(e)]=null),l$1.__e(n,u,i);}}function z$2(n,u){l$1.__c&&l$1.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$1.__e(n,u.__v);}});}function L$1(l,u,i,t,o,r,f,c){var s,a,v,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(o=!0),null!=r)for(;_<r.length;_++)if((s=r[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,r[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=o?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),r=null,c=!1;}if(null===d)y===p||c&&l.data===p||(l.data=p);else {if(r=r&&n$1.call(l.childNodes),a=(y=i.props||e$2).dangerouslySetInnerHTML,v=p.dangerouslySetInnerHTML,!c){if(null!=r)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(v||a)&&(v&&(a&&v.__html==a.__html||v.__html===l.innerHTML)||(l.innerHTML=v&&v.__html||""));}if(C$1(l,p,y,o,c),v)u.__k=[];else if(_=u.props.children,w$2(l,Array.isArray(_)?_:[_],u,i,t,o&&"foreignObject"!==d,r,f,r?r[0]:i.__k&&k$2(i,0),c),null!=r)for(_=r.length;_--;)null!=r[_]&&h$1(r[_]);c||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&H$1(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&H$1(l,"checked",_,y.checked,!1));}return l}function M$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$1.__e(n,i);}}function N$1(n,u,i){var t,o;if(l$1.unmount&&l$1.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||M$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$1.__e(n,u);}t.base=t.__P=null;}if(t=n.__k)for(o=0;o<t.length;o++)t[o]&&N$1(t[o],u,"function"!=typeof n.type);i||null==n.__e||h$1(n.__e),n.__e=n.__d=void 0;}function O$1(n,l,u){return this.constructor(n,u)}function S$1(u,i,t){var o,r,f;l$1.__&&l$1.__(u,i),r=(o="function"==typeof t)?null:t&&t.__k||i.__k,f=[],j$2(i,u=(!o&&t||i).__k=v$1(d$1,null,[u]),r||e$2,e$2,void 0!==i.ownerSVGElement,!o&&t?[t]:r?null:i.firstChild?n$1.call(i.childNodes):null,f,!o&&t?t:r?r.__e:i.firstChild,o),z$2(f,u);}function q$2(n,l){S$1(n,l,q$2);}function B$1(l,u,i){var t,o,r,f=a$1({},l.props);for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),y$1(l.type,f,t||l.key,o||l.ref,null)}function D$1(n,l){var u={__c:l="__cC"+f$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(m$1);},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=c$1.slice,l$1={__e:function(n,l,u,i){for(var t,o,r;l=l.__;)if((t=l.__c)&&!t.__)try{if((o=t.constructor)&&null!=o.getDerivedStateFromError&&(t.setState(o.getDerivedStateFromError(n)),r=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),r=t.__d),r)return t.__E=t}catch(l){n=l;}throw n}},u$1=0,_$1.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=a$1({},this.state),"function"==typeof n&&(n=n(a$1({},u),this.props)),n&&a$1(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),m$1(this));},_$1.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$1(this));},_$1.prototype.render=d$1,t$2=[],o$2="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,g$2.__r=0,f$1=0;
 
 var t$1,u,r,o$1,i=0,c=[],f=[],e$1=l$1.__b,a=l$1.__r,v=l$1.diffed,l=l$1.__c,m=l$1.unmount;function p(t,r){l$1.__h&&l$1.__h(u,t,i||r),i=0;var o=u.__H||(u.__H={__:[],__h:[]});return t>=o.__.length&&o.__.push({__V:f}),o.__[t]}function y(n){return i=1,d(z$1,n)}function d(n,r,o){var i=p(t$1++,2);return i.t=n,i.__c||(i.__=[o?o(r):z$1(void 0,r),function(n){var t=i.t(i.__[0],n);i.__[0]!==t&&(i.__=[t,i.__[1]],i.__c.setState({}));}],i.__c=u),i.__}function _(r,o){var i=p(t$1++,3);!l$1.__s&&w$1(i.__H,o)&&(i.__=r,i.u=o,u.__H.__h.push(i));}function h(r,o){var i=p(t$1++,4);!l$1.__s&&w$1(i.__H,o)&&(i.__=r,i.u=o,u.__h.push(i));}function s(n){return i=5,F$1(function(){return {current:n}},[])}function A$1(n,t,u){i=6,h(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==u?u:u.concat(n));}function F$1(n,u){var r=p(t$1++,7);return w$1(r.__H,u)?(r.__V=n(),r.u=u,r.__h=n,r.__V):r.__}function T$1(n,t){return i=8,F$1(function(){return n},t)}function q$1(n){var r=u.context[n.__c],o=p(t$1++,9);return o.c=n,r?(null==o.__&&(o.__=!0,r.sub(u)),r.props.value):n.__}function x$1(t,u){l$1.useDebugValue&&l$1.useDebugValue(u?u(t):t);}function b(){for(var t;t=c.shift();)if(t.__P)try{t.__H.__h.forEach(j$1),t.__H.__h.forEach(k$1),t.__H.__h=[];}catch(u){t.__H.__h=[],l$1.__e(u,t.__v);}}l$1.__b=function(n){u=null,e$1&&e$1(n);},l$1.__r=function(n){a&&a(n),t$1=0;var o=(u=n.__c).__H;o&&(r===u?(o.__h=[],u.__h=[],o.__.forEach(function(n){n.__V=f,n.u=void 0;})):(o.__h.forEach(j$1),o.__h.forEach(k$1),o.__h=[])),r=u;},l$1.diffed=function(t){v&&v(t);var i=t.__c;i&&i.__H&&(i.__H.__h.length&&(1!==c.push(i)&&o$1===l$1.requestAnimationFrame||((o$1=l$1.requestAnimationFrame)||function(n){var t,u=function(){clearTimeout(r),g$1&&cancelAnimationFrame(t),setTimeout(n);},r=setTimeout(u,100);g$1&&(t=requestAnimationFrame(u));})(b)),i.__H.__.forEach(function(n){n.u&&(n.__H=n.u),n.__V!==f&&(n.__=n.__V),n.u=void 0,n.__V=f;})),r=u=null;},l$1.__c=function(t,u){u.some(function(t){try{t.__h.forEach(j$1),t.__h=t.__h.filter(function(n){return !n.__||k$1(n)});}catch(r){u.some(function(n){n.__h&&(n.__h=[]);}),u=[],l$1.__e(r,t.__v);}}),l&&l(t,u);},l$1.unmount=function(t){m&&m(t);var u,r=t.__c;r&&r.__H&&(r.__H.__.forEach(function(n){try{j$1(n);}catch(n){u=n;}}),u&&l$1.__e(u,r.__v));};var g$1="function"==typeof requestAnimationFrame;function j$1(n){var t=u,r=n.__c;"function"==typeof r&&(n.__c=void 0,r()),u=t;}function k$1(n){var t=u;n.__c=n.__(),u=t;}function w$1(n,t){return !n||n.length!==t.length||t.some(function(t,u){return t!==n[u]})}function z$1(n,t){return "function"==typeof t?t(n):t}
 
@@ -7217,265 +7217,11 @@ function S(n,t){for(var e in t)n[e]=t[e];return n}function C(n,t){for(var e in n
 
 var o=0;function e(_,e,n,t,f){var l,s,u={};for(s in e)"ref"==s?l=e[s]:u[s]=e[s];var a={type:_,props:u,key:n,ref:l,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--o,__source:f,__self:t};if("function"==typeof _&&(l=_.defaultProps))for(s in l)void 0===u[s]&&(u[s]=l[s]);return l$1.vnode&&l$1.vnode(a),a}
 
-/**
- * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
- */
-const eventPopstate = "popstate";
-const eventPushState = "pushState";
-const eventReplaceState = "replaceState";
-const events = [eventPopstate, eventPushState, eventReplaceState];
-
-var locationHook = ({ base = "" } = {}) => {
-  const [{ path, search }, update] = y(() => ({
-    path: currentPathname(base),
-    search: location.search,
-  })); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const prevHash = s(path + search);
-
-  _(() => {
-    // this function checks if the location has been changed since the
-    // last render and updates the state only when needed.
-    // unfortunately, we can't rely on `path` value here, since it can be stale,
-    // that's why we store the last pathname in a ref.
-    const checkForUpdates = () => {
-      const pathname = currentPathname(base);
-      const search = location.search;
-      const hash = pathname + search;
-
-      if (prevHash.current !== hash) {
-        prevHash.current = hash;
-        update({ path: pathname, search });
-      }
-    };
-
-    events.forEach((e) => addEventListener(e, checkForUpdates));
-
-    // it's possible that an update has occurred between render and the effect handler,
-    // so we run additional check on mount to catch these updates. Based on:
-    // https://gist.github.com/bvaughn/e25397f70e8c65b0ae0d7c90b731b189
-    checkForUpdates();
-
-    return () => events.forEach((e) => removeEventListener(e, checkForUpdates));
-  }, [base]);
-
-  // the 2nd argument of the `useLocation` return value is a function
-  // that allows to perform a navigation.
-  //
-  // the function reference should stay the same between re-renders, so that
-  // it can be passed down as an element prop without any performance concerns.
-  const navigate = T$1(
-    (to, { replace = false } = {}) =>
-      history[replace ? eventReplaceState : eventPushState](
-        null,
-        "",
-        // handle nested routers and absolute paths
-        to[0] === "~" ? to.slice(1) : base + to
-      ),
-    [base]
-  );
-
-  return [path, navigate];
-};
-
-// While History API does have `popstate` event, the only
-// proper way to listen to changes via `push/replaceState`
-// is to monkey-patch these methods.
-//
-// See https://stackoverflow.com/a/4585031
-if (typeof history !== "undefined") {
-  for (const type of [eventPushState, eventReplaceState]) {
-    const original = history[type];
-
-    history[type] = function () {
-      const result = original.apply(this, arguments);
-      const event = new Event(type);
-      event.arguments = arguments;
-
-      dispatchEvent(event);
-      return result;
-    };
-  }
-}
-
-const currentPathname = (base, path = location.pathname) =>
-  !path.toLowerCase().indexOf(base.toLowerCase())
-    ? path.slice(base.length) || "/"
-    : "~" + path;
-
-// creates a matcher function
-function makeMatcher(makeRegexpFn = pathToRegexp) {
-  let cache = {};
-
-  // obtains a cached regexp version of the pattern
-  const getRegexp = (pattern) =>
-    cache[pattern] || (cache[pattern] = makeRegexpFn(pattern));
-
-  return (pattern, path) => {
-    const { regexp, keys } = getRegexp(pattern || "");
-    const out = regexp.exec(path);
-
-    if (!out) return [false, null];
-
-    // formats an object with matched params
-    const params = keys.reduce((params, key, i) => {
-      params[key.name] = out[i + 1];
-      return params;
-    }, {});
-
-    return [true, params];
-  };
-}
-
-// escapes a regexp string (borrowed from path-to-regexp sources)
-// https://github.com/pillarjs/path-to-regexp/blob/v3.0.0/index.js#L202
-const escapeRx = (str) => str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
-
-// returns a segment representation in RegExp based on flags
-// adapted and simplified version from path-to-regexp sources
-const rxForSegment = (repeat, optional, prefix) => {
-  let capture = repeat ? "((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*)" : "([^\\/]+?)";
-  if (optional && prefix) capture = "(?:\\/" + capture + ")";
-  return capture + (optional ? "?" : "");
-};
-
-const pathToRegexp = (pattern) => {
-  const groupRx = /:([A-Za-z0-9_]+)([?+*]?)/g;
-
-  let match = null,
-    lastIndex = 0,
-    keys = [],
-    result = "";
-
-  while ((match = groupRx.exec(pattern)) !== null) {
-    const [_, segment, mod] = match;
-
-    // :foo  [1]      (  )
-    // :foo? [0 - 1]  ( o)
-    // :foo+ [1 - ∞]  (r )
-    // :foo* [0 - ∞]  (ro)
-    const repeat = mod === "+" || mod === "*";
-    const optional = mod === "?" || mod === "*";
-    const prefix = optional && pattern[match.index - 1] === "/" ? 1 : 0;
-
-    const prev = pattern.substring(lastIndex, match.index - prefix);
-
-    keys.push({ name: segment });
-    lastIndex = groupRx.lastIndex;
-
-    result += escapeRx(prev) + rxForSegment(repeat, optional, prefix);
-  }
-
-  result += escapeRx(pattern.substring(lastIndex));
-  return { keys, regexp: new RegExp("^" + result + "(?:\\/)?$", "i") };
-};
-
-/*
- * Part 1, Hooks API: useRouter, useRoute and useLocation
- */
-
-// one of the coolest features of `createContext`:
-// when no value is provided — default object is used.
-// allows us to use the router context as a global ref to store
-// the implicitly created router (see `useRouter` below)
-const RouterCtx = D$1({});
-
-const buildRouter = ({
-  hook = locationHook,
-  base = "",
-  matcher = makeMatcher(),
-} = {}) => ({ hook, base, matcher });
-
-const useRouter = () => {
-  const globalRef = q$1(RouterCtx);
-
-  // either obtain the router from the outer context (provided by the
-  // `<Router /> component) or create an implicit one on demand.
-  return globalRef.v || (globalRef.v = buildRouter());
-};
-
-const useLocation = () => {
-  const router = useRouter();
-  return router.hook(router);
-};
-
-const useRoute = (pattern) => {
-  const [path] = useLocation();
-  return useRouter().matcher(pattern, path);
-};
-
-/*
- * Part 2, Low Carb Router API: Router, Route, Link, Switch
- */
-
-const Router = (props) => {
-  const ref = s();
-
-  // this little trick allows to avoid having unnecessary
-  // calls to potentially expensive `buildRouter` method.
-  // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
-  const value = ref.current || (ref.current = { v: buildRouter(props) });
-
-  return v$1(RouterCtx.Provider, {
-    value,
-    children: props.children,
-  });
-};
-
-const Route = ({ path, match, component, children }) => {
-  const useRouteMatch = useRoute(path);
-
-  // `props.match` is present - Route is controlled by the Switch
-  const [matches, params] = match || useRouteMatch;
-
-  if (!matches) return null;
-
-  // React-Router style `component` prop
-  if (component) return v$1(component, { params });
-
-  // support render prop or plain children
-  return typeof children === "function" ? children(params) : children;
-};
-
-const flattenChildren = (children) => {
-  return Array.isArray(children)
-    ? [].concat(
-        ...children.map((c) =>
-          c && c.type === d$1
-            ? flattenChildren(c.props.children)
-            : flattenChildren(c)
-        )
-      )
-    : [children];
-};
-
-const Switch = ({ children, location }) => {
-  const { matcher } = useRouter();
-  const [originalLocation] = useLocation();
-
-  for (const element of flattenChildren(children)) {
-    let match = 0;
-
-    if (
-      i$1(element) &&
-      // we don't require an element to be of type Route,
-      // but we do require it to contain a truthy `path` prop.
-      // this allows to use different components that wrap Route
-      // inside of a switch, for example <AnimatedRoute />.
-      (match = element.props.path
-        ? matcher(element.props.path, location || originalLocation)
-        : [true, {}])[0]
-    )
-      return B$1(element, { match });
-  }
-
-  return null;
-};
-
 function createContextByFields(fields) {
   const keys = Object.keys(fields);
   const instances = keys.reduce((acc, fieldKey) => {
     const ClassName = fields[fieldKey];
-    acc[fieldKey] = Container$m.get(ClassName);
+    acc[fieldKey] = Container$n.get(ClassName);
     return acc;
   }, {}); // @ts-ignore
 
@@ -8488,6 +8234,205 @@ function useFocus() {
   }, [focusAction.handleStartTyping, focusAction.handleStopTyping]);
 }
 
+/**
+ * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
+ */
+const eventPopstate = "popstate";
+const eventPushState = "pushState";
+const eventReplaceState = "replaceState";
+const events = [eventPopstate, eventPushState, eventReplaceState];
+
+var locationHook = ({ base = "" } = {}) => {
+  const [{ path, search }, update] = y(() => ({
+    path: currentPathname(base),
+    search: location.search,
+  })); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  const prevHash = s(path + search);
+
+  _(() => {
+    // this function checks if the location has been changed since the
+    // last render and updates the state only when needed.
+    // unfortunately, we can't rely on `path` value here, since it can be stale,
+    // that's why we store the last pathname in a ref.
+    const checkForUpdates = () => {
+      const pathname = currentPathname(base);
+      const search = location.search;
+      const hash = pathname + search;
+
+      if (prevHash.current !== hash) {
+        prevHash.current = hash;
+        update({ path: pathname, search });
+      }
+    };
+
+    events.forEach((e) => addEventListener(e, checkForUpdates));
+
+    // it's possible that an update has occurred between render and the effect handler,
+    // so we run additional check on mount to catch these updates. Based on:
+    // https://gist.github.com/bvaughn/e25397f70e8c65b0ae0d7c90b731b189
+    checkForUpdates();
+
+    return () => events.forEach((e) => removeEventListener(e, checkForUpdates));
+  }, [base]);
+
+  // the 2nd argument of the `useLocation` return value is a function
+  // that allows to perform a navigation.
+  //
+  // the function reference should stay the same between re-renders, so that
+  // it can be passed down as an element prop without any performance concerns.
+  const navigate = T$1(
+    (to, { replace = false } = {}) =>
+      history[replace ? eventReplaceState : eventPushState](
+        null,
+        "",
+        // handle nested routers and absolute paths
+        to[0] === "~" ? to.slice(1) : base + to
+      ),
+    [base]
+  );
+
+  return [path, navigate];
+};
+
+// While History API does have `popstate` event, the only
+// proper way to listen to changes via `push/replaceState`
+// is to monkey-patch these methods.
+//
+// See https://stackoverflow.com/a/4585031
+if (typeof history !== "undefined") {
+  for (const type of [eventPushState, eventReplaceState]) {
+    const original = history[type];
+
+    history[type] = function () {
+      const result = original.apply(this, arguments);
+      const event = new Event(type);
+      event.arguments = arguments;
+
+      dispatchEvent(event);
+      return result;
+    };
+  }
+}
+
+const currentPathname = (base, path = location.pathname) =>
+  !path.toLowerCase().indexOf(base.toLowerCase())
+    ? path.slice(base.length) || "/"
+    : "~" + path;
+
+// creates a matcher function
+function makeMatcher(makeRegexpFn = pathToRegexp) {
+  let cache = {};
+
+  // obtains a cached regexp version of the pattern
+  const getRegexp = (pattern) =>
+    cache[pattern] || (cache[pattern] = makeRegexpFn(pattern));
+
+  return (pattern, path) => {
+    const { regexp, keys } = getRegexp(pattern || "");
+    const out = regexp.exec(path);
+
+    if (!out) return [false, null];
+
+    // formats an object with matched params
+    const params = keys.reduce((params, key, i) => {
+      params[key.name] = out[i + 1];
+      return params;
+    }, {});
+
+    return [true, params];
+  };
+}
+
+// escapes a regexp string (borrowed from path-to-regexp sources)
+// https://github.com/pillarjs/path-to-regexp/blob/v3.0.0/index.js#L202
+const escapeRx = (str) => str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
+
+// returns a segment representation in RegExp based on flags
+// adapted and simplified version from path-to-regexp sources
+const rxForSegment = (repeat, optional, prefix) => {
+  let capture = repeat ? "((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*)" : "([^\\/]+?)";
+  if (optional && prefix) capture = "(?:\\/" + capture + ")";
+  return capture + (optional ? "?" : "");
+};
+
+const pathToRegexp = (pattern) => {
+  const groupRx = /:([A-Za-z0-9_]+)([?+*]?)/g;
+
+  let match = null,
+    lastIndex = 0,
+    keys = [],
+    result = "";
+
+  while ((match = groupRx.exec(pattern)) !== null) {
+    const [_, segment, mod] = match;
+
+    // :foo  [1]      (  )
+    // :foo? [0 - 1]  ( o)
+    // :foo+ [1 - ∞]  (r )
+    // :foo* [0 - ∞]  (ro)
+    const repeat = mod === "+" || mod === "*";
+    const optional = mod === "?" || mod === "*";
+    const prefix = optional && pattern[match.index - 1] === "/" ? 1 : 0;
+
+    const prev = pattern.substring(lastIndex, match.index - prefix);
+
+    keys.push({ name: segment });
+    lastIndex = groupRx.lastIndex;
+
+    result += escapeRx(prev) + rxForSegment(repeat, optional, prefix);
+  }
+
+  result += escapeRx(pattern.substring(lastIndex));
+  return { keys, regexp: new RegExp("^" + result + "(?:\\/)?$", "i") };
+};
+
+/*
+ * Part 1, Hooks API: useRouter, useRoute and useLocation
+ */
+
+// one of the coolest features of `createContext`:
+// when no value is provided — default object is used.
+// allows us to use the router context as a global ref to store
+// the implicitly created router (see `useRouter` below)
+const RouterCtx = D$1({});
+
+const buildRouter = ({
+  hook = locationHook,
+  base = "",
+  matcher = makeMatcher(),
+} = {}) => ({ hook, base, matcher });
+
+const useRouter = () => {
+  const globalRef = q$1(RouterCtx);
+
+  // either obtain the router from the outer context (provided by the
+  // `<Router /> component) or create an implicit one on demand.
+  return globalRef.v || (globalRef.v = buildRouter());
+};
+
+const useLocation = () => {
+  const router = useRouter();
+  return router.hook(router);
+};
+
+/*
+ * Part 2, Low Carb Router API: Router, Route, Link, Switch
+ */
+
+const Router = (props) => {
+  const ref = s();
+
+  // this little trick allows to avoid having unnecessary
+  // calls to potentially expensive `buildRouter` method.
+  // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
+  const value = ref.current || (ref.current = { v: buildRouter(props) });
+
+  return v$1(RouterCtx.Provider, {
+    value,
+    children: props.children,
+  });
+};
+
 var __decorate$F = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -8578,14 +8523,16 @@ function useCurrentRoute() {
     historyStore
   } = useHistoryContext();
   const router = useRouter();
+  const pathname = historyStore.pathname.split('?')[0];
   const currentRoute = F$1(() => {
     const matchedRoute = routesStore.routes.find(route => {
-      const [isMatched] = router.matcher(route.route.path || '', historyStore.pathname);
+      const [isMatched] = router.matcher(route.route.path || '', pathname);
       return isMatched;
     });
-    if (matchedRoute) return matchedRoute;
+    if (matchedRoute) return matchedRoute; // return not found page
+
     return routesStore.routes.find(route => !route.route.path);
-  }, [historyStore.pathname, router, routesStore.routes]);
+  }, [pathname, router, routesStore.routes]);
   return {
     currentRoute
   };
@@ -8757,7 +8704,7 @@ var styled$1 = styled;
 
 var layoutStyles_z62jah = '';
 
-const Container$l = /*#__PURE__*/styled$1("div")({
+const Container$m = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c16eavkt"
 });
@@ -8783,7 +8730,7 @@ const Layout = observer(({
     currentRoute
   } = useCurrentRoute();
   const isHeaderVisible = (currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.withHeader) || (currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.header);
-  return /*#__PURE__*/e(Container$l, {
+  return /*#__PURE__*/e(Container$m, {
     children: [isHeaderVisible && /*#__PURE__*/e(HeaderContainer, {
       children: headerSlot
     }), /*#__PURE__*/e(Content, {
@@ -8794,34 +8741,54 @@ const Layout = observer(({
   });
 });
 
-function ScreensSwitch() {
-  const {
-    routesStore
-  } = useRoutesContext();
-  return /*#__PURE__*/e(Switch, {
-    children: routesStore.routes.map(routeItem => {
-      const {
-        route,
-        component: ScreenComponent
-      } = routeItem;
-      return /*#__PURE__*/e(Route, {
-        path: route.path,
-        children: /*#__PURE__*/e(ScreenComponent, {})
-      }, route.path);
-    })
+function Swap(props) {
+  if (props.is) return /*#__PURE__*/e(d$1, {
+    children: props.isSlot
+  });
+  return /*#__PURE__*/e(d$1, {
+    children: props.children
   });
 }
 
-function HistoryAdapter() {
-  const [pathname, setLocation] = useLocation();
-  const {
-    historyStore,
-    routerHistory
-  } = useHistoryContext();
-  routerHistory.setHistory(setLocation);
-  historyStore.updateState(pathname);
-  return null;
+var notFoundPageStyles_5sacaj = '';
+
+const Container$l = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cnb1u91"
+});
+
+addBlock({
+  data: {
+    notFound: {
+      title: ['Seems nothing found here', 'Похоже ничего не нашлось']
+    }
+  }
+});
+
+function NotFoundPage() {
+  return /*#__PURE__*/e(Container$l, {
+    children: t('notFound.title')
+  });
 }
+
+const ScreensSwitch = observer(() => {
+  const {
+    currentRoute
+  } = useCurrentRoute();
+  const ScreenComponent = currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.component;
+  const isPageExist = currentRoute && ScreenComponent;
+  return /*#__PURE__*/e(d$1, {
+    children: /*#__PURE__*/e(Swap, {
+      is: !isPageExist,
+      isSlot: /*#__PURE__*/e(NotFoundPage, {}),
+      children: /*#__PURE__*/e(Swap, {
+        is: !(currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.route.path),
+        isSlot: /*#__PURE__*/e(NotFoundPage, {}),
+        children: ScreenComponent && /*#__PURE__*/e(ScreenComponent, {})
+      })
+    })
+  });
+});
 
 var separatorStyles_rka3su = '';
 
@@ -8846,8 +8813,7 @@ const SlotContainer = /*#__PURE__*/styled$1("div")({
 });
 
 const Header$1 = observer(() => {
-  var ref, ref1; // const { title } = useHeader()
-
+  var ref, ref1;
   const {
     currentRoute
   } = useCurrentRoute();
@@ -8882,7 +8848,7 @@ const Container$j = /*#__PURE__*/styled$1("div")({
 
 var iconStyles_1jwujit = '';
 
-const IconWrapper$2 = /*#__PURE__*/styled$1("span")({
+const IconWrapper$3 = /*#__PURE__*/styled$1("span")({
   name: "IconWrapper",
   class: "iavps5w",
   vars: {
@@ -8911,7 +8877,7 @@ function Icon({
   iconName,
   iconSize = 'normal'
 }) {
-  return /*#__PURE__*/e(IconWrapper$2, {
+  return /*#__PURE__*/e(IconWrapper$3, {
     className: `x-icon-${iconName}`,
     size: iconSize
   });
@@ -14759,6 +14725,63 @@ class DatabaseDataProvider {
 
 }
 
+function asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$q(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$A = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let AppDataProvider = class AppDataProvider extends DatabaseDataProvider {
+  defineCategories(categories) {
+    var _this = this;
+
+    return _asyncToGenerator$q(function* () {
+      yield _this.client.category.clear();
+      yield _this.client.category.bulkAdd(categories);
+      return _this.ok(true);
+    })();
+  }
+
+};
+AppDataProvider = __decorate$A([DataProvider()], AppDataProvider);
+
 function asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -14795,63 +14818,6 @@ function _asyncToGenerator$p(fn) {
   };
 }
 
-var __decorate$A = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-let AppDataProvider = class AppDataProvider extends DatabaseDataProvider {
-  defineCategories(categories) {
-    var _this = this;
-
-    return _asyncToGenerator$p(function* () {
-      yield _this.client.category.clear();
-      yield _this.client.category.bulkAdd(categories);
-      return _this.ok(true);
-    })();
-  }
-
-};
-AppDataProvider = __decorate$A([DataProvider()], AppDataProvider);
-
-function asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$o(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 var __decorate$z = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -14873,7 +14839,7 @@ let AppAdapter = class AppAdapter {
   defineCategories(categories) {
     var _this = this;
 
-    return _asyncToGenerator$o(function* () {
+    return _asyncToGenerator$p(function* () {
       try {
         const {
           error
@@ -15492,6 +15458,92 @@ let EmptyStore = class EmptyStore {
 };
 EmptyStore = __decorate$y([Store()], EmptyStore);
 
+function asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$o(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$x = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$l = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$l = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let EmptyService = class EmptyService {
+  changeDefaultCategory(selectedCategory) {
+    this.emptyStore.changeDefaultCategory(selectedCategory);
+  }
+
+  applyDefaultCategory() {
+    var _this = this;
+
+    return _asyncToGenerator$o(function* () {
+      const lang = _this.emptyStore.selectedDefaultCategories;
+
+      _this.langStore.changeLanguage(lang);
+
+      const categories = _this.emptyStore.defaultCategories;
+      if (!categories) return;
+      const result = yield _this.appAdapter.defineCategories(categories);
+
+      if (result.isErr()) {
+        //TODO: add error processing
+        return;
+      }
+    })();
+  }
+
+  constructor(emptyStore, langStore, appAdapter) {
+    this.emptyStore = emptyStore;
+    this.langStore = langStore;
+    this.appAdapter = appAdapter;
+  }
+
+};
+EmptyService = __decorate$x([Service(), __param$l(0, Inject()), __param$l(1, Inject()), __param$l(2, Inject()), __metadata$l("design:type", Function), __metadata$l("design:paramtypes", [typeof EmptyStore === "undefined" ? Object : EmptyStore, typeof LangStore === "undefined" ? Object : LangStore, typeof AppAdapter === "undefined" ? Object : AppAdapter])], EmptyService);
+
 function asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -15528,92 +15580,6 @@ function _asyncToGenerator$n(fn) {
   };
 }
 
-var __decorate$x = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$l = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$l = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let EmptyService = class EmptyService {
-  changeDefaultCategory(selectedCategory) {
-    this.emptyStore.changeDefaultCategory(selectedCategory);
-  }
-
-  applyDefaultCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$n(function* () {
-      const lang = _this.emptyStore.selectedDefaultCategories;
-
-      _this.langStore.changeLanguage(lang);
-
-      const categories = _this.emptyStore.defaultCategories;
-      if (!categories) return;
-      const result = yield _this.appAdapter.defineCategories(categories);
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-    })();
-  }
-
-  constructor(emptyStore, langStore, appAdapter) {
-    this.emptyStore = emptyStore;
-    this.langStore = langStore;
-    this.appAdapter = appAdapter;
-  }
-
-};
-EmptyService = __decorate$x([Service(), __param$l(0, Inject()), __param$l(1, Inject()), __param$l(2, Inject()), __metadata$l("design:type", Function), __metadata$l("design:paramtypes", [typeof EmptyStore === "undefined" ? Object : EmptyStore, typeof LangStore === "undefined" ? Object : LangStore, typeof AppAdapter === "undefined" ? Object : AppAdapter])], EmptyService);
-
-function asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$m(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 var __decorate$w = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -15639,7 +15605,7 @@ let EmptyAction = class EmptyAction {
   handleApplyCategory() {
     var _this = this;
 
-    return _asyncToGenerator$m(function* () {
+    return _asyncToGenerator$n(function* () {
       yield _this.emptyService.applyDefaultCategory();
 
       _this.historyService.push(Routes.categories);
@@ -15755,24 +15721,6 @@ function Loader$1() {
   return null;
 }
 
-addBlock({
-  data: {
-    pages: {
-      expense: ['Expenses', 'Расходы'],
-      analytic: ['Analytic', 'Аналитика'],
-      category: ['Categories', 'Категории'],
-      settings: ['Settings', 'Настройки']
-    },
-    firstView: {
-      t: ['Select Category', 'Выбор категорий'],
-      select: ['At first you need to choose which categories to use:', 'Для начала нужно выбрать, какие категории использовать:'],
-      use: ['Use selected', 'Использовать выбранное'],
-      import: ['Go to import', 'Перейти в импорт'],
-      or: ['or...', 'или...']
-    }
-  }
-});
-
 // ---------------- hash support ------------------------
 
 const currentLocation = (base, path = window.location.hash.replace('#', '')) => !path.toLowerCase().indexOf(base.toLowerCase()) ? path.slice(base.length) || '/' : `~${path}`;
@@ -15812,21 +15760,58 @@ const useHashLocation = () => {
   return [path, navigate];
 };
 
+function HistoryAdapter() {
+  const [pathname, setLocation] = useLocation();
+  const {
+    historyStore,
+    routerHistory
+  } = useHistoryContext();
+  routerHistory.setHistory(setLocation);
+  historyStore.updateState(pathname);
+  return null;
+}
+
 const baseUrl = "/improved-lamp/".slice(0, -1);
+function BaseRouter({
+  children
+}) {
+  return /*#__PURE__*/e(Router, {
+    base: baseUrl,
+    hook: useHashLocation,
+    children: [/*#__PURE__*/e(HistoryAdapter, {}), children]
+  });
+}
+
+addBlock({
+  data: {
+    pages: {
+      expense: ['Expenses', 'Расходы'],
+      analytic: ['Analytic', 'Аналитика'],
+      category: ['Categories', 'Категории'],
+      settings: ['Settings', 'Настройки']
+    },
+    firstView: {
+      t: ['Select Category', 'Выбор категорий'],
+      select: ['At first you need to choose which categories to use:', 'Для начала нужно выбрать, какие категории использовать:'],
+      use: ['Use selected', 'Использовать выбранное'],
+      import: ['Go to import', 'Перейти в импорт'],
+      or: ['or...', 'или...']
+    }
+  }
+});
+
 const App = observer(() => {
   const {
     langStore
   } = useLanguageContext();
   useFocus();
   return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(Router, {
-      base: baseUrl,
-      hook: useHashLocation,
-      children: [/*#__PURE__*/e(HistoryAdapter, {}), /*#__PURE__*/e(Layout, {
+    children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(BaseRouter, {
+      children: /*#__PURE__*/e(Layout, {
         headerSlot: /*#__PURE__*/e(Header$1, {}),
         contentSlot: /*#__PURE__*/e(ScreensSwitch, {}),
         footerSlot: /*#__PURE__*/e(Navigation, {})
-      }, langStore.currentLanguage)]
+      }, langStore.currentLanguage)
     })]
   });
 });
@@ -15852,30 +15837,9 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate$v([Module()], AppModule);
 
-var notFoundPageStyles_5sacaj = '';
-
-const Container$h = /*#__PURE__*/styled$1("div")({
-  name: "Container",
-  class: "cnb1u91"
-});
-
-addBlock({
-  data: {
-    notFound: {
-      title: ['Seems nothing found here', 'Похоже ничего не нашлось']
-    }
-  }
-});
-
-function NotFoundPage() {
-  return /*#__PURE__*/e(Container$h, {
-    children: t('notFound.title')
-  });
-}
-
 var radioButtonStyles_1q7p743 = '';
 
-const Container$g = /*#__PURE__*/styled$1("div")({
+const Container$h = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1cdzirs"
 });
@@ -15891,7 +15855,7 @@ function RadioButton({
     const value = ev.target.value;
     onChange(value);
   }, [onChange]);
-  return /*#__PURE__*/e(Container$g, {
+  return /*#__PURE__*/e(Container$h, {
     children: /*#__PURE__*/e("label", {
       children: [/*#__PURE__*/e("input", {
         value: value,
@@ -15938,7 +15902,7 @@ const extendedClasses$2 = ({
 }) => {
   return cx$1(variantClass(variant), shapeClass(shape));
 };
-const Container$f = /*#__PURE__*/styled$1("button")({
+const Container$g = /*#__PURE__*/styled$1("button")({
   name: "Container",
   class: "c130ml0",
   vars: {
@@ -15966,7 +15930,7 @@ function Button({
   shape = 'rect'
 }) {
   const hasChildren = !!children;
-  return /*#__PURE__*/e(Container$f, {
+  return /*#__PURE__*/e(Container$g, {
     onClick: onClick,
     disabled: isDisabled,
     className: extendedClasses$2({
@@ -15985,7 +15949,7 @@ function Button({
 
 var emptyPageStyles_1yssz39 = '';
 
-const Container$e = /*#__PURE__*/styled$1("div")({
+const Container$f = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1orbz7d"
 });
@@ -16012,7 +15976,7 @@ function EmptyPage() {
     emptyAction,
     emptyStore
   } = useAppContext();
-  return /*#__PURE__*/e(Container$e, {
+  return /*#__PURE__*/e(Container$f, {
     children: [/*#__PURE__*/e(Title$1, {
       children: t('firstView.t')
     }), /*#__PURE__*/e(SubTitle$1, {
@@ -16057,7 +16021,7 @@ const appRoutes = [{
 
 var toggleStyles_1j8gt84 = '';
 
-const Container$d = /*#__PURE__*/styled$1("div")({
+const Container$e = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1rvkqiu"
 });
@@ -16071,7 +16035,7 @@ function Toggle({
     swId++;
     return name || `sw-${swId}`;
   }, [name]);
-  return /*#__PURE__*/e(Container$d, {
+  return /*#__PURE__*/e(Container$e, {
     name: name,
     children: [/*#__PURE__*/e("input", {
       type: "checkbox",
@@ -16635,6 +16599,101 @@ if( module != null ) {
 
 var lz = lzString.exports;
 
+function asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$m(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$u = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+const windowConfirm = window.confirm;
+const windowPrompt = window.prompt;
+const windowAlert = window.alert;
+let MessageBoxService = class MessageBoxService {
+  confirm(message) {
+    return _asyncToGenerator$m(function* () {
+      return new Promise(resolve => {
+        if (windowConfirm(message)) return resolve(true);
+        return resolve(false);
+      });
+    })();
+  }
+
+  prompt(message, defaultValue) {
+    return _asyncToGenerator$m(function* () {
+      return new Promise(resolve => {
+        const data = windowPrompt(message, defaultValue);
+        if (data) return resolve({
+          data,
+          isApplied: true
+        });
+        resolve({
+          isApplied: false,
+          data: ''
+        });
+      });
+    })();
+  }
+
+  alert(message) {
+    return _asyncToGenerator$m(function* () {
+      return new Promise(resolve => {
+        windowAlert(message);
+        return resolve();
+      });
+    })();
+  }
+
+};
+MessageBoxService = __decorate$u([Service()], MessageBoxService);
+
+var SettingsErrors;
+
+(function (SettingsErrors) {
+  SettingsErrors.ImportResponse = createErrorClass('Failed import');
+  SettingsErrors.UnexpectedErrorImport = createErrorClass('Unexpected import');
+  SettingsErrors.DropDataResponse = createErrorClass('Failed drop data');
+  SettingsErrors.UnexpectedErrorDropData = createErrorClass('Unexpected drop data');
+  SettingsErrors.LoadDataResponse = createErrorClass('Failed load data');
+  SettingsErrors.UnexpectedLoadData = createErrorClass('Unexpected load data');
+})(SettingsErrors || (SettingsErrors = {}));
+
 function asyncGeneratorStep$l(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -16671,64 +16730,48 @@ function _asyncToGenerator$l(fn) {
   };
 }
 
-var __decorate$u = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$t = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const windowConfirm = window.confirm;
-const windowPrompt = window.prompt;
-const windowAlert = window.alert;
-let MessageBoxService = class MessageBoxService {
-  confirm(message) {
+let SettingsDataProvider = class SettingsDataProvider extends DatabaseDataProvider {
+  importData(input) {
+    var _this = this;
+
     return _asyncToGenerator$l(function* () {
-      return new Promise(resolve => {
-        if (windowConfirm(message)) return resolve(true);
-        return resolve(false);
-      });
+      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
+      yield Promise.all([_this.client.pouch.bulkAdd(input.pouch), _this.client.category.bulkAdd(input.category), _this.client.expense.bulkAdd(input.expense)]);
+      return _this.ok(true);
     })();
   }
 
-  prompt(message, defaultValue) {
+  dropData() {
+    var _this = this;
+
     return _asyncToGenerator$l(function* () {
-      return new Promise(resolve => {
-        const data = windowPrompt(message, defaultValue);
-        if (data) return resolve({
-          data,
-          isApplied: true
-        });
-        resolve({
-          isApplied: false,
-          data: ''
-        });
-      });
+      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
+      return _this.ok(true);
     })();
   }
 
-  alert(message) {
+  getAllData() {
+    var _this = this;
+
     return _asyncToGenerator$l(function* () {
-      return new Promise(resolve => {
-        windowAlert(message);
-        return resolve();
+      const [expense, category, pouch] = yield Promise.all([_this.client.expense.orderBy('id').toArray(), _this.client.category.orderBy('id').toArray(), _this.client.pouch.orderBy('id').toArray()]);
+      return _this.ok({
+        expense,
+        category,
+        pouch
       });
     })();
   }
 
 };
-MessageBoxService = __decorate$u([Service()], MessageBoxService);
-
-var SettingsErrors;
-
-(function (SettingsErrors) {
-  SettingsErrors.ImportResponse = createErrorClass('Failed import');
-  SettingsErrors.UnexpectedErrorImport = createErrorClass('Unexpected import');
-  SettingsErrors.DropDataResponse = createErrorClass('Failed drop data');
-  SettingsErrors.UnexpectedErrorDropData = createErrorClass('Unexpected drop data');
-  SettingsErrors.LoadDataResponse = createErrorClass('Failed load data');
-  SettingsErrors.UnexpectedLoadData = createErrorClass('Unexpected load data');
-})(SettingsErrors || (SettingsErrors = {}));
+SettingsDataProvider = __decorate$t([DataProvider()], SettingsDataProvider);
 
 function asyncGeneratorStep$k(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -16766,21 +16809,37 @@ function _asyncToGenerator$k(fn) {
   };
 }
 
-var __decorate$t = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$s = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-let SettingsDataProvider = class SettingsDataProvider extends DatabaseDataProvider {
+
+var __metadata$j = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$j = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let SettingsAdapter = class SettingsAdapter {
   importData(input) {
     var _this = this;
 
     return _asyncToGenerator$k(function* () {
-      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
-      yield Promise.all([_this.client.pouch.bulkAdd(input.pouch), _this.client.category.bulkAdd(input.category), _this.client.expense.bulkAdd(input.expense)]);
-      return _this.ok(true);
+      try {
+        const {
+          error
+        } = yield _this.settingsDataProvider.importData(input);
+        if (error) return dist.Result.Err(new SettingsErrors.ImportResponse(error));
+        return dist.Result.Ok(null);
+      } catch (e) {
+        return dist.Result.Err(new SettingsErrors.UnexpectedErrorImport(e));
+      }
     })();
   }
 
@@ -16788,8 +16847,15 @@ let SettingsDataProvider = class SettingsDataProvider extends DatabaseDataProvid
     var _this = this;
 
     return _asyncToGenerator$k(function* () {
-      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
-      return _this.ok(true);
+      try {
+        const {
+          error
+        } = yield _this.settingsDataProvider.dropData();
+        if (error) return dist.Result.Err(new SettingsErrors.DropDataResponse(error));
+        return dist.Result.Ok(null);
+      } catch (e) {
+        return dist.Result.Err(new SettingsErrors.UnexpectedErrorDropData(e));
+      }
     })();
   }
 
@@ -16797,17 +16863,25 @@ let SettingsDataProvider = class SettingsDataProvider extends DatabaseDataProvid
     var _this = this;
 
     return _asyncToGenerator$k(function* () {
-      const [expense, category, pouch] = yield Promise.all([_this.client.expense.orderBy('id').toArray(), _this.client.category.orderBy('id').toArray(), _this.client.pouch.orderBy('id').toArray()]);
-      return _this.ok({
-        expense,
-        category,
-        pouch
-      });
+      try {
+        const {
+          error,
+          data
+        } = yield _this.settingsDataProvider.getAllData();
+        if (error) return dist.Result.Err(new SettingsErrors.LoadDataResponse(error));
+        return dist.Result.Ok(data);
+      } catch (e) {
+        return dist.Result.Err(new SettingsErrors.UnexpectedLoadData(e));
+      }
     })();
   }
 
+  constructor(settingsDataProvider) {
+    this.settingsDataProvider = settingsDataProvider;
+  }
+
 };
-SettingsDataProvider = __decorate$t([DataProvider()], SettingsDataProvider);
+SettingsAdapter = __decorate$s([Adapter(), __param$j(0, Inject()), __metadata$j("design:type", Function), __metadata$j("design:paramtypes", [typeof SettingsDataProvider === "undefined" ? Object : SettingsDataProvider])], SettingsAdapter);
 
 function asyncGeneratorStep$j(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -16845,116 +16919,6 @@ function _asyncToGenerator$j(fn) {
   };
 }
 
-var __decorate$s = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$j = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$j = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let SettingsAdapter = class SettingsAdapter {
-  importData(input) {
-    var _this = this;
-
-    return _asyncToGenerator$j(function* () {
-      try {
-        const {
-          error
-        } = yield _this.settingsDataProvider.importData(input);
-        if (error) return dist.Result.Err(new SettingsErrors.ImportResponse(error));
-        return dist.Result.Ok(null);
-      } catch (e) {
-        return dist.Result.Err(new SettingsErrors.UnexpectedErrorImport(e));
-      }
-    })();
-  }
-
-  dropData() {
-    var _this = this;
-
-    return _asyncToGenerator$j(function* () {
-      try {
-        const {
-          error
-        } = yield _this.settingsDataProvider.dropData();
-        if (error) return dist.Result.Err(new SettingsErrors.DropDataResponse(error));
-        return dist.Result.Ok(null);
-      } catch (e) {
-        return dist.Result.Err(new SettingsErrors.UnexpectedErrorDropData(e));
-      }
-    })();
-  }
-
-  getAllData() {
-    var _this = this;
-
-    return _asyncToGenerator$j(function* () {
-      try {
-        const {
-          error,
-          data
-        } = yield _this.settingsDataProvider.getAllData();
-        if (error) return dist.Result.Err(new SettingsErrors.LoadDataResponse(error));
-        return dist.Result.Ok(data);
-      } catch (e) {
-        return dist.Result.Err(new SettingsErrors.UnexpectedLoadData(e));
-      }
-    })();
-  }
-
-  constructor(settingsDataProvider) {
-    this.settingsDataProvider = settingsDataProvider;
-  }
-
-};
-SettingsAdapter = __decorate$s([Adapter(), __param$j(0, Inject()), __metadata$j("design:type", Function), __metadata$j("design:paramtypes", [typeof SettingsDataProvider === "undefined" ? Object : SettingsDataProvider])], SettingsAdapter);
-
-function asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$i(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 var __decorate$r = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -16975,7 +16939,7 @@ let FileService = class FileService {
   }
 
   readTextFile(file) {
-    return _asyncToGenerator$i(function* () {
+    return _asyncToGenerator$j(function* () {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
@@ -17046,6 +17010,100 @@ var CategoriesErrors;
   CategoriesErrors.UnexpectedErrorRemoveCategory = createErrorClass('Unexpected remove category');
 })(CategoriesErrors || (CategoriesErrors = {}));
 
+function asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$i(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$q = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+function checkDateEnd$1(item) {
+  return !item.dateEnd;
+}
+
+let CategoriesDataProvider = class CategoriesDataProvider extends DatabaseDataProvider {
+  addCategory(category) {
+    var _this = this;
+
+    return _asyncToGenerator$i(function* () {
+      const result = yield _this.client.category.add(category);
+      return _this.ok(result);
+    })();
+  }
+
+  getCategories() {
+    var _this = this;
+
+    return _asyncToGenerator$i(function* () {
+      const result = yield _this.client.category.filter(checkDateEnd$1).toArray();
+      return _this.ok(result);
+    })();
+  }
+
+  updateCategoryTitle(id, title) {
+    var _this = this;
+
+    return _asyncToGenerator$i(function* () {
+      const fields = {
+        title
+      };
+      const result = yield _this.client.category.where('id').equals(id).modify(fields);
+      return _this.ok(result);
+    })();
+  }
+
+  removeCategory(id) {
+    var _this = this;
+
+    return _asyncToGenerator$i(function* () {
+      const fields = {
+        dateEnd: Date.now()
+      };
+      const result = yield _this.client.category.where('id').equals(id).modify(fields);
+      return _this.ok(result);
+    })();
+  }
+
+};
+CategoriesDataProvider = __decorate$q([DataProvider()], CategoriesDataProvider);
+
 function asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -17082,100 +17140,6 @@ function _asyncToGenerator$h(fn) {
   };
 }
 
-var __decorate$q = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-function checkDateEnd(item) {
-  return !item.dateEnd;
-}
-
-let CategoriesDataProvider = class CategoriesDataProvider extends DatabaseDataProvider {
-  addCategory(category) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      const result = yield _this.client.category.add(category);
-      return _this.ok(result);
-    })();
-  }
-
-  getCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      const result = yield _this.client.category.filter(checkDateEnd).toArray();
-      return _this.ok(result);
-    })();
-  }
-
-  updateCategoryTitle(id, title) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      const fields = {
-        title
-      };
-      const result = yield _this.client.category.where('id').equals(id).modify(fields);
-      return _this.ok(result);
-    })();
-  }
-
-  removeCategory(id) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      const fields = {
-        dateEnd: Date.now()
-      };
-      const result = yield _this.client.category.where('id').equals(id).modify(fields);
-      return _this.ok(result);
-    })();
-  }
-
-};
-CategoriesDataProvider = __decorate$q([DataProvider()], CategoriesDataProvider);
-
-function asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$g(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 var __decorate$p = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -17197,7 +17161,7 @@ let CategoriesAdapter = class CategoriesAdapter {
   addCategory(category) {
     var _this = this;
 
-    return _asyncToGenerator$g(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const {
           error
@@ -17213,7 +17177,7 @@ let CategoriesAdapter = class CategoriesAdapter {
   getCategories() {
     var _this = this;
 
-    return _asyncToGenerator$g(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const {
           error,
@@ -17230,7 +17194,7 @@ let CategoriesAdapter = class CategoriesAdapter {
   updateCategoryTitle(id, title) {
     var _this = this;
 
-    return _asyncToGenerator$g(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const {
           error
@@ -17246,7 +17210,7 @@ let CategoriesAdapter = class CategoriesAdapter {
   removeCategory(id) {
     var _this = this;
 
-    return _asyncToGenerator$g(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const {
           error
@@ -17364,6 +17328,155 @@ let CategoriesStore = class CategoriesStore {
 };
 CategoriesStore = __decorate$o([Store()], CategoriesStore);
 
+function asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$g(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$n = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$h = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$h = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let CategoriesService = class CategoriesService {
+  removeCategory() {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const category = _this.categoriesStore.selectedCategory;
+      if (!category) return;
+      const isConfirmed = yield _this.messageBoxService.confirm(t('category.confirmRemove'));
+      if (!isConfirmed) return;
+      const result = yield _this.categoriesAdapter.removeCategory(category.id);
+
+      if (result.isErr()) {
+        //TODO: add error processing
+        return;
+      }
+
+      _this.categoriesStore.setSelectedCategoryId('');
+
+      yield _this.loadCategories();
+    })();
+  }
+
+  editCategory() {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const category = _this.categoriesStore.selectedCategory;
+      if (!category) return;
+      const {
+        isApplied,
+        data: newTitle
+      } = yield _this.messageBoxService.prompt(t('category.edit'), category.title);
+      if (!isApplied) return;
+      const result = yield _this.categoriesAdapter.updateCategoryTitle(category.id, newTitle);
+
+      if (result.isErr()) {
+        //TODO: add error processing
+        return;
+      }
+
+      yield _this.loadCategories();
+    })();
+  }
+
+  addCategory() {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const parentCategoryId = _this.categoriesStore.selectedCategoryId;
+      const {
+        isApplied,
+        data: categoryName
+      } = yield _this.messageBoxService.prompt(parentCategoryId ? t('category.addSubNew') : t('category.addNew'));
+      if (!isApplied) return;
+      const node = {
+        id: guid(),
+        catId: parentCategoryId,
+        title: categoryName
+      };
+      const addResult = yield _this.categoriesAdapter.addCategory(node);
+
+      if (addResult.isErr()) {
+        //TODO: add error processing
+        return;
+      }
+
+      yield _this.loadCategories();
+    })();
+  }
+
+  loadCategories() {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const result = yield _this.categoriesAdapter.getCategories();
+
+      if (result.isErr()) {
+        //TODO: add error processing
+        return;
+      }
+
+      const categories = result.getValue();
+
+      _this.categoriesStore.setCategoryList(categories);
+    })();
+  }
+
+  constructor(messageBoxService, categoriesAdapter, categoriesStore) {
+    this.messageBoxService = messageBoxService;
+    this.categoriesAdapter = categoriesAdapter;
+    this.categoriesStore = categoriesStore;
+  }
+
+};
+CategoriesService = __decorate$n([Service(), __param$h(0, Inject()), __param$h(1, Inject()), __param$h(2, Inject()), __metadata$h("design:type", Function), __metadata$h("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof CategoriesAdapter === "undefined" ? Object : CategoriesAdapter, typeof CategoriesStore === "undefined" ? Object : CategoriesStore])], CategoriesService);
+
 function asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -17393,155 +17506,6 @@ function _asyncToGenerator$f(fn) {
 
       function _throw(err) {
         asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$n = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$h = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$h = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let CategoriesService = class CategoriesService {
-  removeCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const category = _this.categoriesStore.selectedCategory;
-      if (!category) return;
-      const isConfirmed = yield _this.messageBoxService.confirm(t('category.confirmRemove'));
-      if (!isConfirmed) return;
-      const result = yield _this.categoriesAdapter.removeCategory(category.id);
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      _this.categoriesStore.setSelectedCategoryId('');
-
-      yield _this.loadCategories();
-    })();
-  }
-
-  editCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const category = _this.categoriesStore.selectedCategory;
-      if (!category) return;
-      const {
-        isApplied,
-        data: newTitle
-      } = yield _this.messageBoxService.prompt(t('category.edit'), category.title);
-      if (!isApplied) return;
-      const result = yield _this.categoriesAdapter.updateCategoryTitle(category.id, newTitle);
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      yield _this.loadCategories();
-    })();
-  }
-
-  addCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const parentCategoryId = _this.categoriesStore.selectedCategoryId;
-      const {
-        isApplied,
-        data: categoryName
-      } = yield _this.messageBoxService.prompt(parentCategoryId ? t('category.addSubNew') : t('category.addNew'));
-      if (!isApplied) return;
-      const node = {
-        id: guid(),
-        catId: parentCategoryId,
-        title: categoryName
-      };
-      const addResult = yield _this.categoriesAdapter.addCategory(node);
-
-      if (addResult.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      yield _this.loadCategories();
-    })();
-  }
-
-  loadCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const result = yield _this.categoriesAdapter.getCategories();
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      const categories = result.getValue();
-
-      _this.categoriesStore.setCategoryList(categories);
-    })();
-  }
-
-  constructor(messageBoxService, categoriesAdapter, categoriesStore) {
-    this.messageBoxService = messageBoxService;
-    this.categoriesAdapter = categoriesAdapter;
-    this.categoriesStore = categoriesStore;
-  }
-
-};
-CategoriesService = __decorate$n([Service(), __param$h(0, Inject()), __param$h(1, Inject()), __param$h(2, Inject()), __metadata$h("design:type", Function), __metadata$h("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof CategoriesAdapter === "undefined" ? Object : CategoriesAdapter, typeof CategoriesStore === "undefined" ? Object : CategoriesStore])], CategoriesService);
-
-function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$e(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -17582,7 +17546,7 @@ let CategoriesAction = class CategoriesAction {
   handleInitialLoadCategoryList() {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$f(function* () {
       if (!_this.categoriesStore.isEmptyCategories) return;
 
       _this.categoriesStore.setIsLoading(true);
@@ -17620,7 +17584,7 @@ const {
 
 var loaderStyles_1mph9ax = '';
 
-const Container$c = /*#__PURE__*/styled$1("div")({
+const Container$d = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c268xqd"
 });
@@ -17638,17 +17602,8 @@ function Loader() {
   });
 }
 function BlockLoader() {
-  return /*#__PURE__*/e(Container$c, {
+  return /*#__PURE__*/e(Container$d, {
     children: /*#__PURE__*/e(Loader, {})
-  });
-}
-
-function Swap(props) {
-  if (props.is) return /*#__PURE__*/e(d$1, {
-    children: props.isSlot
-  });
-  return /*#__PURE__*/e(d$1, {
-    children: props.children
   });
 }
 
@@ -17715,7 +17670,7 @@ function getAttrFromElement(el, attribute) {
 
 var treeListStyles_17iluma = '';
 
-const Container$b = /*#__PURE__*/styled$1("div")({
+const Container$c = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cik2084"
 });
@@ -17741,7 +17696,7 @@ const TreeList = observer(() => {
     if (!categoryId) return;
     categoriesAction.toggleSelectedCategoryId(categoryId);
   }, [categoriesAction]);
-  return /*#__PURE__*/e(Container$b, {
+  return /*#__PURE__*/e(Container$c, {
     onClick: onClick,
     children: categoriesStore.categoryTree.map(treeItem => {
       const {
@@ -17809,7 +17764,92 @@ var PouchesErrors;
 (function (PouchesErrors) {
   PouchesErrors.GetPouchesResponse = createErrorClass('Failed load pouches');
   PouchesErrors.UnexpectedErrorGetPouches = createErrorClass('Unexpected load pouches');
+  PouchesErrors.RemovePouchResponse = createErrorClass('Failed to remove pouch');
+  PouchesErrors.UnexpectedErrorRemovePouch = createErrorClass('Unexpected remove pouch');
+  PouchesErrors.AddPouchResponse = createErrorClass('Failed to add pouch');
+  PouchesErrors.UnexpectedErrorAddPouch = createErrorClass('Unexpected add pouch');
 })(PouchesErrors || (PouchesErrors = {}));
+
+function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$e(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$l = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+function checkDateEnd(item) {
+  return !item.dateEnd;
+}
+
+let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider {
+  getPouches() {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      const pouches = yield _this.client.pouch.filter(checkDateEnd).toArray();
+      return _this.ok(pouches);
+    })();
+  }
+
+  addPouch(pouch) {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      const result = yield _this.client.pouch.add(pouch);
+      return _this.ok(result);
+    })();
+  }
+
+  removePouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      const result = yield _this.client.pouch.update(pouchId, {
+        dateEnd: Date.now()
+      });
+      return _this.ok(!!result);
+    })();
+  }
+
+};
+PouchesDataProvider = __decorate$l([DataProvider()], PouchesDataProvider);
 
 function asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -17847,62 +17887,6 @@ function _asyncToGenerator$d(fn) {
   };
 }
 
-var __decorate$l = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider {
-  getPouches() {
-    var _this = this;
-
-    return _asyncToGenerator$d(function* () {
-      const pouches = yield _this.client.pouch.toArray();
-      return _this.ok(pouches);
-    })();
-  }
-
-};
-PouchesDataProvider = __decorate$l([DataProvider()], PouchesDataProvider);
-
-function asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$c(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
 var __decorate$k = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -17924,7 +17908,7 @@ let PouchesAdapter = class PouchesAdapter {
   getPouches() {
     var _this = this;
 
-    return _asyncToGenerator$c(function* () {
+    return _asyncToGenerator$d(function* () {
       try {
         const {
           error,
@@ -17934,6 +17918,44 @@ let PouchesAdapter = class PouchesAdapter {
         return dist.Result.Ok(data);
       } catch (e) {
         return dist.Result.Err(new PouchesErrors.UnexpectedErrorGetPouches(e));
+      }
+    })();
+  }
+
+  addPouch(title) {
+    var _this = this;
+
+    return _asyncToGenerator$d(function* () {
+      try {
+        const pouch = {
+          id: guid(),
+          name: title
+        };
+        const {
+          error,
+          data
+        } = yield _this.pouchesDataProvider.addPouch(pouch);
+        if (error) return dist.Result.Err(new PouchesErrors.AddPouchResponse(error));
+        return dist.Result.Ok(data);
+      } catch (e) {
+        return dist.Result.Err(new PouchesErrors.UnexpectedErrorAddPouch(e));
+      }
+    })();
+  }
+
+  removePouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$d(function* () {
+      try {
+        const {
+          error,
+          data
+        } = yield _this.pouchesDataProvider.removePouch(pouchId);
+        if (error) return dist.Result.Err(new PouchesErrors.RemovePouchResponse(error));
+        return dist.Result.Ok(data);
+      } catch (e) {
+        return dist.Result.Err(new PouchesErrors.UnexpectedErrorRemovePouch(e));
       }
     })();
   }
@@ -17975,6 +17997,10 @@ let PouchStore = class PouchStore {
     return ((ref = this.currentPouch) === null || ref === void 0 ? void 0 : ref.name) || t('export.pouchMain');
   }
 
+  setCurrentPouch(id) {
+    this.pouchLocalStorage.set(id);
+  }
+
   setIsLoading(value) {
     this.isLoading = value;
   }
@@ -17996,6 +18022,263 @@ let PouchStore = class PouchStore {
 
 };
 PouchStore = __decorate$j([Store()], PouchStore);
+
+function asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$c(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$i = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$e = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$e = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let PouchService = class PouchService {
+  loadPouches() {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      _this.pouchStore.setPouches([]);
+
+      const result = yield _this.pouchesAdapter.getPouches();
+
+      if (result.isErr()) {
+        // TODO: add error processing
+        return;
+      }
+
+      _this.pouchStore.setPouches(result.getValue());
+    })();
+  }
+
+  addPouch() {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      const {
+        isApplied,
+        data
+      } = yield _this.messageBoxService.prompt(t('pouchBlock.removeAsk'), '');
+      if (!isApplied) return;
+      const result = yield _this.pouchesAdapter.addPouch(data);
+      if (result.isErr()) return;
+      return result.getValue();
+    })();
+  }
+
+  removePouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      if (!pouchId) return false;
+      const isConfirmed = yield _this.messageBoxService.confirm(t('pouchBlock.removeAsk'));
+      if (!isConfirmed) return false;
+      const result = yield _this.pouchesAdapter.removePouch(pouchId);
+      if (result.isErr()) return false;
+      return true;
+    })();
+  }
+
+  selectPouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      _this.pouchStore.setCurrentPouch(pouchId);
+    })();
+  }
+
+  constructor(pouchesAdapter, pouchStore, messageBoxService) {
+    this.pouchesAdapter = pouchesAdapter;
+    this.pouchStore = pouchStore;
+    this.messageBoxService = messageBoxService;
+  }
+
+};
+PouchService = __decorate$i([Service(), __param$e(0, Inject()), __param$e(1, Inject()), __param$e(2, Inject()), __metadata$e("design:type", Function), __metadata$e("design:paramtypes", [typeof PouchesAdapter === "undefined" ? Object : PouchesAdapter, typeof PouchStore === "undefined" ? Object : PouchStore, typeof MessageBoxService === "undefined" ? Object : MessageBoxService])], PouchService);
+
+function Portal({
+  children
+}) {
+  const container = document.getElementById('portal');
+  if (!container) return null;
+  return /*#__PURE__*/e(d$1, {
+    children: V( /*#__PURE__*/e(d$1, {
+      children: children
+    }), container)
+  });
+}
+
+function useSearchLocation() {
+  const [location, setLocation] = useLocation();
+  return [location, setLocation, window.location.search];
+}
+
+const MODAL_PARAM_ID = 'modal';
+
+function useModal({
+  isVisible,
+  onClose
+}) {
+  const [isContainerShown, setContainerShown] = y(isVisible);
+  const idRef = s('');
+  const prevStateRef = s(false);
+
+  if (!idRef.current) {
+    idRef.current = guid();
+  }
+
+  const [usedLocation, setLocation] = useSearchLocation();
+  const hash = window.location.hash;
+  const [basePath, searchLocation] = usedLocation.split('?');
+  _(() => {
+    // on mount
+    const queryParams = new URLSearchParams(searchLocation);
+    queryParams.set(MODAL_PARAM_ID, idRef.current);
+    const newLocation = `${basePath}?${queryParams.toString()}`; // @ts-ignore
+
+    setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  _(() => {
+    const searchFromHash = hash.split('?')[1] || '';
+    const queryParams = new URLSearchParams(searchFromHash);
+    const id = queryParams.get(MODAL_PARAM_ID);
+    const isShown = id === idRef.current;
+    const isStateChanged = prevStateRef.current !== isShown;
+    prevStateRef.current = isShown;
+    if (!isStateChanged) return;
+
+    if (id) {
+      setContainerShown(isShown);
+      return;
+    }
+
+    onClose();
+  }, [hash, onClose]);
+  return {
+    isContainerShown
+  };
+}
+
+var modalStyles_m5w5et = '';
+
+const Container$b = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cb00m8k"
+});
+const ContainerBg = /*#__PURE__*/styled$1("div")({
+  name: "ContainerBg",
+  class: "c18gl9yy"
+});
+const Overlay = /*#__PURE__*/styled$1("div")({
+  name: "Overlay",
+  class: "o1do1xz5"
+});
+
+function useModalHandleClose() {
+  const handleClose = T$1(() => {
+    history.go(-1);
+  }, []);
+  return {
+    handleClose
+  };
+}
+
+function ModalContainer({
+  children,
+  isVisible,
+  onClose
+}) {
+  const {
+    isContainerShown
+  } = useModal({
+    onClose,
+    isVisible
+  });
+  const {
+    handleClose
+  } = useModalHandleClose();
+  if (!isContainerShown) return null;
+  return /*#__PURE__*/e(d$1, {
+    children: /*#__PURE__*/e(Container$b, {
+      children: [/*#__PURE__*/e(Overlay, {
+        onClick: handleClose
+      }), /*#__PURE__*/e(ContainerBg, {
+        children: children
+      })]
+    })
+  });
+}
+
+function Modal({
+  children,
+  isVisible,
+  onClose
+}) {
+  if (!isVisible) return null;
+  return /*#__PURE__*/e(Portal, {
+    children: /*#__PURE__*/e(ModalContainer, {
+      isVisible: isVisible,
+      onClose: onClose,
+      children: children
+    })
+  });
+}
+
+var MoneySpendingErrors;
+
+(function (MoneySpendingErrors) {
+  MoneySpendingErrors.GetExpensesResponse = createErrorClass('Failed load expenses');
+  MoneySpendingErrors.UnexpectedErrorGetExpenses = createErrorClass('Unexpected load expenses');
+  MoneySpendingErrors.GetCategoriesResponse = createErrorClass('Failed load categories');
+  MoneySpendingErrors.UnexpectedErrorGetCategories = createErrorClass('Unexpected load categories');
+  MoneySpendingErrors.RemoveExpenseResponse = createErrorClass('Failed remove expense');
+  MoneySpendingErrors.UnexpectedErrorRemoveExpense = createErrorClass('Unexpected remove expense');
+  MoneySpendingErrors.AddExpenseResponse = createErrorClass('Failed add expense');
+  MoneySpendingErrors.UnexpectedErrorAddExpense = createErrorClass('Unexpected add expense');
+})(MoneySpendingErrors || (MoneySpendingErrors = {}));
 
 function asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -18033,49 +18316,6 @@ function _asyncToGenerator$b(fn) {
   };
 }
 
-var __decorate$i = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$e = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$e = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let PouchService = class PouchService {
-  loadPouches() {
-    var _this = this;
-
-    return _asyncToGenerator$b(function* () {
-      _this.pouchStore.setPouches([]);
-
-      const result = yield _this.pouchesAdapter.getPouches();
-
-      if (result.isErr()) {
-        // TODO: add error processing
-        return;
-      }
-
-      _this.pouchStore.setPouches(result.getValue());
-    })();
-  }
-
-  constructor(pouchesAdapter, pouchStore) {
-    this.pouchesAdapter = pouchesAdapter;
-    this.pouchStore = pouchStore;
-  }
-
-};
-PouchService = __decorate$i([Service(), __param$e(0, Inject()), __param$e(1, Inject()), __metadata$e("design:type", Function), __metadata$e("design:paramtypes", [typeof PouchesAdapter === "undefined" ? Object : PouchesAdapter, typeof PouchStore === "undefined" ? Object : PouchStore])], PouchService);
-
 var __decorate$h = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -18083,231 +18323,60 @@ var __decorate$h = globalThis && globalThis.__decorate || function (decorators, 
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+let MoneySpendingDataProvider = class MoneySpendingDataProvider extends DatabaseDataProvider {
+  getExpenses({
+    offset,
+    pouchId,
+    limit
+  }) {
+    var _this = this;
 
-var __metadata$d = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    return _asyncToGenerator$b(function* () {
+      const expenses = yield _this.client.expense.orderBy('time').reverse().filter(item => {
+        if (item.dateEnd) return false;
+        if (!pouchId && !item.pouchId) return true;
+        if (item.pouchId === pouchId) return true;
+        return false;
+      }).offset(offset).limit(limit).toArray();
+      return _this.ok(expenses);
+    })();
+  }
+
+  getCategories() {
+    var _this = this;
+
+    return _asyncToGenerator$b(function* () {
+      const categories = yield _this.client.category.toArray();
+      return _this.ok(categories);
+    })();
+  }
+
+  removeExpense(id) {
+    var _this = this;
+
+    return _asyncToGenerator$b(function* () {
+      const fields = {
+        dateEnd: Date.now()
+      };
+
+      const result = _this.client.expense.where('id').equals(id).modify(fields);
+
+      return _this.ok(result);
+    })();
+  }
+
+  addExpense(expense) {
+    var _this = this;
+
+    return _asyncToGenerator$b(function* () {
+      _this.client.expense.add(expense);
+
+      return _this.ok(true);
+    })();
+  }
+
 };
-
-var __param$d = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let PouchAction = class PouchAction {
-  handleOpenPouchesList() {
-    this.pouchStore.setModalVisible(true);
-  }
-
-  handleClosePouchesList() {
-    this.pouchStore.setModalVisible(false);
-  }
-
-  constructor(pouchStore) {
-    this.pouchStore = pouchStore;
-  }
-
-};
-PouchAction = __decorate$h([Action(), __param$d(0, Inject()), __metadata$d("design:type", Function), __metadata$d("design:paramtypes", [typeof PouchStore === "undefined" ? Object : PouchStore])], PouchAction);
-
-const {
-  useModuleContext: usePouchContext
-} = hookContextFactory({
-  pouchStore: PouchStore,
-  pouchAction: PouchAction
-});
-
-var linkStyles_aqii0v = '';
-
-const Container$a = /*#__PURE__*/styled$1("div")({
-  name: "Container",
-  class: "c67ods1"
-});
-const IconWrapper$1 = /*#__PURE__*/styled$1("div")({
-  name: "IconWrapper",
-  class: "i1o8p8ca"
-});
-const ContentWrapper = /*#__PURE__*/styled$1("div")({
-  name: "ContentWrapper",
-  class: "c1hxs3cb"
-});
-
-function Link({
-  children,
-  icon,
-  onClick,
-  isDisabled
-}) {
-  return /*#__PURE__*/e(Container$a, {
-    onClick: onClick,
-    disabled: isDisabled,
-    children: [icon && /*#__PURE__*/e(IconWrapper$1, {
-      children: /*#__PURE__*/e(Icon, {
-        iconName: icon
-      })
-    }), /*#__PURE__*/e(ContentWrapper, {
-      children: children
-    })]
-  });
-}
-
-function Portal({
-  children
-}) {
-  const container = document.getElementById('portal');
-  if (!container) return null;
-  return /*#__PURE__*/e(d$1, {
-    children: V( /*#__PURE__*/e(d$1, {
-      children: children
-    }), container)
-  });
-}
-
-function useSearchLocation() {
-  const [location, setLocation] = useLocation();
-  return [location, setLocation, window.location.search];
-}
-
-const PARAM_ID = 'modal';
-function useModal({
-  isVisible,
-  onClose
-}) {
-  const [isContainerShown, setContainerShown] = y(isVisible);
-  const idRef = s('');
-  const prevStateRef = s(false);
-
-  if (!idRef.current) {
-    idRef.current = guid();
-  }
-
-  const [usedLocation, setLocation] = useSearchLocation();
-  const hash = window.location.hash;
-  const searchLocation = usedLocation.split('?')[1] || '';
-  _(() => {
-    // on mount
-    const queryParams = new URLSearchParams(searchLocation);
-    queryParams.set(PARAM_ID, idRef.current);
-    const newLocation = `${usedLocation}?${queryParams.toString()}`; // @ts-ignore
-
-    setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  _(() => {
-    const searchFromHash = hash.split('?')[1] || '';
-    const queryParams = new URLSearchParams(searchFromHash);
-    const id = queryParams.get(PARAM_ID);
-    const isShown = id === idRef.current;
-    const isStateChanged = prevStateRef.current !== isShown;
-    prevStateRef.current = isShown;
-    if (!isStateChanged) return;
-
-    if (id) {
-      setContainerShown(isShown);
-      return;
-    }
-
-    onClose();
-  }, [hash, onClose]);
-  return {
-    isContainerShown
-  };
-}
-
-var modalStyles_1odkjr8 = '';
-
-const Container$9 = /*#__PURE__*/styled$1("div")({
-  name: "Container",
-  class: "cb00m8k"
-});
-const Overlay = /*#__PURE__*/styled$1("div")({
-  name: "Overlay",
-  class: "o18gl9yy"
-});
-
-function useModalHandleClose() {
-  const handleClose = T$1(() => {
-    history.go(-1);
-  }, []);
-  return {
-    handleClose
-  };
-}
-
-function ModalContainer({
-  children,
-  isVisible,
-  onClose
-}) {
-  const {
-    isContainerShown
-  } = useModal({
-    onClose,
-    isVisible
-  });
-  const {
-    handleClose
-  } = useModalHandleClose();
-  if (!isContainerShown) return null;
-  return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Overlay, {
-      onClick: handleClose
-    }), /*#__PURE__*/e(Container$9, {
-      children: children
-    })]
-  });
-}
-
-function Modal({
-  children,
-  isVisible,
-  onClose
-}) {
-  if (!isVisible) return null;
-  return /*#__PURE__*/e(Portal, {
-    children: /*#__PURE__*/e(ModalContainer, {
-      isVisible: isVisible,
-      onClose: onClose,
-      children: children
-    })
-  });
-}
-
-const PouchSelection = observer(() => {
-  const {
-    pouchStore,
-    pouchAction
-  } = usePouchContext();
-  return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Link, {
-      icon: "wallet",
-      onClick: pouchAction.handleOpenPouchesList,
-      children: pouchStore.currentPouchName
-    }), /*#__PURE__*/e(Modal, {
-      onClose: pouchAction.handleClosePouchesList,
-      isVisible: pouchStore.isModalVisible,
-      children: "test"
-    })]
-  });
-});
-
-var expensesPageStyles_3m5f7r = '';
-
-const LoadMoreWrapper = /*#__PURE__*/styled$1("div")({
-  name: "LoadMoreWrapper",
-  class: "l14jmizt"
-});
-
-var MoneySpendingErrors;
-
-(function (MoneySpendingErrors) {
-  MoneySpendingErrors.GetExpensesResponse = createErrorClass('Failed load expenses');
-  MoneySpendingErrors.UnexpectedErrorGetExpenses = createErrorClass('Unexpected load expenses');
-  MoneySpendingErrors.GetCategoriesResponse = createErrorClass('Failed load categories');
-  MoneySpendingErrors.UnexpectedErrorGetCategories = createErrorClass('Unexpected load categories');
-  MoneySpendingErrors.RemoveExpenseResponse = createErrorClass('Failed remove expense');
-  MoneySpendingErrors.UnexpectedErrorRemoveExpense = createErrorClass('Unexpected remove expense');
-  MoneySpendingErrors.AddExpenseResponse = createErrorClass('Failed add expense');
-  MoneySpendingErrors.UnexpectedErrorAddExpense = createErrorClass('Unexpected add expense');
-})(MoneySpendingErrors || (MoneySpendingErrors = {}));
+MoneySpendingDataProvider = __decorate$h([DataProvider()], MoneySpendingDataProvider);
 
 function asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -18352,122 +18421,12 @@ var __decorate$g = globalThis && globalThis.__decorate || function (decorators, 
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-let MoneySpendingDataProvider = class MoneySpendingDataProvider extends DatabaseDataProvider {
-  getExpenses({
-    offset,
-    pouchId,
-    limit
-  }) {
-    var _this = this;
 
-    return _asyncToGenerator$a(function* () {
-      const expenses = yield _this.client.expense.orderBy('time').reverse().filter(item => {
-        if (!item.dateEnd) return true;
-        if (pouchId && item.pouchId !== pouchId) return true;
-        return false;
-      }).offset(offset).limit(limit).toArray();
-      return _this.ok(expenses);
-    })();
-  }
-
-  getCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$a(function* () {
-      const categories = yield _this.client.category.toArray();
-      return _this.ok(categories);
-    })();
-  }
-
-  removeExpense(id) {
-    var _this = this;
-
-    return _asyncToGenerator$a(function* () {
-      const fields = {
-        dateEnd: Date.now()
-      };
-
-      const result = _this.client.expense.where('id').equals(id).modify(fields);
-
-      return _this.ok(result);
-    })();
-  }
-
-  addExpense({
-    desc,
-    cost,
-    catId,
-    pouchId
-  }) {
-    var _this = this;
-
-    return _asyncToGenerator$a(function* () {
-      _this.client.expense.add({
-        id: guid(),
-        cost,
-        desc,
-        time: new Date().getTime(),
-        state: -1,
-        pouchId,
-        catId
-      });
-
-      return _this.ok(true);
-    })();
-  }
-
-};
-MoneySpendingDataProvider = __decorate$g([DataProvider()], MoneySpendingDataProvider);
-
-function asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$9(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$f = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$c = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$d = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$c = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$d = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -18480,7 +18439,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }) {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$a(function* () {
       try {
         const {
           error,
@@ -18501,7 +18460,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   getCategories() {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$a(function* () {
       try {
         const {
           error,
@@ -18518,7 +18477,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   removeExpense(id) {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$a(function* () {
       try {
         const {
           error,
@@ -18540,17 +18499,21 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }) {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$a(function* () {
       try {
+        const expense = {
+          id: guid(),
+          cost,
+          desc,
+          time: new Date().getTime(),
+          state: -1,
+          pouchId,
+          catId
+        };
         const {
           error,
           data
-        } = yield _this.moneySpendingDataProvider.addExpense({
-          desc,
-          cost,
-          catId,
-          pouchId
-        });
+        } = yield _this.moneySpendingDataProvider.addExpense(expense);
         if (error) return dist.Result.Err(new MoneySpendingErrors.AddExpenseResponse(error));
         return dist.Result.Ok(data);
       } catch (e) {
@@ -18564,11 +18527,11 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }
 
 };
-MoneySpendingAdapter = __decorate$f([Adapter(), __param$c(0, Inject()), __metadata$c("design:type", Function), __metadata$c("design:paramtypes", [typeof MoneySpendingDataProvider === "undefined" ? Object : MoneySpendingDataProvider])], MoneySpendingAdapter);
+MoneySpendingAdapter = __decorate$g([Adapter(), __param$d(0, Inject()), __metadata$d("design:type", Function), __metadata$d("design:paramtypes", [typeof MoneySpendingDataProvider === "undefined" ? Object : MoneySpendingDataProvider])], MoneySpendingAdapter);
 
 const LIMIT_DEFAULT = 50;
 
-var __decorate$e = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$f = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18577,7 +18540,7 @@ var __decorate$e = globalThis && globalThis.__decorate || function (decorators, 
 };
 let MoneySpendingStore = class MoneySpendingStore {
   get isShowMoreVisible() {
-    return this.expenses.length > LIMIT_DEFAULT;
+    return this.expenses.length >= LIMIT_DEFAULT;
   }
 
   get selectedParentCategory() {
@@ -18676,7 +18639,7 @@ let MoneySpendingStore = class MoneySpendingStore {
   }
 
 };
-MoneySpendingStore = __decorate$e([Store()], MoneySpendingStore);
+MoneySpendingStore = __decorate$f([Store()], MoneySpendingStore);
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -18712,7 +18675,7 @@ function _objectSpread(target) {
   return target;
 }
 
-var __decorate$d = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$e = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18830,7 +18793,200 @@ let ExpenseSelectionStore = class ExpenseSelectionStore {
   }
 
 };
-ExpenseSelectionStore = __decorate$d([Store()], ExpenseSelectionStore);
+ExpenseSelectionStore = __decorate$e([Store()], ExpenseSelectionStore);
+
+function asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$9(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$d = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$c = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$c = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let MoneySpendingService = class MoneySpendingService {
+  initialLoadData() {
+    var _this = this;
+
+    return _asyncToGenerator$9(function* () {
+      _this.moneySpendingStore.setExpenses([]);
+
+      _this.moneySpendingStore.setOffset(0);
+
+      const [categoriesResult] = yield Promise.all([_this.moneySpendingAdapter.getCategories(), _this.pouchService.loadPouches()]);
+
+      if (categoriesResult.isErr()) {
+        // TODO: add error processing
+        return;
+      }
+
+      _this.moneySpendingStore.setCategories(categoriesResult.getValue());
+
+      if (_this.moneySpendingStore.categories.length === 0) {
+        // open empty settings
+        _this.historyService.push(Routes.empty);
+
+        return;
+      }
+
+      yield _this.loadExpenses(0);
+    })();
+  }
+
+  reloadExpenses() {
+    var _this = this;
+
+    return _asyncToGenerator$9(function* () {
+      _this.moneySpendingStore.setExpenses([]);
+
+      _this.moneySpendingStore.setOffset(0);
+
+      yield _this.loadExpenses(0);
+    })();
+  }
+
+  loadExpenses(offset) {
+    var _this = this;
+
+    return _asyncToGenerator$9(function* () {
+      const currentPouchId = _this.pouchStore.currentPouchId;
+      const result = yield _this.moneySpendingAdapter.getExpenses({
+        offset,
+        pouchId: currentPouchId,
+        limit: LIMIT_DEFAULT
+      });
+
+      if (result.isErr()) {
+        // TODO: add error
+        return;
+      }
+
+      _this.moneySpendingStore.setOffset(offset + LIMIT_DEFAULT);
+
+      const nextExpenses = result.getValue();
+
+      _this.moneySpendingStore.addExpenses(nextExpenses);
+    })();
+  }
+
+  removeExpense(id) {
+    var _this = this;
+
+    return _asyncToGenerator$9(function* () {
+      const isConfirmed = yield _this.messageBoxService.confirm(t('expense.confirmRemove'));
+      if (!isConfirmed) return;
+
+      _this.moneySpendingStore.setIsLoading(true);
+
+      const result = yield _this.moneySpendingAdapter.removeExpense(id);
+
+      _this.moneySpendingStore.setIsLoading(false);
+
+      if (result.isErr()) {
+        //TODO: add error processing
+        return;
+      }
+
+      _this.moneySpendingStore.setOffset(_this.moneySpendingStore.offset - 1);
+
+      _this.moneySpendingStore.removeExpenseById(id);
+
+      _this.expenseSelectionStore.setCurrentExpenseView(null);
+    })();
+  }
+
+  handleApply() {
+    var _this = this;
+
+    return _asyncToGenerator$9(function* () {
+      _this.moneySpendingStore.setIsLoading(true);
+
+      const pouchId = _this.pouchStore.currentPouchId;
+      const catId = _this.moneySpendingStore.selectedCategoryId;
+      const desc = _this.expenseSelectionStore.currentDesc;
+
+      const newExpenses = _this.expenseSelectionStore.getExpenses(); // console.log('newExpenses', newExpenses)
+
+
+      for (const cost of newExpenses) {
+        yield _this.moneySpendingAdapter.addExpense({
+          pouchId,
+          catId,
+          cost,
+          desc
+        }); // if (result.isErr()) {
+        //   //TODO: add error processing
+        //   return
+        // }
+      }
+
+      _this.expenseSelectionStore.dropData();
+
+      yield _this.reloadExpenses();
+
+      _this.historyService.push(Routes.expense); // await this.initialLoadData()
+
+
+      _this.moneySpendingStore.setIsLoading(false);
+    })();
+  }
+
+  constructor(messageBoxService, moneySpendingStore, moneySpendingAdapter, expenseSelectionStore, pouchService, pouchStore, historyService) {
+    this.messageBoxService = messageBoxService;
+    this.moneySpendingStore = moneySpendingStore;
+    this.moneySpendingAdapter = moneySpendingAdapter;
+    this.expenseSelectionStore = expenseSelectionStore;
+    this.pouchService = pouchService;
+    this.pouchStore = pouchStore;
+    this.historyService = historyService;
+  }
+
+};
+MoneySpendingService = __decorate$d([Service(), __param$c(0, Inject()), __param$c(1, Inject()), __param$c(2, Inject()), __param$c(3, Inject()), __param$c(4, Inject()), __param$c(5, Inject()), __param$c(6, Inject()), __metadata$c("design:type", Function), __metadata$c("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof MoneySpendingAdapter === "undefined" ? Object : MoneySpendingAdapter, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof PouchService === "undefined" ? Object : PouchService, typeof PouchStore === "undefined" ? Object : PouchStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingService);
 
 function asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -18885,145 +19041,249 @@ var __param$b = globalThis && globalThis.__param || function (paramIndex, decora
     decorator(target, key, paramIndex);
   };
 };
-let MoneySpendingService = class MoneySpendingService {
-  initialLoadData() {
-    var _this = this;
-
-    return _asyncToGenerator$8(function* () {
-      _this.moneySpendingStore.setExpenses([]);
-
-      _this.moneySpendingStore.setOffset(0);
-
-      const [categoriesResult] = yield Promise.all([_this.moneySpendingAdapter.getCategories(), _this.pouchService.loadPouches()]);
-
-      if (categoriesResult.isErr()) {
-        // TODO: add error processing
-        return;
-      }
-
-      _this.moneySpendingStore.setCategories(categoriesResult.getValue());
-
-      if (_this.moneySpendingStore.categories.length === 0) {
-        // open empty settings
-        _this.historyService.push(Routes.empty);
-
-        return;
-      }
-
-      yield _this.loadExpenses(0);
-    })();
+let PouchAction = class PouchAction {
+  handleOpenPouchesList() {
+    this.pouchStore.setModalVisible(true);
   }
 
-  reloadExpenses() {
-    var _this = this;
-
-    return _asyncToGenerator$8(function* () {
-      _this.moneySpendingStore.setExpenses([]);
-
-      _this.moneySpendingStore.setOffset(0);
-
-      yield _this.loadExpenses(0);
-    })();
+  handleClosePouchesList() {
+    this.pouchStore.setModalVisible(false);
   }
 
-  loadExpenses(offset) {
+  handleRemove(pouchId) {
     var _this = this;
 
     return _asyncToGenerator$8(function* () {
-      const currentPouchId = _this.pouchStore.currentPouchId;
-      const result = yield _this.moneySpendingAdapter.getExpenses({
-        offset,
-        pouchId: currentPouchId,
-        limit: LIMIT_DEFAULT
-      });
-
-      if (result.isErr()) {
-        // TODO: add error
-        return;
-      }
-
-      _this.moneySpendingStore.setOffset(offset + LIMIT_DEFAULT);
-
-      const nextExpenses = result.getValue();
-
-      _this.moneySpendingStore.addExpenses(nextExpenses);
-    })();
-  }
-
-  removeExpense(id) {
-    var _this = this;
-
-    return _asyncToGenerator$8(function* () {
-      const isConfirmed = yield _this.messageBoxService.confirm(t('expense.confirmRemove'));
-      if (!isConfirmed) return;
+      const isSame = pouchId === _this.pouchStore.currentPouchId;
+      const isRemoved = yield _this.pouchService.removePouch(pouchId);
+      if (!isRemoved) return;
 
       _this.moneySpendingStore.setIsLoading(true);
 
-      const result = yield _this.moneySpendingAdapter.removeExpense(id);
+      yield _this.pouchService.loadPouches();
 
       _this.moneySpendingStore.setIsLoading(false);
 
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
+      if (isSame) {
+        yield _this.handleSelect(null);
       }
-
-      _this.moneySpendingStore.setOffset(_this.moneySpendingStore.offset - 1);
-
-      _this.moneySpendingStore.removeExpenseById(id);
-
-      _this.expenseSelectionStore.setCurrentExpenseView(null);
     })();
   }
 
-  handleApply() {
+  handleAdd() {
     var _this = this;
 
     return _asyncToGenerator$8(function* () {
+      const newPouchId = yield _this.pouchService.addPouch();
+      if (!newPouchId) return;
+
       _this.moneySpendingStore.setIsLoading(true);
 
-      const pouchId = _this.pouchStore.currentPouchId;
-      const catId = _this.moneySpendingStore.selectedCategoryId;
-      const desc = _this.expenseSelectionStore.currentDesc;
-
-      const newExpenses = _this.expenseSelectionStore.getExpenses(); // console.log('newExpenses', newExpenses)
-
-
-      for (const cost of newExpenses) {
-        yield _this.moneySpendingAdapter.addExpense({
-          pouchId,
-          catId,
-          cost,
-          desc
-        }); // if (result.isErr()) {
-        //   //TODO: add error processing
-        //   return
-        // }
-      }
-
-      _this.expenseSelectionStore.dropData();
-
-      yield _this.reloadExpenses();
-
-      _this.historyService.push(Routes.expense); // await this.initialLoadData()
-
+      yield _this.pouchService.loadPouches();
+      yield _this.handleSelect(newPouchId);
 
       _this.moneySpendingStore.setIsLoading(false);
     })();
   }
 
-  constructor(messageBoxService, moneySpendingStore, moneySpendingAdapter, expenseSelectionStore, pouchService, pouchStore, historyService) {
-    this.messageBoxService = messageBoxService;
-    this.moneySpendingStore = moneySpendingStore;
-    this.moneySpendingAdapter = moneySpendingAdapter;
-    this.expenseSelectionStore = expenseSelectionStore;
-    this.pouchService = pouchService;
+  handleSelect(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$8(function* () {
+      _this.moneySpendingStore.setIsLoading(true);
+
+      yield _this.pouchService.selectPouch(pouchId);
+      yield _this.moneySpendingService.reloadExpenses();
+
+      _this.moneySpendingStore.setIsLoading(false);
+    })();
+  }
+
+  constructor(pouchStore, pouchService, moneySpendingService, moneySpendingStore) {
     this.pouchStore = pouchStore;
-    this.historyService = historyService;
+    this.pouchService = pouchService;
+    this.moneySpendingService = moneySpendingService;
+    this.moneySpendingStore = moneySpendingStore;
   }
 
 };
-MoneySpendingService = __decorate$c([Service(), __param$b(0, Inject()), __param$b(1, Inject()), __param$b(2, Inject()), __param$b(3, Inject()), __param$b(4, Inject()), __param$b(5, Inject()), __param$b(6, Inject()), __metadata$b("design:type", Function), __metadata$b("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof MoneySpendingAdapter === "undefined" ? Object : MoneySpendingAdapter, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof PouchService === "undefined" ? Object : PouchService, typeof PouchStore === "undefined" ? Object : PouchStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingService);
+PouchAction = __decorate$c([Action(), __param$b(0, Inject()), __param$b(1, Inject()), __param$b(2, Inject()), __param$b(3, Inject()), __metadata$b("design:type", Function), __metadata$b("design:paramtypes", [typeof PouchStore === "undefined" ? Object : PouchStore, typeof PouchService === "undefined" ? Object : PouchService, typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], PouchAction);
+
+const {
+  useModuleContext: usePouchContext
+} = hookContextFactory({
+  pouchStore: PouchStore,
+  pouchAction: PouchAction
+});
+
+var pouchItemStyles_1i6bhrb = '';
+
+const Row$3 = /*#__PURE__*/styled$1("button")({
+  name: "Row",
+  class: "r1ula01y"
+});
+const Container$a = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cqvsgeu"
+});
+const IconWrapper$2 = /*#__PURE__*/styled$1("div")({
+  name: "IconWrapper",
+  class: "i1bw3fr"
+});
+const TitleWrapper = /*#__PURE__*/styled$1("div")({
+  name: "TitleWrapper",
+  class: "t9boept"
+});
+const ActionWrapper = /*#__PURE__*/styled$1("div")({
+  name: "ActionWrapper",
+  class: "auzp478"
+});
+
+function PouchItem({
+  pouch,
+  onRemove,
+  isSelected,
+  onSelect
+}) {
+  const handleRemove = T$1(() => {
+    onRemove && onRemove(pouch.id);
+  }, [onRemove, pouch]);
+  const handleSelect = T$1(() => {
+    onSelect(pouch.id);
+  }, [onSelect, pouch.id]);
+  return /*#__PURE__*/e(Container$a, {
+    children: [/*#__PURE__*/e(Row$3, {
+      onClick: handleSelect,
+      children: [/*#__PURE__*/e(IconWrapper$2, {
+        children: isSelected && /*#__PURE__*/e(Icon, {
+          iconName: "wallet"
+        })
+      }), /*#__PURE__*/e(TitleWrapper, {
+        children: pouch.name
+      })]
+    }), onRemove && /*#__PURE__*/e(ActionWrapper, {
+      children: /*#__PURE__*/e(Button, {
+        variant: "flat",
+        onClick: handleRemove,
+        children: /*#__PURE__*/e(Icon, {
+          iconName: "cross"
+        })
+      })
+    })]
+  });
+}
+
+const PouchModalContent = observer(() => {
+  const {
+    pouchStore,
+    pouchAction
+  } = usePouchContext();
+  const currentId = pouchStore.currentPouchId;
+  return /*#__PURE__*/e("div", {
+    children: [/*#__PURE__*/e(PouchItem, {
+      isSelected: currentId === null,
+      pouch: {
+        name: t('export.pouchMain'),
+        id: null
+      },
+      onSelect: pouchAction.handleSelect
+    }), pouchStore.pouches.map(pouch => {
+      return /*#__PURE__*/e(PouchItem, {
+        isSelected: currentId === pouch.id,
+        pouch: pouch,
+        onRemove: pouchAction.handleRemove,
+        onSelect: pouchAction.handleSelect
+      }, `${pouch.id}-${pouch.name}`);
+    }), /*#__PURE__*/e(Button, {
+      onClick: pouchAction.handleAdd,
+      children: t('pouchBlock.add')
+    })]
+  });
+});
+
+const PouchModal = observer(() => {
+  const {
+    pouchStore,
+    pouchAction
+  } = usePouchContext();
+  return /*#__PURE__*/e(Modal, {
+    onClose: pouchAction.handleClosePouchesList,
+    isVisible: pouchStore.isModalVisible,
+    children: /*#__PURE__*/e(PouchModalContent, {})
+  });
+});
+
+var linkStyles_aqii0v = '';
+
+const Container$9 = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "c67ods1"
+});
+const IconWrapper$1 = /*#__PURE__*/styled$1("div")({
+  name: "IconWrapper",
+  class: "i1o8p8ca"
+});
+const ContentWrapper = /*#__PURE__*/styled$1("div")({
+  name: "ContentWrapper",
+  class: "c1hxs3cb"
+});
+
+function Link({
+  children,
+  icon,
+  onClick,
+  isDisabled
+}) {
+  return /*#__PURE__*/e(Container$9, {
+    onClick: onClick,
+    disabled: isDisabled,
+    children: [icon && /*#__PURE__*/e(IconWrapper$1, {
+      children: /*#__PURE__*/e(Icon, {
+        iconName: icon
+      })
+    }), /*#__PURE__*/e(ContentWrapper, {
+      children: children
+    })]
+  });
+}
+
+const PouchSelection = observer(() => {
+  const {
+    pouchStore,
+    pouchAction
+  } = usePouchContext();
+  return /*#__PURE__*/e(d$1, {
+    children: /*#__PURE__*/e(Link, {
+      icon: "wallet",
+      onClick: pouchAction.handleOpenPouchesList,
+      children: pouchStore.currentPouchName
+    })
+  });
+});
+
+addBlock({
+  data: {
+    pouchBlock: {
+      modalTitle: ['Wallets', 'Кошельки'],
+      add: ['Add Wallet', 'Добавить кошелек'],
+      addTitle: ['New wallet', 'Новый кошелек'],
+      removeAsk: ['Delete wallet permanently?', 'Удалить кошелек безвозвратно?']
+    }
+  }
+});
+
+function PouchBlock() {
+  return /*#__PURE__*/e(d$1, {
+    children: [/*#__PURE__*/e(PouchSelection, {}), /*#__PURE__*/e(PouchModal, {})]
+  });
+}
+
+var expensesPageStyles_3m5f7r = '';
+
+const LoadMoreWrapper = /*#__PURE__*/styled$1("div")({
+  name: "LoadMoreWrapper",
+  class: "l14jmizt"
+});
 
 function asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -19987,7 +20247,7 @@ const moneySpendingRoutes = [{
   component: ExpensesPage,
   header: {
     title: () => t('pages.expense'),
-    component: PouchSelection
+    component: PouchBlock
   },
   withNavigation: true
 }, {
@@ -20637,8 +20897,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '0fc64b9ec0bcb5c21676dfa66f16896346ba6d97',
-  buildTime: new Date(1657447668499)
+  changeset: '5276b8e70edab68db60c0293393be535bc520bb7',
+  buildTime: new Date(1657483948070)
 };
 
 var buildVersionStyles_1ys16xi = '';
@@ -20971,7 +21231,7 @@ let MainModule = class MainModule {
   }
 
   static getInstance() {
-    return Container$m.get(MainModule);
+    return Container$n.get(MainModule);
   }
 
   constructor(screensService, appModule) {

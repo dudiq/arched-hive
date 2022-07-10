@@ -4,7 +4,6 @@ import { useCurrentRoute } from '@pv/interface/use-current-route'
 import { Container, Title, SlotContainer } from './header-styles'
 
 export const Header = observer(() => {
-  // const { title } = useHeader()
   const { currentRoute } = useCurrentRoute()
   const title = currentRoute?.header?.title() || ''
   const Component = currentRoute?.header?.component

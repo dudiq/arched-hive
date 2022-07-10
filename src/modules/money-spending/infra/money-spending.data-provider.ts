@@ -1,7 +1,7 @@
 import { DataProvider } from '@pv/di'
 import { DatabaseDataProvider } from '@pv/infra/database.data-provider'
-import { guid } from '@pv/utils/guid'
 import { PouchId } from '@pv/core/entities/pouch.entity'
+import { ExpenseEntity } from '@pv/core/entities/expense.entity'
 
 type GetExpensesType = {
   pouchId: PouchId
@@ -16,8 +16,9 @@ export class MoneySpendingDataProvider extends DatabaseDataProvider {
       .orderBy('time')
       .reverse()
       .filter((item) => {
-        if (!item.dateEnd) return true
-        if (pouchId && item.pouchId !== pouchId) return true
+        if (item.dateEnd) return false
+        if (!pouchId && !item.pouchId) return true
+        if (item.pouchId === pouchId) return true
         return false
       })
       .offset(offset)
@@ -41,26 +42,8 @@ export class MoneySpendingDataProvider extends DatabaseDataProvider {
     return this.ok(result)
   }
 
-  async addExpense({
-    desc,
-    cost,
-    catId,
-    pouchId,
-  }: {
-    pouchId: PouchId
-    cost: number
-    desc?: string
-    catId: string
-  }) {
-    this.client.expense.add({
-      id: guid(),
-      cost,
-      desc,
-      time: new Date().getTime(),
-      state: -1,
-      pouchId,
-      catId,
-    })
+  async addExpense(expense: ExpenseEntity) {
+    this.client.expense.add(expense)
     return this.ok(true)
   }
 }

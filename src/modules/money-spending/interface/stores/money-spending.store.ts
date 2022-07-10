@@ -16,7 +16,7 @@ export class MoneySpendingStore {
   categories: CategoryEntity[] = []
 
   get isShowMoreVisible() {
-    return this.expenses.length > LIMIT_DEFAULT
+    return this.expenses.length >= LIMIT_DEFAULT
   }
 
   get selectedParentCategory() {

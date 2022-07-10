@@ -8,16 +8,19 @@ export function useCurrentRoute() {
   const { historyStore } = useHistoryContext()
   const router = useRouter()
 
+  const pathname = historyStore.pathname.split('?')[0]
+
   const currentRoute = useMemo(() => {
     const matchedRoute = routesStore.routes.find((route) => {
-      const [isMatched] = router.matcher(route.route.path || '', historyStore.pathname)
+      const [isMatched] = router.matcher(route.route.path || '', pathname)
       return isMatched
     })
 
     if (matchedRoute) return matchedRoute
 
+    // return not found page
     return routesStore.routes.find((route) => !route.route.path)
-  }, [historyStore.pathname, router, routesStore.routes])
+  }, [pathname, router, routesStore.routes])
 
   return {
     currentRoute,

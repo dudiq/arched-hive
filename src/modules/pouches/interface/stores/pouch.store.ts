@@ -1,11 +1,11 @@
 import { Store } from '@pv/di'
-import { PouchEntity } from '@pv/core/entities/pouch.entity'
+import { PouchEntity, PouchId } from '@pv/core/entities/pouch.entity'
 import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
 import { t } from '@pv/interface/services/i18n'
 
 @Store()
 export class PouchStore {
-  private pouchLocalStorage = new LocalStorageItem<string>('pouch')
+  private pouchLocalStorage = new LocalStorageItem<PouchId>('pouch')
 
   isLoading = true
 
@@ -30,6 +30,10 @@ export class PouchStore {
 
   get currentPouchName() {
     return this.currentPouch?.name || t('export.pouchMain')
+  }
+
+  setCurrentPouch(id: PouchId) {
+    this.pouchLocalStorage.set(id)
   }
 
   setIsLoading(value: boolean) {
