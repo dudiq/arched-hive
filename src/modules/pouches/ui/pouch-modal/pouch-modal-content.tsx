@@ -26,7 +26,7 @@ export const PouchModalContent = observer(() => {
           />
         )
       })}
-      <Button>{t('pouchBlock.add')}</Button>
+      <Button onClick={pouchAction.handleAdd}>{t('pouchBlock.add')}</Button>
     </div>
   )
 })

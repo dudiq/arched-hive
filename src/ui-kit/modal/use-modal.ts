@@ -19,12 +19,13 @@ export function useModal({ isVisible, onClose }: Args) {
   const [usedLocation, setLocation] = useSearchLocation()
   const hash = window.location.hash
 
-  const searchLocation = (usedLocation as string).split('?')[1] || ''
+  const [basePath, searchLocation] = usedLocation.split('?')
+
   useEffect(() => {
     // on mount
     const queryParams = new URLSearchParams(searchLocation)
     queryParams.set(MODAL_PARAM_ID, idRef.current)
-    const newLocation = `${usedLocation}?${queryParams.toString()}`
+    const newLocation = `${basePath}?${queryParams.toString()}`
     // @ts-ignore
     setLocation(newLocation)
     // eslint-disable-next-line react-hooks/exhaustive-deps

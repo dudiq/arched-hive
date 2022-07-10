@@ -8,6 +8,7 @@ import {
 import { ExpenseEntity } from '@pv/core/entities/expense.entity'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
 import { PouchId } from '@pv/core/entities/pouch.entity'
+import { guid } from '@pv/utils/guid'
 import { MoneySpendingDataProvider } from './money-spending.data-provider'
 
 @Adapter()
@@ -76,12 +77,16 @@ export class MoneySpendingAdapter {
     pouchId: PouchId
   }) {
     try {
-      const { error, data } = await this.moneySpendingDataProvider.addExpense({
-        desc,
+      const expense = {
+        id: guid(),
         cost,
-        catId,
+        desc,
+        time: new Date().getTime(),
+        state: -1,
         pouchId,
-      })
+        catId,
+      }
+      const { error, data } = await this.moneySpendingDataProvider.addExpense(expense)
 
       if (error) return Result.Err(new MoneySpendingErrors.AddExpenseResponse(error))
 
