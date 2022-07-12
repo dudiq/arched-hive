@@ -6,7 +6,7 @@ import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
 import { ExpenseSelectionStore } from '@pv/modules/money-spending/interface/stores/expense-selection.store'
 import { HistoryService } from '@pv/interface/services/history.service'
-import { Routes } from '@pv/contants/routes'
+import { Routes } from '@pv/constants/routes'
 import { LIMIT_DEFAULT } from '../constants'
 
 @Service()

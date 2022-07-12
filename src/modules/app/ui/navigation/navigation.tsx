@@ -1,6 +1,6 @@
 import { t } from '@pv/interface/services/i18n'
 import { Separator } from '@pv/ui-kit/separator'
-import { Routes } from '@pv/contants/routes'
+import { Routes } from '@pv/constants/routes'
 import { Container } from './navigation-styles'
 import { NaviItem } from './navi-item'
 
