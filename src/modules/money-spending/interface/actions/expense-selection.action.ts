@@ -49,8 +49,8 @@ export class ExpenseSelectionAction {
     this.expenseSelectionStore.pushCurrentToCostList()
   }
 
-  handlePopCost() {
-    this.expenseSelectionStore.removeLastFromCostList()
+  handleBackspaceCost() {
+    this.expenseSelectionStore.backspaceCostList()
   }
 
   handleClear() {

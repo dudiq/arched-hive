@@ -49,6 +49,8 @@ export function Store() {
       }
     }
 
+    Object.defineProperty(SubClass, 'name', { value: Context.name })
+
     return serviceFn(SubClass)
   }
 }
