@@ -3,6 +3,7 @@ import { Inject, Service } from '@pv/di'
 import { SettingsAdapter } from '@pv/modules/settings/infra/settings.adapter'
 import { t } from '@pv/interface/services/i18n'
 import { MessageBoxService } from '@pv/modules/message-box'
+import { isErr } from '@pv/modules/result'
 import { ExportDatabaseValueObject } from '../../core/value-object/export-database.value-object'
 import { FileService } from './file.service'
 
@@ -29,12 +30,12 @@ export class ExportFinService {
 
   async exportData() {
     const result = await this.settingsAdapter.getAllData()
-    if (result.isErr()) {
+    if (isErr(result)) {
       await this.messageBoxService.alert(t('settings.exportError'))
       return
     }
 
-    const data = result.getValue()
+    const data = result.data
     await this.saveDbToFile({
       dbVersion: 4,
       data,

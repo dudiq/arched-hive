@@ -1,11 +1,10 @@
-import { Result } from 'fnscript'
 import { Inject, Adapter } from '@pv/di'
 import { ImportDataValueObject } from '@pv/modules/settings/core/value-object/import-data.value-object'
-import { PromisedResult } from '@pv/di/types'
 import {
   SettingsErrorsInstances,
   SettingsErrors,
 } from '@pv/modules/settings/core/errors/settings.errors'
+import { isErr, PromiseResult, resultErr, resultOk } from '@pv/modules/result'
 import { SettingsDataProvider } from './settings.data-provider'
 
 @Adapter()
@@ -14,37 +13,37 @@ export class SettingsAdapter {
     @Inject()
     private settingsDataProvider: SettingsDataProvider,
   ) {}
-  async importData(input: ImportDataValueObject): PromisedResult<null, SettingsErrorsInstances> {
+  async importData(input: ImportDataValueObject): PromiseResult<null, SettingsErrorsInstances> {
     try {
-      const { error } = await this.settingsDataProvider.importData(input)
+      const result = await this.settingsDataProvider.importData(input)
 
-      if (error) return Result.Err(new SettingsErrors.ImportResponse(error))
+      if (isErr(result)) return resultErr(new SettingsErrors.ImportResponse(result.error))
 
-      return Result.Ok(null)
+      return resultOk(null)
     } catch (e) {
-      return Result.Err(new SettingsErrors.UnexpectedErrorImport(e))
+      return resultErr(new SettingsErrors.UnexpectedErrorImport(e))
     }
   }
 
-  async dropData(): PromisedResult<null, SettingsErrorsInstances> {
+  async dropData(): PromiseResult<null, SettingsErrorsInstances> {
     try {
-      const { error } = await this.settingsDataProvider.dropData()
-      if (error) return Result.Err(new SettingsErrors.DropDataResponse(error))
+      const result = await this.settingsDataProvider.dropData()
+      if (isErr(result)) return resultErr(new SettingsErrors.DropDataResponse(result.error))
 
-      return Result.Ok(null)
+      return resultOk(null)
     } catch (e) {
-      return Result.Err(new SettingsErrors.UnexpectedErrorDropData(e))
+      return resultErr(new SettingsErrors.UnexpectedErrorDropData(e))
     }
   }
 
-  async getAllData(): PromisedResult<ImportDataValueObject, SettingsErrorsInstances> {
+  async getAllData(): PromiseResult<ImportDataValueObject, SettingsErrorsInstances> {
     try {
-      const { error, data } = await this.settingsDataProvider.getAllData()
-      if (error) return Result.Err(new SettingsErrors.LoadDataResponse(error))
+      const result = await this.settingsDataProvider.getAllData()
+      if (isErr(result)) return resultErr(new SettingsErrors.LoadDataResponse(result.error))
 
-      return Result.Ok(data)
+      return resultOk(result.data)
     } catch (e) {
-      return Result.Err(new SettingsErrors.UnexpectedLoadData(e))
+      return resultErr(new SettingsErrors.UnexpectedLoadData(e))
     }
   }
 }

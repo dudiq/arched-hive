@@ -1,18 +1,18 @@
-import { createErrorClass } from '@pv/infra/create-error-class'
+import { errorFactory } from '@pv/modules/errors'
 
-export namespace MoneySpendingErrors {
-  export const GetExpensesResponse = createErrorClass('Failed load expenses')
-  export const UnexpectedErrorGetExpenses = createErrorClass('Unexpected load expenses')
+export const { MoneySpendingErrors } = errorFactory('MoneySpendingErrors', {
+  GetExpensesResponse: 'Failed load expenses',
+  UnexpectedErrorGetExpenses: 'Unexpected load expenses',
 
-  export const GetCategoriesResponse = createErrorClass('Failed load categories')
-  export const UnexpectedErrorGetCategories = createErrorClass('Unexpected load categories')
+  GetCategoriesResponse: 'Failed load categories',
+  UnexpectedErrorGetCategories: 'Unexpected load categories',
 
-  export const RemoveExpenseResponse = createErrorClass('Failed remove expense')
-  export const UnexpectedErrorRemoveExpense = createErrorClass('Unexpected remove expense')
+  RemoveExpenseResponse: 'Failed remove expense',
+  UnexpectedErrorRemoveExpense: 'Unexpected remove expense',
 
-  export const AddExpenseResponse = createErrorClass('Failed add expense')
-  export const UnexpectedErrorAddExpense = createErrorClass('Unexpected add expense')
-}
+  AddExpenseResponse: 'Failed add expense',
+  UnexpectedErrorAddExpense: 'Unexpected add expense',
+})
 
 export type MoneySpendingErrorsInstances = InstanceType<
   typeof MoneySpendingErrors[keyof typeof MoneySpendingErrors]

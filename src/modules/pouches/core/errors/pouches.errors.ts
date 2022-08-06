@@ -1,14 +1,14 @@
-import { createErrorClass } from '@pv/infra/create-error-class'
+import { errorFactory } from '@pv/modules/errors'
 
-export namespace PouchesErrors {
-  export const GetPouchesResponse = createErrorClass('Failed load pouches')
-  export const UnexpectedErrorGetPouches = createErrorClass('Unexpected load pouches')
+export const { PouchesErrors } = errorFactory('PouchesErrors', {
+  GetPouchesResponse: 'Failed load pouches',
+  UnexpectedErrorGetPouches: 'Unexpected load pouches',
 
-  export const RemovePouchResponse = createErrorClass('Failed to remove pouch')
-  export const UnexpectedErrorRemovePouch = createErrorClass('Unexpected remove pouch')
+  RemovePouchResponse: 'Failed to remove pouch',
+  UnexpectedErrorRemovePouch: 'Unexpected remove pouch',
 
-  export const AddPouchResponse = createErrorClass('Failed to add pouch')
-  export const UnexpectedErrorAddPouch = createErrorClass('Unexpected add pouch')
-}
+  AddPouchResponse: 'Failed to add pouch',
+  UnexpectedErrorAddPouch: 'Unexpected add pouch',
+})
 
 export type PouchesErrorsInstances = InstanceType<typeof PouchesErrors[keyof typeof PouchesErrors]>

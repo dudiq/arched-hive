@@ -1,3 +1,4 @@
+import { resultErr, resultOk } from '@pv/modules/result'
 import { databaseClient, FinansoDb } from './database.client'
 
 export class DatabaseDataProvider {
@@ -8,10 +9,10 @@ export class DatabaseDataProvider {
   }
 
   ok<T>(result: T) {
-    return { data: result, error: undefined }
+    return resultOk<T>(result)
   }
 
   error<T>(result: T) {
-    return { data: undefined, error: result }
+    return resultErr<T>(result)
   }
 }

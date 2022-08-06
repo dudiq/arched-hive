@@ -2,6 +2,7 @@ import lz from 'lz-string'
 import { Inject, Service } from '@pv/di'
 import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
+import { isErr } from '@pv/modules/result'
 import { ExportDatabaseValueObject } from '../../core/value-object/export-database.value-object'
 import { SettingsAdapter } from '../../infra/settings.adapter'
 import { FileService } from './file.service'
@@ -43,7 +44,7 @@ export class ImportFinService {
 
     this.dropAllService.dropRelatedStores()
     const importResult = await this.settingsAdapter.importData(result.data)
-    if (importResult.isErr()) {
+    if (isErr(importResult)) {
       await this.messageBoxService.alert(t('settings.importError'))
       return
     }
