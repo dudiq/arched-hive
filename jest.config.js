@@ -1,5 +1,10 @@
 module.exports = {
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+  roots: ['<rootDir>/src'],
+  resetMocks: true,
+  testEnvironment: 'node',
+  testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+  transform: {
+    '^.+\\.ts$': 'esbuild-jest',
   },
+  moduleFileExtensions: ['js', 'ts'],
 }

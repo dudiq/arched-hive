@@ -1,15 +1,15 @@
-import { createErrorClass } from '@pv/infra/create-error-class'
+import { errorFactory } from '@pv/modules/errors'
 
-export namespace SettingsErrors {
-  export const ImportResponse = createErrorClass('Failed import')
-  export const UnexpectedErrorImport = createErrorClass('Unexpected import')
+export const { SettingsErrors } = errorFactory('SettingsErrors', {
+  ImportResponse: 'Failed import',
+  UnexpectedErrorImport: 'Unexpected import',
 
-  export const DropDataResponse = createErrorClass('Failed drop data')
-  export const UnexpectedErrorDropData = createErrorClass('Unexpected drop data')
+  DropDataResponse: 'Failed drop data',
+  UnexpectedErrorDropData: 'Unexpected drop data',
 
-  export const LoadDataResponse = createErrorClass('Failed load data')
-  export const UnexpectedLoadData = createErrorClass('Unexpected load data')
-}
+  LoadDataResponse: 'Failed load data',
+  UnexpectedLoadData: 'Unexpected load data',
+})
 
 export type SettingsErrorsInstances = InstanceType<
   typeof SettingsErrors[keyof typeof SettingsErrors]
