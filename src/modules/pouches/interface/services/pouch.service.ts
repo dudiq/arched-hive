@@ -4,6 +4,7 @@ import { PouchStore } from '@pv/modules/pouches/interface/stores/pouch.store'
 import { PouchId } from '@pv/core/entities/pouch.entity'
 import { t } from '@pv/interface/services/i18n'
 import { MessageBoxService } from '@pv/modules/message-box'
+import { isErr } from '@pv/modules/result'
 
 @Service()
 export class PouchService {
@@ -20,12 +21,12 @@ export class PouchService {
     this.pouchStore.setPouches([])
     const result = await this.pouchesAdapter.getPouches()
 
-    if (result.isErr()) {
+    if (isErr(result)) {
       // TODO: add error processing
       return
     }
 
-    this.pouchStore.setPouches(result.getValue())
+    this.pouchStore.setPouches(result.data)
   }
 
   async addPouch() {
@@ -33,8 +34,8 @@ export class PouchService {
     if (!isApplied) return
 
     const result = await this.pouchesAdapter.addPouch(data)
-    if (result.isErr()) return
-    return result.getValue()
+    if (isErr(result)) return
+    return result.data
   }
 
   async removePouch(pouchId: PouchId) {
@@ -42,7 +43,7 @@ export class PouchService {
     const isConfirmed = await this.messageBoxService.confirm(t('pouchBlock.removeAsk'))
     if (!isConfirmed) return false
     const result = await this.pouchesAdapter.removePouch(pouchId)
-    if (result.isErr()) return false
+    if (isErr(result)) return false
     return true
   }
 

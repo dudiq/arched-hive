@@ -4630,11 +4630,6 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.5.tgz#76c8584f4fc843db64702a6bd04ab7a8bd666da3"
   integrity sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==
 
-fnscript@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/fnscript/-/fnscript-0.3.0.tgz#7fcfa48077f58140824c4fc8e00e103689a39f35"
-  integrity sha512-czwtwWXoNqBYeWcjei9ITdbiOFS+JsUjAUTMd6NNMxoX+ZTeppBBlJEFjOoCQmVpG34fLWX7RqiFIWHfIzULNg==
-
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"

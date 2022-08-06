@@ -3,6 +3,7 @@ import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
 import { CategoriesStore } from '@pv/modules/categories'
 import { MoneySpendingStore } from '@pv/modules/money-spending'
+import { isErr } from '@pv/modules/result'
 import { SettingsAdapter } from '../../infra/settings.adapter'
 
 @Service()
@@ -23,7 +24,7 @@ export class DropAllService {
     if (!isConfirmed) return
 
     const result = await this.settingsAdapter.dropData()
-    if (result.isErr()) {
+    if (isErr(result)) {
       //TODO: add error processing
     }
     this.dropRelatedStores()

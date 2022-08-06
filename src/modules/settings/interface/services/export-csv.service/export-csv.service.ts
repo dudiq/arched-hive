@@ -2,6 +2,7 @@ import { Inject, Service } from '@pv/di'
 import { t } from '@pv/interface/services/i18n'
 import { MessageBoxService } from '@pv/modules/message-box'
 import { SettingsAdapter } from '@pv/modules/settings/infra/settings.adapter'
+import { isErr } from '@pv/modules/result'
 import { FileService } from '../file.service'
 import { SheetsService } from './sheets.service'
 
@@ -30,12 +31,12 @@ export class ExportCsvService {
 
   async exportData() {
     const result = await this.settingsAdapter.getAllData()
-    if (result.isErr()) {
+    if (isErr(result)) {
       await this.messageBoxService.alert(t('settings.exportError'))
       return
     }
 
-    const data = result.getValue()
+    const data = result.data
 
     const sheets = this.sheetsService.getSheets(data)
     sheets.forEach(({ sheet, name }) => {

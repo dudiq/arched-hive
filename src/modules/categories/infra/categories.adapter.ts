@@ -1,11 +1,10 @@
-import { Result } from 'fnscript'
 import { Inject, Adapter } from '@pv/di'
-import { PromisedResult } from '@pv/di/types'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
 import {
   CategoriesErrors,
   CategoriesErrorsInstances,
 } from '@pv/modules/categories/core/categories.errors'
+import { isErr, PromiseResult, resultErr, resultOk } from '@pv/modules/result'
 import { CategoriesDataProvider } from './categories.data-provider'
 
 @Adapter()
@@ -15,54 +14,54 @@ export class CategoriesAdapter {
     private categoriesDataProvider: CategoriesDataProvider,
   ) {}
 
-  async addCategory(category: CategoryEntity): PromisedResult<boolean, CategoriesErrorsInstances> {
+  async addCategory(category: CategoryEntity): PromiseResult<boolean, CategoriesErrorsInstances> {
     try {
-      const { error } = await this.categoriesDataProvider.addCategory(category)
+      const result = await this.categoriesDataProvider.addCategory(category)
 
-      if (error) return Result.Err(new CategoriesErrors.AddResponse(error))
+      if (isErr(result)) return resultErr(new CategoriesErrors.AddResponse(result.error))
 
-      return Result.Ok(true)
+      return resultOk(true)
     } catch (e) {
-      return Result.Err(new CategoriesErrors.UnexpectedErrorAdd(e))
+      return resultErr(new CategoriesErrors.UnexpectedErrorAdd(e))
     }
   }
 
-  async getCategories(): PromisedResult<CategoryEntity[], CategoriesErrorsInstances> {
+  async getCategories(): PromiseResult<CategoryEntity[], CategoriesErrorsInstances> {
     try {
-      const { error, data } = await this.categoriesDataProvider.getCategories()
+      const result = await this.categoriesDataProvider.getCategories()
 
-      if (error) return Result.Err(new CategoriesErrors.GetListResponse(error))
+      if (isErr(result)) return resultErr(new CategoriesErrors.GetListResponse(result.error))
 
-      return Result.Ok(data)
+      return resultOk(result.data)
     } catch (e) {
-      return Result.Err(new CategoriesErrors.UnexpectedErrorGetList(e))
+      return resultErr(new CategoriesErrors.UnexpectedErrorGetList(e))
     }
   }
 
   async updateCategoryTitle(
     id: string,
     title: string,
-  ): PromisedResult<boolean, CategoriesErrorsInstances> {
+  ): PromiseResult<boolean, CategoriesErrorsInstances> {
     try {
-      const { error } = await this.categoriesDataProvider.updateCategoryTitle(id, title)
+      const result = await this.categoriesDataProvider.updateCategoryTitle(id, title)
 
-      if (error) return Result.Err(new CategoriesErrors.UpdateCategoryResponse(error))
+      if (isErr(result)) return resultErr(new CategoriesErrors.UpdateCategoryResponse(result.error))
 
-      return Result.Ok(true)
+      return resultOk(true)
     } catch (e) {
-      return Result.Err(new CategoriesErrors.UnexpectedErrorUpdateCategory(e))
+      return resultErr(new CategoriesErrors.UnexpectedErrorUpdateCategory(e))
     }
   }
 
-  async removeCategory(id: string): PromisedResult<boolean, CategoriesErrorsInstances> {
+  async removeCategory(id: string): PromiseResult<boolean, CategoriesErrorsInstances> {
     try {
-      const { error } = await this.categoriesDataProvider.removeCategory(id)
+      const result = await this.categoriesDataProvider.removeCategory(id)
 
-      if (error) return Result.Err(new CategoriesErrors.RemoveCategoryResponse(error))
+      if (isErr(result)) return resultErr(new CategoriesErrors.RemoveCategoryResponse(result.error))
 
-      return Result.Ok(true)
+      return resultOk(true)
     } catch (e) {
-      return Result.Err(new CategoriesErrors.UnexpectedErrorRemoveCategory(e))
+      return resultErr(new CategoriesErrors.UnexpectedErrorRemoveCategory(e))
     }
   }
 }
