@@ -1,0 +1,35 @@
+@import "../../../styles/variables";
+
+.field-select {
+    width: 200px;
+    border-bottom: 0;
+    display: inline-block;
+    position: relative;
+    padding: $padding-small 0;
+    padding-bottom: $padding-small + $text-size-tiny;
+
+    .field-footer {
+        position: absolute;
+        font-size: $text-size-tiny;
+        height: $text-size-tiny + 5px;
+    }
+
+    select {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+    }
+    &.with-underline {
+        select {
+            border-bottom: 1px solid transparent;
+            border-radius: 0;
+            @include set-color-theme('border-bottom-color', clr-separator);
+            &:focus {
+                @include set-color-theme('border-bottom-color', clr-text);
+            }
+        }
+    }
+    option {
+        @include set-color-theme('background-color', clr-secondary);
+    }
+}
