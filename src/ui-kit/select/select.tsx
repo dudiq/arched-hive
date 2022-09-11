@@ -16,7 +16,7 @@ export function Select({ value, options, onChange }: Props) {
     <SelectContainer>
       <select
         value={value}
-        onSelect={(e: any) => {
+        onChange={(e: any) => {
           onChange(e.target.value)
         }}
       >

@@ -12,8 +12,11 @@ export class AnalyticAction {
     private analyticStore: AnalyticStore,
   ) {}
 
-  handleChangeReportView(reportView: REPORT_VIEW) {
+  async handleChangeReportView(reportView: REPORT_VIEW) {
+    this.analyticStore.setIsLoading(true)
     this.analyticStore.setReportView(reportView)
+    await this.analyticReportService.handleReport()
+    this.analyticStore.setIsLoading(false)
   }
 
   async handleNextReport() {

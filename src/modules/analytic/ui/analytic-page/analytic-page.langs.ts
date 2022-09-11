@@ -8,25 +8,25 @@ addBlock({
         'Всего',
       ],
       all: [
-        'all data',
-        'все данные',
+        'All data',
+        'Все данные',
       ],
       seasons: {
         winter: [
-          'winter',
-          'зима',
+          'Winter',
+          'Зима',
         ],
         spring: [
-          'spring',
-          'весна',
+          'Spring',
+          'Весна',
         ],
         summer: [
-          'summer',
-          'лето',
+          'Summer',
+          'Лето',
         ],
         autumn: [
-          'autumn',
-          'осень',
+          'Autumn',
+          'Осень',
         ],
       },
     },

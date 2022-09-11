@@ -1,7 +1,7 @@
 import { useLanguageContext } from '@pv/modules/language'
 import { analyticContext } from '@pv/modules/analytic/interface/analytic-context'
 import { useCallback, useMemo } from 'preact/compat'
-import { titleMap } from '@pv/modules/analytic/ui/analytic-page/date-range-select/title-map'
+import { titleMap } from '@pv/modules/analytic/ui/analytic-page/header/date-range-select/title-map'
 import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
 
 export function useDateRangeSelect() {

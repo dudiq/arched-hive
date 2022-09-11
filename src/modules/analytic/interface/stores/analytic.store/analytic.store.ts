@@ -35,7 +35,13 @@ export class AnalyticStore {
     this.viewDate = value
   }
 
+  get isPrevAvailable() {
+    return this.reportView !== REPORT_VIEW.ALL
+  }
+
   get isNextAvailable() {
+    if (this.reportView === REPORT_VIEW.ALL) return false
+
     const endDate = this.range.endDate
     return endDate < Date.now()
   }
