@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Swap } from '@pv/ui-kit/swap'
 import { Loader } from '@pv/ui-kit/loader'
 import { analyticContext } from '@pv/modules/analytic/interface/analytic-context'
+import { getMoney } from '@pv/interface/services/i18n'
 import { Container, Content } from './analytic-page-styles'
 import { Header } from './header'
 
@@ -17,7 +18,7 @@ export const AnalyticPage = observer(() => {
         <Content>
           <ScrollContainer>
             <Swap is={analyticStore.isLoading} isSlot={<Loader />}>
-              analytic is here
+              {getMoney(analyticStore.totalCost)}
             </Swap>
           </ScrollContainer>
         </Content>

@@ -39,6 +39,12 @@ export class AnalyticStore {
     return this.reportView !== REPORT_VIEW.ALL
   }
 
+  get totalCost() {
+    return this.expenseList.reduce((summ, item) => {
+      return summ + item.cost
+    }, 0)
+  }
+
   get isNextAvailable() {
     if (this.reportView === REPORT_VIEW.ALL) return false
 
