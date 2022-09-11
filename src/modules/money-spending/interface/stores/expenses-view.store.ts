@@ -1,9 +1,7 @@
 import { Inject, Store } from '@pv/di'
 import { getMoney } from '@pv/interface/services/i18n'
 import { LangStore } from '@pv/modules/language'
-import { ExpenseEntity } from '@pv/core/entities/expense.entity'
-import { CategoryEntity } from '@pv/core/entities/category.entity'
-import { ExpenseViewEntity } from '@pv/core/entities/expense-view.entity'
+import { ExpenseViewListService } from '@pv/modules/view-list'
 import { MoneySpendingStore } from './money-spending.store'
 
 @Store()
@@ -13,6 +11,8 @@ export class ExpensesViewStore {
     private langStore: LangStore,
     @Inject()
     private moneySpendingStore: MoneySpendingStore,
+    @Inject()
+    private expenseViewListService: ExpenseViewListService,
   ) {}
 
   get dateFormatter() {
@@ -48,41 +48,10 @@ export class ExpensesViewStore {
   }
 
   get expensesView() {
-    return this.mapExpenseToExpenseViewEntityList(
+    return this.expenseViewListService.mapExpenseToExpenseViewEntityList(
       this.moneySpendingStore.expenses,
       this.moneySpendingStore.categories,
     )
-  }
-
-  mapExpenseToExpenseViewEntityList(
-    expenseList: ExpenseEntity[],
-    categoryList: CategoryEntity[],
-  ): ExpenseViewEntity[] {
-    const categoryMap: Record<string, CategoryEntity> = {}
-
-    categoryList.forEach((item) => {
-      categoryMap[item.id] = item
-    })
-
-    return expenseList.map((expenseItem) => {
-      const catId = expenseItem.catId
-      const cat = categoryMap[catId]
-      const parentCat = cat && cat.catId ? categoryMap[cat.catId] : null
-      return {
-        id: expenseItem.id,
-        catId: expenseItem.catId,
-        cost: expenseItem.cost,
-        pouchId: expenseItem.pouchId,
-        time: expenseItem.time,
-        state: expenseItem.state,
-        dateBegin: expenseItem.dateBegin,
-        dateEnd: expenseItem.dateEnd,
-        desc: expenseItem.desc,
-        catParentTitle: parentCat ? parentCat.title : '',
-        catParentId: parentCat?.id,
-        catTitle: cat ? cat.title : '',
-      }
-    })
   }
 
   getExpenseViewById(id: string) {
