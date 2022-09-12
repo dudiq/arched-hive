@@ -45,6 +45,18 @@ export class AnalyticStore {
     }, 0)
   }
 
+  // get categoryReportView() {
+  //   const categorySummMap = this.expenseList.reduce((acc, expense) => {
+  //     const { catId, cost } = expense
+  //     acc[catId] = (acc[catId] || 0) + cost
+  //     return acc
+  //   }, {} as Record<string, number>)
+  //
+  //   this.categoryList.reduce()
+  //
+  //   this.categoryList
+  // }
+
   get isNextAvailable() {
     if (this.reportView === REPORT_VIEW.ALL) return false
 
