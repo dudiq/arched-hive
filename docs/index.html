@@ -2,9 +2,8 @@
 <html lang="en" class="theme-light">
   <head>
     <meta charset="UTF-8" />
-    <title>Example</title>
+    <title>Coinote</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>frontend arch example</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.d947bf24.png" />
     <!--<link rel="icon" type="image/png" sizes="32x32" href="layout/assets/favicon-32x32.png">-->
     <!--<link rel="icon" type="image/png" sizes="16x16" href="layout/assets/favicon-16x16.png">-->
@@ -28,7 +27,7 @@
     <meta property="og:title" content="Example" />
     <meta property="og:description" content="Example" />
     <meta property="og:type" content="website" />
-    <link rel="manifest" href="data:application/manifest+json;base64,ewogICAgIm5hbWUiOiAiRnJvbnRlbmQgQXJjaCBFeGFtcGxlIiwKICAgICJzaG9ydF9uYW1lIjogIkZyb250ZW5kIEFyY2ggRXhhbXBsZSIsCiAgICAiZGVzY3JpcHRpb24iOiAiRnJvbnRlbmQgQXJjaCBFeGFtcGxlIiwKICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICAgImJhY2tncm91bmRfY29sb3IiOiAiIzM3MzczNyIsCiAgICAiaWNvbnMiOiBbCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tMzJ4MzIucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjMyeDMyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tNjR4NjQucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjY0eDY0IiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tMTI4eDEyOC5wbmciLAogICAgICAgICAgICAic2l6ZXMiOiAiMTI4eDEyOCIsCiAgICAgICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInNyYyI6ICJpY29ucy9pY29uLTE0NHgxNDQucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xNTJ4MTUyLnBuZyIsCiAgICAgICAgICAgICJzaXplcyI6ICIxNTJ4MTUyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tMTkyeDE5Mi5wbmciLAogICAgICAgICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInNyYyI6ICJpY29ucy9pY29uLTUxMng1MTIucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfQogICAgXSwKICAgICJzdGFydF91cmwiOiAiLi8iCn0K" />
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICAgIm5hbWUiOiAiQ29pbm90ZSIsCiAgICAic2hvcnRfbmFtZSI6ICJDb2lub3RlIiwKICAgICJkZXNjcmlwdGlvbiI6ICJDb2lub3RlIiwKICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICAgImJhY2tncm91bmRfY29sb3IiOiAiIzM3MzczNyIsCiAgICAiaWNvbnMiOiBbCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tMzJ4MzIucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjMyeDMyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tNjR4NjQucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjY0eDY0IiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tMTI4eDEyOC5wbmciLAogICAgICAgICAgICAic2l6ZXMiOiAiMTI4eDEyOCIsCiAgICAgICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInNyYyI6ICJpY29ucy9pY29uLTE0NHgxNDQucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xNTJ4MTUyLnBuZyIsCiAgICAgICAgICAgICJzaXplcyI6ICIxNTJ4MTUyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImljb25zL2ljb24tMTkyeDE5Mi5wbmciLAogICAgICAgICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInNyYyI6ICJpY29ucy9pY29uLTUxMng1MTIucG5nIiwKICAgICAgICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfQogICAgXSwKICAgICJzdGFydF91cmwiOiAiLyMvIgp9Cg==" />
     
 
     <style data-type="loader">
@@ -53,8 +52,8 @@
         display: none;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index.56d29af3.js"></script>
-    <link rel="stylesheet" href="/assets/index.ea71f5ba.css">
+    <script type="module" crossorigin src="/assets/index.b85fe641.js"></script>
+    <link rel="stylesheet" href="/assets/index.f132aa19.css">
   <link rel="manifest" href="/manifest.webmanifest"><script src="/registerSW.js"></script></head>
   <body>
     <div id="loader">loading...</div>
