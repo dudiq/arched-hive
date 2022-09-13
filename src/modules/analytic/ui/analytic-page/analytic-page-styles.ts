@@ -12,3 +12,12 @@ export const Content = styled.div`
   width: 100%;
   position: relative;
 `
+
+export const TotalMoneyRow = styled.div`
+  margin: 10px 0;
+  font-size: var(--text-size-big);
+  display: flex;
+  & > *:last-child {
+    margin-left: auto;
+  }
+`
