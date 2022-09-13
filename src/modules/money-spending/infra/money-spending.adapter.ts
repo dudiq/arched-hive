@@ -16,6 +16,7 @@ export class MoneySpendingAdapter {
     @Inject()
     private moneySpendingDataProvider: MoneySpendingDataProvider,
   ) {}
+
   async getExpenses({
     pouchId,
     offset,

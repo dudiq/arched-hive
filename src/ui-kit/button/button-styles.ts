@@ -66,6 +66,9 @@ export const Container = styled.button<{ variant?: ButtonVariant; shape?: Button
   &:active {
     box-shadow: 2px 2px 6px 0 var(--clr-shadow);
   }
+  &:disabled {
+    opacity: 0.4;
+  }
 `
 
 export const Wrapper = styled.div<{ hasIcon?: boolean }>`

@@ -5,7 +5,7 @@ import { useCategoriesContext } from '@pv/modules/categories/interface/use-categ
 import { Loader } from '@pv/ui-kit/loader'
 import { Swap } from '@pv/ui-kit/swap'
 import { Controls } from './controls'
-import { TreeList } from './tree-list'
+import { TreeListWrapper } from './tree-list-wrapper'
 
 import './categories.langs'
 
@@ -20,7 +20,7 @@ export const Categories = observer(() => {
     <>
       <ScrollContainer>
         <Swap is={categoriesStore.isLoading} isSlot={<Loader />}>
-          <TreeList />
+          <TreeListWrapper />
         </Swap>
       </ScrollContainer>
       <Controls />
