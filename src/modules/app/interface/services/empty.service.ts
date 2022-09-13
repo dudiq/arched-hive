@@ -2,6 +2,7 @@ import { Inject, Service } from '@pv/di'
 import { CategoriesDefaultEntity } from '@pv/modules/app/core/categories-default.entity'
 import { LangStore } from '@pv/modules/language'
 import { AppAdapter } from '@pv/modules/app/infra/app.adapter'
+import { isErr } from '@pv/modules/result'
 import { EmptyStore } from '../stores/empty.store'
 
 @Service()
@@ -25,7 +26,7 @@ export class EmptyService {
     const categories = this.emptyStore.defaultCategories
     if (!categories) return
     const result = await this.appAdapter.defineCategories(categories)
-    if (result.isErr()) {
+    if (isErr(result)) {
       //TODO: add error processing
       return
     }

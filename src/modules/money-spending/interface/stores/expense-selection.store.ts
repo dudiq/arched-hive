@@ -65,7 +65,12 @@ export class ExpenseSelectionStore {
     this.setFloat(false)
   }
 
-  removeLastFromCostList() {
+  backspaceCostList() {
+    if (this.currentCost !== 0) {
+      this.currentCost = 0
+      this.setFloat(false)
+      return
+    }
     this.costList.pop()
     this.setFloat(false)
   }

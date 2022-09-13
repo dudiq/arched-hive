@@ -1,8 +1,7 @@
-import { Result } from 'fnscript'
 import { Inject, Adapter } from '@pv/di'
-import { PromisedResult } from '@pv/di/types'
 import { AppErrors, AppErrorsInstances } from '@pv/modules/app/core/app.errors'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
+import { isErr, PromiseResult, resultErr, resultOk } from '@pv/modules/result'
 import { AppDataProvider } from './app.data-provider'
 
 @Adapter()
@@ -11,15 +10,15 @@ export class AppAdapter {
     @Inject()
     private appDataProvider: AppDataProvider,
   ) {}
-  async defineCategories(categories: CategoryEntity[]): PromisedResult<null, AppErrorsInstances> {
+  async defineCategories(categories: CategoryEntity[]): PromiseResult<null, AppErrorsInstances> {
     try {
-      const { error } = await this.appDataProvider.defineCategories(categories)
+      const result = await this.appDataProvider.defineCategories(categories)
 
-      if (error) return Result.Err(new AppErrors.DefineCategoryResponse(error))
+      if (isErr(result)) return resultErr(new AppErrors.DefineCategoryResponse(result.error))
 
-      return Result.Ok(null)
+      return resultOk(null)
     } catch (e) {
-      return Result.Err(new AppErrors.UnexpectedErrorDefineCategory(e))
+      return resultErr(new AppErrors.UnexpectedErrorDefineCategory(e))
     }
   }
 }

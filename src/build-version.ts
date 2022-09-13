@@ -2,6 +2,6 @@
 export const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '5276b8e70edab68db60c0293393be535bc520bb7',
-  buildTime: new Date(1657483948070), // 'Sun Jul 10 2022 23:12:28 GMT+0300 (Москва, стандартное время)',
-};
+  changeset: 'f2b3d0570f111d67882145edde7c5e85d4b3540e',
+  buildTime: new Date(1663101961050), // 'Tue Sep 13 2022 23:46:01 GMT+0300 (Москва, стандартное время)',
+}

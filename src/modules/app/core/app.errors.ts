@@ -1,8 +1,8 @@
-import { createErrorClass } from '@pv/infra/create-error-class'
+import { errorFactory } from '@pv/modules/errors'
 
-export namespace AppErrors {
-  export const DefineCategoryResponse = createErrorClass('Failed define categories')
-  export const UnexpectedErrorDefineCategory = createErrorClass('Unexpected add category')
-}
+export const { AppErrors } = errorFactory('AppErrors', {
+  DefineCategoryResponse: 'Failed define categories',
+  UnexpectedErrorDefineCategory: 'Unexpected add category',
+})
 
 export type AppErrorsInstances = InstanceType<typeof AppErrors[keyof typeof AppErrors]>

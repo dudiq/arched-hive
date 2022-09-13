@@ -3,6 +3,7 @@ import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
 import { guid } from '@pv/utils/guid'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
+import { isErr } from '@pv/modules/result'
 import { CategoriesAdapter } from '../../infra/categories.adapter'
 import { CategoriesStore } from '../../interface/stores/categories.store'
 
@@ -25,7 +26,7 @@ export class CategoriesService {
     if (!isConfirmed) return
 
     const result = await this.categoriesAdapter.removeCategory(category.id)
-    if (result.isErr()) {
+    if (isErr(result)) {
       //TODO: add error processing
       return
     }
@@ -44,7 +45,7 @@ export class CategoriesService {
     if (!isApplied) return
 
     const result = await this.categoriesAdapter.updateCategoryTitle(category.id, newTitle)
-    if (result.isErr()) {
+    if (isErr(result)) {
       //TODO: add error processing
       return
     }
@@ -65,7 +66,7 @@ export class CategoriesService {
     }
 
     const addResult = await this.categoriesAdapter.addCategory(node)
-    if (addResult.isErr()) {
+    if (isErr(addResult)) {
       //TODO: add error processing
       return
     }
@@ -74,11 +75,11 @@ export class CategoriesService {
 
   async loadCategories() {
     const result = await this.categoriesAdapter.getCategories()
-    if (result.isErr()) {
+    if (isErr(result)) {
       //TODO: add error processing
       return
     }
-    const categories = result.getValue()
+    const categories = result.data
     this.categoriesStore.setCategoryList(categories)
   }
 }

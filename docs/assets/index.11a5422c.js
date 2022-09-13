@@ -1,4 +1,4 @@
-const p$2 = function polyfill() {
+true&&(function polyfill() {
     const relList = document.createElement('link').relList;
     if (relList && relList.supports && relList.supports('modulepreload')) {
         return;
@@ -40,9 +40,9 @@ const p$2 = function polyfill() {
         const fetchOpts = getFetchOpts(link);
         fetch(link.href, fetchOpts);
     }
-};true&&p$2();
+}());
 
-var styles = '';
+const styles = '';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1324,7 +1324,7 @@ var ContainerInstance = /** @class */ (function () {
         return !!this.findService(identifier);
     };
     ContainerInstance.prototype.get = function (identifier) {
-        var globalContainer = Container$n.of(undefined);
+        var globalContainer = Container$r.of(undefined);
         var globalService = globalContainer.findService(identifier);
         var scopedService = this.findService(identifier);
         if (globalService && globalService.global === true)
@@ -1534,7 +1534,7 @@ var ContainerInstance = /** @class */ (function () {
     ContainerInstance.prototype.initializeParams = function (target, paramTypes) {
         var _this = this;
         return paramTypes.map(function (paramType, index) {
-            var paramHandler = Container$n.handlers.find(function (handler) {
+            var paramHandler = Container$r.handlers.find(function (handler) {
                 /**
                  * @Inject()-ed values are stored as parameter handlers and they reference their target
                  * when created. So when a class is extended the @Inject()-ed values are not inherited
@@ -1567,7 +1567,7 @@ var ContainerInstance = /** @class */ (function () {
      */
     ContainerInstance.prototype.applyPropertyHandlers = function (target, instance) {
         var _this = this;
-        Container$n.handlers.forEach(function (handler) {
+        Container$r.handlers.forEach(function (handler) {
             if (typeof handler.index === 'number')
                 return;
             if (handler.object.constructor !== target && !(target.prototype instanceof handler.object.constructor))
@@ -1607,7 +1607,7 @@ var ContainerInstance = /** @class */ (function () {
 /**
  * Service container.
  */
-var Container$n = /** @class */ (function () {
+var Container$r = /** @class */ (function () {
     function Container() {
     }
     /**
@@ -1776,7 +1776,7 @@ function Inject(typeOrIdentifier) {
         if (typeWrapper === undefined || typeWrapper.eagerType === undefined || typeWrapper.eagerType === Object) {
             throw new CannotInjectValueError(target, propertyName);
         }
-        Container$n.registerHandler({
+        Container$r.registerHandler({
             object: target,
             propertyName: propertyName,
             index: index,
@@ -1818,7 +1818,7 @@ function Service(optionsOrServiceIdentifier) {
             serviceMetadata.eager = optionsOrServiceIdentifier.eager || false;
             serviceMetadata.transient = optionsOrServiceIdentifier.transient || false;
         }
-        Container$n.set(serviceMetadata);
+        Container$r.set(serviceMetadata);
     };
 }
 
@@ -2985,10 +2985,6 @@ var ObservableValue = /*#__PURE__*/function (_Atom) {
 
     if (name_ === void 0) {
       name_ = "ObservableValue";
-    }
-
-    if (notifySpy === void 0) {
-      notifySpy = true;
     }
 
     if (equals === void 0) {
@@ -7157,6 +7153,9 @@ function Store() {
       }
 
     };
+    Object.defineProperty(SubClass, 'name', {
+      value: Context.name
+    });
     return serviceFn(SubClass);
   };
 }
@@ -7209,11 +7208,11 @@ function Module() {
   };
 }
 
-var n$1,l$1,u$1,t$2,o$2,r$1,f$1,e$2={},c$1=[],s$1=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function a$1(n,l){for(var u in l)n[u]=l[u];return n}function h$1(n){var l=n.parentNode;l&&l.removeChild(n);}function v$1(l,u,i){var t,o,r,f={};for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(r in l.defaultProps)void 0===f[r]&&(f[r]=l.defaultProps[r]);return y$1(l,f,t,o,null)}function y$1(n,i,t,o,r){var f={type:n,props:i,key:t,ref:o,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==r?++u$1:r};return null==r&&null!=l$1.vnode&&l$1.vnode(f),f}function p$1(){return {current:null}}function d$1(n){return n.children}function _$1(n,l){this.props=n,this.context=l;}function k$2(n,l){if(null==l)return n.__?k$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?k$2(n):null}function b$1(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return b$1(n)}}function m$1(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!g$2.__r++||r$1!==l$1.debounceRendering)&&((r$1=l$1.debounceRendering)||o$2)(g$2);}function g$2(){for(var n;g$2.__r=t$2.length;)n=t$2.sort(function(n,l){return n.__v.__b-l.__v.__b}),t$2=[],n.some(function(n){var l,u,i,t,o,r;n.__d&&(o=(t=(l=n).__v).__e,(r=l.__P)&&(u=[],(i=a$1({},t)).__v=t.__v+1,j$2(r,t,i,l.__n,void 0!==r.ownerSVGElement,null!=t.__h?[o]:null,u,null==o?k$2(t):o,t.__h),z$2(u,t),t.__e!=o&&b$1(t)));});}function w$2(n,l,u,i,t,o,r,f,s,a){var h,v,p,_,b,m,g,w=i&&i.__k||c$1,A=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(_=u.__k[h]=null==(_=l[h])||"boolean"==typeof _?null:"string"==typeof _||"number"==typeof _||"bigint"==typeof _?y$1(null,_,null,null,_):Array.isArray(_)?y$1(d$1,{children:_},null,null,null):_.__b>0?y$1(_.type,_.props,_.key,null,_.__v):_)){if(_.__=u,_.__b=u.__b+1,null===(p=w[h])||p&&_.key==p.key&&_.type===p.type)w[h]=void 0;else for(v=0;v<A;v++){if((p=w[v])&&_.key==p.key&&_.type===p.type){w[v]=void 0;break}p=null;}j$2(n,_,p=p||e$2,t,o,r,f,s,a),b=_.__e,(v=_.ref)&&p.ref!=v&&(g||(g=[]),p.ref&&g.push(p.ref,null,_),g.push(v,_.__c||b,_)),null!=b?(null==m&&(m=b),"function"==typeof _.type&&_.__k===p.__k?_.__d=s=x$2(_,s,n):s=P$1(n,_,p,w,b,s),"function"==typeof u.type&&(u.__d=s)):s&&p.__e==s&&s.parentNode!=n&&(s=k$2(p));}for(u.__e=m,h=A;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=k$2(i,h+1)),N$1(w[h],w[h]));if(g)for(h=0;h<g.length;h++)M$1(g[h],g[++h],g[++h]);}function x$2(n,l,u){for(var i,t=n.__k,o=0;t&&o<t.length;o++)(i=t[o])&&(i.__=n,l="function"==typeof i.type?x$2(i,l,u):P$1(u,i,i,t,i.__e,l));return l}function A$2(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){A$2(n,l);}):l.push(n)),l}function P$1(n,l,u,i,t,o){var r,f,e;if(void 0!==l.__d)r=l.__d,l.__d=void 0;else if(null==u||t!=o||null==t.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(t),r=null;else {for(f=o,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,o),r=o;}return void 0!==r?r:t.nextSibling}function C$1(n,l,u,i,t){var o;for(o in u)"children"===o||"key"===o||o in l||H$1(n,o,null,u[o],i);for(o in l)t&&"function"!=typeof l[o]||"children"===o||"key"===o||"value"===o||"checked"===o||u[o]===l[o]||H$1(n,o,l[o],u[o],i);}function $$1(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||s$1.test(l)?u:u+"px";}function H$1(n,l,u,i,t){var o;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||$$1(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||$$1(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=u,u?i||n.addEventListener(l,o?T$2:I$1,o):n.removeEventListener(l,o?T$2:I$1,o);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l));}}function I$1(n){this.l[n.type+!1](l$1.event?l$1.event(n):n);}function T$2(n){this.l[n.type+!0](l$1.event?l$1.event(n):n);}function j$2(n,u,i,t,o,r,f,e,c){var s,h,v,y,p,k,b,m,g,x,A,P,C,$=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,r=[e]),(s=l$1.__b)&&s(u);try{n:if("function"==typeof $){if(m=u.props,g=(s=$.contextType)&&t[s.__c],x=s?g?g.props.value:s.__:t,i.__c?b=(h=u.__c=i.__c).__=h.__E:("prototype"in $&&$.prototype.render?u.__c=h=new $(m,x):(u.__c=h=new _$1(m,x),h.constructor=$,h.render=O$1),g&&g.sub(h),h.props=m,h.state||(h.state={}),h.context=x,h.__n=t,v=h.__d=!0,h.__h=[]),null==h.__s&&(h.__s=h.state),null!=$.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=a$1({},h.__s)),a$1(h.__s,$.getDerivedStateFromProps(m,h.__s))),y=h.props,p=h.state,v)null==$.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else {if(null==$.getDerivedStateFromProps&&m!==y&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(m,x),!h.__e&&null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(m,h.__s,x)||u.__v===i.__v){h.props=m,h.state=h.__s,u.__v!==i.__v&&(h.__d=!1),h.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),h.__h.length&&f.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(m,h.__s,x),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(y,p,k);});}if(h.context=x,h.props=m,h.__v=u,h.__P=n,A=l$1.__r,P=0,"prototype"in $&&$.prototype.render)h.state=h.__s,h.__d=!1,A&&A(u),s=h.render(h.props,h.state,h.context);else do{h.__d=!1,A&&A(u),s=h.render(h.props,h.state,h.context),h.state=h.__s;}while(h.__d&&++P<25);h.state=h.__s,null!=h.getChildContext&&(t=a$1(a$1({},t),h.getChildContext())),v||null==h.getSnapshotBeforeUpdate||(k=h.getSnapshotBeforeUpdate(y,p)),C=null!=s&&s.type===d$1&&null==s.key?s.props.children:s,w$2(n,Array.isArray(C)?C:[C],u,i,t,o,r,f,e,c),h.base=u.__e,u.__h=null,h.__h.length&&f.push(h),b&&(h.__E=h.__=null),h.__e=!1;}else null==r&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=L$1(i.__e,u,i,t,o,r,f,c);(s=l$1.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=r)&&(u.__e=e,u.__h=!!c,r[r.indexOf(e)]=null),l$1.__e(n,u,i);}}function z$2(n,u){l$1.__c&&l$1.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$1.__e(n,u.__v);}});}function L$1(l,u,i,t,o,r,f,c){var s,a,v,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(o=!0),null!=r)for(;_<r.length;_++)if((s=r[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,r[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=o?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),r=null,c=!1;}if(null===d)y===p||c&&l.data===p||(l.data=p);else {if(r=r&&n$1.call(l.childNodes),a=(y=i.props||e$2).dangerouslySetInnerHTML,v=p.dangerouslySetInnerHTML,!c){if(null!=r)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(v||a)&&(v&&(a&&v.__html==a.__html||v.__html===l.innerHTML)||(l.innerHTML=v&&v.__html||""));}if(C$1(l,p,y,o,c),v)u.__k=[];else if(_=u.props.children,w$2(l,Array.isArray(_)?_:[_],u,i,t,o&&"foreignObject"!==d,r,f,r?r[0]:i.__k&&k$2(i,0),c),null!=r)for(_=r.length;_--;)null!=r[_]&&h$1(r[_]);c||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&H$1(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&H$1(l,"checked",_,y.checked,!1));}return l}function M$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$1.__e(n,i);}}function N$1(n,u,i){var t,o;if(l$1.unmount&&l$1.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||M$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$1.__e(n,u);}t.base=t.__P=null;}if(t=n.__k)for(o=0;o<t.length;o++)t[o]&&N$1(t[o],u,"function"!=typeof n.type);i||null==n.__e||h$1(n.__e),n.__e=n.__d=void 0;}function O$1(n,l,u){return this.constructor(n,u)}function S$1(u,i,t){var o,r,f;l$1.__&&l$1.__(u,i),r=(o="function"==typeof t)?null:t&&t.__k||i.__k,f=[],j$2(i,u=(!o&&t||i).__k=v$1(d$1,null,[u]),r||e$2,e$2,void 0!==i.ownerSVGElement,!o&&t?[t]:r?null:i.firstChild?n$1.call(i.childNodes):null,f,!o&&t?t:r?r.__e:i.firstChild,o),z$2(f,u);}function q$2(n,l){S$1(n,l,q$2);}function B$1(l,u,i){var t,o,r,f=a$1({},l.props);for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),y$1(l.type,f,t||l.key,o||l.ref,null)}function D$1(n,l){var u={__c:l="__cC"+f$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(m$1);},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=c$1.slice,l$1={__e:function(n,l,u,i){for(var t,o,r;l=l.__;)if((t=l.__c)&&!t.__)try{if((o=t.constructor)&&null!=o.getDerivedStateFromError&&(t.setState(o.getDerivedStateFromError(n)),r=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),r=t.__d),r)return t.__E=t}catch(l){n=l;}throw n}},u$1=0,_$1.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=a$1({},this.state),"function"==typeof n&&(n=n(a$1({},u),this.props)),n&&a$1(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),m$1(this));},_$1.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$1(this));},_$1.prototype.render=d$1,t$2=[],o$2="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,g$2.__r=0,f$1=0;
+var n$1,l$1,u$1,t$2,o$2,r$1,f$1={},e$2=[],c$1=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function s$1(n,l){for(var u in l)n[u]=l[u];return n}function a$1(n){var l=n.parentNode;l&&l.removeChild(n);}function h$1(l,u,i){var t,o,r,f={};for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(r in l.defaultProps)void 0===f[r]&&(f[r]=l.defaultProps[r]);return v$1(l,f,t,o,null)}function v$1(n,i,t,o,r){var f={type:n,props:i,key:t,ref:o,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==r?++u$1:r};return null==r&&null!=l$1.vnode&&l$1.vnode(f),f}function y$1(){return {current:null}}function p$1(n){return n.children}function d$1(n,l){this.props=n,this.context=l;}function _$1(n,l){if(null==l)return n.__?_$1(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?_$1(n):null}function k$2(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return k$2(n)}}function b$1(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!g$2.__r++||o$2!==l$1.debounceRendering)&&((o$2=l$1.debounceRendering)||setTimeout)(g$2);}function g$2(){for(var n;g$2.__r=t$2.length;)n=t$2.sort(function(n,l){return n.__v.__b-l.__v.__b}),t$2=[],n.some(function(n){var l,u,i,t,o,r;n.__d&&(o=(t=(l=n).__v).__e,(r=l.__P)&&(u=[],(i=s$1({},t)).__v=t.__v+1,j$2(r,t,i,l.__n,void 0!==r.ownerSVGElement,null!=t.__h?[o]:null,u,null==o?_$1(t):o,t.__h),z$2(u,t),t.__e!=o&&k$2(t)));});}function w$2(n,l,u,i,t,o,r,c,s,a){var h,y,d,k,b,g,w,x=i&&i.__k||e$2,C=x.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(k=u.__k[h]=null==(k=l[h])||"boolean"==typeof k?null:"string"==typeof k||"number"==typeof k||"bigint"==typeof k?v$1(null,k,null,null,k):Array.isArray(k)?v$1(p$1,{children:k},null,null,null):k.__b>0?v$1(k.type,k.props,k.key,null,k.__v):k)){if(k.__=u,k.__b=u.__b+1,null===(d=x[h])||d&&k.key==d.key&&k.type===d.type)x[h]=void 0;else for(y=0;y<C;y++){if((d=x[y])&&k.key==d.key&&k.type===d.type){x[y]=void 0;break}d=null;}j$2(n,k,d=d||f$1,t,o,r,c,s,a),b=k.__e,(y=k.ref)&&d.ref!=y&&(w||(w=[]),d.ref&&w.push(d.ref,null,k),w.push(y,k.__c||b,k)),null!=b?(null==g&&(g=b),"function"==typeof k.type&&k.__k===d.__k?k.__d=s=m$1(k,s,n):s=A$2(n,k,d,x,b,s),"function"==typeof u.type&&(u.__d=s)):s&&d.__e==s&&s.parentNode!=n&&(s=_$1(d));}for(u.__e=g,h=C;h--;)null!=x[h]&&("function"==typeof u.type&&null!=x[h].__e&&x[h].__e==u.__d&&(u.__d=_$1(i,h+1)),N$1(x[h],x[h]));if(w)for(h=0;h<w.length;h++)M$1(w[h],w[++h],w[++h]);}function m$1(n,l,u){for(var i,t=n.__k,o=0;t&&o<t.length;o++)(i=t[o])&&(i.__=n,l="function"==typeof i.type?m$1(i,l,u):A$2(u,i,i,t,i.__e,l));return l}function x$2(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){x$2(n,l);}):l.push(n)),l}function A$2(n,l,u,i,t,o){var r,f,e;if(void 0!==l.__d)r=l.__d,l.__d=void 0;else if(null==u||t!=o||null==t.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(t),r=null;else {for(f=o,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,o),r=o;}return void 0!==r?r:t.nextSibling}function C$1(n,l,u,i,t){var o;for(o in u)"children"===o||"key"===o||o in l||H$1(n,o,null,u[o],i);for(o in l)t&&"function"!=typeof l[o]||"children"===o||"key"===o||"value"===o||"checked"===o||u[o]===l[o]||H$1(n,o,l[o],u[o],i);}function $$1(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||c$1.test(l)?u:u+"px";}function H$1(n,l,u,i,t){var o;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||$$1(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||$$1(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=u,u?i||n.addEventListener(l,o?T$2:I$1,o):n.removeEventListener(l,o?T$2:I$1,o);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l));}}function I$1(n){this.l[n.type+!1](l$1.event?l$1.event(n):n);}function T$2(n){this.l[n.type+!0](l$1.event?l$1.event(n):n);}function j$2(n,u,i,t,o,r,f,e,c){var a,h,v,y,_,k,b,g,m,x,A,C,$,H=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,r=[e]),(a=l$1.__b)&&a(u);try{n:if("function"==typeof H){if(g=u.props,m=(a=H.contextType)&&t[a.__c],x=a?m?m.props.value:a.__:t,i.__c?b=(h=u.__c=i.__c).__=h.__E:("prototype"in H&&H.prototype.render?u.__c=h=new H(g,x):(u.__c=h=new d$1(g,x),h.constructor=H,h.render=O$1),m&&m.sub(h),h.props=g,h.state||(h.state={}),h.context=x,h.__n=t,v=h.__d=!0,h.__h=[]),null==h.__s&&(h.__s=h.state),null!=H.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=s$1({},h.__s)),s$1(h.__s,H.getDerivedStateFromProps(g,h.__s))),y=h.props,_=h.state,v)null==H.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else {if(null==H.getDerivedStateFromProps&&g!==y&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(g,x),!h.__e&&null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(g,h.__s,x)||u.__v===i.__v){h.props=g,h.state=h.__s,u.__v!==i.__v&&(h.__d=!1),h.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),h.__h.length&&f.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(g,h.__s,x),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(y,_,k);});}if(h.context=x,h.props=g,h.__v=u,h.__P=n,A=l$1.__r,C=0,"prototype"in H&&H.prototype.render)h.state=h.__s,h.__d=!1,A&&A(u),a=h.render(h.props,h.state,h.context);else do{h.__d=!1,A&&A(u),a=h.render(h.props,h.state,h.context),h.state=h.__s;}while(h.__d&&++C<25);h.state=h.__s,null!=h.getChildContext&&(t=s$1(s$1({},t),h.getChildContext())),v||null==h.getSnapshotBeforeUpdate||(k=h.getSnapshotBeforeUpdate(y,_)),$=null!=a&&a.type===p$1&&null==a.key?a.props.children:a,w$2(n,Array.isArray($)?$:[$],u,i,t,o,r,f,e,c),h.base=u.__e,u.__h=null,h.__h.length&&f.push(h),b&&(h.__E=h.__=null),h.__e=!1;}else null==r&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=L$1(i.__e,u,i,t,o,r,f,c);(a=l$1.diffed)&&a(u);}catch(n){u.__v=null,(c||null!=r)&&(u.__e=e,u.__h=!!c,r[r.indexOf(e)]=null),l$1.__e(n,u,i);}}function z$2(n,u){l$1.__c&&l$1.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$1.__e(n,u.__v);}});}function L$1(l,u,i,t,o,r,e,c){var s,h,v,y=i.props,p=u.props,d=u.type,k=0;if("svg"===d&&(o=!0),null!=r)for(;k<r.length;k++)if((s=r[k])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,r[k]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=o?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),r=null,c=!1;}if(null===d)y===p||c&&l.data===p||(l.data=p);else {if(r=r&&n$1.call(l.childNodes),h=(y=i.props||f$1).dangerouslySetInnerHTML,v=p.dangerouslySetInnerHTML,!c){if(null!=r)for(y={},k=0;k<l.attributes.length;k++)y[l.attributes[k].name]=l.attributes[k].value;(v||h)&&(v&&(h&&v.__html==h.__html||v.__html===l.innerHTML)||(l.innerHTML=v&&v.__html||""));}if(C$1(l,p,y,o,c),v)u.__k=[];else if(k=u.props.children,w$2(l,Array.isArray(k)?k:[k],u,i,t,o&&"foreignObject"!==d,r,e,r?r[0]:i.__k&&_$1(i,0),c),null!=r)for(k=r.length;k--;)null!=r[k]&&a$1(r[k]);c||("value"in p&&void 0!==(k=p.value)&&(k!==l.value||"progress"===d&&!k||"option"===d&&k!==y.value)&&H$1(l,"value",k,y.value,!1),"checked"in p&&void 0!==(k=p.checked)&&k!==l.checked&&H$1(l,"checked",k,y.checked,!1));}return l}function M$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$1.__e(n,i);}}function N$1(n,u,i){var t,o;if(l$1.unmount&&l$1.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||M$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$1.__e(n,u);}t.base=t.__P=null;}if(t=n.__k)for(o=0;o<t.length;o++)t[o]&&N$1(t[o],u,"function"!=typeof n.type);i||null==n.__e||a$1(n.__e),n.__e=n.__d=void 0;}function O$1(n,l,u){return this.constructor(n,u)}function P$1(u,i,t){var o,r,e;l$1.__&&l$1.__(u,i),r=(o="function"==typeof t)?null:t&&t.__k||i.__k,e=[],j$2(i,u=(!o&&t||i).__k=h$1(p$1,null,[u]),r||f$1,f$1,void 0!==i.ownerSVGElement,!o&&t?[t]:r?null:i.firstChild?n$1.call(i.childNodes):null,e,!o&&t?t:r?r.__e:i.firstChild,o),z$2(e,u);}function S$1(n,l){P$1(n,l,S$1);}function q$2(l,u,i){var t,o,r,f=s$1({},l.props);for(r in u)"key"==r?t=u[r]:"ref"==r?o=u[r]:f[r]=u[r];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),v$1(l.type,f,t||l.key,o||l.ref,null)}function B$1(n,l){var u={__c:l="__cC"+r$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(b$1);},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=e$2.slice,l$1={__e:function(n,l,u,i){for(var t,o,r;l=l.__;)if((t=l.__c)&&!t.__)try{if((o=t.constructor)&&null!=o.getDerivedStateFromError&&(t.setState(o.getDerivedStateFromError(n)),r=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),r=t.__d),r)return t.__E=t}catch(l){n=l;}throw n}},u$1=0,d$1.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=s$1({},this.state),"function"==typeof n&&(n=n(s$1({},u),this.props)),n&&s$1(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),b$1(this));},d$1.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),b$1(this));},d$1.prototype.render=p$1,t$2=[],g$2.__r=0,r$1=0;
 
-var t$1,u,r,o$1,i=0,c=[],f=[],e$1=l$1.__b,a=l$1.__r,v=l$1.diffed,l=l$1.__c,m=l$1.unmount;function p(t,r){l$1.__h&&l$1.__h(u,t,i||r),i=0;var o=u.__H||(u.__H={__:[],__h:[]});return t>=o.__.length&&o.__.push({__V:f}),o.__[t]}function y(n){return i=1,d(z$1,n)}function d(n,r,o){var i=p(t$1++,2);return i.t=n,i.__c||(i.__=[o?o(r):z$1(void 0,r),function(n){var t=i.t(i.__[0],n);i.__[0]!==t&&(i.__=[t,i.__[1]],i.__c.setState({}));}],i.__c=u),i.__}function _(r,o){var i=p(t$1++,3);!l$1.__s&&w$1(i.__H,o)&&(i.__=r,i.u=o,u.__H.__h.push(i));}function h(r,o){var i=p(t$1++,4);!l$1.__s&&w$1(i.__H,o)&&(i.__=r,i.u=o,u.__h.push(i));}function s(n){return i=5,F$1(function(){return {current:n}},[])}function A$1(n,t,u){i=6,h(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==u?u:u.concat(n));}function F$1(n,u){var r=p(t$1++,7);return w$1(r.__H,u)?(r.__V=n(),r.u=u,r.__h=n,r.__V):r.__}function T$1(n,t){return i=8,F$1(function(){return n},t)}function q$1(n){var r=u.context[n.__c],o=p(t$1++,9);return o.c=n,r?(null==o.__&&(o.__=!0,r.sub(u)),r.props.value):n.__}function x$1(t,u){l$1.useDebugValue&&l$1.useDebugValue(u?u(t):t);}function b(){for(var t;t=c.shift();)if(t.__P)try{t.__H.__h.forEach(j$1),t.__H.__h.forEach(k$1),t.__H.__h=[];}catch(u){t.__H.__h=[],l$1.__e(u,t.__v);}}l$1.__b=function(n){u=null,e$1&&e$1(n);},l$1.__r=function(n){a&&a(n),t$1=0;var o=(u=n.__c).__H;o&&(r===u?(o.__h=[],u.__h=[],o.__.forEach(function(n){n.__V=f,n.u=void 0;})):(o.__h.forEach(j$1),o.__h.forEach(k$1),o.__h=[])),r=u;},l$1.diffed=function(t){v&&v(t);var i=t.__c;i&&i.__H&&(i.__H.__h.length&&(1!==c.push(i)&&o$1===l$1.requestAnimationFrame||((o$1=l$1.requestAnimationFrame)||function(n){var t,u=function(){clearTimeout(r),g$1&&cancelAnimationFrame(t),setTimeout(n);},r=setTimeout(u,100);g$1&&(t=requestAnimationFrame(u));})(b)),i.__H.__.forEach(function(n){n.u&&(n.__H=n.u),n.__V!==f&&(n.__=n.__V),n.u=void 0,n.__V=f;})),r=u=null;},l$1.__c=function(t,u){u.some(function(t){try{t.__h.forEach(j$1),t.__h=t.__h.filter(function(n){return !n.__||k$1(n)});}catch(r){u.some(function(n){n.__h&&(n.__h=[]);}),u=[],l$1.__e(r,t.__v);}}),l&&l(t,u);},l$1.unmount=function(t){m&&m(t);var u,r=t.__c;r&&r.__H&&(r.__H.__.forEach(function(n){try{j$1(n);}catch(n){u=n;}}),u&&l$1.__e(u,r.__v));};var g$1="function"==typeof requestAnimationFrame;function j$1(n){var t=u,r=n.__c;"function"==typeof r&&(n.__c=void 0,r()),u=t;}function k$1(n){var t=u;n.__c=n.__(),u=t;}function w$1(n,t){return !n||n.length!==t.length||t.some(function(t,u){return t!==n[u]})}function z$1(n,t){return "function"==typeof t?t(n):t}
+var t$1,r,u,i,o$1=0,c=[],f=[],e$1=l$1.__b,a=l$1.__r,v=l$1.diffed,l=l$1.__c,m=l$1.unmount;function d(t,u){l$1.__h&&l$1.__h(r,t,o$1||u),o$1=0;var i=r.__H||(r.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:f}),i.__[t]}function p(n){return o$1=1,y(z$1,n)}function y(n,u,i){var o=d(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):z$1(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r,!r.u)){r.u=!0;var c=r.shouldComponentUpdate;r.shouldComponentUpdate=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!!i&&(!c||c.call(this,n,t,r))};}return o.__N||o.__}function h(u,i){var o=d(t$1++,3);!l$1.__s&&w$1(o.__H,i)&&(o.__=u,o.i=i,r.__H.__h.push(o));}function s(u,i){var o=d(t$1++,4);!l$1.__s&&w$1(o.__H,i)&&(o.__=u,o.i=i,r.__h.push(o));}function _(n){return o$1=5,F$1(function(){return {current:n}},[])}function A$1(n,t,r){o$1=6,s(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$1(n,r){var u=d(t$1++,7);return w$1(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$1(n,t){return o$1=8,F$1(function(){return n},t)}function q$1(n){var u=r.context[n.__c],i=d(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r)),u.props.value):n.__}function x$1(t,r){l$1.useDebugValue&&l$1.useDebugValue(r?r(t):t);}function b(){for(var t;t=c.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(j$1),t.__H.__h.forEach(k$1),t.__H.__h=[];}catch(r){t.__H.__h=[],l$1.__e(r,t.__v);}}l$1.__b=function(n){r=null,e$1&&e$1(n);},l$1.__r=function(n){a&&a(n),t$1=0;var i=(r=n.__c).__H;i&&(u===r?(i.__h=[],r.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=f,n.__N=n.i=void 0;})):(i.__h.forEach(j$1),i.__h.forEach(k$1),i.__h=[])),u=r;},l$1.diffed=function(t){v&&v(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==c.push(o)&&i===l$1.requestAnimationFrame||((i=l$1.requestAnimationFrame)||function(n){var t,r=function(){clearTimeout(u),g$1&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$1&&(t=requestAnimationFrame(r));})(b)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==f&&(n.__=n.__V),n.i=void 0,n.__V=f;})),u=r=null;},l$1.__c=function(t,r){r.some(function(t){try{t.__h.forEach(j$1),t.__h=t.__h.filter(function(n){return !n.__||k$1(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$1.__e(u,t.__v);}}),l&&l(t,r);},l$1.unmount=function(t){m&&m(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{j$1(n);}catch(n){r=n;}}),r&&l$1.__e(r,u.__v));};var g$1="function"==typeof requestAnimationFrame;function j$1(n){var t=r,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r=t;}function k$1(n){var t=r;n.__c=n.__(),r=t;}function w$1(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function z$1(n,t){return "function"==typeof t?t(n):t}
 
-function S(n,t){for(var e in t)n[e]=t[e];return n}function C(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function E(n){this.props=n;}function g(n,t){function e(n){var e=this.props.ref,r=e==n.ref;return !r&&e&&(e.call?e(null):e.current=null),t?!t(this.props,n)||!r:C(this.props,n)}function r(t){return this.shouldComponentUpdate=e,v$1(n,t)}return r.displayName="Memo("+(n.displayName||n.name)+")",r.prototype.isReactComponent=!0,r.__f=!0,r}(E.prototype=new _$1).isPureReactComponent=!0,E.prototype.shouldComponentUpdate=function(n,t){return C(this.props,n)||C(this.state,t)};var w=l$1.__b;l$1.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),w&&w(n);};var x="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function R(n){function t(t){var e=S({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=x,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var N=function(n,t){return null==n?null:A$2(A$2(n).map(t))},k={map:N,forEach:N,count:function(n){return n?A$2(n).length:0},only:function(n){var t=A$2(n);if(1!==t.length)throw "Children.only";return t[0]},toArray:A$2},A=l$1.__e;l$1.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);A(n,t,e,r);};var O=l$1.unmount;function T(){this.__u=0,this.t=null,this.__b=null;}function L(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function U(n){var t,e,r;function u(u){if(t||(t=n()).then(function(n){e=n.default||n;},function(n){r=n;}),r)throw r;if(!e)throw t;return v$1(e,u)}return u.displayName="Lazy",u.__f=!0,u}function D(){this.u=null,this.o=null;}l$1.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),O&&O(n);},(T.prototype=new _$1).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=L(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=function n(t,e,r){return t&&(t.__v=null,t.__k=t.__k&&t.__k.map(function(t){return n(t,e,r)}),t.__c&&t.__c.__P===e&&(t.__e&&r.insertBefore(t.__e,t.__d),t.__c.__e=!0,t.__c.__P=r)),t}(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},f=!0===t.__h;r.__u++||f||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},T.prototype.componentWillUnmount=function(){this.t=[];},T.prototype.render=function(n,t){if(this.__b){if(this.__v.__k){var e=document.createElement("div"),r=this.__v.__k[0].__c;this.__v.__k[0]=function n(t,e,r){return t&&(t.__c&&t.__c.__H&&(t.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),t.__c.__H=null),null!=(t=S({},t)).__c&&(t.__c.__P===r&&(t.__c.__P=e),t.__c=null),t.__k=t.__k&&t.__k.map(function(t){return n(t,e,r)})),t}(this.__b,e,r.__O=r.__P);}this.__b=null;}var u=t.__a&&v$1(d$1,null,n.fallback);return u&&(u.__h=null),[v$1(d$1,null,t.__a?null:n.children),u]};var F=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function I(n){return this.getChildContext=function(){return n.context},n.children}function M(n){var t=this,e=n.i;t.componentWillUnmount=function(){S$1(null,t.l),t.l=null,t.i=null;},t.i&&t.i!==e&&t.componentWillUnmount(),n.__v?(t.l||(t.i=e,t.l={nodeType:1,parentNode:e,childNodes:[],appendChild:function(n){this.childNodes.push(n),t.i.appendChild(n);},insertBefore:function(n,e){this.childNodes.push(n),t.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),t.i.removeChild(n);}}),S$1(v$1(I,{context:t.context},n.__v),t.l)):t.l&&t.componentWillUnmount();}function V(n,t){var e=v$1(M,{__v:n,i:t});return e.containerInfo=t,e}(D.prototype=new _$1).__a=function(n){var t=this,e=L(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),F(t,n,r)):u();};e?e(o):o();}},D.prototype.render=function(n){this.u=null,this.o=new Map;var t=A$2(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},D.prototype.componentDidUpdate=D.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){F(n,e,t);});};var W="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,P=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|marker(?!H|W|U)|overline|paint|shape|stop|strikethrough|stroke|text(?!L)|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,$="undefined"!=typeof document,j=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(n)};function z(n,t,e){return null==t.__k&&(t.textContent=""),S$1(n,t),"function"==typeof e&&e(),n?n.__c:null}function B(n,t,e){return q$2(n,t),"function"==typeof e&&e(),n?n.__c:null}_$1.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(n){Object.defineProperty(_$1.prototype,n,{configurable:!0,get:function(){return this["UNSAFE_"+n]},set:function(t){Object.defineProperty(this,n,{configurable:!0,writable:!0,value:t});}});});var H=l$1.event;function Z(){}function Y(){return this.cancelBubble}function q(){return this.defaultPrevented}l$1.event=function(n){return H&&(n=H(n)),n.persist=Z,n.isPropagationStopped=Y,n.isDefaultPrevented=q,n.nativeEvent=n};var G,J={configurable:!0,get:function(){return this.class}},K=l$1.vnode;l$1.vnode=function(n){var t=n.type,e=n.props,r=e;if("string"==typeof t){var u=-1===t.indexOf("-");for(var o in r={},e){var i=e[o];$&&"children"===o&&"noscript"===t||"value"===o&&"defaultValue"in e&&null==i||("defaultValue"===o&&"value"in e&&null==e.value?o="value":"download"===o&&!0===i?i="":/ondoubleclick/i.test(o)?o="ondblclick":/^onchange(textarea|input)/i.test(o+t)&&!j(e.type)?o="oninput":/^onfocus$/i.test(o)?o="onfocusin":/^onblur$/i.test(o)?o="onfocusout":/^on(Ani|Tra|Tou|BeforeInp|Compo)/.test(o)?o=o.toLowerCase():u&&P.test(o)?o=o.replace(/[A-Z0-9]/,"-$&").toLowerCase():null===i&&(i=void 0),/^oninput$/i.test(o)&&(o=o.toLowerCase(),r[o]&&(o="oninputCapture")),r[o]=i);}"select"==t&&r.multiple&&Array.isArray(r.value)&&(r.value=A$2(e.children).forEach(function(n){n.props.selected=-1!=r.value.indexOf(n.props.value);})),"select"==t&&null!=r.defaultValue&&(r.value=A$2(e.children).forEach(function(n){n.props.selected=r.multiple?-1!=r.defaultValue.indexOf(n.props.value):r.defaultValue==n.props.value;})),n.props=r,e.class!=e.className&&(J.enumerable="className"in e,null!=e.className&&(r.class=e.className),Object.defineProperty(r,"className",J));}n.$$typeof=W,K&&K(n);};var Q=l$1.__r;l$1.__r=function(n){Q&&Q(n),G=n.__c;};var X={ReactCurrentDispatcher:{current:{readContext:function(n){return G.__n[n.__c].props.value}}}};function tn(n){return v$1.bind(null,n)}function en(n){return !!n&&n.$$typeof===W}function rn(n){return en(n)?B$1.apply(null,arguments):n}function un(n){return !!n.__k&&(S$1(null,n),!0)}function on(n){return n&&(n.base||1===n.nodeType&&n)||null}var ln=function(n,t){return n(t)},fn=function(n,t){return n(t)};function an(n){n();}function sn(n){return n}function hn(){return [!1,an]}function dn(t,r){var u=y(r),o=u[0],i=u[1];return _(function(){return t(function(){i(r());})},[t,r]),o}var React = {useState:y,useReducer:d,useEffect:_,useLayoutEffect:h,useInsertionEffect:h,useTransition:hn,useDeferredValue:sn,useSyncExternalStore:dn,startTransition:an,useRef:s,useImperativeHandle:A$1,useMemo:F$1,useCallback:T$1,useContext:q$1,useDebugValue:x$1,version:"17.0.2",Children:k,render:z,hydrate:B,unmountComponentAtNode:un,createPortal:V,createElement:v$1,createContext:D$1,createFactory:tn,cloneElement:rn,createRef:p$1,Fragment:d$1,isValidElement:en,findDOMNode:on,Component:_$1,PureComponent:E,memo:g,forwardRef:R,flushSync:fn,unstable_batchedUpdates:ln,StrictMode:d$1,Suspense:T,SuspenseList:D,lazy:U,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:X};
+function S(n,t){for(var e in t)n[e]=t[e];return n}function g(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function C(n){this.props=n;}function E(n,t){function e(n){var e=this.props.ref,r=e==n.ref;return !r&&e&&(e.call?e(null):e.current=null),t?!t(this.props,n)||!r:g(this.props,n)}function r(t){return this.shouldComponentUpdate=e,h$1(n,t)}return r.displayName="Memo("+(n.displayName||n.name)+")",r.prototype.isReactComponent=!0,r.__f=!0,r}(C.prototype=new d$1).isPureReactComponent=!0,C.prototype.shouldComponentUpdate=function(n,t){return g(this.props,n)||g(this.state,t)};var w=l$1.__b;l$1.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),w&&w(n);};var x="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function R(n){function t(t){var e=S({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=x,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var N=function(n,t){return null==n?null:x$2(x$2(n).map(t))},k={map:N,forEach:N,count:function(n){return n?x$2(n).length:0},only:function(n){var t=x$2(n);if(1!==t.length)throw "Children.only";return t[0]},toArray:x$2},A=l$1.__e;l$1.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);A(n,t,e,r);};var O=l$1.unmount;function T(){this.__u=0,this.t=null,this.__b=null;}function L(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function U(n){var t,e,r;function u(u){if(t||(t=n()).then(function(n){e=n.default||n;},function(n){r=n;}),r)throw r;if(!e)throw t;return h$1(e,u)}return u.displayName="Lazy",u.__f=!0,u}function D(){this.u=null,this.o=null;}l$1.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),O&&O(n);},(T.prototype=new d$1).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=L(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=function n(t,e,r){return t&&(t.__v=null,t.__k=t.__k&&t.__k.map(function(t){return n(t,e,r)}),t.__c&&t.__c.__P===e&&(t.__e&&r.insertBefore(t.__e,t.__d),t.__c.__e=!0,t.__c.__P=r)),t}(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},T.prototype.componentWillUnmount=function(){this.t=[];},T.prototype.render=function(n,t){if(this.__b){if(this.__v.__k){var e=document.createElement("div"),r=this.__v.__k[0].__c;this.__v.__k[0]=function n(t,e,r){return t&&(t.__c&&t.__c.__H&&(t.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),t.__c.__H=null),null!=(t=S({},t)).__c&&(t.__c.__P===r&&(t.__c.__P=e),t.__c=null),t.__k=t.__k&&t.__k.map(function(t){return n(t,e,r)})),t}(this.__b,e,r.__O=r.__P);}this.__b=null;}var u=t.__a&&h$1(p$1,null,n.fallback);return u&&(u.__h=null),[h$1(p$1,null,t.__a?null:n.children),u]};var F=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function I(n){return this.getChildContext=function(){return n.context},n.children}function M(n){var t=this,e=n.i;t.componentWillUnmount=function(){P$1(null,t.l),t.l=null,t.i=null;},t.i&&t.i!==e&&t.componentWillUnmount(),n.__v?(t.l||(t.i=e,t.l={nodeType:1,parentNode:e,childNodes:[],appendChild:function(n){this.childNodes.push(n),t.i.appendChild(n);},insertBefore:function(n,e){this.childNodes.push(n),t.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),t.i.removeChild(n);}}),P$1(h$1(I,{context:t.context},n.__v),t.l)):t.l&&t.componentWillUnmount();}function V(n,t){var e=h$1(M,{__v:n,i:t});return e.containerInfo=t,e}(D.prototype=new d$1).__a=function(n){var t=this,e=L(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),F(t,n,r)):u();};e?e(o):o();}},D.prototype.render=function(n){this.u=null,this.o=new Map;var t=x$2(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},D.prototype.componentDidUpdate=D.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){F(n,e,t);});};var W="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,P=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,$="undefined"!=typeof document,j=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(n)};function z(n,t,e){return null==t.__k&&(t.textContent=""),P$1(n,t),"function"==typeof e&&e(),n?n.__c:null}function B(n,t,e){return S$1(n,t),"function"==typeof e&&e(),n?n.__c:null}d$1.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(n){Object.defineProperty(d$1.prototype,n,{configurable:!0,get:function(){return this["UNSAFE_"+n]},set:function(t){Object.defineProperty(this,n,{configurable:!0,writable:!0,value:t});}});});var H=l$1.event;function Z(){}function Y(){return this.cancelBubble}function q(){return this.defaultPrevented}l$1.event=function(n){return H&&(n=H(n)),n.persist=Z,n.isPropagationStopped=Y,n.isDefaultPrevented=q,n.nativeEvent=n};var G,J={configurable:!0,get:function(){return this.class}},K=l$1.vnode;l$1.vnode=function(n){var t=n.type,e=n.props,r=e;if("string"==typeof t){var u=-1===t.indexOf("-");for(var o in r={},e){var i=e[o];$&&"children"===o&&"noscript"===t||"value"===o&&"defaultValue"in e&&null==i||("defaultValue"===o&&"value"in e&&null==e.value?o="value":"download"===o&&!0===i?i="":/ondoubleclick/i.test(o)?o="ondblclick":/^onchange(textarea|input)/i.test(o+t)&&!j(e.type)?o="oninput":/^onfocus$/i.test(o)?o="onfocusin":/^onblur$/i.test(o)?o="onfocusout":/^on(Ani|Tra|Tou|BeforeInp|Compo)/.test(o)?o=o.toLowerCase():u&&P.test(o)?o=o.replace(/[A-Z0-9]/g,"-$&").toLowerCase():null===i&&(i=void 0),/^oninput$/i.test(o)&&(o=o.toLowerCase(),r[o]&&(o="oninputCapture")),r[o]=i);}"select"==t&&r.multiple&&Array.isArray(r.value)&&(r.value=x$2(e.children).forEach(function(n){n.props.selected=-1!=r.value.indexOf(n.props.value);})),"select"==t&&null!=r.defaultValue&&(r.value=x$2(e.children).forEach(function(n){n.props.selected=r.multiple?-1!=r.defaultValue.indexOf(n.props.value):r.defaultValue==n.props.value;})),n.props=r,e.class!=e.className&&(J.enumerable="className"in e,null!=e.className&&(r.class=e.className),Object.defineProperty(r,"className",J));}n.$$typeof=W,K&&K(n);};var Q=l$1.__r;l$1.__r=function(n){Q&&Q(n),G=n.__c;};var X={ReactCurrentDispatcher:{current:{readContext:function(n){return G.__n[n.__c].props.value}}}};function tn(n){return h$1.bind(null,n)}function en(n){return !!n&&n.$$typeof===W}function rn(n){return en(n)?q$2.apply(null,arguments):n}function un(n){return !!n.__k&&(P$1(null,n),!0)}function on(n){return n&&(n.base||1===n.nodeType&&n)||null}var ln=function(n,t){return n(t)},cn=function(n,t){return n(t)};function an(n){n();}function sn(n){return n}function hn(){return [!1,an]}function dn(t,u){var o=u(),i=p({s:{__:o,h:u}}),l=i[0].s,c=i[1];return s(function(){l.__=o,l.h=u,l.__!==u()&&c({s:l});},[t,o,u]),h(function(){return l.__!==l.h()&&c({s:l}),t(function(){l.__!==l.h()&&c({s:l});})},[t]),o}const React = {useState:p,useReducer:y,useEffect:h,useLayoutEffect:s,useInsertionEffect:s,useTransition:hn,useDeferredValue:sn,useSyncExternalStore:dn,startTransition:an,useRef:_,useImperativeHandle:A$1,useMemo:F$1,useCallback:T$1,useContext:q$1,useDebugValue:x$1,version:"17.0.2",Children:k,render:z,hydrate:B,unmountComponentAtNode:un,createPortal:V,createElement:h$1,createContext:B$1,createFactory:tn,cloneElement:rn,createRef:y$1,Fragment:p$1,isValidElement:en,findDOMNode:on,Component:d$1,PureComponent:C,memo:E,forwardRef:R,flushSync:cn,unstable_batchedUpdates:ln,StrictMode:p$1,Suspense:T,SuspenseList:D,lazy:U,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:X};
 
 var o=0;function e(_,e,n,t,f){var l,s,u={};for(s in e)"ref"==s?l=e[s]:u[s]=e[s];var a={type:_,props:u,key:n,ref:l,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--o,__source:f,__self:t};if("function"==typeof _&&(l=_.defaultProps))for(s in l)void 0===u[s]&&(u[s]=l[s]);return l$1.vnode&&l$1.vnode(a),a}
 
@@ -7221,11 +7220,11 @@ function createContextByFields(fields) {
   const keys = Object.keys(fields);
   const instances = keys.reduce((acc, fieldKey) => {
     const ClassName = fields[fieldKey];
-    acc[fieldKey] = Container$n.get(ClassName);
+    acc[fieldKey] = Container$r.get(ClassName);
     return acc;
   }, {}); // @ts-ignore
 
-  return D$1.call(this, instances);
+  return B$1.call(this, instances);
 }
 
 function hookContextFactory(fields) {
@@ -7297,7 +7296,7 @@ class LocalStorageItem {
 
 }
 
-var __decorate$L = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$R = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -7321,9 +7320,9 @@ let ThemeStore = class ThemeStore {
   }
 
 };
-ThemeStore = __decorate$L([Store()], ThemeStore);
+ThemeStore = __decorate$R([Store()], ThemeStore);
 
-var __decorate$K = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$Q = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -7331,11 +7330,11 @@ var __decorate$K = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$r = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$v = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$r = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$v = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -7352,7 +7351,7 @@ let ThemeAction = class ThemeAction {
   }
 
 };
-ThemeAction = __decorate$K([Action(), __param$r(0, Inject()), __metadata$r("design:type", Function), __metadata$r("design:paramtypes", [typeof ThemeStore === "undefined" ? Object : ThemeStore])], ThemeAction);
+ThemeAction = __decorate$Q([Action(), __param$v(0, Inject()), __metadata$v("design:type", Function), __metadata$v("design:paramtypes", [typeof ThemeStore === "undefined" ? Object : ThemeStore])], ThemeAction);
 
 const {
   useModuleContext: useThemeContext
@@ -7361,7 +7360,7 @@ const {
   themeStore: ThemeStore
 });
 
-if (!y) {
+if (!p) {
     throw new Error("mobx-react-lite requires React with Hooks support");
 }
 if (!makeObservable) {
@@ -7688,7 +7687,7 @@ var ReactForwardRefSymbol = hasSymbol
     : typeof R === "function" && R(function (props) { return null; })["$$typeof"];
 var ReactMemoSymbol = hasSymbol
     ? Symbol.for("react.memo")
-    : typeof g === "function" && g(function (props) { return null; })["$$typeof"];
+    : typeof E === "function" && E(function (props) { return null; })["$$typeof"];
 // n.b. base case is not used for actual typings or exported in the typing files
 function observer(baseComponent, 
 // TODO remove in next major
@@ -7730,7 +7729,7 @@ options) {
     // memo; we are not interested in deep updates
     // in props; we assume that if deep objects are changed,
     // this is in observables, which would have been tracked anyway
-    observerComponent = g(observerComponent);
+    observerComponent = E(observerComponent);
     copyStaticProperties(baseComponent, observerComponent);
     return observerComponent;
 }
@@ -7790,7 +7789,7 @@ function useTheme() {
   const {
     themeStore
   } = useThemeContext();
-  _(() => {
+  h(() => {
     const themeValue = themeStore.currentTheme;
     const root = document.getElementsByTagName('html')[0];
     const oldTheme = themeValue === 'light' ? 'dark' : 'light';
@@ -8062,7 +8061,7 @@ function getMoney(val, precision = 2) {
 }
 setLangs(['en', 'ru']);
 
-var __decorate$J = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$P = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8086,9 +8085,9 @@ let LangStore = class LangStore {
   }
 
 };
-LangStore = __decorate$J([Store()], LangStore);
+LangStore = __decorate$P([Store()], LangStore);
 
-var __decorate$I = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$O = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8096,11 +8095,11 @@ var __decorate$I = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$q = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$u = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$q = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$u = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -8117,7 +8116,7 @@ let LanguageAction = class LanguageAction {
   }
 
 };
-LanguageAction = __decorate$I([Action(), __param$q(0, Inject()), __metadata$q("design:type", Function), __metadata$q("design:paramtypes", [typeof LangStore === "undefined" ? Object : LangStore])], LanguageAction);
+LanguageAction = __decorate$O([Action(), __param$u(0, Inject()), __metadata$u("design:type", Function), __metadata$u("design:paramtypes", [typeof LangStore === "undefined" ? Object : LangStore])], LanguageAction);
 
 const {
   useModuleContext: useLanguageContext
@@ -8126,7 +8125,7 @@ const {
   langStore: LangStore
 });
 
-var __decorate$H = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$N = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8143,9 +8142,9 @@ let FocusStore = class FocusStore {
   }
 
 };
-FocusStore = __decorate$H([Store()], FocusStore);
+FocusStore = __decorate$N([Store()], FocusStore);
 
-var __decorate$G = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$M = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8153,11 +8152,11 @@ var __decorate$G = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$p = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$t = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$p = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$t = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -8211,7 +8210,7 @@ let FocusAction = class FocusAction {
   }
 
 };
-FocusAction = __decorate$G([Action(), __param$p(0, Inject()), __metadata$p("design:type", Function), __metadata$p("design:paramtypes", [typeof FocusStore === "undefined" ? Object : FocusStore])], FocusAction);
+FocusAction = __decorate$M([Action(), __param$t(0, Inject()), __metadata$t("design:type", Function), __metadata$t("design:paramtypes", [typeof FocusStore === "undefined" ? Object : FocusStore])], FocusAction);
 
 const {
   useModuleContext: useFocusContext
@@ -8224,7 +8223,7 @@ function useFocus() {
   const {
     focusAction
   } = useFocusContext();
-  _(() => {
+  h(() => {
     document.body.addEventListener('focus', focusAction.handleStartTyping, true);
     document.body.addEventListener('blur', focusAction.handleStopTyping, true);
     return () => {
@@ -8242,14 +8241,14 @@ const eventPushState = "pushState";
 const eventReplaceState = "replaceState";
 const events = [eventPopstate, eventPushState, eventReplaceState];
 
-var locationHook = ({ base = "" } = {}) => {
-  const [{ path, search }, update] = y(() => ({
+const locationHook = ({ base = "" } = {}) => {
+  const [{ path, search }, update] = p(() => ({
     path: currentPathname(base),
     search: location.search,
   })); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const prevHash = s(path + search);
+  const prevHash = _(path + search);
 
-  _(() => {
+  h(() => {
     // this function checks if the location has been changed since the
     // last render and updates the state only when needed.
     // unfortunately, we can't rely on `path` value here, since it can be stale,
@@ -8394,7 +8393,7 @@ const pathToRegexp = (pattern) => {
 // when no value is provided — default object is used.
 // allows us to use the router context as a global ref to store
 // the implicitly created router (see `useRouter` below)
-const RouterCtx = D$1({});
+const RouterCtx = B$1({});
 
 const buildRouter = ({
   hook = locationHook,
@@ -8420,20 +8419,20 @@ const useLocation = () => {
  */
 
 const Router = (props) => {
-  const ref = s();
+  const ref = _();
 
   // this little trick allows to avoid having unnecessary
   // calls to potentially expensive `buildRouter` method.
   // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
   const value = ref.current || (ref.current = { v: buildRouter(props) });
 
-  return v$1(RouterCtx.Provider, {
+  return h$1(RouterCtx.Provider, {
     value,
     children: props.children,
   });
 };
 
-var __decorate$F = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$L = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8454,7 +8453,7 @@ let RoutesStore = class RoutesStore {
   }
 
 };
-RoutesStore = __decorate$F([Store()], RoutesStore);
+RoutesStore = __decorate$L([Store()], RoutesStore);
 
 const {
   useModuleContext: useRoutesContext
@@ -8462,7 +8461,7 @@ const {
   routesStore: RoutesStore
 });
 
-var __decorate$E = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$K = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8481,9 +8480,9 @@ let HistoryStore = class HistoryStore {
   }
 
 };
-HistoryStore = __decorate$E([Store()], HistoryStore);
+HistoryStore = __decorate$K([Store()], HistoryStore);
 
-var __decorate$D = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$J = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8506,7 +8505,7 @@ let RouterHistory = class RouterHistory {
   }
 
 };
-RouterHistory = __decorate$D([Service()], RouterHistory);
+RouterHistory = __decorate$J([Service()], RouterHistory);
 
 const {
   useModuleContext: useHistoryContext
@@ -8601,7 +8600,7 @@ const cx = function cx() {
   return result.join(' ');
 };
 
-var cx$1 = cx;
+const cx$1 = cx;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -8700,15 +8699,15 @@ function styled(tag) {
   };
 }
 
-var styled$1 = styled;
+const styled$1 = styled;
 
-var layoutStyles_z62jah = '';
+const layoutStyles_z62jah = '';
 
-const Container$m = /*#__PURE__*/styled$1("div")({
+const Container$q = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c16eavkt"
 });
-const Content = /*#__PURE__*/styled$1("div")({
+const Content$1 = /*#__PURE__*/styled$1("div")({
   name: "Content",
   class: "c1d8et0l"
 });
@@ -8730,10 +8729,10 @@ const Layout = observer(({
     currentRoute
   } = useCurrentRoute();
   const isHeaderVisible = (currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.withHeader) || (currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.header);
-  return /*#__PURE__*/e(Container$m, {
+  return /*#__PURE__*/e(Container$q, {
     children: [isHeaderVisible && /*#__PURE__*/e(HeaderContainer, {
       children: headerSlot
-    }), /*#__PURE__*/e(Content, {
+    }), /*#__PURE__*/e(Content$1, {
       children: contentSlot
     }), (currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.withNavigation) && /*#__PURE__*/e(FooterContainer, {
       children: footerSlot
@@ -8742,17 +8741,17 @@ const Layout = observer(({
 });
 
 function Swap(props) {
-  if (props.is) return /*#__PURE__*/e(d$1, {
+  if (props.is) return /*#__PURE__*/e(p$1, {
     children: props.isSlot
   });
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: props.children
   });
 }
 
-var notFoundPageStyles_5sacaj = '';
+const notFoundPageStyles_5sacaj = '';
 
-const Container$l = /*#__PURE__*/styled$1("div")({
+const Container$p = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cnb1u91"
 });
@@ -8766,7 +8765,7 @@ addBlock({
 });
 
 function NotFoundPage() {
-  return /*#__PURE__*/e(Container$l, {
+  return /*#__PURE__*/e(Container$p, {
     children: t('notFound.title')
   });
 }
@@ -8777,7 +8776,7 @@ const ScreensSwitch = observer(() => {
   } = useCurrentRoute();
   const ScreenComponent = currentRoute === null || currentRoute === void 0 ? void 0 : currentRoute.component;
   const isPageExist = currentRoute && ScreenComponent;
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: /*#__PURE__*/e(Swap, {
       is: !isPageExist,
       isSlot: /*#__PURE__*/e(NotFoundPage, {}),
@@ -8790,16 +8789,16 @@ const ScreensSwitch = observer(() => {
   });
 });
 
-var separatorStyles_rka3su = '';
+const separatorStyles_rka3su = '';
 
 const Separator = /*#__PURE__*/styled$1("div")({
   name: "Separator",
   class: "sp7x0af"
 });
 
-var headerStyles_1e87tu0 = '';
+const headerStyles_1e87tu0 = '';
 
-const Container$k = /*#__PURE__*/styled$1("div")({
+const Container$o = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c15fl877"
 });
@@ -8812,15 +8811,15 @@ const SlotContainer = /*#__PURE__*/styled$1("div")({
   class: "s1kdx1r"
 });
 
-const Header$1 = observer(() => {
+const Header$2 = observer(() => {
   var ref, ref1;
   const {
     currentRoute
   } = useCurrentRoute();
   const title = (currentRoute === null || currentRoute === void 0 ? void 0 : (ref = currentRoute.header) === null || ref === void 0 ? void 0 : ref.title()) || '';
   const Component = currentRoute === null || currentRoute === void 0 ? void 0 : (ref1 = currentRoute.header) === null || ref1 === void 0 ? void 0 : ref1.component;
-  return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Container$k, {
+  return /*#__PURE__*/e(p$1, {
+    children: [/*#__PURE__*/e(Container$o, {
       children: [/*#__PURE__*/e(Title$3, {
         children: title
       }), Component && /*#__PURE__*/e(SlotContainer, {
@@ -8839,14 +8838,14 @@ const Routes = {
   empty: '/empty'
 };
 
-var navigationStyles_88bkgm = '';
+const navigationStyles_88bkgm = '';
 
-const Container$j = /*#__PURE__*/styled$1("div")({
+const Container$n = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cxkvvxg"
 });
 
-var iconStyles_1jwujit = '';
+const iconStyles_1jwujit = '';
 
 const IconWrapper$3 = /*#__PURE__*/styled$1("span")({
   name: "IconWrapper",
@@ -8871,7 +8870,7 @@ const IconWrapper$3 = /*#__PURE__*/styled$1("span")({
   }
 });
 
-var icons = '';
+const icons = '';
 
 function Icon({
   iconName,
@@ -8883,9 +8882,9 @@ function Icon({
   });
 }
 
-var naviItemStyles_6dv4h9 = '';
+const naviItemStyles_6dv4h9 = '';
 
-const Container$i = /*#__PURE__*/styled$1("button")({
+const Container$m = /*#__PURE__*/styled$1("button")({
   name: "Container",
   class: "c3m6fju",
   vars: {
@@ -8897,7 +8896,7 @@ const Title$2 = /*#__PURE__*/styled$1("div")({
   class: "t7gt6rq"
 });
 
-var __decorate$C = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$I = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8905,11 +8904,11 @@ var __decorate$C = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$o = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$s = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$o = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$s = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -8934,9 +8933,9 @@ let HistoryService = class HistoryService {
   }
 
 };
-HistoryService = __decorate$C([Service(), __param$o(0, Inject()), __metadata$o("design:type", Function), __metadata$o("design:paramtypes", [typeof RouterHistory === "undefined" ? Object : RouterHistory])], HistoryService);
+HistoryService = __decorate$I([Service(), __param$s(0, Inject()), __metadata$s("design:type", Function), __metadata$s("design:paramtypes", [typeof RouterHistory === "undefined" ? Object : RouterHistory])], HistoryService);
 
-var __decorate$B = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$H = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -8944,11 +8943,11 @@ var __decorate$B = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$n = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$r = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$n = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$r = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -8963,562 +8962,67 @@ let NavigationAction = class NavigationAction {
   }
 
 };
-NavigationAction = __decorate$B([Action(), __param$n(0, Inject()), __metadata$n("design:type", Function), __metadata$n("design:paramtypes", [typeof HistoryService === "undefined" ? Object : HistoryService])], NavigationAction);
+NavigationAction = __decorate$H([Action(), __param$r(0, Inject()), __metadata$r("design:type", Function), __metadata$r("design:paramtypes", [typeof HistoryService === "undefined" ? Object : HistoryService])], NavigationAction);
 
-var dist = {};
-
-var maybe = {};
-
-Object.defineProperty(maybe, "__esModule", { value: true });
-maybe.Nothing = maybe.Just = maybe.Maybe = void 0;
-/**
- * Container for missing values information when working with `Maybe.match2` or
- * higher order analogs.
- */
-class MissingValues {
-    constructor(positions) {
-        this.POSITIONS_NAMES = ["first", "second", "third", "fourth", "fifth"];
-        this.positions = positions;
-    }
-    /**
-     * Returns position at which values are missing, starting from 0.
-     */
-    getPositions() {
-        return this.positions;
-    }
-    /**
-     * Returns human readable message describing which values are missing.
-     * If `names` list is passed, values from this list will be matched to
-     * corresponding positions from missing values. Otherwise human readable form
-     * will be put in place.
-     *
-     * Should serve to improve readability of error messages.
-     *
-     * Example:
-     * ```
-     * const missing = new MissingValues([0, 2])
-     * missing.getPositions() // [0, 2]
-     * missing.getMessage() // "first and third values are missing"
-     * missing.getMessage(['a', 'b']) // "a and b values are missing"
-     * missing.getMessage(['a']) // "a and second values are missing"
-     * ```
-     *
-     * @param names list of value names
-     */
-    getMessage(names) {
-        return this.composeMissingValuesMessage(this.positions, names || []);
-    }
-    composeMissingValuesMessage(positions, names) {
-        if (positions.length === 0) {
-            return "some values are missing";
-        }
-        if (positions.length === 1) {
-            const value = this.mapPositionToHumanReadable(positions[0], names);
-            return `${value} value is missing`;
-        }
-        const values = positions
-            .map((i) => this.mapPositionToHumanReadable(i, names))
-            .join(" and ");
-        return `${values} values are missing`;
-    }
-    mapPositionToHumanReadable(position, names) {
-        return (names[position] || this.POSITIONS_NAMES[position] || "<unspecified value>");
-    }
-}
-/**
- * The `Maybe` monad represents computations which might "go wrong" by not returning a value.
- */
-class Maybe {
-    /**
-     * Evaluates `Maybe` object and runs corresponding match function.
-     *
-     * Example:
-     * ```
-     * function numberToString(maybeNumber: Maybe<number>): string {
-     *   return maybeNumber.match({
-     *     Just: value => `${value}`,
-     *     Nothing: () => 'invalid number',
-     *   })
-     * }
-     *
-     * numberToString(Just(5)) // "5"
-     * numberToString(Nothing()) // "invalid number"
-     * ```
-     *
-     * @param match an object with handler functions
-     */
-    match(match) {
-        if (this.isValue()) {
-            return match.Just(this.value);
-        }
-        return match.Nothing();
-    }
-    /**
-     * Returns value if it's `Just(value)`.
-     *
-     * Returns `defaultValue` if it's `Nothing()`.
-     *
-     * @param defaultValue default value to be returned
-     */
-    withDefault(defaultValue) {
-        if (this.isValue()) {
-            return this.value;
-        }
-        return defaultValue;
-    }
-    /**
-     * Returns `true` if it's `Just(value)`.
-     */
-    isValue() {
-        return this.value !== null && this.value !== undefined;
-    }
-    /**
-     * Returns `true` if it's `Nothing()`.
-     */
-    isNothing() {
-        return !this.isValue();
-    }
-    /**
-     * Compares to Maybe object containing value of the same type.
-     *
-     * @param other value to compare to
-     */
-    isEqualTo(other) {
-        if (this.isNothing() && other.isNothing()) {
-            return true;
-        }
-        if (this.isValue() && other.isValue()) {
-            return this.value === other.value;
-        }
-        return false;
-    }
-    /**
-     * *Note*: the usage of this function is discouraged. Instead, prefer to use
-     * `match` and handle the `Nothing` case expicitly or use `withDefault()`.
-     *
-     * Returns value if `Maybe` is `Just(value)`, throws otherwise.
-     */
-    getValue() {
-        if (this.isNothing()) {
-            throw new Error("tried to unwrap Just(value) but got Nothing");
-        }
-        return this.value;
-    }
-    /**
-     * Returns new `Maybe` object with modified value if
-     * it is Just(value). Returns `Nothing` otherwise.
-     *
-     * @param mapper mapper function
-     */
-    map(mapper) {
-        if (this.isValue()) {
-            return Maybe.Just(mapper(this.value));
-        }
-        return Maybe.Nothing();
-    }
-    /**
-     * Runs `fun` with value if it's Just(value).
-     * Will not run `fun` if it's Nothing().
-     * Returns self.
-     *
-     * @param mapper tap function
-     */
-    tap(fun) {
-        if (this.isValue()) {
-            fun(this.value);
-        }
-        return this;
-    }
-    /**
-     * Wraps value in `Maybe` (value) object.
-     *
-     * @param value value to wrap
-     */
-    static Just(value) {
-        const result = new Maybe();
-        result.value = value;
-        return result;
-    }
-    /**
-     * Wraps value in `Maybe` (nothing) object.
-     *
-     * @param value value to wrap
-     */
-    static Nothing() {
-        return new Maybe();
-    }
-    /**
-     * Creates `Maybe` object from value.
-     *
-     * If `value` is `null` or `undefined`, will create `Nothing()`.
-     * Otherwise will generate `Just(value)`.
-     *
-     * Example:
-     * ```
-     * Maybe.from(5)      // Just(5)
-     * Maybe.from('test') // Just('test')
-     * Maybe.from(null)   // Nothing()
-     * ```
-     *
-     * @param value value to create `Maybe` from
-     */
-    static from(value) {
-        if (value === null || value === undefined) {
-            return Maybe.Nothing();
-        }
-        return Maybe.Just(value);
-    }
-    /**
-     * Combines two `Maybe` objects in a single match, ensuring that all
-     * given values are present.
-     *
-     * Example:
-     * ```
-     * function combine(x1: Maybe<number>, x2: Maybe<string>): string {
-     *   return Maybe.match2(x1, x2, {
-     *     Values: (num, str) => `x1=${num} x2=${str}`,
-     *     Missing: missing => `error: ${missing.getMessage(['x1', 'x2'])}`,
-     *   })
-     * }
-     *
-     * combine(Just(123), Just('test')) // "x1=123 x2=test"
-     * combine(Just(123), Nothing()) // "error: x2 value is missing"
-     * combine(Nothing(), Nothing()) // "error: x1 and x2 values are missing"
-     * ```
-     *
-     * @param {Maybe} m1 first value
-     * @param {Maybe} m2 second value
-     * @param {Object} match object with match functions
-     */
-    static match2(m1, m2, match) {
-        if (m1.isValue() && m2.isValue()) {
-            return match.Values(m1.value, m2.value);
-        }
-        const indices = getMissingValuesIndices([m1, m2]);
-        return match.Missing(new MissingValues(indices));
-    }
-    /**
-     * Same as `match2` but accepts 3 values.
-     *
-     * @param {Maybe} m1 first value
-     * @param {Maybe} m2 second value
-     * @param {Maybe} m3 third value
-     * @param {Object} match object with match functions
-     */
-    static match3(m1, m2, m3, match) {
-        if (m1.isValue() && m2.isValue() && m3.isValue()) {
-            return match.Values(m1.value, m2.value, m3.value);
-        }
-        const indices = getMissingValuesIndices([m1, m2, m3]);
-        return match.Missing(new MissingValues(indices));
-    }
-    /**
-     * Same as `match2` but accepts 4 values.
-     *
-     * @param {Maybe} m1 first value
-     * @param {Maybe} m2 second value
-     * @param {Maybe} m3 third value
-     * @param {Maybe} m4 fourth value
-     * @param {Object} match object with match functions
-     */
-    static match4(m1, m2, m3, m4, match) {
-        if (m1.isValue() && m2.isValue() && m3.isValue() && m4.isValue()) {
-            return match.Values(m1.value, m2.value, m3.value, m4.value);
-        }
-        const indices = getMissingValuesIndices([m1, m2, m3, m4]);
-        return match.Missing(new MissingValues(indices));
-    }
-    /**
-     * Same as `match5` but accepts 5 values.
-     *
-     * @param {Maybe} m1 first value
-     * @param {Maybe} m2 second value
-     * @param {Maybe} m3 third value
-     * @param {Maybe} m4 fourth value
-     * @param {Maybe} m5 fifth value
-     * @param {Object} match object with match functions
-     */
-    static match5(m1, m2, m3, m4, m5, match) {
-        if (m1.isValue() &&
-            m2.isValue() &&
-            m3.isValue() &&
-            m4.isValue() &&
-            m5.isValue()) {
-            return match.Values(m1.value, m2.value, m3.value, m4.value, m5.value);
-        }
-        const indices = getMissingValuesIndices([m1, m2, m3, m4, m5]);
-        return match.Missing(new MissingValues(indices));
-    }
-}
-maybe.Maybe = Maybe;
-maybe.Just = Maybe.Just;
-maybe.Nothing = Maybe.Nothing;
-function getMissingValuesIndices(items) {
-    const indices = [];
-    items.forEach((item, index) => item.isNothing() && indices.push(index));
-    return indices;
-}
-
-var result = {};
-
-Object.defineProperty(result, "__esModule", { value: true });
-result.Err = result.Ok = result.Result = void 0;
-const maybe_1$1 = maybe;
-/**
- * Result<V, E> is a type used for returning and propagating errors.
- * It has two possible states:
- * - Ok(V), representing success and containing a value;
- * - Err(E), representing error and containing an error value.
- */
-class Result {
-    /**
-     * Evaluates `Result` and runs:
-     * - "Ok" handler if result is `Ok(value)`
-     * - "Err" handler if result is `Err(error)`
-     *
-     * @param match object with handler functions
-     */
-    match(match) {
-        if (this.isOk()) {
-            return match.Ok(this.value);
-        }
-        return match.Err(this.error);
-    }
-    /**
-     * *Note*: the usage of this function is discouraged. Instead, prefer to use
-     * `match` and handle the `Err` case expicitly or use `getValueOr()`.
-     *
-     * Returns value if `Result` is `Ok(value)`, throws otherwise.
-     */
-    getValue() {
-        if (!this.isOk()) {
-            throw new Error("tried to unwrap result value but result is not Ok");
-        }
-        return this.value;
-    }
-    /**
-     * Returns value if `Result` is `Ok(value)`, otherwise returns `defaultValue`.
-     *
-     * @param defaultValue default value
-     */
-    getValueOr(defaultValue) {
-        if (!this.isOk()) {
-            return defaultValue;
-        }
-        return this.value;
-    }
-    /**
-     * *Note*: the usage of this function is discouraged. Instead, prefer to use
-     * `match` or use `getErrorOr()`.
-     *
-     * Returns error value if `Result` is `Err(error)`, throws otherwise.
-     */
-    getError() {
-        if (!this.isErr()) {
-            throw new Error("tried to unwrap result error but result is not Err");
-        }
-        return this.error;
-    }
-    /**
-     * Returns error if `Result` is `Err(error)`, otherwise returns `defaultError`.
-     *
-     * @param defaultError default error
-     */
-    getErrorOr(defaultError) {
-        if (!this.isErr()) {
-            return defaultError;
-        }
-        return this.error;
-    }
-    /**
-     * Returns Just(value) if result is Ok(value).
-     * Returns Nothing() if result is Err(error).
-     */
-    ok() {
-        if (this.isOk()) {
-            return maybe_1$1.Just(this.value);
-        }
-        return maybe_1$1.Nothing();
-    }
-    /**
-     * Returns Just(error) if result is Err(error).
-     * Returns Nothing() if result is Ok(value).
-     */
-    err() {
-        if (this.isErr()) {
-            return maybe_1$1.Just(this.error);
-        }
-        return maybe_1$1.Nothing();
-    }
-    /**
-     * Returns true if result is a value.
-     */
-    isOk() {
-        return this.value !== undefined;
-    }
-    /**
-     * Returns true if result is an error.
-     */
-    isErr() {
-        return !this.isOk();
-    }
-    /**
-     * Checks if self is equal to given result.
-     *
-     * @param other result to compare self to
-     */
-    isEqualTo(other) {
-        if (this.isErr() && other.isErr()) {
-            return this.error === other.error;
-        }
-        if (this.isOk() && other.isOk()) {
-            return this.value === other.value;
-        }
-        return false;
-    }
-    /**
-     * Maps self to new `Result` keeping `error` value.
-     *
-     * @param mapper mapper function
-     */
-    map(mapper) {
-        if (this.isOk()) {
-            return Result.Ok(mapper(this.value));
-        }
-        return Result.Err(this.error);
-    }
-    /**
-     * Maps self to new `Result` keeping `value` and modifying `error`.
-     *
-     * @param mapper mapper function
-     */
-    mapErr(mapper) {
-        if (this.isErr()) {
-            return Result.Err(mapper(this.error));
-        }
-        return Result.Ok(this.value);
-    }
-    /**
-     * Returns argument if self is `Ok(value)`. Otherwise returns `Err(error)`.
-     *
-     * @param result value to return
-     */
-    and(result) {
-        if (this.isOk()) {
-            return result;
-        }
-        return Result.Err(this.error);
-    }
-    /**
-     * Runs predicate function if self is `Ok(value)`, otherwise returns `Err(error)`.
-     *
-     * @param op function to run
-     */
-    andThen(op) {
-        if (this.isOk()) {
-            return op(this.value);
-        }
-        return Result.Err(this.error);
-    }
-    /**
-     * Constructs `Ok(value)` instance of `Result`.
-     *
-     * @param value value to wrap
-     */
-    static Ok(value) {
-        const result = new Result();
-        result.value = value;
-        return result;
-    }
-    /**
-     * Constructs `Err(error)` instance of `Result`.
-     *
-     * @param error error value
-     */
-    static Err(error) {
-        const result = new Result();
-        result.error = error;
-        return result;
-    }
-}
-result.Result = Result;
-result.Ok = Result.Ok;
-result.Err = Result.Err;
-
-var error = {};
-
-Object.defineProperty(error, "__esModule", { value: true });
-error.Error = void 0;
-const maybe_1 = maybe;
-class Error$1 {
-    constructor(message) {
-        this.message = message;
-        this.nestedError = maybe_1.Nothing();
-    }
-    static new(value) {
-        return new Error$1(value.toString());
-    }
-    static flatten(error) {
-        const thisError = new Error$1(error.getMessage());
-        const rest = error.getNestedError().match({
-            Just: (err) => Error$1.flatten(err),
-            Nothing: () => [],
-        });
-        return [thisError, ...rest];
-    }
-    text() {
-        const errors = Error$1.flatten(this);
-        const messages = errors.map((err) => err.getMessage());
-        return messages.join(": ");
-    }
-    wrap(error) {
-        this.nestedError = maybe_1.Just(error);
-        return this;
-    }
-    getNestedError() {
-        return this.nestedError;
-    }
-    getMessage() {
-        return this.message;
-    }
-    toString() {
-        return this.message;
-    }
-}
-error.Error = Error$1;
-
-(function (exports) {
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Error = exports.Err = exports.Ok = exports.Result = exports.Nothing = exports.Just = exports.Maybe = void 0;
-var maybe_1 = maybe;
-Object.defineProperty(exports, "Maybe", { enumerable: true, get: function () { return maybe_1.Maybe; } });
-Object.defineProperty(exports, "Just", { enumerable: true, get: function () { return maybe_1.Just; } });
-Object.defineProperty(exports, "Nothing", { enumerable: true, get: function () { return maybe_1.Nothing; } });
-var result_1 = result;
-Object.defineProperty(exports, "Result", { enumerable: true, get: function () { return result_1.Result; } });
-Object.defineProperty(exports, "Ok", { enumerable: true, get: function () { return result_1.Ok; } });
-Object.defineProperty(exports, "Err", { enumerable: true, get: function () { return result_1.Err; } });
-var error_1 = error;
-Object.defineProperty(exports, "Error", { enumerable: true, get: function () { return error_1.Error; } });
-}(dist));
-
-function createErrorClass(message) {
+function createErrorClass(key, message) {
   return class ErrorClass {
     constructor(error) {
       this.stack = new Error().stack;
-      this.message = message;
+      this.message = (error === null || error === void 0 ? void 0 : error.message) ? `${message} | ${error.message}` : message;
       this.error = error;
+      this.key = key;
     }
 
   };
 }
 
-var AppErrors;
+class ErrorBlock {
+  constructor(namespace, errorRecord) {
+    this.errorRecord = errorRecord;
+    const keys = Object.keys(errorRecord); // @ts-ignore
 
-(function (AppErrors) {
-  AppErrors.DefineCategoryResponse = createErrorClass('Failed define categories');
-  AppErrors.UnexpectedErrorDefineCategory = createErrorClass('Unexpected add category');
-})(AppErrors || (AppErrors = {}));
+    this.errors = keys.reduce((acc, key) => {
+      const message = errorRecord[key];
+      const fullKey = `${namespace}.${String(key)}`; // @ts-ignore
+
+      acc[key] = createErrorClass(fullKey, message);
+      return acc; // @ts-ignore
+    }, {});
+  }
+
+}
+
+function errorFactory(namespace, errorRecord) {
+  const inst = new ErrorBlock(namespace, errorRecord);
+  const errors = inst.errors;
+  return {
+    [namespace]: errors
+  };
+}
+
+const {
+  AppErrors
+} = errorFactory('AppErrors', {
+  DefineCategoryResponse: 'Failed define categories',
+  UnexpectedErrorDefineCategory: 'Unexpected add category'
+});
+
+function resultErr(error) {
+  return {
+    error
+  };
+}
+
+function resultOk(data) {
+  return {
+    data
+  };
+}
+
+function isErr(result) {
+  if (!result) return false;
+  return 'error' in result;
+}
 
 /*
  * Dexie.js - a minimalistic wrapper for IndexedDB
@@ -14706,17 +14210,11 @@ class DatabaseDataProvider {
   }
 
   ok(result) {
-    return {
-      data: result,
-      error: undefined
-    };
+    return resultOk(result);
   }
 
   error(result) {
-    return {
-      data: undefined,
-      error: result
-    };
+    return resultErr(result);
   }
 
   constructor() {
@@ -14725,7 +14223,7 @@ class DatabaseDataProvider {
 
 }
 
-function asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$u(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -14741,7 +14239,7 @@ function asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$q(fn) {
+function _asyncToGenerator$u(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -14749,11 +14247,11 @@ function _asyncToGenerator$q(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$u(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$u(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -14761,7 +14259,7 @@ function _asyncToGenerator$q(fn) {
   };
 }
 
-var __decorate$A = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$G = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -14772,7 +14270,7 @@ let AppDataProvider = class AppDataProvider extends DatabaseDataProvider {
   defineCategories(categories) {
     var _this = this;
 
-    return _asyncToGenerator$q(function* () {
+    return _asyncToGenerator$u(function* () {
       yield _this.client.category.clear();
       yield _this.client.category.bulkAdd(categories);
       return _this.ok(true);
@@ -14780,9 +14278,9 @@ let AppDataProvider = class AppDataProvider extends DatabaseDataProvider {
   }
 
 };
-AppDataProvider = __decorate$A([DataProvider()], AppDataProvider);
+AppDataProvider = __decorate$G([DataProvider()], AppDataProvider);
 
-function asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$t(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -14798,7 +14296,7 @@ function asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$p(fn) {
+function _asyncToGenerator$t(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -14806,11 +14304,11 @@ function _asyncToGenerator$p(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$t(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$t(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -14818,7 +14316,7 @@ function _asyncToGenerator$p(fn) {
   };
 }
 
-var __decorate$z = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$F = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -14826,11 +14324,11 @@ var __decorate$z = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$m = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$q = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$m = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$q = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -14839,15 +14337,13 @@ let AppAdapter = class AppAdapter {
   defineCategories(categories) {
     var _this = this;
 
-    return _asyncToGenerator$p(function* () {
+    return _asyncToGenerator$t(function* () {
       try {
-        const {
-          error
-        } = yield _this.appDataProvider.defineCategories(categories);
-        if (error) return dist.Result.Err(new AppErrors.DefineCategoryResponse(error));
-        return dist.Result.Ok(null);
+        const result = yield _this.appDataProvider.defineCategories(categories);
+        if (isErr(result)) return resultErr(new AppErrors.DefineCategoryResponse(result.error));
+        return resultOk(null);
       } catch (e) {
-        return dist.Result.Err(new AppErrors.UnexpectedErrorDefineCategory(e));
+        return resultErr(new AppErrors.UnexpectedErrorDefineCategory(e));
       }
     })();
   }
@@ -14857,7 +14353,7 @@ let AppAdapter = class AppAdapter {
   }
 
 };
-AppAdapter = __decorate$z([Adapter(), __param$m(0, Inject()), __metadata$m("design:type", Function), __metadata$m("design:paramtypes", [typeof AppDataProvider === "undefined" ? Object : AppDataProvider])], AppAdapter);
+AppAdapter = __decorate$F([Adapter(), __param$q(0, Inject()), __metadata$q("design:type", Function), __metadata$q("design:paramtypes", [typeof AppDataProvider === "undefined" ? Object : AppDataProvider])], AppAdapter);
 
 const categoriesDefaultEn = [{
   id: '5a29b6a142c84c408b60f441',
@@ -15431,7 +14927,7 @@ const categoriesDefaultRu = [{
   catId: null
 }];
 
-var __decorate$y = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$E = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -15456,9 +14952,9 @@ let EmptyStore = class EmptyStore {
   }
 
 };
-EmptyStore = __decorate$y([Store()], EmptyStore);
+EmptyStore = __decorate$E([Store()], EmptyStore);
 
-function asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$s(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -15474,7 +14970,7 @@ function asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$o(fn) {
+function _asyncToGenerator$s(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -15482,11 +14978,11 @@ function _asyncToGenerator$o(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$s(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$s(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -15494,7 +14990,7 @@ function _asyncToGenerator$o(fn) {
   };
 }
 
-var __decorate$x = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$D = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -15502,11 +14998,11 @@ var __decorate$x = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$l = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$p = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$l = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$p = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -15519,7 +15015,7 @@ let EmptyService = class EmptyService {
   applyDefaultCategory() {
     var _this = this;
 
-    return _asyncToGenerator$o(function* () {
+    return _asyncToGenerator$s(function* () {
       const lang = _this.emptyStore.selectedDefaultCategories;
 
       _this.langStore.changeLanguage(lang);
@@ -15528,7 +15024,7 @@ let EmptyService = class EmptyService {
       if (!categories) return;
       const result = yield _this.appAdapter.defineCategories(categories);
 
-      if (result.isErr()) {
+      if (isErr(result)) {
         //TODO: add error processing
         return;
       }
@@ -15542,9 +15038,9 @@ let EmptyService = class EmptyService {
   }
 
 };
-EmptyService = __decorate$x([Service(), __param$l(0, Inject()), __param$l(1, Inject()), __param$l(2, Inject()), __metadata$l("design:type", Function), __metadata$l("design:paramtypes", [typeof EmptyStore === "undefined" ? Object : EmptyStore, typeof LangStore === "undefined" ? Object : LangStore, typeof AppAdapter === "undefined" ? Object : AppAdapter])], EmptyService);
+EmptyService = __decorate$D([Service(), __param$p(0, Inject()), __param$p(1, Inject()), __param$p(2, Inject()), __metadata$p("design:type", Function), __metadata$p("design:paramtypes", [typeof EmptyStore === "undefined" ? Object : EmptyStore, typeof LangStore === "undefined" ? Object : LangStore, typeof AppAdapter === "undefined" ? Object : AppAdapter])], EmptyService);
 
-function asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$r(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -15560,7 +15056,7 @@ function asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$n(fn) {
+function _asyncToGenerator$r(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -15568,11 +15064,11 @@ function _asyncToGenerator$n(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$r(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$r(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -15580,7 +15076,7 @@ function _asyncToGenerator$n(fn) {
   };
 }
 
-var __decorate$w = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$C = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -15588,11 +15084,11 @@ var __decorate$w = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$k = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$o = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$k = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$o = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -15605,7 +15101,7 @@ let EmptyAction = class EmptyAction {
   handleApplyCategory() {
     var _this = this;
 
-    return _asyncToGenerator$n(function* () {
+    return _asyncToGenerator$r(function* () {
       yield _this.emptyService.applyDefaultCategory();
 
       _this.historyService.push(Routes.categories);
@@ -15622,7 +15118,7 @@ let EmptyAction = class EmptyAction {
   }
 
 };
-EmptyAction = __decorate$w([Action(), __param$k(0, Inject()), __param$k(1, Inject()), __metadata$k("design:type", Function), __metadata$k("design:paramtypes", [typeof HistoryService === "undefined" ? Object : HistoryService, typeof EmptyService === "undefined" ? Object : EmptyService])], EmptyAction);
+EmptyAction = __decorate$C([Action(), __param$o(0, Inject()), __param$o(1, Inject()), __metadata$o("design:type", Function), __metadata$o("design:paramtypes", [typeof HistoryService === "undefined" ? Object : HistoryService, typeof EmptyService === "undefined" ? Object : EmptyService])], EmptyAction);
 
 const {
   useModuleContext: useAppContext
@@ -15665,7 +15161,7 @@ const NaviItem = observer(({
     isMatch,
     path
   });
-  return /*#__PURE__*/e(Container$i, {
+  return /*#__PURE__*/e(Container$m, {
     isMatched: isMatched,
     onClick: handleChangePage,
     children: [/*#__PURE__*/e(Icon, {
@@ -15677,8 +15173,8 @@ const NaviItem = observer(({
 });
 
 function Navigation() {
-  return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Separator, {}), /*#__PURE__*/e(Container$j, {
+  return /*#__PURE__*/e(p$1, {
+    children: [/*#__PURE__*/e(Separator, {}), /*#__PURE__*/e(Container$n, {
       children: [/*#__PURE__*/e(NaviItem, {
         path: Routes.expense,
         isMatch: true,
@@ -15712,7 +15208,7 @@ function removeLoader() {
 }
 
 function Loader$1() {
-  _(() => {
+  h(() => {
     const timerId = window.setTimeout(removeLoader, 500);
     return () => {
       window.clearTimeout(timerId);
@@ -15729,12 +15225,12 @@ const base = '';
 const useHashLocation = () => {
   const [{
     path
-  }, setState] = y({
+  }, setState] = p({
     path: currentLocation(base),
     search: ''
   });
-  const prevHash = s(path);
-  _(() => {
+  const prevHash = _(path);
+  h(() => {
     // this function is called whenever the hash changes
     const handler = () => {
       const baseHash = currentLocation(base);
@@ -15805,10 +15301,10 @@ const App = observer(() => {
     langStore
   } = useLanguageContext();
   useFocus();
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: [/*#__PURE__*/e(Loader$1, {}), /*#__PURE__*/e(ThemeDefine, {}), /*#__PURE__*/e(BaseRouter, {
       children: /*#__PURE__*/e(Layout, {
-        headerSlot: /*#__PURE__*/e(Header$1, {}),
+        headerSlot: /*#__PURE__*/e(Header$2, {}),
         contentSlot: /*#__PURE__*/e(ScreensSwitch, {}),
         footerSlot: /*#__PURE__*/e(Navigation, {})
       }, langStore.currentLanguage)
@@ -15819,10 +15315,10 @@ const App = observer(() => {
 function startRender() {
   const node = document.getElementById('root');
   if (!node) return;
-  S$1( /*#__PURE__*/e(App, {}), node);
+  P$1( /*#__PURE__*/e(App, {}), node);
 }
 
-var __decorate$v = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$B = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -15835,11 +15331,11 @@ let AppModule = class AppModule {
   }
 
 };
-AppModule = __decorate$v([Module()], AppModule);
+AppModule = __decorate$B([Module()], AppModule);
 
-var radioButtonStyles_1q7p743 = '';
+const radioButtonStyles_1q7p743 = '';
 
-const Container$h = /*#__PURE__*/styled$1("div")({
+const Container$l = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1cdzirs"
 });
@@ -15855,7 +15351,7 @@ function RadioButton({
     const value = ev.target.value;
     onChange(value);
   }, [onChange]);
-  return /*#__PURE__*/e(Container$h, {
+  return /*#__PURE__*/e(Container$l, {
     children: /*#__PURE__*/e("label", {
       children: [/*#__PURE__*/e("input", {
         value: value,
@@ -15868,7 +15364,7 @@ function RadioButton({
   });
 }
 
-var buttonStyles_ftg82k = '';
+const buttonStyles_gs3qv = '';
 
 const variantClass = variant => {
   switch (variant) {
@@ -15902,7 +15398,7 @@ const extendedClasses$2 = ({
 }) => {
   return cx$1(variantClass(variant), shapeClass(shape));
 };
-const Container$g = /*#__PURE__*/styled$1("button")({
+const Container$k = /*#__PURE__*/styled$1("button")({
   name: "Container",
   class: "c130ml0",
   vars: {
@@ -15930,7 +15426,7 @@ function Button({
   shape = 'rect'
 }) {
   const hasChildren = !!children;
-  return /*#__PURE__*/e(Container$g, {
+  return /*#__PURE__*/e(Container$k, {
     onClick: onClick,
     disabled: isDisabled,
     className: extendedClasses$2({
@@ -15947,9 +15443,9 @@ function Button({
   });
 }
 
-var emptyPageStyles_1yssz39 = '';
+const emptyPageStyles_1yssz39 = '';
 
-const Container$f = /*#__PURE__*/styled$1("div")({
+const Container$j = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1orbz7d"
 });
@@ -15976,7 +15472,7 @@ function EmptyPage() {
     emptyAction,
     emptyStore
   } = useAppContext();
-  return /*#__PURE__*/e(Container$f, {
+  return /*#__PURE__*/e(Container$j, {
     children: [/*#__PURE__*/e(Title$1, {
       children: t('firstView.t')
     }), /*#__PURE__*/e(SubTitle$1, {
@@ -16019,9 +15515,9 @@ const appRoutes = [{
   withNavigation: true
 }];
 
-var toggleStyles_1j8gt84 = '';
+const toggleStyles_1j8gt84 = '';
 
-const Container$e = /*#__PURE__*/styled$1("div")({
+const Container$i = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1rvkqiu"
 });
@@ -16035,7 +15531,7 @@ function Toggle({
     swId++;
     return name || `sw-${swId}`;
   }, [name]);
-  return /*#__PURE__*/e(Container$e, {
+  return /*#__PURE__*/e(Container$i, {
     name: name,
     children: [/*#__PURE__*/e("input", {
       type: "checkbox",
@@ -16049,7 +15545,7 @@ function Toggle({
   });
 }
 
-var listStyles_n2nf4w = '';
+const listStyles_n2nf4w = '';
 
 const ListContainer = /*#__PURE__*/styled$1("div")({
   name: "ListContainer",
@@ -16097,507 +15593,911 @@ List.Cell = ListCell;
 var lzString = {exports: {}};
 
 (function (module) {
-// Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
-// This work is free. You can redistribute it and/or modify it
-// under the terms of the WTFPL, Version 2
-// For more information see LICENSE.txt or http://www.wtfpl.net/
-//
-// For more information, the home page:
-// http://pieroxy.net/blog/pages/lz-string/testing.html
-//
-// LZ-based compression algorithm, version 1.4.4
-var LZString = (function() {
+	// Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
+	// This work is free. You can redistribute it and/or modify it
+	// under the terms of the WTFPL, Version 2
+	// For more information see LICENSE.txt or http://www.wtfpl.net/
+	//
+	// For more information, the home page:
+	// http://pieroxy.net/blog/pages/lz-string/testing.html
+	//
+	// LZ-based compression algorithm, version 1.4.4
+	var LZString = (function() {
 
-// private property
-var f = String.fromCharCode;
-var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
-var baseReverseDic = {};
+	// private property
+	var f = String.fromCharCode;
+	var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+	var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+	var baseReverseDic = {};
 
-function getBaseValue(alphabet, character) {
-  if (!baseReverseDic[alphabet]) {
-    baseReverseDic[alphabet] = {};
-    for (var i=0 ; i<alphabet.length ; i++) {
-      baseReverseDic[alphabet][alphabet.charAt(i)] = i;
-    }
+	function getBaseValue(alphabet, character) {
+	  if (!baseReverseDic[alphabet]) {
+	    baseReverseDic[alphabet] = {};
+	    for (var i=0 ; i<alphabet.length ; i++) {
+	      baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+	    }
+	  }
+	  return baseReverseDic[alphabet][character];
+	}
+
+	var LZString = {
+	  compressToBase64 : function (input) {
+	    if (input == null) return "";
+	    var res = LZString._compress(input, 6, function(a){return keyStrBase64.charAt(a);});
+	    switch (res.length % 4) { // To produce valid Base64
+	    default: // When could this happen ?
+	    case 0 : return res;
+	    case 1 : return res+"===";
+	    case 2 : return res+"==";
+	    case 3 : return res+"=";
+	    }
+	  },
+
+	  decompressFromBase64 : function (input) {
+	    if (input == null) return "";
+	    if (input == "") return null;
+	    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrBase64, input.charAt(index)); });
+	  },
+
+	  compressToUTF16 : function (input) {
+	    if (input == null) return "";
+	    return LZString._compress(input, 15, function(a){return f(a+32);}) + " ";
+	  },
+
+	  decompressFromUTF16: function (compressed) {
+	    if (compressed == null) return "";
+	    if (compressed == "") return null;
+	    return LZString._decompress(compressed.length, 16384, function(index) { return compressed.charCodeAt(index) - 32; });
+	  },
+
+	  //compress into uint8array (UCS-2 big endian format)
+	  compressToUint8Array: function (uncompressed) {
+	    var compressed = LZString.compress(uncompressed);
+	    var buf=new Uint8Array(compressed.length*2); // 2 bytes per character
+
+	    for (var i=0, TotalLen=compressed.length; i<TotalLen; i++) {
+	      var current_value = compressed.charCodeAt(i);
+	      buf[i*2] = current_value >>> 8;
+	      buf[i*2+1] = current_value % 256;
+	    }
+	    return buf;
+	  },
+
+	  //decompress from uint8array (UCS-2 big endian format)
+	  decompressFromUint8Array:function (compressed) {
+	    if (compressed===null || compressed===undefined){
+	        return LZString.decompress(compressed);
+	    } else {
+	        var buf=new Array(compressed.length/2); // 2 bytes per character
+	        for (var i=0, TotalLen=buf.length; i<TotalLen; i++) {
+	          buf[i]=compressed[i*2]*256+compressed[i*2+1];
+	        }
+
+	        var result = [];
+	        buf.forEach(function (c) {
+	          result.push(f(c));
+	        });
+	        return LZString.decompress(result.join(''));
+
+	    }
+
+	  },
+
+
+	  //compress into a string that is already URI encoded
+	  compressToEncodedURIComponent: function (input) {
+	    if (input == null) return "";
+	    return LZString._compress(input, 6, function(a){return keyStrUriSafe.charAt(a);});
+	  },
+
+	  //decompress from an output of compressToEncodedURIComponent
+	  decompressFromEncodedURIComponent:function (input) {
+	    if (input == null) return "";
+	    if (input == "") return null;
+	    input = input.replace(/ /g, "+");
+	    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrUriSafe, input.charAt(index)); });
+	  },
+
+	  compress: function (uncompressed) {
+	    return LZString._compress(uncompressed, 16, function(a){return f(a);});
+	  },
+	  _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
+	    if (uncompressed == null) return "";
+	    var i, value,
+	        context_dictionary= {},
+	        context_dictionaryToCreate= {},
+	        context_c="",
+	        context_wc="",
+	        context_w="",
+	        context_enlargeIn= 2, // Compensate for the first entry which should not count
+	        context_dictSize= 3,
+	        context_numBits= 2,
+	        context_data=[],
+	        context_data_val=0,
+	        context_data_position=0,
+	        ii;
+
+	    for (ii = 0; ii < uncompressed.length; ii += 1) {
+	      context_c = uncompressed.charAt(ii);
+	      if (!Object.prototype.hasOwnProperty.call(context_dictionary,context_c)) {
+	        context_dictionary[context_c] = context_dictSize++;
+	        context_dictionaryToCreate[context_c] = true;
+	      }
+
+	      context_wc = context_w + context_c;
+	      if (Object.prototype.hasOwnProperty.call(context_dictionary,context_wc)) {
+	        context_w = context_wc;
+	      } else {
+	        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+	          if (context_w.charCodeAt(0)<256) {
+	            for (i=0 ; i<context_numBits ; i++) {
+	              context_data_val = (context_data_val << 1);
+	              if (context_data_position == bitsPerChar-1) {
+	                context_data_position = 0;
+	                context_data.push(getCharFromInt(context_data_val));
+	                context_data_val = 0;
+	              } else {
+	                context_data_position++;
+	              }
+	            }
+	            value = context_w.charCodeAt(0);
+	            for (i=0 ; i<8 ; i++) {
+	              context_data_val = (context_data_val << 1) | (value&1);
+	              if (context_data_position == bitsPerChar-1) {
+	                context_data_position = 0;
+	                context_data.push(getCharFromInt(context_data_val));
+	                context_data_val = 0;
+	              } else {
+	                context_data_position++;
+	              }
+	              value = value >> 1;
+	            }
+	          } else {
+	            value = 1;
+	            for (i=0 ; i<context_numBits ; i++) {
+	              context_data_val = (context_data_val << 1) | value;
+	              if (context_data_position ==bitsPerChar-1) {
+	                context_data_position = 0;
+	                context_data.push(getCharFromInt(context_data_val));
+	                context_data_val = 0;
+	              } else {
+	                context_data_position++;
+	              }
+	              value = 0;
+	            }
+	            value = context_w.charCodeAt(0);
+	            for (i=0 ; i<16 ; i++) {
+	              context_data_val = (context_data_val << 1) | (value&1);
+	              if (context_data_position == bitsPerChar-1) {
+	                context_data_position = 0;
+	                context_data.push(getCharFromInt(context_data_val));
+	                context_data_val = 0;
+	              } else {
+	                context_data_position++;
+	              }
+	              value = value >> 1;
+	            }
+	          }
+	          context_enlargeIn--;
+	          if (context_enlargeIn == 0) {
+	            context_enlargeIn = Math.pow(2, context_numBits);
+	            context_numBits++;
+	          }
+	          delete context_dictionaryToCreate[context_w];
+	        } else {
+	          value = context_dictionary[context_w];
+	          for (i=0 ; i<context_numBits ; i++) {
+	            context_data_val = (context_data_val << 1) | (value&1);
+	            if (context_data_position == bitsPerChar-1) {
+	              context_data_position = 0;
+	              context_data.push(getCharFromInt(context_data_val));
+	              context_data_val = 0;
+	            } else {
+	              context_data_position++;
+	            }
+	            value = value >> 1;
+	          }
+
+
+	        }
+	        context_enlargeIn--;
+	        if (context_enlargeIn == 0) {
+	          context_enlargeIn = Math.pow(2, context_numBits);
+	          context_numBits++;
+	        }
+	        // Add wc to the dictionary.
+	        context_dictionary[context_wc] = context_dictSize++;
+	        context_w = String(context_c);
+	      }
+	    }
+
+	    // Output the code for w.
+	    if (context_w !== "") {
+	      if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+	        if (context_w.charCodeAt(0)<256) {
+	          for (i=0 ; i<context_numBits ; i++) {
+	            context_data_val = (context_data_val << 1);
+	            if (context_data_position == bitsPerChar-1) {
+	              context_data_position = 0;
+	              context_data.push(getCharFromInt(context_data_val));
+	              context_data_val = 0;
+	            } else {
+	              context_data_position++;
+	            }
+	          }
+	          value = context_w.charCodeAt(0);
+	          for (i=0 ; i<8 ; i++) {
+	            context_data_val = (context_data_val << 1) | (value&1);
+	            if (context_data_position == bitsPerChar-1) {
+	              context_data_position = 0;
+	              context_data.push(getCharFromInt(context_data_val));
+	              context_data_val = 0;
+	            } else {
+	              context_data_position++;
+	            }
+	            value = value >> 1;
+	          }
+	        } else {
+	          value = 1;
+	          for (i=0 ; i<context_numBits ; i++) {
+	            context_data_val = (context_data_val << 1) | value;
+	            if (context_data_position == bitsPerChar-1) {
+	              context_data_position = 0;
+	              context_data.push(getCharFromInt(context_data_val));
+	              context_data_val = 0;
+	            } else {
+	              context_data_position++;
+	            }
+	            value = 0;
+	          }
+	          value = context_w.charCodeAt(0);
+	          for (i=0 ; i<16 ; i++) {
+	            context_data_val = (context_data_val << 1) | (value&1);
+	            if (context_data_position == bitsPerChar-1) {
+	              context_data_position = 0;
+	              context_data.push(getCharFromInt(context_data_val));
+	              context_data_val = 0;
+	            } else {
+	              context_data_position++;
+	            }
+	            value = value >> 1;
+	          }
+	        }
+	        context_enlargeIn--;
+	        if (context_enlargeIn == 0) {
+	          context_enlargeIn = Math.pow(2, context_numBits);
+	          context_numBits++;
+	        }
+	        delete context_dictionaryToCreate[context_w];
+	      } else {
+	        value = context_dictionary[context_w];
+	        for (i=0 ; i<context_numBits ; i++) {
+	          context_data_val = (context_data_val << 1) | (value&1);
+	          if (context_data_position == bitsPerChar-1) {
+	            context_data_position = 0;
+	            context_data.push(getCharFromInt(context_data_val));
+	            context_data_val = 0;
+	          } else {
+	            context_data_position++;
+	          }
+	          value = value >> 1;
+	        }
+
+
+	      }
+	      context_enlargeIn--;
+	      if (context_enlargeIn == 0) {
+	        context_enlargeIn = Math.pow(2, context_numBits);
+	        context_numBits++;
+	      }
+	    }
+
+	    // Mark the end of the stream
+	    value = 2;
+	    for (i=0 ; i<context_numBits ; i++) {
+	      context_data_val = (context_data_val << 1) | (value&1);
+	      if (context_data_position == bitsPerChar-1) {
+	        context_data_position = 0;
+	        context_data.push(getCharFromInt(context_data_val));
+	        context_data_val = 0;
+	      } else {
+	        context_data_position++;
+	      }
+	      value = value >> 1;
+	    }
+
+	    // Flush the last char
+	    while (true) {
+	      context_data_val = (context_data_val << 1);
+	      if (context_data_position == bitsPerChar-1) {
+	        context_data.push(getCharFromInt(context_data_val));
+	        break;
+	      }
+	      else context_data_position++;
+	    }
+	    return context_data.join('');
+	  },
+
+	  decompress: function (compressed) {
+	    if (compressed == null) return "";
+	    if (compressed == "") return null;
+	    return LZString._decompress(compressed.length, 32768, function(index) { return compressed.charCodeAt(index); });
+	  },
+
+	  _decompress: function (length, resetValue, getNextValue) {
+	    var dictionary = [],
+	        enlargeIn = 4,
+	        dictSize = 4,
+	        numBits = 3,
+	        entry = "",
+	        result = [],
+	        i,
+	        w,
+	        bits, resb, maxpower, power,
+	        c,
+	        data = {val:getNextValue(0), position:resetValue, index:1};
+
+	    for (i = 0; i < 3; i += 1) {
+	      dictionary[i] = i;
+	    }
+
+	    bits = 0;
+	    maxpower = Math.pow(2,2);
+	    power=1;
+	    while (power!=maxpower) {
+	      resb = data.val & data.position;
+	      data.position >>= 1;
+	      if (data.position == 0) {
+	        data.position = resetValue;
+	        data.val = getNextValue(data.index++);
+	      }
+	      bits |= (resb>0 ? 1 : 0) * power;
+	      power <<= 1;
+	    }
+
+	    switch (bits) {
+	      case 0:
+	          bits = 0;
+	          maxpower = Math.pow(2,8);
+	          power=1;
+	          while (power!=maxpower) {
+	            resb = data.val & data.position;
+	            data.position >>= 1;
+	            if (data.position == 0) {
+	              data.position = resetValue;
+	              data.val = getNextValue(data.index++);
+	            }
+	            bits |= (resb>0 ? 1 : 0) * power;
+	            power <<= 1;
+	          }
+	        c = f(bits);
+	        break;
+	      case 1:
+	          bits = 0;
+	          maxpower = Math.pow(2,16);
+	          power=1;
+	          while (power!=maxpower) {
+	            resb = data.val & data.position;
+	            data.position >>= 1;
+	            if (data.position == 0) {
+	              data.position = resetValue;
+	              data.val = getNextValue(data.index++);
+	            }
+	            bits |= (resb>0 ? 1 : 0) * power;
+	            power <<= 1;
+	          }
+	        c = f(bits);
+	        break;
+	      case 2:
+	        return "";
+	    }
+	    dictionary[3] = c;
+	    w = c;
+	    result.push(c);
+	    while (true) {
+	      if (data.index > length) {
+	        return "";
+	      }
+
+	      bits = 0;
+	      maxpower = Math.pow(2,numBits);
+	      power=1;
+	      while (power!=maxpower) {
+	        resb = data.val & data.position;
+	        data.position >>= 1;
+	        if (data.position == 0) {
+	          data.position = resetValue;
+	          data.val = getNextValue(data.index++);
+	        }
+	        bits |= (resb>0 ? 1 : 0) * power;
+	        power <<= 1;
+	      }
+
+	      switch (c = bits) {
+	        case 0:
+	          bits = 0;
+	          maxpower = Math.pow(2,8);
+	          power=1;
+	          while (power!=maxpower) {
+	            resb = data.val & data.position;
+	            data.position >>= 1;
+	            if (data.position == 0) {
+	              data.position = resetValue;
+	              data.val = getNextValue(data.index++);
+	            }
+	            bits |= (resb>0 ? 1 : 0) * power;
+	            power <<= 1;
+	          }
+
+	          dictionary[dictSize++] = f(bits);
+	          c = dictSize-1;
+	          enlargeIn--;
+	          break;
+	        case 1:
+	          bits = 0;
+	          maxpower = Math.pow(2,16);
+	          power=1;
+	          while (power!=maxpower) {
+	            resb = data.val & data.position;
+	            data.position >>= 1;
+	            if (data.position == 0) {
+	              data.position = resetValue;
+	              data.val = getNextValue(data.index++);
+	            }
+	            bits |= (resb>0 ? 1 : 0) * power;
+	            power <<= 1;
+	          }
+	          dictionary[dictSize++] = f(bits);
+	          c = dictSize-1;
+	          enlargeIn--;
+	          break;
+	        case 2:
+	          return result.join('');
+	      }
+
+	      if (enlargeIn == 0) {
+	        enlargeIn = Math.pow(2, numBits);
+	        numBits++;
+	      }
+
+	      if (dictionary[c]) {
+	        entry = dictionary[c];
+	      } else {
+	        if (c === dictSize) {
+	          entry = w + w.charAt(0);
+	        } else {
+	          return null;
+	        }
+	      }
+	      result.push(entry);
+
+	      // Add w+entry[0] to the dictionary.
+	      dictionary[dictSize++] = w + entry.charAt(0);
+	      enlargeIn--;
+
+	      w = entry;
+
+	      if (enlargeIn == 0) {
+	        enlargeIn = Math.pow(2, numBits);
+	        numBits++;
+	      }
+
+	    }
+	  }
+	};
+	  return LZString;
+	})();
+
+	if( module != null ) {
+	  module.exports = LZString;
+	}
+} (lzString));
+
+const lz = lzString.exports;
+
+function asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
   }
-  return baseReverseDic[alphabet][character];
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
 }
 
-var LZString = {
-  compressToBase64 : function (input) {
-    if (input == null) return "";
-    var res = LZString._compress(input, 6, function(a){return keyStrBase64.charAt(a);});
-    switch (res.length % 4) { // To produce valid Base64
-    default: // When could this happen ?
-    case 0 : return res;
-    case 1 : return res+"===";
-    case 2 : return res+"==";
-    case 3 : return res+"=";
-    }
-  },
+function _asyncToGenerator$q(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
 
-  decompressFromBase64 : function (input) {
-    if (input == null) return "";
-    if (input == "") return null;
-    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrBase64, input.charAt(index)); });
-  },
-
-  compressToUTF16 : function (input) {
-    if (input == null) return "";
-    return LZString._compress(input, 15, function(a){return f(a+32);}) + " ";
-  },
-
-  decompressFromUTF16: function (compressed) {
-    if (compressed == null) return "";
-    if (compressed == "") return null;
-    return LZString._decompress(compressed.length, 16384, function(index) { return compressed.charCodeAt(index) - 32; });
-  },
-
-  //compress into uint8array (UCS-2 big endian format)
-  compressToUint8Array: function (uncompressed) {
-    var compressed = LZString.compress(uncompressed);
-    var buf=new Uint8Array(compressed.length*2); // 2 bytes per character
-
-    for (var i=0, TotalLen=compressed.length; i<TotalLen; i++) {
-      var current_value = compressed.charCodeAt(i);
-      buf[i*2] = current_value >>> 8;
-      buf[i*2+1] = current_value % 256;
-    }
-    return buf;
-  },
-
-  //decompress from uint8array (UCS-2 big endian format)
-  decompressFromUint8Array:function (compressed) {
-    if (compressed===null || compressed===undefined){
-        return LZString.decompress(compressed);
-    } else {
-        var buf=new Array(compressed.length/2); // 2 bytes per character
-        for (var i=0, TotalLen=buf.length; i<TotalLen; i++) {
-          buf[i]=compressed[i*2]*256+compressed[i*2+1];
-        }
-
-        var result = [];
-        buf.forEach(function (c) {
-          result.push(f(c));
-        });
-        return LZString.decompress(result.join(''));
-
-    }
-
-  },
-
-
-  //compress into a string that is already URI encoded
-  compressToEncodedURIComponent: function (input) {
-    if (input == null) return "";
-    return LZString._compress(input, 6, function(a){return keyStrUriSafe.charAt(a);});
-  },
-
-  //decompress from an output of compressToEncodedURIComponent
-  decompressFromEncodedURIComponent:function (input) {
-    if (input == null) return "";
-    if (input == "") return null;
-    input = input.replace(/ /g, "+");
-    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrUriSafe, input.charAt(index)); });
-  },
-
-  compress: function (uncompressed) {
-    return LZString._compress(uncompressed, 16, function(a){return f(a);});
-  },
-  _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
-    if (uncompressed == null) return "";
-    var i, value,
-        context_dictionary= {},
-        context_dictionaryToCreate= {},
-        context_c="",
-        context_wc="",
-        context_w="",
-        context_enlargeIn= 2, // Compensate for the first entry which should not count
-        context_dictSize= 3,
-        context_numBits= 2,
-        context_data=[],
-        context_data_val=0,
-        context_data_position=0,
-        ii;
-
-    for (ii = 0; ii < uncompressed.length; ii += 1) {
-      context_c = uncompressed.charAt(ii);
-      if (!Object.prototype.hasOwnProperty.call(context_dictionary,context_c)) {
-        context_dictionary[context_c] = context_dictSize++;
-        context_dictionaryToCreate[context_c] = true;
+      function _next(value) {
+        asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, "next", value);
       }
 
-      context_wc = context_w + context_c;
-      if (Object.prototype.hasOwnProperty.call(context_dictionary,context_wc)) {
-        context_w = context_wc;
-      } else {
-        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
-          if (context_w.charCodeAt(0)<256) {
-            for (i=0 ; i<context_numBits ; i++) {
-              context_data_val = (context_data_val << 1);
-              if (context_data_position == bitsPerChar-1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-            }
-            value = context_w.charCodeAt(0);
-            for (i=0 ; i<8 ; i++) {
-              context_data_val = (context_data_val << 1) | (value&1);
-              if (context_data_position == bitsPerChar-1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = value >> 1;
-            }
-          } else {
-            value = 1;
-            for (i=0 ; i<context_numBits ; i++) {
-              context_data_val = (context_data_val << 1) | value;
-              if (context_data_position ==bitsPerChar-1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = 0;
-            }
-            value = context_w.charCodeAt(0);
-            for (i=0 ; i<16 ; i++) {
-              context_data_val = (context_data_val << 1) | (value&1);
-              if (context_data_position == bitsPerChar-1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = value >> 1;
-            }
-          }
-          context_enlargeIn--;
-          if (context_enlargeIn == 0) {
-            context_enlargeIn = Math.pow(2, context_numBits);
-            context_numBits++;
-          }
-          delete context_dictionaryToCreate[context_w];
-        } else {
-          value = context_dictionary[context_w];
-          for (i=0 ; i<context_numBits ; i++) {
-            context_data_val = (context_data_val << 1) | (value&1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
-
-
-        }
-        context_enlargeIn--;
-        if (context_enlargeIn == 0) {
-          context_enlargeIn = Math.pow(2, context_numBits);
-          context_numBits++;
-        }
-        // Add wc to the dictionary.
-        context_dictionary[context_wc] = context_dictSize++;
-        context_w = String(context_c);
-      }
-    }
-
-    // Output the code for w.
-    if (context_w !== "") {
-      if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
-        if (context_w.charCodeAt(0)<256) {
-          for (i=0 ; i<context_numBits ; i++) {
-            context_data_val = (context_data_val << 1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-          }
-          value = context_w.charCodeAt(0);
-          for (i=0 ; i<8 ; i++) {
-            context_data_val = (context_data_val << 1) | (value&1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
-        } else {
-          value = 1;
-          for (i=0 ; i<context_numBits ; i++) {
-            context_data_val = (context_data_val << 1) | value;
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = 0;
-          }
-          value = context_w.charCodeAt(0);
-          for (i=0 ; i<16 ; i++) {
-            context_data_val = (context_data_val << 1) | (value&1);
-            if (context_data_position == bitsPerChar-1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
-        }
-        context_enlargeIn--;
-        if (context_enlargeIn == 0) {
-          context_enlargeIn = Math.pow(2, context_numBits);
-          context_numBits++;
-        }
-        delete context_dictionaryToCreate[context_w];
-      } else {
-        value = context_dictionary[context_w];
-        for (i=0 ; i<context_numBits ; i++) {
-          context_data_val = (context_data_val << 1) | (value&1);
-          if (context_data_position == bitsPerChar-1) {
-            context_data_position = 0;
-            context_data.push(getCharFromInt(context_data_val));
-            context_data_val = 0;
-          } else {
-            context_data_position++;
-          }
-          value = value >> 1;
-        }
-
-
-      }
-      context_enlargeIn--;
-      if (context_enlargeIn == 0) {
-        context_enlargeIn = Math.pow(2, context_numBits);
-        context_numBits++;
-      }
-    }
-
-    // Mark the end of the stream
-    value = 2;
-    for (i=0 ; i<context_numBits ; i++) {
-      context_data_val = (context_data_val << 1) | (value&1);
-      if (context_data_position == bitsPerChar-1) {
-        context_data_position = 0;
-        context_data.push(getCharFromInt(context_data_val));
-        context_data_val = 0;
-      } else {
-        context_data_position++;
-      }
-      value = value >> 1;
-    }
-
-    // Flush the last char
-    while (true) {
-      context_data_val = (context_data_val << 1);
-      if (context_data_position == bitsPerChar-1) {
-        context_data.push(getCharFromInt(context_data_val));
-        break;
-      }
-      else context_data_position++;
-    }
-    return context_data.join('');
-  },
-
-  decompress: function (compressed) {
-    if (compressed == null) return "";
-    if (compressed == "") return null;
-    return LZString._decompress(compressed.length, 32768, function(index) { return compressed.charCodeAt(index); });
-  },
-
-  _decompress: function (length, resetValue, getNextValue) {
-    var dictionary = [],
-        enlargeIn = 4,
-        dictSize = 4,
-        numBits = 3,
-        entry = "",
-        result = [],
-        i,
-        w,
-        bits, resb, maxpower, power,
-        c,
-        data = {val:getNextValue(0), position:resetValue, index:1};
-
-    for (i = 0; i < 3; i += 1) {
-      dictionary[i] = i;
-    }
-
-    bits = 0;
-    maxpower = Math.pow(2,2);
-    power=1;
-    while (power!=maxpower) {
-      resb = data.val & data.position;
-      data.position >>= 1;
-      if (data.position == 0) {
-        data.position = resetValue;
-        data.val = getNextValue(data.index++);
-      }
-      bits |= (resb>0 ? 1 : 0) * power;
-      power <<= 1;
-    }
-
-    switch (bits) {
-      case 0:
-          bits = 0;
-          maxpower = Math.pow(2,8);
-          power=1;
-          while (power!=maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb>0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-        c = f(bits);
-        break;
-      case 1:
-          bits = 0;
-          maxpower = Math.pow(2,16);
-          power=1;
-          while (power!=maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb>0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-        c = f(bits);
-        break;
-      case 2:
-        return "";
-    }
-    dictionary[3] = c;
-    w = c;
-    result.push(c);
-    while (true) {
-      if (data.index > length) {
-        return "";
+      function _throw(err) {
+        asyncGeneratorStep$q(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
-      bits = 0;
-      maxpower = Math.pow(2,numBits);
-      power=1;
-      while (power!=maxpower) {
-        resb = data.val & data.position;
-        data.position >>= 1;
-        if (data.position == 0) {
-          data.position = resetValue;
-          data.val = getNextValue(data.index++);
-        }
-        bits |= (resb>0 ? 1 : 0) * power;
-        power <<= 1;
-      }
+      _next(undefined);
+    });
+  };
+}
 
-      switch (c = bits) {
-        case 0:
-          bits = 0;
-          maxpower = Math.pow(2,8);
-          power=1;
-          while (power!=maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb>0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-
-          dictionary[dictSize++] = f(bits);
-          c = dictSize-1;
-          enlargeIn--;
-          break;
-        case 1:
-          bits = 0;
-          maxpower = Math.pow(2,16);
-          power=1;
-          while (power!=maxpower) {
-            resb = data.val & data.position;
-            data.position >>= 1;
-            if (data.position == 0) {
-              data.position = resetValue;
-              data.val = getNextValue(data.index++);
-            }
-            bits |= (resb>0 ? 1 : 0) * power;
-            power <<= 1;
-          }
-          dictionary[dictSize++] = f(bits);
-          c = dictSize-1;
-          enlargeIn--;
-          break;
-        case 2:
-          return result.join('');
-      }
-
-      if (enlargeIn == 0) {
-        enlargeIn = Math.pow(2, numBits);
-        numBits++;
-      }
-
-      if (dictionary[c]) {
-        entry = dictionary[c];
-      } else {
-        if (c === dictSize) {
-          entry = w + w.charAt(0);
-        } else {
-          return null;
-        }
-      }
-      result.push(entry);
-
-      // Add w+entry[0] to the dictionary.
-      dictionary[dictSize++] = w + entry.charAt(0);
-      enlargeIn--;
-
-      w = entry;
-
-      if (enlargeIn == 0) {
-        enlargeIn = Math.pow(2, numBits);
-        numBits++;
-      }
-
-    }
-  }
+var __decorate$A = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-  return LZString;
-})();
+const windowConfirm = window.confirm;
+const windowPrompt = window.prompt;
+const windowAlert = window.alert;
+let MessageBoxService = class MessageBoxService {
+  confirm(message) {
+    return _asyncToGenerator$q(function* () {
+      return new Promise(resolve => {
+        if (windowConfirm(message)) return resolve(true);
+        return resolve(false);
+      });
+    })();
+  }
 
-if( module != null ) {
-  module.exports = LZString;
+  prompt(message, defaultValue) {
+    return _asyncToGenerator$q(function* () {
+      return new Promise(resolve => {
+        const data = windowPrompt(message, defaultValue);
+        if (data) return resolve({
+          data,
+          isApplied: true
+        });
+        resolve({
+          isApplied: false,
+          data: ''
+        });
+      });
+    })();
+  }
+
+  alert(message) {
+    return _asyncToGenerator$q(function* () {
+      return new Promise(resolve => {
+        windowAlert(message);
+        return resolve();
+      });
+    })();
+  }
+
+};
+MessageBoxService = __decorate$A([Service()], MessageBoxService);
+
+const {
+  SettingsErrors
+} = errorFactory('SettingsErrors', {
+  ImportResponse: 'Failed import',
+  UnexpectedErrorImport: 'Unexpected import',
+  DropDataResponse: 'Failed drop data',
+  UnexpectedErrorDropData: 'Unexpected drop data',
+  LoadDataResponse: 'Failed load data',
+  UnexpectedLoadData: 'Unexpected load data'
+});
+
+function asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
 }
-}(lzString));
 
-var lz = lzString.exports;
+function _asyncToGenerator$p(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$p(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$z = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let SettingsDataProvider = class SettingsDataProvider extends DatabaseDataProvider {
+  importData(input) {
+    var _this = this;
+
+    return _asyncToGenerator$p(function* () {
+      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
+      yield Promise.all([_this.client.pouch.bulkAdd(input.pouch), _this.client.category.bulkAdd(input.category), _this.client.expense.bulkAdd(input.expense)]);
+      return _this.ok(true);
+    })();
+  }
+
+  dropData() {
+    var _this = this;
+
+    return _asyncToGenerator$p(function* () {
+      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
+      return _this.ok(true);
+    })();
+  }
+
+  getAllData() {
+    var _this = this;
+
+    return _asyncToGenerator$p(function* () {
+      const [expense, category, pouch] = yield Promise.all([_this.client.expense.orderBy('id').toArray(), _this.client.category.orderBy('id').toArray(), _this.client.pouch.orderBy('id').toArray()]);
+      return _this.ok({
+        expense,
+        category,
+        pouch
+      });
+    })();
+  }
+
+};
+SettingsDataProvider = __decorate$z([DataProvider()], SettingsDataProvider);
+
+function asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$o(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$o(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$y = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$n = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$n = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let SettingsAdapter = class SettingsAdapter {
+  importData(input) {
+    var _this = this;
+
+    return _asyncToGenerator$o(function* () {
+      try {
+        const result = yield _this.settingsDataProvider.importData(input);
+        if (isErr(result)) return resultErr(new SettingsErrors.ImportResponse(result.error));
+        return resultOk(null);
+      } catch (e) {
+        return resultErr(new SettingsErrors.UnexpectedErrorImport(e));
+      }
+    })();
+  }
+
+  dropData() {
+    var _this = this;
+
+    return _asyncToGenerator$o(function* () {
+      try {
+        const result = yield _this.settingsDataProvider.dropData();
+        if (isErr(result)) return resultErr(new SettingsErrors.DropDataResponse(result.error));
+        return resultOk(null);
+      } catch (e) {
+        return resultErr(new SettingsErrors.UnexpectedErrorDropData(e));
+      }
+    })();
+  }
+
+  getAllData() {
+    var _this = this;
+
+    return _asyncToGenerator$o(function* () {
+      try {
+        const result = yield _this.settingsDataProvider.getAllData();
+        if (isErr(result)) return resultErr(new SettingsErrors.LoadDataResponse(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new SettingsErrors.UnexpectedLoadData(e));
+      }
+    })();
+  }
+
+  constructor(settingsDataProvider) {
+    this.settingsDataProvider = settingsDataProvider;
+  }
+
+};
+SettingsAdapter = __decorate$y([Adapter(), __param$n(0, Inject()), __metadata$n("design:type", Function), __metadata$n("design:paramtypes", [typeof SettingsDataProvider === "undefined" ? Object : SettingsDataProvider])], SettingsAdapter);
+
+function asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$n(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$n(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$x = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let FileService = class FileService {
+  saveToFile(fileName, content) {
+    const element = document.createElement('a');
+    const header = `data:application/text;charset=utf-8,`;
+    element.setAttribute('href', header + encodeURIComponent(content));
+    element.setAttribute('download', fileName);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
+  readTextFile(file) {
+    return _asyncToGenerator$n(function* () {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onerror = function (e) {
+          reject && reject(e);
+        };
+
+        reader.onload = function (e) {
+          var ref;
+          const data = (ref = e.target) === null || ref === void 0 ? void 0 : ref.result;
+          resolve(data);
+        };
+
+        reader.readAsText(file);
+      });
+    })();
+  }
+
+};
+FileService = __decorate$x([Service()], FileService);
+
+const scrollContainerStyles_qkk51a = '';
+
+const ScrollContainer = /*#__PURE__*/styled$1("div")({
+  name: "ScrollContainer",
+  class: "s11703p9"
+});
+
+const guidStore = new LocalStorageItem('guid');
+let machineId = guidStore.value;
+const lut = [];
+
+function init() {
+  if (!machineId) {
+    machineId = Math.abs(Math.random() * 0xff | 0).toString(16);
+    guidStore.set(machineId);
+  }
+
+  for (let i = 0; i < 256; i++) {
+    lut[i] = (i < 16 ? '0' : '') + i.toString(16);
+  }
+}
+
+init();
+function guid() {
+  const timeObj = new Date().getTime();
+  const s = Math.floor(timeObj / 1000);
+  const ms = timeObj - s * 1000;
+  const d1 = ms + Math.random() * 0xffff | 0;
+  const d2 = Math.random() * 0xffffffff | 0;
+  const d3 = machineId // Math.random()*0xffffffff|0;
+  ;
+  const d4 = s.toString(16);
+  return d4 + // @ts-ignore
+  lut[d3 & 0xff] + lut[d1 & 0xff] + lut[d1 >> 8 & 0xff] + lut[d1 >> 16 & 0x0f | 0x40] + lut[d2 & 0x3f | 0x80] + lut[d2 >> 8 & 0xff] + lut[d2 >> 16 & 0xff] + lut[d2 >> 24 & 0xff];
+}
+
+const {
+  CategoriesErrors
+} = errorFactory('CategoriesErrors', {
+  AddResponse: 'Failed add category',
+  UnexpectedErrorAdd: 'Unexpected add category',
+  GetListResponse: 'Failed get category list',
+  UnexpectedErrorGetList: 'Unexpected get category list',
+  UpdateCategoryResponse: 'Failed update category',
+  UnexpectedErrorUpdateCategory: 'Unexpected update category',
+  RemoveCategoryResponse: 'Failed remove category',
+  UnexpectedErrorRemoveCategory: 'Unexpected remove category'
+});
 
 function asyncGeneratorStep$m(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -16635,64 +16535,63 @@ function _asyncToGenerator$m(fn) {
   };
 }
 
-var __decorate$u = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$w = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-const windowConfirm = window.confirm;
-const windowPrompt = window.prompt;
-const windowAlert = window.alert;
-let MessageBoxService = class MessageBoxService {
-  confirm(message) {
+
+function checkDateEnd$2(item) {
+  return !item.dateEnd;
+}
+
+let CategoriesDataProvider = class CategoriesDataProvider extends DatabaseDataProvider {
+  addCategory(category) {
+    var _this = this;
+
     return _asyncToGenerator$m(function* () {
-      return new Promise(resolve => {
-        if (windowConfirm(message)) return resolve(true);
-        return resolve(false);
-      });
+      const result = yield _this.client.category.add(category);
+      return _this.ok(result);
     })();
   }
 
-  prompt(message, defaultValue) {
+  getCategories() {
+    var _this = this;
+
     return _asyncToGenerator$m(function* () {
-      return new Promise(resolve => {
-        const data = windowPrompt(message, defaultValue);
-        if (data) return resolve({
-          data,
-          isApplied: true
-        });
-        resolve({
-          isApplied: false,
-          data: ''
-        });
-      });
+      const result = yield _this.client.category.filter(checkDateEnd$2).toArray();
+      return _this.ok(result);
     })();
   }
 
-  alert(message) {
+  updateCategoryTitle(id, title) {
+    var _this = this;
+
     return _asyncToGenerator$m(function* () {
-      return new Promise(resolve => {
-        windowAlert(message);
-        return resolve();
-      });
+      const fields = {
+        title
+      };
+      const result = yield _this.client.category.where('id').equals(id).modify(fields);
+      return _this.ok(result);
+    })();
+  }
+
+  removeCategory(id) {
+    var _this = this;
+
+    return _asyncToGenerator$m(function* () {
+      const fields = {
+        dateEnd: Date.now()
+      };
+      const result = yield _this.client.category.where('id').equals(id).modify(fields);
+      return _this.ok(result);
     })();
   }
 
 };
-MessageBoxService = __decorate$u([Service()], MessageBoxService);
-
-var SettingsErrors;
-
-(function (SettingsErrors) {
-  SettingsErrors.ImportResponse = createErrorClass('Failed import');
-  SettingsErrors.UnexpectedErrorImport = createErrorClass('Unexpected import');
-  SettingsErrors.DropDataResponse = createErrorClass('Failed drop data');
-  SettingsErrors.UnexpectedErrorDropData = createErrorClass('Unexpected drop data');
-  SettingsErrors.LoadDataResponse = createErrorClass('Failed load data');
-  SettingsErrors.UnexpectedLoadData = createErrorClass('Unexpected load data');
-})(SettingsErrors || (SettingsErrors = {}));
+CategoriesDataProvider = __decorate$w([DataProvider()], CategoriesDataProvider);
 
 function asyncGeneratorStep$l(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -16730,48 +16629,184 @@ function _asyncToGenerator$l(fn) {
   };
 }
 
-var __decorate$t = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$v = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-let SettingsDataProvider = class SettingsDataProvider extends DatabaseDataProvider {
-  importData(input) {
+
+var __metadata$m = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$m = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let CategoriesAdapter = class CategoriesAdapter {
+  addCategory(category) {
     var _this = this;
 
     return _asyncToGenerator$l(function* () {
-      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
-      yield Promise.all([_this.client.pouch.bulkAdd(input.pouch), _this.client.category.bulkAdd(input.category), _this.client.expense.bulkAdd(input.expense)]);
-      return _this.ok(true);
+      try {
+        const result = yield _this.categoriesDataProvider.addCategory(category);
+        if (isErr(result)) return resultErr(new CategoriesErrors.AddResponse(result.error));
+        return resultOk(true);
+      } catch (e) {
+        return resultErr(new CategoriesErrors.UnexpectedErrorAdd(e));
+      }
     })();
   }
 
-  dropData() {
+  getCategories() {
     var _this = this;
 
     return _asyncToGenerator$l(function* () {
-      yield Promise.all([_this.client.expense.clear(), _this.client.category.clear(), _this.client.pouch.clear()]);
-      return _this.ok(true);
+      try {
+        const result = yield _this.categoriesDataProvider.getCategories();
+        if (isErr(result)) return resultErr(new CategoriesErrors.GetListResponse(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new CategoriesErrors.UnexpectedErrorGetList(e));
+      }
     })();
   }
 
-  getAllData() {
+  updateCategoryTitle(id, title) {
     var _this = this;
 
     return _asyncToGenerator$l(function* () {
-      const [expense, category, pouch] = yield Promise.all([_this.client.expense.orderBy('id').toArray(), _this.client.category.orderBy('id').toArray(), _this.client.pouch.orderBy('id').toArray()]);
-      return _this.ok({
-        expense,
-        category,
-        pouch
-      });
+      try {
+        const result = yield _this.categoriesDataProvider.updateCategoryTitle(id, title);
+        if (isErr(result)) return resultErr(new CategoriesErrors.UpdateCategoryResponse(result.error));
+        return resultOk(true);
+      } catch (e) {
+        return resultErr(new CategoriesErrors.UnexpectedErrorUpdateCategory(e));
+      }
     })();
+  }
+
+  removeCategory(id) {
+    var _this = this;
+
+    return _asyncToGenerator$l(function* () {
+      try {
+        const result = yield _this.categoriesDataProvider.removeCategory(id);
+        if (isErr(result)) return resultErr(new CategoriesErrors.RemoveCategoryResponse(result.error));
+        return resultOk(true);
+      } catch (e) {
+        return resultErr(new CategoriesErrors.UnexpectedErrorRemoveCategory(e));
+      }
+    })();
+  }
+
+  constructor(categoriesDataProvider) {
+    this.categoriesDataProvider = categoriesDataProvider;
   }
 
 };
-SettingsDataProvider = __decorate$t([DataProvider()], SettingsDataProvider);
+CategoriesAdapter = __decorate$v([Adapter(), __param$m(0, Inject()), __metadata$m("design:type", Function), __metadata$m("design:paramtypes", [typeof CategoriesDataProvider === "undefined" ? Object : CategoriesDataProvider])], CategoriesAdapter);
+
+var __decorate$u = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let CategoriesStore = class CategoriesStore {
+  setIsLoading(value) {
+    this.isLoading = value;
+  }
+
+  setSelectedCategoryId(value) {
+    this.selectedCategoryId = value;
+  }
+
+  setCategoryList(value) {
+    this.categoryList = value;
+  }
+
+  dropCategories() {
+    this.categoryList = [];
+  }
+
+  setFilter(callback) {
+    this.filter = callback;
+  }
+
+  checkFilter(item) {
+    if (!this.filter) return true;
+    return this.filter(item);
+  }
+
+  get categoryTreeMaps() {
+    const rootMap = {};
+    const categoryMap = {};
+    this.categoryList.forEach(item => {
+      categoryMap[item.id] = item;
+      const isRoot = !item.catId;
+      const createId = item.catId ? item.catId : item.id;
+      const parent = rootMap[createId] = rootMap[createId] || {
+        children: []
+      };
+      if (isRoot) return;
+      if (!this.checkFilter(item)) return;
+      parent.children.push(item.id);
+    });
+    return {
+      rootMap,
+      categoryMap
+    };
+  }
+
+  get isEmptyCategories() {
+    return this.categoryList.length === 0;
+  }
+
+  get selectedCategory() {
+    return this.categoryList.find(category => category.id === this.selectedCategoryId);
+  }
+
+  get categoryTree() {
+    const {
+      categoryMap,
+      rootMap
+    } = this.categoryTreeMaps;
+    const filteredKeys = Object.keys(rootMap).filter(key => {
+      const item = categoryMap[key];
+      if (!item) return false;
+      return this.checkFilter(item);
+    });
+    const result = filteredKeys.reduce((acc, key) => {
+      const item = categoryMap[key];
+      const rootEl = rootMap[key];
+      acc.push({
+        item,
+        isRoot: true
+      });
+      rootEl.children.forEach(id => {
+        const node = categoryMap[id];
+        acc.push({
+          item: node
+        });
+      });
+      return acc;
+    }, []);
+    return result;
+  }
+
+  constructor() {
+    this.selectedCategoryId = '';
+    this.isLoading = true;
+    this.categoryList = [];
+  }
+
+};
+CategoriesStore = __decorate$u([Store()], CategoriesStore);
 
 function asyncGeneratorStep$k(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -16809,7 +16844,7 @@ function _asyncToGenerator$k(fn) {
   };
 }
 
-var __decorate$s = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$t = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -16817,71 +16852,110 @@ var __decorate$s = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$j = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$l = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$j = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$l = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
 };
-let SettingsAdapter = class SettingsAdapter {
-  importData(input) {
+let CategoriesService = class CategoriesService {
+  removeCategory() {
     var _this = this;
 
     return _asyncToGenerator$k(function* () {
-      try {
-        const {
-          error
-        } = yield _this.settingsDataProvider.importData(input);
-        if (error) return dist.Result.Err(new SettingsErrors.ImportResponse(error));
-        return dist.Result.Ok(null);
-      } catch (e) {
-        return dist.Result.Err(new SettingsErrors.UnexpectedErrorImport(e));
+      const category = _this.categoriesStore.selectedCategory;
+      if (!category) return;
+      const isConfirmed = yield _this.messageBoxService.confirm(t('category.confirmRemove'));
+      if (!isConfirmed) return;
+      const result = yield _this.categoriesAdapter.removeCategory(category.id);
+
+      if (isErr(result)) {
+        //TODO: add error processing
+        return;
       }
+
+      _this.categoriesStore.setSelectedCategoryId('');
+
+      yield _this.loadCategories();
     })();
   }
 
-  dropData() {
+  editCategory() {
     var _this = this;
 
     return _asyncToGenerator$k(function* () {
-      try {
-        const {
-          error
-        } = yield _this.settingsDataProvider.dropData();
-        if (error) return dist.Result.Err(new SettingsErrors.DropDataResponse(error));
-        return dist.Result.Ok(null);
-      } catch (e) {
-        return dist.Result.Err(new SettingsErrors.UnexpectedErrorDropData(e));
+      const category = _this.categoriesStore.selectedCategory;
+      if (!category) return;
+      const {
+        isApplied,
+        data: newTitle
+      } = yield _this.messageBoxService.prompt(t('category.edit'), category.title);
+      if (!isApplied) return;
+      const result = yield _this.categoriesAdapter.updateCategoryTitle(category.id, newTitle);
+
+      if (isErr(result)) {
+        //TODO: add error processing
+        return;
       }
+
+      yield _this.loadCategories();
     })();
   }
 
-  getAllData() {
+  addCategory() {
     var _this = this;
 
     return _asyncToGenerator$k(function* () {
-      try {
-        const {
-          error,
-          data
-        } = yield _this.settingsDataProvider.getAllData();
-        if (error) return dist.Result.Err(new SettingsErrors.LoadDataResponse(error));
-        return dist.Result.Ok(data);
-      } catch (e) {
-        return dist.Result.Err(new SettingsErrors.UnexpectedLoadData(e));
+      const parentCategoryId = _this.categoriesStore.selectedCategoryId;
+      const {
+        isApplied,
+        data: categoryName
+      } = yield _this.messageBoxService.prompt(parentCategoryId ? t('category.addSubNew') : t('category.addNew'));
+      if (!isApplied) return;
+      const node = {
+        id: guid(),
+        catId: parentCategoryId,
+        title: categoryName
+      };
+      const addResult = yield _this.categoriesAdapter.addCategory(node);
+
+      if (isErr(addResult)) {
+        //TODO: add error processing
+        return;
       }
+
+      yield _this.loadCategories();
     })();
   }
 
-  constructor(settingsDataProvider) {
-    this.settingsDataProvider = settingsDataProvider;
+  loadCategories() {
+    var _this = this;
+
+    return _asyncToGenerator$k(function* () {
+      const result = yield _this.categoriesAdapter.getCategories();
+
+      if (isErr(result)) {
+        //TODO: add error processing
+        return;
+      }
+
+      const categories = result.data;
+
+      _this.categoriesStore.setCategoryList(categories);
+    })();
+  }
+
+  constructor(messageBoxService, categoriesAdapter, categoriesStore) {
+    this.messageBoxService = messageBoxService;
+    this.categoriesAdapter = categoriesAdapter;
+    this.categoriesStore = categoriesStore;
   }
 
 };
-SettingsAdapter = __decorate$s([Adapter(), __param$j(0, Inject()), __metadata$j("design:type", Function), __metadata$j("design:paramtypes", [typeof SettingsDataProvider === "undefined" ? Object : SettingsDataProvider])], SettingsAdapter);
+CategoriesService = __decorate$t([Service(), __param$l(0, Inject()), __param$l(1, Inject()), __param$l(2, Inject()), __metadata$l("design:type", Function), __metadata$l("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof CategoriesAdapter === "undefined" ? Object : CategoriesAdapter, typeof CategoriesStore === "undefined" ? Object : CategoriesStore])], CategoriesService);
 
 function asyncGeneratorStep$j(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -16919,134 +16993,7 @@ function _asyncToGenerator$j(fn) {
   };
 }
 
-var __decorate$r = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-let FileService = class FileService {
-  saveToFile(fileName, content) {
-    const element = document.createElement('a');
-    const header = `data:application/text;charset=utf-8,`;
-    element.setAttribute('href', header + encodeURIComponent(content));
-    element.setAttribute('download', fileName);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  }
-
-  readTextFile(file) {
-    return _asyncToGenerator$j(function* () {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onerror = function (e) {
-          reject && reject(e);
-        };
-
-        reader.onload = function (e) {
-          var ref;
-          const data = (ref = e.target) === null || ref === void 0 ? void 0 : ref.result;
-          resolve(data);
-        };
-
-        reader.readAsText(file);
-      });
-    })();
-  }
-
-};
-FileService = __decorate$r([Service()], FileService);
-
-var scrollContainerStyles_qkk51a = '';
-
-const ScrollContainer = /*#__PURE__*/styled$1("div")({
-  name: "ScrollContainer",
-  class: "s11703p9"
-});
-
-const guidStore = new LocalStorageItem('guid');
-let machineId = guidStore.value;
-const lut = [];
-
-function init() {
-  if (!machineId) {
-    machineId = Math.abs(Math.random() * 0xff | 0).toString(16);
-    guidStore.set(machineId);
-  }
-
-  for (let i = 0; i < 256; i++) {
-    lut[i] = (i < 16 ? '0' : '') + i.toString(16);
-  }
-}
-
-init();
-function guid() {
-  const timeObj = new Date().getTime();
-  const s = Math.floor(timeObj / 1000);
-  const ms = timeObj - s * 1000;
-  const d1 = ms + Math.random() * 0xffff | 0;
-  const d2 = Math.random() * 0xffffffff | 0;
-  const d3 = machineId // Math.random()*0xffffffff|0;
-  ;
-  const d4 = s.toString(16);
-  return d4 + // @ts-ignore
-  lut[d3 & 0xff] + lut[d1 & 0xff] + lut[d1 >> 8 & 0xff] + lut[d1 >> 16 & 0x0f | 0x40] + lut[d2 & 0x3f | 0x80] + lut[d2 >> 8 & 0xff] + lut[d2 >> 16 & 0xff] + lut[d2 >> 24 & 0xff];
-}
-
-var CategoriesErrors;
-
-(function (CategoriesErrors) {
-  CategoriesErrors.AddResponse = createErrorClass('Failed add category');
-  CategoriesErrors.UnexpectedErrorAdd = createErrorClass('Unexpected add category');
-  CategoriesErrors.GetListResponse = createErrorClass('Failed get category list');
-  CategoriesErrors.UnexpectedErrorGetList = createErrorClass('Unexpected get category list');
-  CategoriesErrors.UpdateCategoryResponse = createErrorClass('Failed update category');
-  CategoriesErrors.UnexpectedErrorUpdateCategory = createErrorClass('Unexpected update category');
-  CategoriesErrors.RemoveCategoryResponse = createErrorClass('Failed remove category');
-  CategoriesErrors.UnexpectedErrorRemoveCategory = createErrorClass('Unexpected remove category');
-})(CategoriesErrors || (CategoriesErrors = {}));
-
-function asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$i(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$q = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$s = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -17054,478 +17001,11 @@ var __decorate$q = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-function checkDateEnd$1(item) {
-  return !item.dateEnd;
-}
-
-let CategoriesDataProvider = class CategoriesDataProvider extends DatabaseDataProvider {
-  addCategory(category) {
-    var _this = this;
-
-    return _asyncToGenerator$i(function* () {
-      const result = yield _this.client.category.add(category);
-      return _this.ok(result);
-    })();
-  }
-
-  getCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$i(function* () {
-      const result = yield _this.client.category.filter(checkDateEnd$1).toArray();
-      return _this.ok(result);
-    })();
-  }
-
-  updateCategoryTitle(id, title) {
-    var _this = this;
-
-    return _asyncToGenerator$i(function* () {
-      const fields = {
-        title
-      };
-      const result = yield _this.client.category.where('id').equals(id).modify(fields);
-      return _this.ok(result);
-    })();
-  }
-
-  removeCategory(id) {
-    var _this = this;
-
-    return _asyncToGenerator$i(function* () {
-      const fields = {
-        dateEnd: Date.now()
-      };
-      const result = yield _this.client.category.where('id').equals(id).modify(fields);
-      return _this.ok(result);
-    })();
-  }
-
-};
-CategoriesDataProvider = __decorate$q([DataProvider()], CategoriesDataProvider);
-
-function asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$h(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$p = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$i = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$k = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$i = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let CategoriesAdapter = class CategoriesAdapter {
-  addCategory(category) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const {
-          error
-        } = yield _this.categoriesDataProvider.addCategory(category);
-        if (error) return dist.Result.Err(new CategoriesErrors.AddResponse(error));
-        return dist.Result.Ok(true);
-      } catch (e) {
-        return dist.Result.Err(new CategoriesErrors.UnexpectedErrorAdd(e));
-      }
-    })();
-  }
-
-  getCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const {
-          error,
-          data
-        } = yield _this.categoriesDataProvider.getCategories();
-        if (error) return dist.Result.Err(new CategoriesErrors.GetListResponse(error));
-        return dist.Result.Ok(data);
-      } catch (e) {
-        return dist.Result.Err(new CategoriesErrors.UnexpectedErrorGetList(e));
-      }
-    })();
-  }
-
-  updateCategoryTitle(id, title) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const {
-          error
-        } = yield _this.categoriesDataProvider.updateCategoryTitle(id, title);
-        if (error) return dist.Result.Err(new CategoriesErrors.UpdateCategoryResponse(error));
-        return dist.Result.Ok(true);
-      } catch (e) {
-        return dist.Result.Err(new CategoriesErrors.UnexpectedErrorUpdateCategory(e));
-      }
-    })();
-  }
-
-  removeCategory(id) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const {
-          error
-        } = yield _this.categoriesDataProvider.removeCategory(id);
-        if (error) return dist.Result.Err(new CategoriesErrors.RemoveCategoryResponse(error));
-        return dist.Result.Ok(true);
-      } catch (e) {
-        return dist.Result.Err(new CategoriesErrors.UnexpectedErrorRemoveCategory(e));
-      }
-    })();
-  }
-
-  constructor(categoriesDataProvider) {
-    this.categoriesDataProvider = categoriesDataProvider;
-  }
-
-};
-CategoriesAdapter = __decorate$p([Adapter(), __param$i(0, Inject()), __metadata$i("design:type", Function), __metadata$i("design:paramtypes", [typeof CategoriesDataProvider === "undefined" ? Object : CategoriesDataProvider])], CategoriesAdapter);
-
-var __decorate$o = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-let CategoriesStore = class CategoriesStore {
-  setIsLoading(value) {
-    this.isLoading = value;
-  }
-
-  setSelectedCategoryId(value) {
-    this.selectedCategoryId = value;
-  }
-
-  setCategoryList(value) {
-    this.categoryList = value;
-  }
-
-  dropCategories() {
-    this.categoryList = [];
-  }
-
-  setFilter(callback) {
-    this.filter = callback;
-  }
-
-  checkFilter(item) {
-    if (!this.filter) return true;
-    return this.filter(item);
-  }
-
-  get maps() {
-    const rootMap = {};
-    const categoryMap = {};
-    this.categoryList.forEach(item => {
-      categoryMap[item.id] = item;
-      const isRoot = !item.catId;
-      const createId = item.catId ? item.catId : item.id;
-      const parent = rootMap[createId] = rootMap[createId] || {
-        children: []
-      };
-      if (isRoot) return;
-      if (!this.checkFilter(item)) return;
-      parent.children.push(item.id);
-    });
-    return {
-      rootMap,
-      categoryMap
-    };
-  }
-
-  get isEmptyCategories() {
-    return this.categoryList.length === 0;
-  }
-
-  get selectedCategory() {
-    return this.categoryList.find(category => category.id === this.selectedCategoryId);
-  }
-
-  get categoryTree() {
-    const {
-      categoryMap,
-      rootMap
-    } = this.maps;
-    const filteredKeys = Object.keys(rootMap).filter(key => {
-      const item = categoryMap[key];
-      if (!item) return false;
-      return this.checkFilter(item);
-    });
-    const result = filteredKeys.reduce((acc, key) => {
-      const item = categoryMap[key];
-      const rootEl = rootMap[key];
-      acc.push({
-        item,
-        isRoot: true
-      });
-      rootEl.children.forEach(id => {
-        const node = categoryMap[id];
-        acc.push({
-          item: node
-        });
-      });
-      return acc;
-    }, []);
-    return result;
-  }
-
-  constructor() {
-    this.selectedCategoryId = '';
-    this.isLoading = true;
-    this.categoryList = [];
-  }
-
-};
-CategoriesStore = __decorate$o([Store()], CategoriesStore);
-
-function asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$g(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$n = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$h = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$h = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let CategoriesService = class CategoriesService {
-  removeCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      const category = _this.categoriesStore.selectedCategory;
-      if (!category) return;
-      const isConfirmed = yield _this.messageBoxService.confirm(t('category.confirmRemove'));
-      if (!isConfirmed) return;
-      const result = yield _this.categoriesAdapter.removeCategory(category.id);
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      _this.categoriesStore.setSelectedCategoryId('');
-
-      yield _this.loadCategories();
-    })();
-  }
-
-  editCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      const category = _this.categoriesStore.selectedCategory;
-      if (!category) return;
-      const {
-        isApplied,
-        data: newTitle
-      } = yield _this.messageBoxService.prompt(t('category.edit'), category.title);
-      if (!isApplied) return;
-      const result = yield _this.categoriesAdapter.updateCategoryTitle(category.id, newTitle);
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      yield _this.loadCategories();
-    })();
-  }
-
-  addCategory() {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      const parentCategoryId = _this.categoriesStore.selectedCategoryId;
-      const {
-        isApplied,
-        data: categoryName
-      } = yield _this.messageBoxService.prompt(parentCategoryId ? t('category.addSubNew') : t('category.addNew'));
-      if (!isApplied) return;
-      const node = {
-        id: guid(),
-        catId: parentCategoryId,
-        title: categoryName
-      };
-      const addResult = yield _this.categoriesAdapter.addCategory(node);
-
-      if (addResult.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      yield _this.loadCategories();
-    })();
-  }
-
-  loadCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      const result = yield _this.categoriesAdapter.getCategories();
-
-      if (result.isErr()) {
-        //TODO: add error processing
-        return;
-      }
-
-      const categories = result.getValue();
-
-      _this.categoriesStore.setCategoryList(categories);
-    })();
-  }
-
-  constructor(messageBoxService, categoriesAdapter, categoriesStore) {
-    this.messageBoxService = messageBoxService;
-    this.categoriesAdapter = categoriesAdapter;
-    this.categoriesStore = categoriesStore;
-  }
-
-};
-CategoriesService = __decorate$n([Service(), __param$h(0, Inject()), __param$h(1, Inject()), __param$h(2, Inject()), __metadata$h("design:type", Function), __metadata$h("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof CategoriesAdapter === "undefined" ? Object : CategoriesAdapter, typeof CategoriesStore === "undefined" ? Object : CategoriesStore])], CategoriesService);
-
-function asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$f(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$m = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$g = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$g = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$k = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -17546,7 +17026,7 @@ let CategoriesAction = class CategoriesAction {
   handleInitialLoadCategoryList() {
     var _this = this;
 
-    return _asyncToGenerator$f(function* () {
+    return _asyncToGenerator$j(function* () {
       if (!_this.categoriesStore.isEmptyCategories) return;
 
       _this.categoriesStore.setIsLoading(true);
@@ -17573,7 +17053,7 @@ let CategoriesAction = class CategoriesAction {
   }
 
 };
-CategoriesAction = __decorate$m([Action(), __param$g(0, Inject()), __param$g(1, Inject()), __param$g(2, Inject()), __metadata$g("design:type", Function), __metadata$g("design:paramtypes", [typeof CategoriesService === "undefined" ? Object : CategoriesService, typeof CategoriesStore === "undefined" ? Object : CategoriesStore, typeof HistoryService === "undefined" ? Object : HistoryService])], CategoriesAction);
+CategoriesAction = __decorate$s([Action(), __param$k(0, Inject()), __param$k(1, Inject()), __param$k(2, Inject()), __metadata$k("design:type", Function), __metadata$k("design:paramtypes", [typeof CategoriesService === "undefined" ? Object : CategoriesService, typeof CategoriesStore === "undefined" ? Object : CategoriesStore, typeof HistoryService === "undefined" ? Object : HistoryService])], CategoriesAction);
 
 const {
   useModuleContext: useCategoriesContext
@@ -17582,9 +17062,9 @@ const {
   categoriesStore: CategoriesStore
 });
 
-var loaderStyles_1mph9ax = '';
+const loaderStyles_1mph9ax = '';
 
-const Container$d = /*#__PURE__*/styled$1("div")({
+const Container$h = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c268xqd"
 });
@@ -17602,12 +17082,12 @@ function Loader() {
   });
 }
 function BlockLoader() {
-  return /*#__PURE__*/e(Container$d, {
+  return /*#__PURE__*/e(Container$h, {
     children: /*#__PURE__*/e(Loader, {})
   });
 }
 
-var controlsStyles_1lojvxn = '';
+const controlsStyles_1lojvxn = '';
 
 const ButtonWrapper$2 = /*#__PURE__*/styled$1("div")({
   name: "ButtonWrapper",
@@ -17668,37 +17148,55 @@ function getAttrFromElement(el, attribute) {
   }
 }
 
-var treeListStyles_17iluma = '';
+const treeListStyles_x642ct = '';
 
-const Container$c = /*#__PURE__*/styled$1("div")({
+const Container$g = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cik2084"
 });
+
+const treeItemStyles_xfyuqb = '';
+
 const extendedClasses = ({
   isActive,
   isRoot
 }) => {
-  return cx$1(isRoot ? "eggkn9q" : "e1k7iui1", isActive ? "etkrh1b" : '');
+  return cx$1(isRoot ? "ek1gtnd" : "e150exor", isActive ? "e1tjxynu" : '');
 };
-const TreeItem = /*#__PURE__*/styled$1("div")({
-  name: "TreeItem",
-  class: "tt6nbp3"
+const TreeItemContainer = /*#__PURE__*/styled$1("div")({
+  name: "TreeItemContainer",
+  class: "t7zzxu6"
 });
 
-const TreeList = observer(() => {
-  const {
-    categoriesAction,
-    categoriesStore
-  } = useCategoriesContext();
-  const selectedId = categoriesStore.selectedCategoryId;
-  const onClick = T$1(e => {
+function TreeItem({
+  isActive,
+  isRoot,
+  title,
+  categoryId
+}) {
+  return /*#__PURE__*/e(TreeItemContainer, {
+    "data-category-id": categoryId,
+    className: extendedClasses({
+      isActive,
+      isRoot
+    }),
+    children: title
+  });
+}
+
+function TreeList({
+  categoryTree,
+  onClick,
+  selectedId
+}) {
+  const handleClick = T$1(e => {
     const categoryId = getAttrFromElement(e.target, 'data-category-id');
     if (!categoryId) return;
-    categoriesAction.toggleSelectedCategoryId(categoryId);
-  }, [categoriesAction]);
-  return /*#__PURE__*/e(Container$c, {
-    onClick: onClick,
-    children: categoriesStore.categoryTree.map(treeItem => {
+    onClick(categoryId);
+  }, [onClick]);
+  return /*#__PURE__*/e(Container$g, {
+    onClick: handleClick,
+    children: categoryTree.map(treeItem => {
       const {
         item,
         isRoot
@@ -17706,14 +17204,28 @@ const TreeList = observer(() => {
       const isActive = item.id === selectedId;
       const key = `${item.id}-${item.title}-${item.catId}`;
       return /*#__PURE__*/e(TreeItem, {
-        "data-category-id": item.id,
-        className: extendedClasses({
-          isActive,
-          isRoot
-        }),
-        children: item.title
+        title: item.title,
+        isActive: isActive,
+        categoryId: item.id,
+        isRoot: isRoot
       }, key);
     })
+  });
+}
+
+const TreeListWrapper = observer(() => {
+  const {
+    categoriesAction,
+    categoriesStore
+  } = useCategoriesContext();
+  const selectedId = categoriesStore.selectedCategoryId;
+  const onClick = T$1(categoryId => {
+    categoriesAction.toggleSelectedCategoryId(categoryId);
+  }, [categoriesAction]);
+  return /*#__PURE__*/e(TreeList, {
+    onClick: onClick,
+    selectedId: selectedId,
+    categoryTree: categoriesStore.categoryTree
   });
 });
 
@@ -17733,15 +17245,15 @@ const Categories$1 = observer(() => {
     categoriesAction,
     categoriesStore
   } = useCategoriesContext();
-  _(() => {
+  h(() => {
     categoriesAction.handleInitialLoadCategoryList();
   }, [categoriesAction]);
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: [/*#__PURE__*/e(ScrollContainer, {
       children: /*#__PURE__*/e(Swap, {
         is: categoriesStore.isLoading,
         isSlot: /*#__PURE__*/e(Loader, {}),
-        children: /*#__PURE__*/e(TreeList, {})
+        children: /*#__PURE__*/e(TreeListWrapper, {})
       })
     }), /*#__PURE__*/e(Controls$1, {})]
   });
@@ -17759,18 +17271,18 @@ const categoriesRoutes = [{
   withNavigation: true
 }];
 
-var PouchesErrors;
+const {
+  PouchesErrors
+} = errorFactory('PouchesErrors', {
+  GetPouchesResponse: 'Failed load pouches',
+  UnexpectedErrorGetPouches: 'Unexpected load pouches',
+  RemovePouchResponse: 'Failed to remove pouch',
+  UnexpectedErrorRemovePouch: 'Unexpected remove pouch',
+  AddPouchResponse: 'Failed to add pouch',
+  UnexpectedErrorAddPouch: 'Unexpected add pouch'
+});
 
-(function (PouchesErrors) {
-  PouchesErrors.GetPouchesResponse = createErrorClass('Failed load pouches');
-  PouchesErrors.UnexpectedErrorGetPouches = createErrorClass('Unexpected load pouches');
-  PouchesErrors.RemovePouchResponse = createErrorClass('Failed to remove pouch');
-  PouchesErrors.UnexpectedErrorRemovePouch = createErrorClass('Unexpected remove pouch');
-  PouchesErrors.AddPouchResponse = createErrorClass('Failed to add pouch');
-  PouchesErrors.UnexpectedErrorAddPouch = createErrorClass('Unexpected add pouch');
-})(PouchesErrors || (PouchesErrors = {}));
-
-function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -17786,7 +17298,7 @@ function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$e(fn) {
+function _asyncToGenerator$i(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -17794,11 +17306,11 @@ function _asyncToGenerator$e(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -17806,7 +17318,7 @@ function _asyncToGenerator$e(fn) {
   };
 }
 
-var __decorate$l = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$r = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -17814,7 +17326,7 @@ var __decorate$l = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-function checkDateEnd(item) {
+function checkDateEnd$1(item) {
   return !item.dateEnd;
 }
 
@@ -17822,8 +17334,8 @@ let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider
   getPouches() {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
-      const pouches = yield _this.client.pouch.filter(checkDateEnd).toArray();
+    return _asyncToGenerator$i(function* () {
+      const pouches = yield _this.client.pouch.filter(checkDateEnd$1).toArray();
       return _this.ok(pouches);
     })();
   }
@@ -17831,7 +17343,7 @@ let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider
   addPouch(pouch) {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$i(function* () {
       const result = yield _this.client.pouch.add(pouch);
       return _this.ok(result);
     })();
@@ -17840,7 +17352,7 @@ let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider
   removePouch(pouchId) {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$i(function* () {
       const result = yield _this.client.pouch.update(pouchId, {
         dateEnd: Date.now()
       });
@@ -17849,9 +17361,9 @@ let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider
   }
 
 };
-PouchesDataProvider = __decorate$l([DataProvider()], PouchesDataProvider);
+PouchesDataProvider = __decorate$r([DataProvider()], PouchesDataProvider);
 
-function asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -17867,7 +17379,7 @@ function asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$d(fn) {
+function _asyncToGenerator$h(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -17875,11 +17387,11 @@ function _asyncToGenerator$d(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -17887,7 +17399,7 @@ function _asyncToGenerator$d(fn) {
   };
 }
 
-var __decorate$k = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$q = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -17895,11 +17407,11 @@ var __decorate$k = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$f = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$j = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$f = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$j = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -17908,16 +17420,13 @@ let PouchesAdapter = class PouchesAdapter {
   getPouches() {
     var _this = this;
 
-    return _asyncToGenerator$d(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
-        const {
-          error,
-          data
-        } = yield _this.pouchesDataProvider.getPouches();
-        if (error) return dist.Result.Err(new PouchesErrors.GetPouchesResponse(error));
-        return dist.Result.Ok(data);
+        const result = yield _this.pouchesDataProvider.getPouches();
+        if (isErr(result)) return resultErr(new PouchesErrors.GetPouchesResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new PouchesErrors.UnexpectedErrorGetPouches(e));
+        return resultErr(new PouchesErrors.UnexpectedErrorGetPouches(e));
       }
     })();
   }
@@ -17925,20 +17434,17 @@ let PouchesAdapter = class PouchesAdapter {
   addPouch(title) {
     var _this = this;
 
-    return _asyncToGenerator$d(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const pouch = {
           id: guid(),
           name: title
         };
-        const {
-          error,
-          data
-        } = yield _this.pouchesDataProvider.addPouch(pouch);
-        if (error) return dist.Result.Err(new PouchesErrors.AddPouchResponse(error));
-        return dist.Result.Ok(data);
+        const result = yield _this.pouchesDataProvider.addPouch(pouch);
+        if (isErr(result)) return resultErr(new PouchesErrors.AddPouchResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new PouchesErrors.UnexpectedErrorAddPouch(e));
+        return resultErr(new PouchesErrors.UnexpectedErrorAddPouch(e));
       }
     })();
   }
@@ -17946,16 +17452,13 @@ let PouchesAdapter = class PouchesAdapter {
   removePouch(pouchId) {
     var _this = this;
 
-    return _asyncToGenerator$d(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
-        const {
-          error,
-          data
-        } = yield _this.pouchesDataProvider.removePouch(pouchId);
-        if (error) return dist.Result.Err(new PouchesErrors.RemovePouchResponse(error));
-        return dist.Result.Ok(data);
+        const result = yield _this.pouchesDataProvider.removePouch(pouchId);
+        if (isErr(result)) return resultErr(new PouchesErrors.RemovePouchResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new PouchesErrors.UnexpectedErrorRemovePouch(e));
+        return resultErr(new PouchesErrors.UnexpectedErrorRemovePouch(e));
       }
     })();
   }
@@ -17965,9 +17468,9 @@ let PouchesAdapter = class PouchesAdapter {
   }
 
 };
-PouchesAdapter = __decorate$k([Adapter(), __param$f(0, Inject()), __metadata$f("design:type", Function), __metadata$f("design:paramtypes", [typeof PouchesDataProvider === "undefined" ? Object : PouchesDataProvider])], PouchesAdapter);
+PouchesAdapter = __decorate$q([Adapter(), __param$j(0, Inject()), __metadata$j("design:type", Function), __metadata$j("design:paramtypes", [typeof PouchesDataProvider === "undefined" ? Object : PouchesDataProvider])], PouchesAdapter);
 
-var __decorate$j = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$p = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18021,9 +17524,9 @@ let PouchStore = class PouchStore {
   }
 
 };
-PouchStore = __decorate$j([Store()], PouchStore);
+PouchStore = __decorate$p([Store()], PouchStore);
 
-function asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -18039,7 +17542,7 @@ function asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$c(fn) {
+function _asyncToGenerator$g(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -18047,11 +17550,11 @@ function _asyncToGenerator$c(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -18059,7 +17562,7 @@ function _asyncToGenerator$c(fn) {
   };
 }
 
-var __decorate$i = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$o = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18067,11 +17570,11 @@ var __decorate$i = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$e = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$i = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$e = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$i = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -18080,44 +17583,44 @@ let PouchService = class PouchService {
   loadPouches() {
     var _this = this;
 
-    return _asyncToGenerator$c(function* () {
+    return _asyncToGenerator$g(function* () {
       _this.pouchStore.setPouches([]);
 
       const result = yield _this.pouchesAdapter.getPouches();
 
-      if (result.isErr()) {
+      if (isErr(result)) {
         // TODO: add error processing
         return;
       }
 
-      _this.pouchStore.setPouches(result.getValue());
+      _this.pouchStore.setPouches(result.data);
     })();
   }
 
   addPouch() {
     var _this = this;
 
-    return _asyncToGenerator$c(function* () {
+    return _asyncToGenerator$g(function* () {
       const {
         isApplied,
         data
       } = yield _this.messageBoxService.prompt(t('pouchBlock.removeAsk'), '');
       if (!isApplied) return;
       const result = yield _this.pouchesAdapter.addPouch(data);
-      if (result.isErr()) return;
-      return result.getValue();
+      if (isErr(result)) return;
+      return result.data;
     })();
   }
 
   removePouch(pouchId) {
     var _this = this;
 
-    return _asyncToGenerator$c(function* () {
+    return _asyncToGenerator$g(function* () {
       if (!pouchId) return false;
       const isConfirmed = yield _this.messageBoxService.confirm(t('pouchBlock.removeAsk'));
       if (!isConfirmed) return false;
       const result = yield _this.pouchesAdapter.removePouch(pouchId);
-      if (result.isErr()) return false;
+      if (isErr(result)) return false;
       return true;
     })();
   }
@@ -18125,7 +17628,7 @@ let PouchService = class PouchService {
   selectPouch(pouchId) {
     var _this = this;
 
-    return _asyncToGenerator$c(function* () {
+    return _asyncToGenerator$g(function* () {
       _this.pouchStore.setCurrentPouch(pouchId);
     })();
   }
@@ -18137,15 +17640,15 @@ let PouchService = class PouchService {
   }
 
 };
-PouchService = __decorate$i([Service(), __param$e(0, Inject()), __param$e(1, Inject()), __param$e(2, Inject()), __metadata$e("design:type", Function), __metadata$e("design:paramtypes", [typeof PouchesAdapter === "undefined" ? Object : PouchesAdapter, typeof PouchStore === "undefined" ? Object : PouchStore, typeof MessageBoxService === "undefined" ? Object : MessageBoxService])], PouchService);
+PouchService = __decorate$o([Service(), __param$i(0, Inject()), __param$i(1, Inject()), __param$i(2, Inject()), __metadata$i("design:type", Function), __metadata$i("design:paramtypes", [typeof PouchesAdapter === "undefined" ? Object : PouchesAdapter, typeof PouchStore === "undefined" ? Object : PouchStore, typeof MessageBoxService === "undefined" ? Object : MessageBoxService])], PouchService);
 
 function Portal({
   children
 }) {
   const container = document.getElementById('portal');
   if (!container) return null;
-  return /*#__PURE__*/e(d$1, {
-    children: V( /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
+    children: V( /*#__PURE__*/e(p$1, {
       children: children
     }), container)
   });
@@ -18162,9 +17665,9 @@ function useModal({
   isVisible,
   onClose
 }) {
-  const [isContainerShown, setContainerShown] = y(isVisible);
-  const idRef = s('');
-  const prevStateRef = s(false);
+  const [isContainerShown, setContainerShown] = p(isVisible);
+  const idRef = _('');
+  const prevStateRef = _(false);
 
   if (!idRef.current) {
     idRef.current = guid();
@@ -18173,7 +17676,7 @@ function useModal({
   const [usedLocation, setLocation] = useSearchLocation();
   const hash = window.location.hash;
   const [basePath, searchLocation] = usedLocation.split('?');
-  _(() => {
+  h(() => {
     // on mount
     const queryParams = new URLSearchParams(searchLocation);
     queryParams.set(MODAL_PARAM_ID, idRef.current);
@@ -18181,7 +17684,7 @@ function useModal({
 
     setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  _(() => {
+  h(() => {
     const searchFromHash = hash.split('?')[1] || '';
     const queryParams = new URLSearchParams(searchFromHash);
     const id = queryParams.get(MODAL_PARAM_ID);
@@ -18202,9 +17705,9 @@ function useModal({
   };
 }
 
-var modalStyles_m5w5et = '';
+const modalStyles_m5w5et = '';
 
-const Container$b = /*#__PURE__*/styled$1("div")({
+const Container$f = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cb00m8k"
 });
@@ -18241,8 +17744,8 @@ function ModalContainer({
     handleClose
   } = useModalHandleClose();
   if (!isContainerShown) return null;
-  return /*#__PURE__*/e(d$1, {
-    children: /*#__PURE__*/e(Container$b, {
+  return /*#__PURE__*/e(p$1, {
+    children: /*#__PURE__*/e(Container$f, {
       children: [/*#__PURE__*/e(Overlay, {
         onClick: handleClose
       }), /*#__PURE__*/e(ContainerBg, {
@@ -18267,20 +17770,20 @@ function Modal({
   });
 }
 
-var MoneySpendingErrors;
+const {
+  MoneySpendingErrors
+} = errorFactory('MoneySpendingErrors', {
+  GetExpensesResponse: 'Failed load expenses',
+  UnexpectedErrorGetExpenses: 'Unexpected load expenses',
+  GetCategoriesResponse: 'Failed load categories',
+  UnexpectedErrorGetCategories: 'Unexpected load categories',
+  RemoveExpenseResponse: 'Failed remove expense',
+  UnexpectedErrorRemoveExpense: 'Unexpected remove expense',
+  AddExpenseResponse: 'Failed add expense',
+  UnexpectedErrorAddExpense: 'Unexpected add expense'
+});
 
-(function (MoneySpendingErrors) {
-  MoneySpendingErrors.GetExpensesResponse = createErrorClass('Failed load expenses');
-  MoneySpendingErrors.UnexpectedErrorGetExpenses = createErrorClass('Unexpected load expenses');
-  MoneySpendingErrors.GetCategoriesResponse = createErrorClass('Failed load categories');
-  MoneySpendingErrors.UnexpectedErrorGetCategories = createErrorClass('Unexpected load categories');
-  MoneySpendingErrors.RemoveExpenseResponse = createErrorClass('Failed remove expense');
-  MoneySpendingErrors.UnexpectedErrorRemoveExpense = createErrorClass('Unexpected remove expense');
-  MoneySpendingErrors.AddExpenseResponse = createErrorClass('Failed add expense');
-  MoneySpendingErrors.UnexpectedErrorAddExpense = createErrorClass('Unexpected add expense');
-})(MoneySpendingErrors || (MoneySpendingErrors = {}));
-
-function asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -18296,7 +17799,7 @@ function asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$b(fn) {
+function _asyncToGenerator$f(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -18304,11 +17807,11 @@ function _asyncToGenerator$b(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -18316,7 +17819,7 @@ function _asyncToGenerator$b(fn) {
   };
 }
 
-var __decorate$h = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$n = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18331,7 +17834,7 @@ let MoneySpendingDataProvider = class MoneySpendingDataProvider extends Database
   }) {
     var _this = this;
 
-    return _asyncToGenerator$b(function* () {
+    return _asyncToGenerator$f(function* () {
       const expenses = yield _this.client.expense.orderBy('time').reverse().filter(item => {
         if (item.dateEnd) return false;
         if (!pouchId && !item.pouchId) return true;
@@ -18345,7 +17848,7 @@ let MoneySpendingDataProvider = class MoneySpendingDataProvider extends Database
   getCategories() {
     var _this = this;
 
-    return _asyncToGenerator$b(function* () {
+    return _asyncToGenerator$f(function* () {
       const categories = yield _this.client.category.toArray();
       return _this.ok(categories);
     })();
@@ -18354,7 +17857,7 @@ let MoneySpendingDataProvider = class MoneySpendingDataProvider extends Database
   removeExpense(id) {
     var _this = this;
 
-    return _asyncToGenerator$b(function* () {
+    return _asyncToGenerator$f(function* () {
       const fields = {
         dateEnd: Date.now()
       };
@@ -18368,7 +17871,7 @@ let MoneySpendingDataProvider = class MoneySpendingDataProvider extends Database
   addExpense(expense) {
     var _this = this;
 
-    return _asyncToGenerator$b(function* () {
+    return _asyncToGenerator$f(function* () {
       _this.client.expense.add(expense);
 
       return _this.ok(true);
@@ -18376,9 +17879,9 @@ let MoneySpendingDataProvider = class MoneySpendingDataProvider extends Database
   }
 
 };
-MoneySpendingDataProvider = __decorate$h([DataProvider()], MoneySpendingDataProvider);
+MoneySpendingDataProvider = __decorate$n([DataProvider()], MoneySpendingDataProvider);
 
-function asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -18394,7 +17897,7 @@ function asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$a(fn) {
+function _asyncToGenerator$e(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -18402,11 +17905,11 @@ function _asyncToGenerator$a(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -18414,7 +17917,7 @@ function _asyncToGenerator$a(fn) {
   };
 }
 
-var __decorate$g = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$m = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18422,11 +17925,11 @@ var __decorate$g = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$d = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$h = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$d = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$h = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -18439,20 +17942,17 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }) {
     var _this = this;
 
-    return _asyncToGenerator$a(function* () {
+    return _asyncToGenerator$e(function* () {
       try {
-        const {
-          error,
-          data
-        } = yield _this.moneySpendingDataProvider.getExpenses({
+        const result = yield _this.moneySpendingDataProvider.getExpenses({
           offset,
           limit,
           pouchId
         });
-        if (error) return dist.Result.Err(new MoneySpendingErrors.GetExpensesResponse(error));
-        return dist.Result.Ok(data);
+        if (isErr(result)) return resultErr(new MoneySpendingErrors.GetExpensesResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new MoneySpendingErrors.UnexpectedErrorGetExpenses(e));
+        return resultErr(new MoneySpendingErrors.UnexpectedErrorGetExpenses(e));
       }
     })();
   }
@@ -18460,16 +17960,13 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   getCategories() {
     var _this = this;
 
-    return _asyncToGenerator$a(function* () {
+    return _asyncToGenerator$e(function* () {
       try {
-        const {
-          error,
-          data
-        } = yield _this.moneySpendingDataProvider.getCategories();
-        if (error) return dist.Result.Err(new MoneySpendingErrors.GetCategoriesResponse(error));
-        return dist.Result.Ok(data);
+        const result = yield _this.moneySpendingDataProvider.getCategories();
+        if (isErr(result)) return resultErr(new MoneySpendingErrors.GetCategoriesResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new MoneySpendingErrors.UnexpectedErrorGetCategories(e));
+        return resultErr(new MoneySpendingErrors.UnexpectedErrorGetCategories(e));
       }
     })();
   }
@@ -18477,16 +17974,13 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   removeExpense(id) {
     var _this = this;
 
-    return _asyncToGenerator$a(function* () {
+    return _asyncToGenerator$e(function* () {
       try {
-        const {
-          error,
-          data
-        } = yield _this.moneySpendingDataProvider.removeExpense(id);
-        if (error) return dist.Result.Err(new MoneySpendingErrors.RemoveExpenseResponse(error));
-        return dist.Result.Ok(data);
+        const result = yield _this.moneySpendingDataProvider.removeExpense(id);
+        if (isErr(result)) return resultErr(new MoneySpendingErrors.RemoveExpenseResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e));
+        return resultErr(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e));
       }
     })();
   }
@@ -18499,7 +17993,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }) {
     var _this = this;
 
-    return _asyncToGenerator$a(function* () {
+    return _asyncToGenerator$e(function* () {
       try {
         const expense = {
           id: guid(),
@@ -18510,14 +18004,11 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
           pouchId,
           catId
         };
-        const {
-          error,
-          data
-        } = yield _this.moneySpendingDataProvider.addExpense(expense);
-        if (error) return dist.Result.Err(new MoneySpendingErrors.AddExpenseResponse(error));
-        return dist.Result.Ok(data);
+        const result = yield _this.moneySpendingDataProvider.addExpense(expense);
+        if (isErr(result)) return resultErr(new MoneySpendingErrors.AddExpenseResponse(result.error));
+        return resultOk(result.data);
       } catch (e) {
-        return dist.Result.Err(new MoneySpendingErrors.UnexpectedErrorAddExpense(e));
+        return resultErr(new MoneySpendingErrors.UnexpectedErrorAddExpense(e));
       }
     })();
   }
@@ -18527,11 +18018,11 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }
 
 };
-MoneySpendingAdapter = __decorate$g([Adapter(), __param$d(0, Inject()), __metadata$d("design:type", Function), __metadata$d("design:paramtypes", [typeof MoneySpendingDataProvider === "undefined" ? Object : MoneySpendingDataProvider])], MoneySpendingAdapter);
+MoneySpendingAdapter = __decorate$m([Adapter(), __param$h(0, Inject()), __metadata$h("design:type", Function), __metadata$h("design:paramtypes", [typeof MoneySpendingDataProvider === "undefined" ? Object : MoneySpendingDataProvider])], MoneySpendingAdapter);
 
 const LIMIT_DEFAULT = 50;
 
-var __decorate$f = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$l = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18639,7 +18130,7 @@ let MoneySpendingStore = class MoneySpendingStore {
   }
 
 };
-MoneySpendingStore = __decorate$f([Store()], MoneySpendingStore);
+MoneySpendingStore = __decorate$l([Store()], MoneySpendingStore);
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -18675,7 +18166,7 @@ function _objectSpread(target) {
   return target;
 }
 
-var __decorate$e = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$k = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18733,7 +18224,13 @@ let ExpenseSelectionStore = class ExpenseSelectionStore {
     this.setFloat(false);
   }
 
-  removeLastFromCostList() {
+  backspaceCostList() {
+    if (this.currentCost !== 0) {
+      this.currentCost = 0;
+      this.setFloat(false);
+      return;
+    }
+
     this.costList.pop();
     this.setFloat(false);
   }
@@ -18793,9 +18290,9 @@ let ExpenseSelectionStore = class ExpenseSelectionStore {
   }
 
 };
-ExpenseSelectionStore = __decorate$e([Store()], ExpenseSelectionStore);
+ExpenseSelectionStore = __decorate$k([Store()], ExpenseSelectionStore);
 
-function asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -18811,7 +18308,7 @@ function asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$9(fn) {
+function _asyncToGenerator$d(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -18819,11 +18316,11 @@ function _asyncToGenerator$9(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -18831,7 +18328,7 @@ function _asyncToGenerator$9(fn) {
   };
 }
 
-var __decorate$d = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$j = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18839,11 +18336,11 @@ var __decorate$d = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$c = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$g = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$c = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$g = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -18852,19 +18349,19 @@ let MoneySpendingService = class MoneySpendingService {
   initialLoadData() {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$d(function* () {
       _this.moneySpendingStore.setExpenses([]);
 
       _this.moneySpendingStore.setOffset(0);
 
       const [categoriesResult] = yield Promise.all([_this.moneySpendingAdapter.getCategories(), _this.pouchService.loadPouches()]);
 
-      if (categoriesResult.isErr()) {
+      if (isErr(categoriesResult)) {
         // TODO: add error processing
         return;
       }
 
-      _this.moneySpendingStore.setCategories(categoriesResult.getValue());
+      _this.moneySpendingStore.setCategories(categoriesResult.data);
 
       if (_this.moneySpendingStore.categories.length === 0) {
         // open empty settings
@@ -18880,7 +18377,7 @@ let MoneySpendingService = class MoneySpendingService {
   reloadExpenses() {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$d(function* () {
       _this.moneySpendingStore.setExpenses([]);
 
       _this.moneySpendingStore.setOffset(0);
@@ -18892,7 +18389,7 @@ let MoneySpendingService = class MoneySpendingService {
   loadExpenses(offset) {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$d(function* () {
       const currentPouchId = _this.pouchStore.currentPouchId;
       const result = yield _this.moneySpendingAdapter.getExpenses({
         offset,
@@ -18900,14 +18397,14 @@ let MoneySpendingService = class MoneySpendingService {
         limit: LIMIT_DEFAULT
       });
 
-      if (result.isErr()) {
+      if (isErr(result)) {
         // TODO: add error
         return;
       }
 
       _this.moneySpendingStore.setOffset(offset + LIMIT_DEFAULT);
 
-      const nextExpenses = result.getValue();
+      const nextExpenses = result.data;
 
       _this.moneySpendingStore.addExpenses(nextExpenses);
     })();
@@ -18916,7 +18413,7 @@ let MoneySpendingService = class MoneySpendingService {
   removeExpense(id) {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$d(function* () {
       const isConfirmed = yield _this.messageBoxService.confirm(t('expense.confirmRemove'));
       if (!isConfirmed) return;
 
@@ -18926,7 +18423,7 @@ let MoneySpendingService = class MoneySpendingService {
 
       _this.moneySpendingStore.setIsLoading(false);
 
-      if (result.isErr()) {
+      if (isErr(result)) {
         //TODO: add error processing
         return;
       }
@@ -18942,7 +18439,7 @@ let MoneySpendingService = class MoneySpendingService {
   handleApply() {
     var _this = this;
 
-    return _asyncToGenerator$9(function* () {
+    return _asyncToGenerator$d(function* () {
       _this.moneySpendingStore.setIsLoading(true);
 
       const pouchId = _this.pouchStore.currentPouchId;
@@ -18958,7 +18455,7 @@ let MoneySpendingService = class MoneySpendingService {
           catId,
           cost,
           desc
-        }); // if (result.isErr()) {
+        }); // if (isErr(result)) {
         //   //TODO: add error processing
         //   return
         // }
@@ -18986,9 +18483,9 @@ let MoneySpendingService = class MoneySpendingService {
   }
 
 };
-MoneySpendingService = __decorate$d([Service(), __param$c(0, Inject()), __param$c(1, Inject()), __param$c(2, Inject()), __param$c(3, Inject()), __param$c(4, Inject()), __param$c(5, Inject()), __param$c(6, Inject()), __metadata$c("design:type", Function), __metadata$c("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof MoneySpendingAdapter === "undefined" ? Object : MoneySpendingAdapter, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof PouchService === "undefined" ? Object : PouchService, typeof PouchStore === "undefined" ? Object : PouchStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingService);
+MoneySpendingService = __decorate$j([Service(), __param$g(0, Inject()), __param$g(1, Inject()), __param$g(2, Inject()), __param$g(3, Inject()), __param$g(4, Inject()), __param$g(5, Inject()), __param$g(6, Inject()), __metadata$g("design:type", Function), __metadata$g("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof MoneySpendingAdapter === "undefined" ? Object : MoneySpendingAdapter, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof PouchService === "undefined" ? Object : PouchService, typeof PouchStore === "undefined" ? Object : PouchStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingService);
 
-function asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -19004,7 +18501,7 @@ function asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$8(fn) {
+function _asyncToGenerator$c(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -19012,11 +18509,11 @@ function _asyncToGenerator$8(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -19024,7 +18521,7 @@ function _asyncToGenerator$8(fn) {
   };
 }
 
-var __decorate$c = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$i = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -19032,11 +18529,11 @@ var __decorate$c = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$b = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$f = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$b = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$f = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -19053,7 +18550,7 @@ let PouchAction = class PouchAction {
   handleRemove(pouchId) {
     var _this = this;
 
-    return _asyncToGenerator$8(function* () {
+    return _asyncToGenerator$c(function* () {
       const isSame = pouchId === _this.pouchStore.currentPouchId;
       const isRemoved = yield _this.pouchService.removePouch(pouchId);
       if (!isRemoved) return;
@@ -19073,7 +18570,7 @@ let PouchAction = class PouchAction {
   handleAdd() {
     var _this = this;
 
-    return _asyncToGenerator$8(function* () {
+    return _asyncToGenerator$c(function* () {
       const newPouchId = yield _this.pouchService.addPouch();
       if (!newPouchId) return;
 
@@ -19089,7 +18586,7 @@ let PouchAction = class PouchAction {
   handleSelect(pouchId) {
     var _this = this;
 
-    return _asyncToGenerator$8(function* () {
+    return _asyncToGenerator$c(function* () {
       _this.moneySpendingStore.setIsLoading(true);
 
       yield _this.pouchService.selectPouch(pouchId);
@@ -19107,7 +18604,7 @@ let PouchAction = class PouchAction {
   }
 
 };
-PouchAction = __decorate$c([Action(), __param$b(0, Inject()), __param$b(1, Inject()), __param$b(2, Inject()), __param$b(3, Inject()), __metadata$b("design:type", Function), __metadata$b("design:paramtypes", [typeof PouchStore === "undefined" ? Object : PouchStore, typeof PouchService === "undefined" ? Object : PouchService, typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], PouchAction);
+PouchAction = __decorate$i([Action(), __param$f(0, Inject()), __param$f(1, Inject()), __param$f(2, Inject()), __param$f(3, Inject()), __metadata$f("design:type", Function), __metadata$f("design:paramtypes", [typeof PouchStore === "undefined" ? Object : PouchStore, typeof PouchService === "undefined" ? Object : PouchService, typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], PouchAction);
 
 const {
   useModuleContext: usePouchContext
@@ -19116,13 +18613,13 @@ const {
   pouchAction: PouchAction
 });
 
-var pouchItemStyles_1i6bhrb = '';
+const pouchItemStyles_1i6bhrb = '';
 
 const Row$3 = /*#__PURE__*/styled$1("button")({
   name: "Row",
   class: "r1ula01y"
 });
-const Container$a = /*#__PURE__*/styled$1("div")({
+const Container$e = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cqvsgeu"
 });
@@ -19151,7 +18648,7 @@ function PouchItem({
   const handleSelect = T$1(() => {
     onSelect(pouch.id);
   }, [onSelect, pouch.id]);
-  return /*#__PURE__*/e(Container$a, {
+  return /*#__PURE__*/e(Container$e, {
     children: [/*#__PURE__*/e(Row$3, {
       onClick: handleSelect,
       children: [/*#__PURE__*/e(IconWrapper$2, {
@@ -19213,9 +18710,9 @@ const PouchModal = observer(() => {
   });
 });
 
-var linkStyles_aqii0v = '';
+const linkStyles_aqii0v = '';
 
-const Container$9 = /*#__PURE__*/styled$1("div")({
+const Container$d = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c67ods1"
 });
@@ -19234,7 +18731,7 @@ function Link({
   onClick,
   isDisabled
 }) {
-  return /*#__PURE__*/e(Container$9, {
+  return /*#__PURE__*/e(Container$d, {
     onClick: onClick,
     disabled: isDisabled,
     children: [icon && /*#__PURE__*/e(IconWrapper$1, {
@@ -19252,7 +18749,7 @@ const PouchSelection = observer(() => {
     pouchStore,
     pouchAction
   } = usePouchContext();
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: /*#__PURE__*/e(Link, {
       icon: "wallet",
       onClick: pouchAction.handleOpenPouchesList,
@@ -19273,19 +18770,19 @@ addBlock({
 });
 
 function PouchBlock() {
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: [/*#__PURE__*/e(PouchSelection, {}), /*#__PURE__*/e(PouchModal, {})]
   });
 }
 
-var expensesPageStyles_3m5f7r = '';
+const expensesPageStyles_3m5f7r = '';
 
 const LoadMoreWrapper = /*#__PURE__*/styled$1("div")({
   name: "LoadMoreWrapper",
   class: "l14jmizt"
 });
 
-function asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -19301,7 +18798,7 @@ function asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$7(fn) {
+function _asyncToGenerator$b(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -19309,11 +18806,11 @@ function _asyncToGenerator$7(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -19321,7 +18818,7 @@ function _asyncToGenerator$7(fn) {
   };
 }
 
-var __decorate$b = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$h = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -19329,11 +18826,11 @@ var __decorate$b = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$a = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$e = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$a = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$e = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -19342,7 +18839,7 @@ let MoneySpendingAction = class MoneySpendingAction {
   initialLoadData() {
     var _this = this;
 
-    return _asyncToGenerator$7(function* () {
+    return _asyncToGenerator$b(function* () {
       if (_this.moneySpendingStore.offset !== 0) return;
 
       _this.moneySpendingStore.setIsLoading(true);
@@ -19356,7 +18853,7 @@ let MoneySpendingAction = class MoneySpendingAction {
   handleLoadNextExpenses() {
     var _this = this;
 
-    return _asyncToGenerator$7(function* () {
+    return _asyncToGenerator$b(function* () {
       _this.moneySpendingStore.setIsLoading(true);
 
       yield _this.moneySpendingService.loadExpenses(_this.moneySpendingStore.offset);
@@ -19384,9 +18881,46 @@ let MoneySpendingAction = class MoneySpendingAction {
   }
 
 };
-MoneySpendingAction = __decorate$b([Action(), __param$a(0, Inject()), __param$a(1, Inject()), __param$a(2, Inject()), __metadata$a("design:type", Function), __metadata$a("design:paramtypes", [typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingAction);
+MoneySpendingAction = __decorate$h([Action(), __param$e(0, Inject()), __param$e(1, Inject()), __param$e(2, Inject()), __metadata$e("design:type", Function), __metadata$e("design:paramtypes", [typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingAction);
 
-var __decorate$a = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$g = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let ExpenseViewListService = class ExpenseViewListService {
+  mapExpenseToExpenseViewEntityList(expenseList, categoryList) {
+    const categoryMap = {};
+    categoryList.forEach(item => {
+      categoryMap[item.id] = item;
+    });
+    return expenseList.map(expenseItem => {
+      const catId = expenseItem.catId;
+      const cat = categoryMap[catId];
+      const parentCat = cat && cat.catId ? categoryMap[cat.catId] : null;
+      return {
+        id: expenseItem.id,
+        catId: expenseItem.catId,
+        cost: expenseItem.cost,
+        pouchId: expenseItem.pouchId,
+        time: expenseItem.time,
+        state: expenseItem.state,
+        dateBegin: expenseItem.dateBegin,
+        dateEnd: expenseItem.dateEnd,
+        desc: expenseItem.desc,
+        catParentTitle: parentCat ? parentCat.title : '',
+        catParentId: parentCat === null || parentCat === void 0 ? void 0 : parentCat.id,
+        catTitle: cat ? cat.title : ''
+      };
+    });
+  }
+
+};
+ExpenseViewListService = __decorate$g([Service()], ExpenseViewListService);
+
+var __decorate$f = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -19394,11 +18928,11 @@ var __decorate$a = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$9 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$d = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$9 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$d = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -19437,48 +18971,23 @@ let ExpensesViewStore = class ExpensesViewStore {
   }
 
   get expensesView() {
-    return this.mapExpenseToExpenseViewEntityList(this.moneySpendingStore.expenses, this.moneySpendingStore.categories);
-  }
-
-  mapExpenseToExpenseViewEntityList(expenseList, categoryList) {
-    const categoryMap = {};
-    categoryList.forEach(item => {
-      categoryMap[item.id] = item;
-    });
-    return expenseList.map(expenseItem => {
-      const catId = expenseItem.catId;
-      const cat = categoryMap[catId];
-      const parentCat = cat && cat.catId ? categoryMap[cat.catId] : null;
-      return {
-        id: expenseItem.id,
-        catId: expenseItem.catId,
-        cost: expenseItem.cost,
-        pouchId: expenseItem.pouchId,
-        time: expenseItem.time,
-        state: expenseItem.state,
-        dateBegin: expenseItem.dateBegin,
-        dateEnd: expenseItem.dateEnd,
-        desc: expenseItem.desc,
-        catParentTitle: parentCat ? parentCat.title : '',
-        catParentId: parentCat === null || parentCat === void 0 ? void 0 : parentCat.id,
-        catTitle: cat ? cat.title : ''
-      };
-    });
+    return this.expenseViewListService.mapExpenseToExpenseViewEntityList(this.moneySpendingStore.expenses, this.moneySpendingStore.categories);
   }
 
   getExpenseViewById(id) {
     return this.expensesView.find(item => item.id === id) || null;
   }
 
-  constructor(langStore, moneySpendingStore) {
+  constructor(langStore, moneySpendingStore, expenseViewListService) {
     this.langStore = langStore;
     this.moneySpendingStore = moneySpendingStore;
+    this.expenseViewListService = expenseViewListService;
   }
 
 };
-ExpensesViewStore = __decorate$a([Store(), __param$9(0, Inject()), __param$9(1, Inject()), __metadata$9("design:type", Function), __metadata$9("design:paramtypes", [typeof LangStore === "undefined" ? Object : LangStore, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], ExpensesViewStore);
+ExpensesViewStore = __decorate$f([Store(), __param$d(0, Inject()), __param$d(1, Inject()), __param$d(2, Inject()), __metadata$d("design:type", Function), __metadata$d("design:paramtypes", [typeof LangStore === "undefined" ? Object : LangStore, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof ExpenseViewListService === "undefined" ? Object : ExpenseViewListService])], ExpensesViewStore);
 
-function asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -19494,7 +19003,7 @@ function asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$6(fn) {
+function _asyncToGenerator$a(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -19502,11 +19011,11 @@ function _asyncToGenerator$6(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$a(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -19514,7 +19023,7 @@ function _asyncToGenerator$6(fn) {
   };
 }
 
-var __decorate$9 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$e = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -19522,11 +19031,11 @@ var __decorate$9 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$8 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$c = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$8 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$c = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -19548,7 +19057,7 @@ let ExpenseSelectionAction = class ExpenseSelectionAction {
   handleRemoveExpense() {
     var _this = this;
 
-    return _asyncToGenerator$6(function* () {
+    return _asyncToGenerator$a(function* () {
       var ref;
       const id = (ref = _this.expenseSelectionStore.currentExpenseView) === null || ref === void 0 ? void 0 : ref.id;
       if (!id) return;
@@ -19572,8 +19081,8 @@ let ExpenseSelectionAction = class ExpenseSelectionAction {
     this.expenseSelectionStore.pushCurrentToCostList();
   }
 
-  handlePopCost() {
-    this.expenseSelectionStore.removeLastFromCostList();
+  handleBackspaceCost() {
+    this.expenseSelectionStore.backspaceCostList();
   }
 
   handleClear() {
@@ -19600,7 +19109,7 @@ let ExpenseSelectionAction = class ExpenseSelectionAction {
   }
 
 };
-ExpenseSelectionAction = __decorate$9([Action(), __param$8(0, Inject()), __param$8(1, Inject()), __param$8(2, Inject()), __param$8(3, Inject()), __metadata$8("design:type", Function), __metadata$8("design:paramtypes", [typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof ExpensesViewStore === "undefined" ? Object : ExpensesViewStore])], ExpenseSelectionAction);
+ExpenseSelectionAction = __decorate$e([Action(), __param$c(0, Inject()), __param$c(1, Inject()), __param$c(2, Inject()), __param$c(3, Inject()), __metadata$c("design:type", Function), __metadata$c("design:paramtypes", [typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof ExpensesViewStore === "undefined" ? Object : ExpensesViewStore])], ExpenseSelectionAction);
 
 const {
   useModuleContext: useMoneySpendingContext
@@ -19612,16 +19121,16 @@ const {
   expensesViewStore: ExpensesViewStore
 });
 
-var dot_ur8aht = '';
+const dot_ur8aht = '';
 
 const Dot = /*#__PURE__*/styled$1("span")({
   name: "Dot",
   class: "d1e6vu4z"
 });
 
-var todayCostStyles_1ijec60 = '';
+const todayCostStyles_1ijec60 = '';
 
-const Container$8 = /*#__PURE__*/styled$1("div")({
+const Container$c = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "ch0zh0"
 });
@@ -19638,7 +19147,7 @@ const TodayCost = observer(() => {
   const {
     expensesViewStore
   } = useMoneySpendingContext();
-  return /*#__PURE__*/e(Container$8, {
+  return /*#__PURE__*/e(Container$c, {
     children: [/*#__PURE__*/e(Item$1, {
       children: t('expense.today')
     }), /*#__PURE__*/e(Item$1, {
@@ -19653,9 +19162,9 @@ const isIntersectionAvailable = ('IntersectionObserver' in window);
 function useIntersection({
   onChange
 }) {
-  const elementRef = s(null);
-  const observerRef = s(null);
-  const handleRef = s(onChange);
+  const elementRef = _(null);
+  const observerRef = _(null);
+  const handleRef = _(onChange);
   handleRef.current = onChange;
   const anchorRef = T$1(node => {
     if (!isIntersectionAvailable) return;
@@ -19694,7 +19203,7 @@ function useExpensesPage() {
     moneySpendingAction,
     moneySpendingStore
   } = useMoneySpendingContext();
-  _(() => {
+  h(() => {
     moneySpendingAction.initialLoadData();
   }, [moneySpendingAction]);
   const handleChangeViewport = T$1(state => {
@@ -19713,7 +19222,7 @@ function useExpensesPage() {
   };
 }
 
-var controlsStyles_jgx9w4 = '';
+const controlsStyles_jgx9w4 = '';
 
 const ButtonWrapper$1 = /*#__PURE__*/styled$1("div")({
   name: "ButtonWrapper",
@@ -19759,9 +19268,9 @@ const Controls = observer(() => {
   });
 });
 
-var expenseRowStyles_qxlb90 = '';
+const expenseRowStyles_qxlb90 = '';
 
-const Container$7 = /*#__PURE__*/styled$1("div")({
+const Container$b = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1n9ew6p"
 });
@@ -19806,8 +19315,8 @@ function ExpenseRow({
   const rawMinutes = date.getMinutes();
   const minutes = rawMinutes < 10 ? `0${rawMinutes}` : rawMinutes;
   const isToday = expenseView.time >= expensesViewStore.startTime;
-  const refEl = s(null);
-  _(() => {
+  const refEl = _(null);
+  h(() => {
     if (!isScrollTo) return;
     if (!refEl.current) return;
     refEl.current.scrollIntoView({
@@ -19815,7 +19324,7 @@ function ExpenseRow({
       inline: 'center'
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return /*#__PURE__*/e(Container$7, {
+  return /*#__PURE__*/e(Container$b, {
     "data-is-selected": isSelected,
     ref: refEl,
     children: [/*#__PURE__*/e(LeftBlock, {
@@ -19834,7 +19343,7 @@ function ExpenseRow({
   });
 }
 
-var expenseListStyles_3cw4ik = '';
+const expenseListStyles_3cw4ik = '';
 
 const RowsContainer = /*#__PURE__*/styled$1("ul")({
   name: "RowsContainer",
@@ -19896,7 +19405,7 @@ const ExpensesPage = observer(() => {
     moneySpendingStore,
     moneySpendingAction
   } = useExpensesPage();
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: [/*#__PURE__*/e(ScrollContainer, {
       children: /*#__PURE__*/e(Swap, {
         is: moneySpendingStore.isInitialLoading,
@@ -19914,7 +19423,7 @@ const ExpensesPage = observer(() => {
   });
 });
 
-var expenseItemStyles_d6mup8 = '';
+const expenseItemStyles_d6mup8 = '';
 
 const ButtonWrapper = /*#__PURE__*/styled$1("div")({
   name: "ButtonWrapper",
@@ -19925,9 +19434,9 @@ const Block = /*#__PURE__*/styled$1("div")({
   class: "bhrg2ct"
 });
 
-var categoriesStyles_1iw4uo6 = '';
+const categoriesStyles_1iw4uo6 = '';
 
-const Header = /*#__PURE__*/styled$1("div")({
+const Header$1 = /*#__PURE__*/styled$1("div")({
   name: "Header",
   class: "h4kaban"
 });
@@ -19949,8 +19458,8 @@ const Categories = observer(() => {
     selectedCategoryId
   } = moneySpendingStore;
   const isCategorySelected = !!selectedCategoryId;
-  return /*#__PURE__*/e(d$1, {
-    children: [/*#__PURE__*/e(Header, {
+  return /*#__PURE__*/e(p$1, {
+    children: [/*#__PURE__*/e(Header$1, {
       children: /*#__PURE__*/e(Swap, {
         is: !isCategorySelected,
         isSlot: t('moneySpending.selectCategory'),
@@ -19975,9 +19484,9 @@ const Categories = observer(() => {
   });
 });
 
-var inputStyles_frh1ky = '';
+const inputStyles_frh1ky = '';
 
-const Container$6 = /*#__PURE__*/styled$1("div")({
+const Container$a = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1dz5pjj"
 });
@@ -19991,7 +19500,7 @@ function Input$1({
     const target = ev.target;
     onChange(target.value);
   }, [onChange]);
-  return /*#__PURE__*/e(Container$6, {
+  return /*#__PURE__*/e(Container$a, {
     children: /*#__PURE__*/e("input", {
       type: type,
       value: value,
@@ -20000,9 +19509,9 @@ function Input$1({
   });
 }
 
-var descStyles_oz0q3r = '';
+const descStyles_oz0q3r = '';
 
-const Container$5 = /*#__PURE__*/styled$1("div")({
+const Container$9 = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "ct5s5ng"
 });
@@ -20012,7 +19521,7 @@ const Desc = observer(() => {
     expenseSelectionAction,
     expenseSelectionStore
   } = useMoneySpendingContext();
-  return /*#__PURE__*/e(Container$5, {
+  return /*#__PURE__*/e(Container$9, {
     children: /*#__PURE__*/e(Input$1, {
       value: expenseSelectionStore.currentDesc,
       onChange: expenseSelectionAction.handleChangeDesc
@@ -20020,9 +19529,9 @@ const Desc = observer(() => {
   });
 });
 
-var padTitleStyles_14qva38 = '';
+const padTitleStyles_14qva38 = '';
 
-const Container$4 = /*#__PURE__*/styled$1("div")({
+const Container$8 = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1qibejp"
 });
@@ -20043,7 +19552,7 @@ const PadTitle = observer(() => {
   const {
     expenseSelectionStore
   } = useMoneySpendingContext();
-  return /*#__PURE__*/e(Container$4, {
+  return /*#__PURE__*/e(Container$8, {
     children: [/*#__PURE__*/e(CostView, {
       children: expenseSelectionStore.costsView
     }), /*#__PURE__*/e(CurrentCost, {
@@ -20054,9 +19563,9 @@ const PadTitle = observer(() => {
   });
 });
 
-var padBlockStyles_kxndoe = '';
+const padBlockStyles_kxndoe = '';
 
-const Container$3 = /*#__PURE__*/styled$1("div")({
+const Container$7 = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c5pb6z"
 });
@@ -20104,7 +19613,7 @@ function usePadBlock() {
         return;
 
       case 'backspace':
-        expenseSelectionAction.handlePopCost();
+        expenseSelectionAction.handleBackspaceCost();
         return;
 
       case 'plus':
@@ -20129,7 +19638,7 @@ const PadBlock = observer(() => {
   const {
     handleClick
   } = usePadBlock();
-  return /*#__PURE__*/e(Container$3, {
+  return /*#__PURE__*/e(Container$7, {
     onClick: handleClick,
     children: [/*#__PURE__*/e(Row$1, {
       children: [/*#__PURE__*/e(PadButton, {
@@ -20219,12 +19728,12 @@ const ExpenseItemPage = observer(() => {
   const {
     focusStore
   } = useFocusContext();
-  _(() => {
+  h(() => {
     return () => {
       expenseSelectionAction.handleSelectCategoryId('');
     };
   }, [expenseSelectionAction]);
-  return /*#__PURE__*/e(d$1, {
+  return /*#__PURE__*/e(p$1, {
     children: [/*#__PURE__*/e(ScrollContainer, {
       children: [/*#__PURE__*/e(Categories, {}), moneySpendingStore.isCalculatorVisible && /*#__PURE__*/e(Block, {
         children: [/*#__PURE__*/e(Desc, {}), /*#__PURE__*/e(PadTitle, {}), /*#__PURE__*/e(PadBlock, {})]
@@ -20257,7 +19766,7 @@ const moneySpendingRoutes = [{
   component: ExpenseItemPage
 }];
 
-function asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -20273,7 +19782,7 @@ function asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$5(fn) {
+function _asyncToGenerator$9(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -20281,11 +19790,11 @@ function _asyncToGenerator$5(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$9(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -20293,7 +19802,7 @@ function _asyncToGenerator$5(fn) {
   };
 }
 
-var __decorate$8 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$d = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20301,11 +19810,11 @@ var __decorate$8 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$7 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$b = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$7 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$b = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -20314,12 +19823,10 @@ let DropAllService = class DropAllService {
   dropData() {
     var _this = this;
 
-    return _asyncToGenerator$5(function* () {
+    return _asyncToGenerator$9(function* () {
       const isConfirmed = yield _this.messageBoxService.confirm(t('settings.sureDrop'));
       if (!isConfirmed) return;
-      const result = yield _this.settingsAdapter.dropData();
-
-      if (result.isErr()) ;
+      yield _this.settingsAdapter.dropData();
 
       _this.dropRelatedStores();
     })();
@@ -20338,9 +19845,9 @@ let DropAllService = class DropAllService {
   }
 
 };
-DropAllService = __decorate$8([Service(), __param$7(0, Inject()), __param$7(1, Inject()), __param$7(2, Inject()), __param$7(3, Inject()), __metadata$7("design:type", Function), __metadata$7("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter, typeof CategoriesStore === "undefined" ? Object : CategoriesStore, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], DropAllService);
+DropAllService = __decorate$d([Service(), __param$b(0, Inject()), __param$b(1, Inject()), __param$b(2, Inject()), __param$b(3, Inject()), __metadata$b("design:type", Function), __metadata$b("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter, typeof CategoriesStore === "undefined" ? Object : CategoriesStore, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], DropAllService);
 
-function asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -20356,7 +19863,7 @@ function asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$4(fn) {
+function _asyncToGenerator$8(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -20364,11 +19871,11 @@ function _asyncToGenerator$4(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$8(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -20376,7 +19883,7 @@ function _asyncToGenerator$4(fn) {
   };
 }
 
-var __decorate$7 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$c = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20384,11 +19891,11 @@ var __decorate$7 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$6 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$a = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$6 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$a = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -20411,7 +19918,7 @@ let ImportFinService = class ImportFinService {
   importFiles(files) {
     var _this = this;
 
-    return _asyncToGenerator$4(function* () {
+    return _asyncToGenerator$8(function* () {
       if (!files || files.length === 0) return;
       const content = yield _this.fileService.readTextFile(files[0]);
       const result = ImportFinService.decompressFromBase64(content);
@@ -20423,7 +19930,7 @@ let ImportFinService = class ImportFinService {
 
       const importResult = yield _this.settingsAdapter.importData(result.data);
 
-      if (importResult.isErr()) {
+      if (isErr(importResult)) {
         yield _this.messageBoxService.alert(t('settings.importError'));
         return;
       }
@@ -20440,9 +19947,9 @@ let ImportFinService = class ImportFinService {
   }
 
 };
-ImportFinService = __decorate$7([Service(), __param$6(0, Inject()), __param$6(1, Inject()), __param$6(2, Inject()), __param$6(3, Inject()), __metadata$6("design:type", Function), __metadata$6("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof FileService === "undefined" ? Object : FileService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter, typeof DropAllService === "undefined" ? Object : DropAllService])], ImportFinService);
+ImportFinService = __decorate$c([Service(), __param$a(0, Inject()), __param$a(1, Inject()), __param$a(2, Inject()), __param$a(3, Inject()), __metadata$a("design:type", Function), __metadata$a("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof FileService === "undefined" ? Object : FileService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter, typeof DropAllService === "undefined" ? Object : DropAllService])], ImportFinService);
 
-function asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -20458,7 +19965,7 @@ function asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$3(fn) {
+function _asyncToGenerator$7(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -20466,11 +19973,11 @@ function _asyncToGenerator$3(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$7(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -20478,7 +19985,7 @@ function _asyncToGenerator$3(fn) {
   };
 }
 
-var __decorate$6 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$b = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20486,11 +19993,11 @@ var __decorate$6 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$5 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$9 = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$5 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$9 = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -20499,7 +20006,7 @@ let ExportFinService = class ExportFinService {
   saveDbToFile(storeData) {
     var _this = this;
 
-    return _asyncToGenerator$3(function* () {
+    return _asyncToGenerator$7(function* () {
       try {
         const str = JSON.stringify(storeData);
         const content = lz.compressToBase64(str);
@@ -20514,15 +20021,15 @@ let ExportFinService = class ExportFinService {
   exportData() {
     var _this = this;
 
-    return _asyncToGenerator$3(function* () {
+    return _asyncToGenerator$7(function* () {
       const result = yield _this.settingsAdapter.getAllData();
 
-      if (result.isErr()) {
+      if (isErr(result)) {
         yield _this.messageBoxService.alert(t('settings.exportError'));
         return;
       }
 
-      const data = result.getValue();
+      const data = result.data;
       yield _this.saveDbToFile({
         dbVersion: 4,
         data,
@@ -20542,7 +20049,7 @@ let ExportFinService = class ExportFinService {
   }
 
 };
-ExportFinService = __decorate$6([Service(), __param$5(0, Inject()), __param$5(1, Inject()), __param$5(2, Inject()), __metadata$5("design:type", Function), __metadata$5("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof FileService === "undefined" ? Object : FileService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter])], ExportFinService);
+ExportFinService = __decorate$b([Service(), __param$9(0, Inject()), __param$9(1, Inject()), __param$9(2, Inject()), __metadata$9("design:type", Function), __metadata$9("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof FileService === "undefined" ? Object : FileService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter])], ExportFinService);
 
 addBlock({
   data: {
@@ -20559,7 +20066,7 @@ addBlock({
   }
 });
 
-var __decorate$5 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$a = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20567,11 +20074,11 @@ var __decorate$5 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$4 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$8 = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$4 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$8 = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -20598,7 +20105,7 @@ let SheetsService = class SheetsService {
         rows: []
       };
     });
-    const expenseViewList = this.expenseViewStore.mapExpenseToExpenseViewEntityList(data.expense, data.category);
+    const expenseViewList = this.expenseViewListService.mapExpenseToExpenseViewEntityList(data.expense, data.category);
     expenseViewList.forEach(item => {
       const pouchId = item.pouchId;
       const list = pouchId ? pouchMap[pouchId] : null;
@@ -20649,14 +20156,14 @@ let SheetsService = class SheetsService {
     return sheets;
   }
 
-  constructor(expenseViewStore) {
-    this.expenseViewStore = expenseViewStore;
+  constructor(expenseViewListService) {
+    this.expenseViewListService = expenseViewListService;
   }
 
 };
-SheetsService = __decorate$5([Service(), __param$4(0, Inject()), __metadata$4("design:type", Function), __metadata$4("design:paramtypes", [typeof ExpensesViewStore === "undefined" ? Object : ExpensesViewStore])], SheetsService);
+SheetsService = __decorate$a([Service(), __param$8(0, Inject()), __metadata$8("design:type", Function), __metadata$8("design:paramtypes", [typeof ExpenseViewListService === "undefined" ? Object : ExpenseViewListService])], SheetsService);
 
-function asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -20672,7 +20179,7 @@ function asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$2(fn) {
+function _asyncToGenerator$6(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -20680,11 +20187,11 @@ function _asyncToGenerator$2(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$6(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -20692,7 +20199,7 @@ function _asyncToGenerator$2(fn) {
   };
 }
 
-var __decorate$4 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$9 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20700,11 +20207,11 @@ var __decorate$4 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$3 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$7 = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$3 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$7 = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -20721,15 +20228,15 @@ let ExportCsvService = class ExportCsvService {
   exportData() {
     var _this = this;
 
-    return _asyncToGenerator$2(function* () {
+    return _asyncToGenerator$6(function* () {
       const result = yield _this.settingsAdapter.getAllData();
 
-      if (result.isErr()) {
+      if (isErr(result)) {
         yield _this.messageBoxService.alert(t('settings.exportError'));
         return;
       }
 
-      const data = result.getValue();
+      const data = result.data;
 
       const sheets = _this.sheetsService.getSheets(data);
 
@@ -20752,9 +20259,9 @@ let ExportCsvService = class ExportCsvService {
   }
 
 };
-ExportCsvService = __decorate$4([Service(), __param$3(0, Inject()), __param$3(1, Inject()), __param$3(2, Inject()), __param$3(3, Inject()), __metadata$3("design:type", Function), __metadata$3("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter, typeof FileService === "undefined" ? Object : FileService, typeof SheetsService === "undefined" ? Object : SheetsService])], ExportCsvService);
+ExportCsvService = __decorate$9([Service(), __param$7(0, Inject()), __param$7(1, Inject()), __param$7(2, Inject()), __param$7(3, Inject()), __metadata$7("design:type", Function), __metadata$7("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof SettingsAdapter === "undefined" ? Object : SettingsAdapter, typeof FileService === "undefined" ? Object : FileService, typeof SheetsService === "undefined" ? Object : SheetsService])], ExportCsvService);
 
-var __decorate$3 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$8 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20771,9 +20278,9 @@ let SettingsStore = class SettingsStore {
   }
 
 };
-SettingsStore = __decorate$3([Store()], SettingsStore);
+SettingsStore = __decorate$8([Store()], SettingsStore);
 
-function asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, key, arg) {
+function asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
     var value = info.value;
@@ -20789,7 +20296,7 @@ function asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, key, arg) {
   }
 }
 
-function _asyncToGenerator$1(fn) {
+function _asyncToGenerator$5(fn) {
   return function () {
     var self = this,
         args = arguments;
@@ -20797,11 +20304,11 @@ function _asyncToGenerator$1(fn) {
       var gen = fn.apply(self, args);
 
       function _next(value) {
-        asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "next", value);
+        asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, "next", value);
       }
 
       function _throw(err) {
-        asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "throw", err);
+        asyncGeneratorStep$5(gen, resolve, reject, _next, _throw, "throw", err);
       }
 
       _next(undefined);
@@ -20809,7 +20316,7 @@ function _asyncToGenerator$1(fn) {
   };
 }
 
-var __decorate$2 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$7 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -20817,11 +20324,11 @@ var __decorate$2 = globalThis && globalThis.__decorate || function (decorators, 
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
-var __metadata$2 = globalThis && globalThis.__metadata || function (k, v) {
+var __metadata$6 = globalThis && globalThis.__metadata || function (k, v) {
   if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var __param$2 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+var __param$6 = globalThis && globalThis.__param || function (paramIndex, decorator) {
   return function (target, key) {
     decorator(target, key, paramIndex);
   };
@@ -20830,7 +20337,7 @@ let SettingsAction = class SettingsAction {
   handleImportFiles(files) {
     var _this = this;
 
-    return _asyncToGenerator$1(function* () {
+    return _asyncToGenerator$5(function* () {
       _this.settingsStore.setIsLoading(true);
 
       yield _this.importFinService.importFiles(files);
@@ -20842,7 +20349,7 @@ let SettingsAction = class SettingsAction {
   handleExportAsFin() {
     var _this = this;
 
-    return _asyncToGenerator$1(function* () {
+    return _asyncToGenerator$5(function* () {
       _this.settingsStore.setIsLoading(true);
 
       yield _this.exportFinService.exportData();
@@ -20854,7 +20361,7 @@ let SettingsAction = class SettingsAction {
   handleExportAsCsv() {
     var _this = this;
 
-    return _asyncToGenerator$1(function* () {
+    return _asyncToGenerator$5(function* () {
       _this.settingsStore.setIsLoading(true);
 
       yield _this.exportCsvService.exportData();
@@ -20866,7 +20373,7 @@ let SettingsAction = class SettingsAction {
   handleDropAllData() {
     var _this = this;
 
-    return _asyncToGenerator$1(function* () {
+    return _asyncToGenerator$5(function* () {
       _this.settingsStore.setIsLoading(true);
 
       yield _this.dropAllService.dropData();
@@ -20884,7 +20391,7 @@ let SettingsAction = class SettingsAction {
   }
 
 };
-SettingsAction = __decorate$2([Action(), __param$2(0, Inject()), __param$2(1, Inject()), __param$2(2, Inject()), __param$2(3, Inject()), __param$2(4, Inject()), __metadata$2("design:type", Function), __metadata$2("design:paramtypes", [typeof ImportFinService === "undefined" ? Object : ImportFinService, typeof ExportFinService === "undefined" ? Object : ExportFinService, typeof ExportCsvService === "undefined" ? Object : ExportCsvService, typeof DropAllService === "undefined" ? Object : DropAllService, typeof SettingsStore === "undefined" ? Object : SettingsStore])], SettingsAction);
+SettingsAction = __decorate$7([Action(), __param$6(0, Inject()), __param$6(1, Inject()), __param$6(2, Inject()), __param$6(3, Inject()), __param$6(4, Inject()), __metadata$6("design:type", Function), __metadata$6("design:paramtypes", [typeof ImportFinService === "undefined" ? Object : ImportFinService, typeof ExportFinService === "undefined" ? Object : ExportFinService, typeof ExportCsvService === "undefined" ? Object : ExportCsvService, typeof DropAllService === "undefined" ? Object : DropAllService, typeof SettingsStore === "undefined" ? Object : SettingsStore])], SettingsAction);
 
 const {
   useModuleContext: useSettingsContext
@@ -20897,13 +20404,13 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.1',
-  changeset: '5276b8e70edab68db60c0293393be535bc520bb7',
-  buildTime: new Date(1657483948070)
+  changeset: 'f2b3d0570f111d67882145edde7c5e85d4b3540e',
+  buildTime: new Date(1663101961050)
 };
 
-var buildVersionStyles_1ys16xi = '';
+const buildVersionStyles_1ys16xi = '';
 
-const Container$2 = /*#__PURE__*/styled$1("div")({
+const Container$6 = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1g8bbbt"
 });
@@ -20911,7 +20418,7 @@ const Container$2 = /*#__PURE__*/styled$1("div")({
 const buildTime = buildVersion.buildTime;
 const hash = buildVersion.changeset.substring(0, 6);
 function BuildVersion() {
-  return /*#__PURE__*/e(Container$2, {
+  return /*#__PURE__*/e(Container$6, {
     children: [/*#__PURE__*/e("div", {
       children: [t(`settings.version`), ": ", buildVersion.version, ' | ', hash || '']
     }), /*#__PURE__*/e("div", {
@@ -20920,7 +20427,7 @@ function BuildVersion() {
   });
 }
 
-var listBlockStyles_vp9rj8 = '';
+const listBlockStyles_vp9rj8 = '';
 
 const IconWrapper = /*#__PURE__*/styled$1("div")({
   name: "IconWrapper",
@@ -20957,16 +20464,16 @@ function ListBlock({
   });
 }
 
-var settingsStyles_1fiuzsi = '';
+const settingsStyles_1fiuzsi = '';
 
 const LangSwitch = /*#__PURE__*/styled$1("div")({
   name: "LangSwitch",
   class: "lh5gplm"
 });
 
-var uploadButtonStyles_2vrjjq = '';
+const uploadButtonStyles_2vrjjq = '';
 
-const Container$1 = /*#__PURE__*/styled$1("div")({
+const Container$5 = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "cgfi94f"
 });
@@ -20989,7 +20496,7 @@ function UploadButton({
     onChange && onChange(files);
     target.value = '';
   }, [onChange]);
-  return /*#__PURE__*/e(Container$1, {
+  return /*#__PURE__*/e(Container$5, {
     children: /*#__PURE__*/e(Wrapper, {
       children: [children, /*#__PURE__*/e(Input, {
         onChange: handleChange,
@@ -20999,18 +20506,18 @@ function UploadButton({
   });
 }
 
-var buttonsStyles_4z8wbz = '';
+const buttonsStyles_4z8wbz = '';
 
 const DangerRow = /*#__PURE__*/styled$1("div")({
   name: "DangerRow",
   class: "dmctse5"
 });
-const Container = /*#__PURE__*/styled$1("div")({
+const Container$4 = /*#__PURE__*/styled$1("div")({
   name: "Container",
   class: "c1sdpjvm"
 });
 
-var rowBlockStyles_vp133y = '';
+const rowBlockStyles_vp133y = '';
 
 const Row = /*#__PURE__*/styled$1("div")({
   name: "Row",
@@ -21037,7 +20544,7 @@ const Buttons = observer(() => {
   const {
     settingsAction
   } = useSettingsContext();
-  return /*#__PURE__*/e(Container, {
+  return /*#__PURE__*/e(Container$4, {
     children: [/*#__PURE__*/e(RowBlock, {
       icon: "upload",
       children: /*#__PURE__*/e(UploadButton, {
@@ -21131,7 +20638,1031 @@ const settingsRoutes = [{
   withNavigation: true
 }];
 
-const routes = [...settingsRoutes, ...moneySpendingRoutes, ...categoriesRoutes, ...appRoutes];
+var REPORT_VIEW;
+
+(function (REPORT_VIEW) {
+  REPORT_VIEW["MONTHLY"] = "MONTHLY";
+  REPORT_VIEW["SEASONALLY"] = "SEASONALLY";
+  REPORT_VIEW["YEARLY"] = "YEARLY";
+  REPORT_VIEW["FIVE_YEARLY"] = "FIVE_YEARLY";
+  REPORT_VIEW["ALL"] = "ALL";
+})(REPORT_VIEW || (REPORT_VIEW = {}));
+
+function toToday(today) {
+  return !today ? new Date() : new Date(today);
+}
+
+function getMonthStart(today) {
+  const dToday = toToday(today);
+  const month = new Date(dToday.getFullYear(), dToday.getMonth());
+  const ret = month.getTime();
+  return ret;
+}
+
+const MS_DAY = 24 * 60 * 60 * 1000;
+function getMonthEnd(today) {
+  const startMonthMs = getMonthStart(today);
+  const dToday = new Date(startMonthMs);
+  const days = new Date(dToday.getFullYear(), dToday.getMonth() + 1, 0).getDate();
+  const ret = startMonthMs + days * MS_DAY - 1;
+  return ret;
+}
+
+const monthToEndSeason = {
+  11: 11,
+  0: 1,
+  1: 1,
+  2: 4,
+  3: 4,
+  4: 4,
+  5: 7,
+  6: 7,
+  7: 7,
+  8: 10,
+  9: 10,
+  10: 10
+};
+const startDateByView = {
+  [REPORT_VIEW.MONTHLY](initDate) {
+    const startDate = getMonthStart(initDate);
+    const endDate = getMonthEnd(initDate);
+    return {
+      startDate,
+      endDate
+    };
+  },
+
+  [REPORT_VIEW.SEASONALLY](initDate) {
+    const endDate = getMonthEnd(initDate);
+    const endD = new Date(endDate);
+    const month = endD.getMonth();
+    let monthStartD = new Date(endD.getFullYear(), monthToEndSeason[month], 10);
+
+    if (month === 11) {
+      monthStartD = new Date(endD.getFullYear() + 1, 1, 10);
+    }
+
+    const seasonEnd = getMonthEnd(monthStartD);
+    const seasonStartD = new Date(monthStartD);
+    seasonStartD.setMonth(monthStartD.getMonth() - 2);
+    const seasonStart = getMonthStart(seasonStartD.getTime());
+    return {
+      startDate: seasonStart,
+      endDate: seasonEnd
+    };
+  },
+
+  [REPORT_VIEW.YEARLY](initDate) {
+    const endDateEdge = getMonthEnd(initDate);
+    const endD = new Date(endDateEdge);
+    const startD = new Date(endD.getFullYear(), 0);
+    const endDateD = new Date(endD.getFullYear(), 11);
+    const endDate = getMonthEnd(endDateD);
+    return {
+      startDate: startD.getTime(),
+      endDate
+    };
+  },
+
+  [REPORT_VIEW.FIVE_YEARLY](initDate) {
+    const endDate = getMonthEnd(initDate);
+    const endD = new Date(endDate);
+    const startD = new Date(endD.getFullYear() - 5, endD.getMonth());
+    return {
+      startDate: startD.getTime(),
+      endDate
+    };
+  },
+
+  [REPORT_VIEW.ALL]() {
+    return {
+      startDate: 0,
+      endDate: Date.now()
+    };
+  }
+
+};
+function getRangeByViewType({
+  viewType,
+  viewDate
+}) {
+  const res = startDateByView[viewType](viewDate);
+  return res;
+}
+
+var __decorate$6 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$5 = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$5 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let AnalyticStore = class AnalyticStore {
+  setSelectedCategory(value) {
+    this.selectedCategoryId = value;
+  }
+
+  setExpenseList(value) {
+    this.expenseList = value;
+  }
+
+  setCategoryList(value) {
+    this.categoryList = value;
+  }
+
+  setIsLoading(value) {
+    this.isLoading = value;
+  }
+
+  setReportView(value) {
+    this.reportView = value;
+  }
+
+  setViewDate(value) {
+    this.viewDate = value;
+  }
+
+  get isPrevAvailable() {
+    return this.reportView !== REPORT_VIEW.ALL;
+  }
+
+  get totalCost() {
+    return this.expenseList.reduce((sum, item) => {
+      return sum + Number(item.cost);
+    }, 0);
+  }
+
+  get categoryMap() {
+    return this.categoryList.reduce((acc, category) => {
+      acc[category.id] = category;
+      return acc;
+    }, {});
+  }
+
+  get categoryReportView() {
+    return Object.values(this.categoryReportViewMap).map(category => {
+      return {
+        node: category.node,
+        children: Object.values(category.children)
+      };
+    });
+  }
+
+  get expenseListView() {
+    const categoryMap = this.categoryMap;
+    const expenses = this.expenseList.filter(expense => {
+      const parentCatId = categoryMap[expense.catId].catId;
+      if (!this.checkCategorySelection(expense.catId, parentCatId)) return false;
+      return true;
+    });
+    return this.expenseViewListService.mapExpenseToExpenseViewEntityList(expenses, this.categoryList);
+  }
+
+  checkCategorySelection(catId, parentCatId) {
+    const selectedCategoryId = this.selectedCategoryId;
+    if (!selectedCategoryId) return true;
+
+    if (selectedCategoryId) {
+      const isSelected = selectedCategoryId === parentCatId || selectedCategoryId === catId;
+      if (!isSelected) return false;
+    }
+
+    return true;
+  }
+
+  get categoryReportViewMap() {
+    const categoryMap = this.categoryMap;
+    return this.expenseList.reduce((acc, expense) => {
+      const {
+        catId,
+        cost
+      } = expense;
+      const parentCatId = categoryMap[catId].catId;
+
+      if (!this.checkCategorySelection(catId, parentCatId)) {
+        return acc;
+      }
+
+      if (parentCatId) {
+        const parentNode = acc[parentCatId] = acc[parentCatId] || {
+          node: {
+            id: parentCatId,
+            title: categoryMap[parentCatId].title,
+            cost: 0
+          },
+          children: {}
+        };
+        parentNode.node.cost = parentNode.node.cost + Number(cost);
+        const catNode = parentNode.children[catId] = parentNode.children[catId] || {
+          id: catId,
+          cost: 0,
+          title: categoryMap[catId].title
+        };
+        catNode.cost = catNode.cost + Number(cost);
+        return acc;
+      }
+
+      const item = acc[catId] = acc[catId] || {
+        node: {
+          id: catId,
+          cost: 0,
+          title: categoryMap[catId].title
+        },
+        children: {}
+      };
+      item.node.cost = item.node.cost + Number(cost);
+      return acc;
+    }, {});
+  }
+
+  get isNextAvailable() {
+    if (this.reportView === REPORT_VIEW.ALL) return false;
+    const endDate = this.range.endDate;
+    return endDate < Date.now();
+  }
+
+  get range() {
+    return getRangeByViewType({
+      viewType: this.reportView,
+      viewDate: this.viewDate
+    });
+  }
+
+  constructor(expenseViewListService) {
+    this.expenseViewListService = expenseViewListService;
+    this.reportView = REPORT_VIEW.MONTHLY;
+    this.expenseList = [];
+    this.categoryList = [];
+    this.viewDate = Date.now();
+    this.isLoading = false;
+    this.selectedCategoryId = '';
+  }
+
+};
+AnalyticStore = __decorate$6([Store(), __param$5(0, Inject()), __metadata$5("design:type", Function), __metadata$5("design:paramtypes", [typeof ExpenseViewListService === "undefined" ? Object : ExpenseViewListService])], AnalyticStore);
+
+const {
+  AnalyticErrors
+} = errorFactory('AnalyticErrors', {
+  GetRangeReport: 'Failed get range report',
+  UnexpectedGetRangeReport: 'Unexpected get range report'
+});
+
+function asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$4(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$4(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$5 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+function checkDateEnd(item) {
+  return !item.dateEnd;
+}
+
+let AnalyticDataProvider = class AnalyticDataProvider extends DatabaseDataProvider {
+  getRangeReport({
+    startDate,
+    endDate,
+    pouchId
+  }) {
+    var _this = this;
+
+    return _asyncToGenerator$4(function* () {
+      const [categoryList, expenseList] = yield Promise.all([_this.client.category.filter(checkDateEnd).toArray(), _this.client.expense.where('time').between(startDate, endDate).filter(item => {
+        return item.pouchId == pouchId && item.dateEnd == null;
+      }).toArray()]);
+      return _this.ok({
+        categoryList,
+        expenseList
+      });
+    })();
+  }
+
+};
+AnalyticDataProvider = __decorate$5([DataProvider()], AnalyticDataProvider);
+
+function asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$3(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$3(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$4 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$4 = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$4 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let AnalyticAdapter = class AnalyticAdapter {
+  getRangeReport({
+    startDate,
+    endDate,
+    pouchId
+  }) {
+    var _this = this;
+
+    return _asyncToGenerator$3(function* () {
+      try {
+        const result = yield _this.analyticDataProvider.getRangeReport({
+          startDate,
+          endDate,
+          pouchId
+        });
+        if (isErr(result)) return resultErr(new AnalyticErrors.GetRangeReport(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new AnalyticErrors.UnexpectedGetRangeReport(e));
+      }
+    })();
+  }
+
+  constructor(analyticDataProvider) {
+    this.analyticDataProvider = analyticDataProvider;
+  }
+
+};
+AnalyticAdapter = __decorate$4([Adapter(), __param$4(0, Inject()), __metadata$4("design:type", Function), __metadata$4("design:paramtypes", [typeof AnalyticDataProvider === "undefined" ? Object : AnalyticDataProvider])], AnalyticAdapter);
+
+function asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$2(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$2(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$3 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$3 = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$3 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let AnalyticReportService = class AnalyticReportService {
+  handleReport() {
+    var _this = this;
+
+    return _asyncToGenerator$2(function* () {
+      _this.analyticStore.setExpenseList([]);
+
+      _this.analyticStore.setCategoryList([]);
+
+      const {
+        startDate,
+        endDate
+      } = _this.analyticStore.range;
+      const currentPouchId = _this.pouchStore.currentPouchId;
+      const result = yield _this.analyticAdapter.getRangeReport({
+        startDate,
+        endDate,
+        pouchId: currentPouchId
+      });
+
+      if (isErr(result)) {
+        // TODO: add error
+        return;
+      }
+
+      const {
+        expenseList,
+        categoryList
+      } = result.data;
+
+      _this.analyticStore.setExpenseList(expenseList);
+
+      _this.analyticStore.setCategoryList(categoryList);
+    })();
+  }
+
+  constructor(analyticStore, analyticAdapter, pouchStore) {
+    this.analyticStore = analyticStore;
+    this.analyticAdapter = analyticAdapter;
+    this.pouchStore = pouchStore;
+  }
+
+};
+AnalyticReportService = __decorate$3([Service(), __param$3(0, Inject()), __param$3(1, Inject()), __param$3(2, Inject()), __metadata$3("design:type", Function), __metadata$3("design:paramtypes", [typeof AnalyticStore === "undefined" ? Object : AnalyticStore, typeof AnalyticAdapter === "undefined" ? Object : AnalyticAdapter, typeof PouchStore === "undefined" ? Object : PouchStore])], AnalyticReportService);
+
+function asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$1(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$1(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$2 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$2 = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$2 = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let AnalyticAction = class AnalyticAction {
+  handleToggleSelectedCategory(selectedId) {
+    if (this.analyticStore.selectedCategoryId === selectedId) {
+      this.analyticStore.setSelectedCategory('');
+      return;
+    }
+
+    this.analyticStore.setSelectedCategory(selectedId);
+  }
+
+  handleChangeReportView(reportView) {
+    var _this = this;
+
+    return _asyncToGenerator$1(function* () {
+      _this.analyticStore.setIsLoading(true);
+
+      _this.analyticStore.setReportView(reportView);
+
+      yield _this.analyticReportService.handleReport();
+
+      _this.analyticStore.setIsLoading(false);
+    })();
+  }
+
+  handleNextReport() {
+    var _this = this;
+
+    return _asyncToGenerator$1(function* () {
+      const isNextAvailable = _this.analyticStore.isNextAvailable;
+      if (!isNextAvailable) return;
+
+      _this.analyticStore.setIsLoading(true);
+
+      _this.analyticStore.setViewDate(_this.analyticStore.range.endDate + 2000);
+
+      yield _this.analyticReportService.handleReport();
+
+      _this.analyticStore.setIsLoading(false);
+    })();
+  }
+
+  handleLoadReport() {
+    var _this = this;
+
+    return _asyncToGenerator$1(function* () {
+      _this.analyticStore.setIsLoading(true);
+
+      yield _this.analyticReportService.handleReport();
+
+      _this.analyticStore.setIsLoading(false);
+    })();
+  }
+
+  handlePrevReport() {
+    var _this = this;
+
+    return _asyncToGenerator$1(function* () {
+      _this.analyticStore.setIsLoading(true);
+
+      _this.analyticStore.setViewDate(_this.analyticStore.range.startDate - 2000);
+
+      yield _this.analyticReportService.handleReport();
+
+      _this.analyticStore.setIsLoading(false);
+    })();
+  }
+
+  constructor(analyticReportService, analyticStore) {
+    this.analyticReportService = analyticReportService;
+    this.analyticStore = analyticStore;
+  }
+
+};
+AnalyticAction = __decorate$2([Action(), __param$2(0, Inject()), __param$2(1, Inject()), __metadata$2("design:type", Function), __metadata$2("design:paramtypes", [typeof AnalyticReportService === "undefined" ? Object : AnalyticReportService, typeof AnalyticStore === "undefined" ? Object : AnalyticStore])], AnalyticAction);
+
+const {
+  useModuleContext: analyticContext
+} = hookContextFactory({
+  analyticStore: AnalyticStore,
+  analyticAction: AnalyticAction
+});
+
+const analyticPageStyles_1qzuhg2 = '';
+
+const Container$3 = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "c1dg121k"
+});
+const Content = /*#__PURE__*/styled$1("div")({
+  name: "Content",
+  class: "crore7s"
+});
+const TotalMoneyRow = /*#__PURE__*/styled$1("div")({
+  name: "TotalMoneyRow",
+  class: "t5cd8z"
+});
+
+const selectStyles_16hj5z5 = '';
+
+const SelectContainer = /*#__PURE__*/styled$1("div")({
+  name: "SelectContainer",
+  class: "s1krdv3q"
+});
+
+function Select({
+  value,
+  options,
+  onChange
+}) {
+  return /*#__PURE__*/e(SelectContainer, {
+    children: /*#__PURE__*/e("select", {
+      value: value,
+      onChange: e => {
+        onChange(e.target.value);
+      },
+      children: options.map(option => {
+        return /*#__PURE__*/e("option", {
+          value: option.value,
+          children: option.label
+        }, option.value);
+      })
+    })
+  });
+}
+
+const seasonCodeMap = {
+  0() {
+    return t('analytic.seasons.winter');
+  },
+
+  1() {
+    return t('analytic.seasons.spring');
+  },
+
+  2() {
+    return t('analytic.seasons.summer');
+  },
+
+  3() {
+    return t('analytic.seasons.autumn');
+  }
+
+};
+const monthToSeason = {
+  // winter
+  11: 0,
+  0: 0,
+  1: 0,
+  // spring
+  2: 1,
+  3: 1,
+  4: 1,
+  //summer
+  5: 2,
+  6: 2,
+  7: 2,
+  // autumn
+  8: 3,
+  9: 3,
+  10: 3
+};
+const titleMap = {
+  [REPORT_VIEW.MONTHLY]({
+    formatter,
+    endDate
+  }) {
+    const startD = new Date(endDate);
+    const title = formatter.format(startD);
+    const now = new Date();
+    const yearTitle = now.getFullYear() != startD.getFullYear() ? startD.getFullYear() : '';
+    const ret = `${title} ${yearTitle}`;
+    return ret;
+  },
+
+  [REPORT_VIEW.SEASONALLY]({
+    endDate
+  }) {
+    const endD = new Date(endDate);
+    const month = endD.getMonth();
+    const seasonCode = monthToSeason[month];
+    const season = seasonCodeMap[seasonCode]();
+    const now = new Date();
+    const yearTitle = now.getFullYear() != endD.getFullYear() ? endD.getFullYear() : '';
+    return `${season} ${yearTitle}`;
+  },
+
+  [REPORT_VIEW.YEARLY]({
+    endDate
+  }) {
+    const startD = new Date(endDate);
+    return `${startD.getFullYear()}`;
+  },
+
+  [REPORT_VIEW.FIVE_YEARLY]({
+    endDate
+  }) {
+    const endD = new Date(endDate);
+    const ret = `${endD.getFullYear() - 5} - ${endD.getFullYear()}`;
+    return ret;
+  },
+
+  [REPORT_VIEW.ALL]() {
+    return t('analytic.all');
+  }
+
+};
+
+function useDateRangeSelect() {
+  const {
+    langStore
+  } = useLanguageContext();
+  const {
+    analyticStore,
+    analyticAction
+  } = analyticContext();
+  const lang = langStore.currentLanguage;
+  const dateFormatter = F$1(() => {
+    return new Intl.DateTimeFormat(lang, {
+      month: 'long'
+    });
+  }, [lang]);
+  const endDate = analyticStore.viewDate;
+  const options = F$1(() => {
+    const args = {
+      formatter: dateFormatter,
+      endDate
+    };
+    return [{
+      label: titleMap[REPORT_VIEW.MONTHLY](args),
+      value: REPORT_VIEW.MONTHLY
+    }, {
+      label: titleMap[REPORT_VIEW.SEASONALLY](args),
+      value: REPORT_VIEW.SEASONALLY
+    }, {
+      label: titleMap[REPORT_VIEW.YEARLY](args),
+      value: REPORT_VIEW.YEARLY
+    }, {
+      label: titleMap[REPORT_VIEW.ALL](args),
+      value: REPORT_VIEW.ALL
+    }];
+  }, [dateFormatter, endDate]);
+  const onChange = T$1(value => {
+    analyticAction.handleChangeReportView(value);
+  }, [analyticAction]);
+  return {
+    onChange,
+    options,
+    reportView: analyticStore.reportView
+  };
+}
+
+const DateRangeSelect = observer(() => {
+  const {
+    reportView,
+    options,
+    onChange
+  } = useDateRangeSelect();
+  return /*#__PURE__*/e(Select, {
+    onChange: onChange,
+    options: options,
+    value: reportView
+  });
+});
+
+const headerStyles_ixj6l0 = '';
+
+const Root = /*#__PURE__*/styled$1("div")({
+  name: "Root",
+  class: "rnbiwne"
+});
+const Container$2 = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cruykij"
+});
+const DateSelectContainer = /*#__PURE__*/styled$1("div")({
+  name: "DateSelectContainer",
+  class: "d1ic6szx"
+});
+
+const Header = observer(() => {
+  const {
+    analyticAction,
+    analyticStore
+  } = analyticContext();
+  return /*#__PURE__*/e(Root, {
+    children: /*#__PURE__*/e(Container$2, {
+      children: [/*#__PURE__*/e(Button, {
+        onClick: analyticAction.handlePrevReport,
+        isDisabled: !analyticStore.isPrevAvailable,
+        children: /*#__PURE__*/e(Icon, {
+          iconName: "a-left"
+        })
+      }), /*#__PURE__*/e(DateSelectContainer, {
+        children: /*#__PURE__*/e(DateRangeSelect, {})
+      }), /*#__PURE__*/e(Button, {
+        onClick: analyticAction.handleNextReport,
+        isDisabled: !analyticStore.isNextAvailable,
+        children: /*#__PURE__*/e(Icon, {
+          iconName: "a-right"
+        })
+      })]
+    })
+  });
+});
+
+const analyticCategoryStyles_18zx03y = '';
+
+const Container$1 = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cww64st"
+});
+const CategoryItem = /*#__PURE__*/styled$1("div")({
+  name: "CategoryItem",
+  class: "c1pedkqp"
+});
+const CategoryTitle = /*#__PURE__*/styled$1("div")({
+  name: "CategoryTitle",
+  class: "c1f8sttc"
+});
+const CategoryCost = /*#__PURE__*/styled$1("div")({
+  name: "CategoryCost",
+  class: "cdagtj1"
+});
+const ChildCategoryItem = /*#__PURE__*/styled$1("div")({
+  name: "ChildCategoryItem",
+  class: "c976sa5"
+});
+
+const AnalyticCategory = observer(() => {
+  const {
+    analyticStore,
+    analyticAction
+  } = analyticContext();
+  const handleClick = T$1(e => {
+    const categoryId = getAttrFromElement(e.target, 'data-id');
+    if (!categoryId) return;
+    analyticAction.handleToggleSelectedCategory(categoryId);
+  }, [analyticAction]);
+  return /*#__PURE__*/e(Container$1, {
+    onClick: handleClick,
+    children: analyticStore.categoryReportView.map(item => {
+      return /*#__PURE__*/e("div", {
+        children: [/*#__PURE__*/e(CategoryItem, {
+          "data-id": item.node.id,
+          children: [/*#__PURE__*/e(CategoryTitle, {
+            children: item.node.title
+          }), /*#__PURE__*/e(CategoryCost, {
+            children: getMoney(item.node.cost)
+          })]
+        }), item.children.map(child => {
+          return /*#__PURE__*/e(ChildCategoryItem, {
+            "data-id": child.id,
+            children: [/*#__PURE__*/e(CategoryTitle, {
+              children: child.title
+            }), /*#__PURE__*/e(CategoryCost, {
+              children: getMoney(child.cost)
+            })]
+          }, child.id);
+        })]
+      }, item.node.id);
+    })
+  });
+});
+
+const analyticExpensesStyles_mx0fc8 = '';
+
+const Container = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "c11r9ikv"
+});
+
+const AnalyticExpenses = observer(() => {
+  const {
+    analyticStore
+  } = analyticContext();
+  if (!analyticStore.selectedCategoryId) return null;
+  return /*#__PURE__*/e(Container, {
+    children: analyticStore.expenseListView.map(expense => {
+      return /*#__PURE__*/e(ExpenseRow, {
+        expenseView: expense,
+        isSelected: false
+      }, expense.id);
+    })
+  });
+});
+
+addBlock({
+  data: {
+    analytic: {
+      total: ['Total', 'Всего'],
+      all: ['All data', 'Все данные'],
+      seasons: {
+        winter: ['Winter', 'Зима'],
+        spring: ['Spring', 'Весна'],
+        summer: ['Summer', 'Лето'],
+        autumn: ['Autumn', 'Осень']
+      }
+    }
+  }
+});
+
+const AnalyticPage = observer(() => {
+  const {
+    analyticStore,
+    analyticAction
+  } = analyticContext();
+  h(() => {
+    analyticAction.handleLoadReport(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return /*#__PURE__*/e(p$1, {
+    children: /*#__PURE__*/e(Container$3, {
+      children: [/*#__PURE__*/e(Header, {}), /*#__PURE__*/e(Swap, {
+        is: analyticStore.isLoading,
+        isSlot: /*#__PURE__*/e(Loader, {}),
+        children: [/*#__PURE__*/e(TotalMoneyRow, {
+          children: [t('analytic.total'), /*#__PURE__*/e("div", {
+            children: getMoney(analyticStore.totalCost)
+          })]
+        }), /*#__PURE__*/e(Separator, {}), /*#__PURE__*/e(Content, {
+          children: /*#__PURE__*/e(ScrollContainer, {
+            children: [/*#__PURE__*/e(AnalyticCategory, {}), /*#__PURE__*/e(AnalyticExpenses, {})]
+          })
+        })]
+      })]
+    })
+  });
+});
+
+const analyticRoutes = [{
+  route: {
+    path: Routes.analytic
+  },
+  component: AnalyticPage,
+  header: {
+    title: () => t('pages.analytic'),
+    component: PouchBlock
+  },
+  withNavigation: true
+}];
+
+const routes = [...settingsRoutes, ...moneySpendingRoutes, ...categoriesRoutes, ...appRoutes, ...analyticRoutes];
 
 var __decorate$1 = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
@@ -21231,7 +21762,7 @@ let MainModule = class MainModule {
   }
 
   static getInstance() {
-    return Container$n.get(MainModule);
+    return Container$r.get(MainModule);
   }
 
   constructor(screensService, appModule) {

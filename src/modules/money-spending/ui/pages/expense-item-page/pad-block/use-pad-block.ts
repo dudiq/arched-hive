@@ -18,7 +18,7 @@ export function usePadBlock() {
           expenseSelectionAction.handleClear()
           return
         case 'backspace':
-          expenseSelectionAction.handlePopCost()
+          expenseSelectionAction.handleBackspaceCost()
           return
         case 'plus':
           expenseSelectionAction.handlePushCost()

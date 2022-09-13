@@ -1,6 +1,4 @@
-import { Result } from 'fnscript'
 import { Inject, Adapter } from '@pv/di'
-import { PromisedResult } from '@pv/di/types'
 import {
   MoneySpendingErrors,
   MoneySpendingErrorsInstances,
@@ -9,6 +7,7 @@ import { ExpenseEntity } from '@pv/core/entities/expense.entity'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
 import { PouchId } from '@pv/core/entities/pouch.entity'
 import { guid } from '@pv/utils/guid'
+import { isErr, PromiseResult, resultErr, resultOk } from '@pv/modules/result'
 import { MoneySpendingDataProvider } from './money-spending.data-provider'
 
 @Adapter()
@@ -17,6 +16,7 @@ export class MoneySpendingAdapter {
     @Inject()
     private moneySpendingDataProvider: MoneySpendingDataProvider,
   ) {}
+
   async getExpenses({
     pouchId,
     offset,
@@ -25,43 +25,45 @@ export class MoneySpendingAdapter {
     pouchId: PouchId
     offset: number
     limit: number
-  }): PromisedResult<ExpenseEntity[], MoneySpendingErrorsInstances> {
+  }): PromiseResult<ExpenseEntity[], MoneySpendingErrorsInstances> {
     try {
-      const { error, data } = await this.moneySpendingDataProvider.getExpenses({
+      const result = await this.moneySpendingDataProvider.getExpenses({
         offset,
         limit,
         pouchId,
       })
 
-      if (error) return Result.Err(new MoneySpendingErrors.GetExpensesResponse(error))
+      if (isErr(result)) return resultErr(new MoneySpendingErrors.GetExpensesResponse(result.error))
 
-      return Result.Ok(data)
+      return resultOk(result.data)
     } catch (e) {
-      return Result.Err(new MoneySpendingErrors.UnexpectedErrorGetExpenses(e))
+      return resultErr(new MoneySpendingErrors.UnexpectedErrorGetExpenses(e))
     }
   }
 
-  async getCategories(): PromisedResult<CategoryEntity[], MoneySpendingErrorsInstances> {
+  async getCategories(): PromiseResult<CategoryEntity[], MoneySpendingErrorsInstances> {
     try {
-      const { error, data } = await this.moneySpendingDataProvider.getCategories()
+      const result = await this.moneySpendingDataProvider.getCategories()
 
-      if (error) return Result.Err(new MoneySpendingErrors.GetCategoriesResponse(error))
+      if (isErr(result))
+        return resultErr(new MoneySpendingErrors.GetCategoriesResponse(result.error))
 
-      return Result.Ok(data)
+      return resultOk(result.data)
     } catch (e) {
-      return Result.Err(new MoneySpendingErrors.UnexpectedErrorGetCategories(e))
+      return resultErr(new MoneySpendingErrors.UnexpectedErrorGetCategories(e))
     }
   }
 
   async removeExpense(id: string) {
     try {
-      const { error, data } = await this.moneySpendingDataProvider.removeExpense(id)
+      const result = await this.moneySpendingDataProvider.removeExpense(id)
 
-      if (error) return Result.Err(new MoneySpendingErrors.RemoveExpenseResponse(error))
+      if (isErr(result))
+        return resultErr(new MoneySpendingErrors.RemoveExpenseResponse(result.error))
 
-      return Result.Ok(data)
+      return resultOk(result.data)
     } catch (e) {
-      return Result.Err(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e))
+      return resultErr(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e))
     }
   }
 
@@ -86,13 +88,13 @@ export class MoneySpendingAdapter {
         pouchId,
         catId,
       }
-      const { error, data } = await this.moneySpendingDataProvider.addExpense(expense)
+      const result = await this.moneySpendingDataProvider.addExpense(expense)
 
-      if (error) return Result.Err(new MoneySpendingErrors.AddExpenseResponse(error))
+      if (isErr(result)) return resultErr(new MoneySpendingErrors.AddExpenseResponse(result.error))
 
-      return Result.Ok(data)
+      return resultOk(result.data)
     } catch (e) {
-      return Result.Err(new MoneySpendingErrors.UnexpectedErrorAddExpense(e))
+      return resultErr(new MoneySpendingErrors.UnexpectedErrorAddExpense(e))
     }
   }
 }

@@ -1,7 +1,7 @@
 {
-    "name": "Frontend Arch Example",
-    "short_name": "Frontend Arch Example",
-    "description": "Frontend Arch Example",
+    "name": "Coinote",
+    "short_name": "Coinote",
+    "description": "Coinote",
     "display": "standalone",
     "background_color": "#373737",
     "icons": [
@@ -41,5 +41,5 @@
             "type": "image/png"
         }
     ],
-    "start_url": "./"
+    "start_url": "/#/"
 }

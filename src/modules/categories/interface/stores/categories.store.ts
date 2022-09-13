@@ -1,9 +1,8 @@
 import { Store } from '@pv/di'
 import { CategoryEntity } from '@pv/core/entities/category.entity'
+import { TreeListType } from './types'
 
 type FilterCbType = (value: CategoryEntity) => boolean
-
-type TreeListType = { item: CategoryEntity; isRoot?: boolean }[]
 
 @Store()
 export class CategoriesStore {
@@ -40,7 +39,7 @@ export class CategoriesStore {
     return this.filter(item)
   }
 
-  private get maps() {
+  private get categoryTreeMaps() {
     const rootMap: Record<
       string,
       {
@@ -77,7 +76,7 @@ export class CategoriesStore {
   }
 
   get categoryTree() {
-    const { categoryMap, rootMap } = this.maps
+    const { categoryMap, rootMap } = this.categoryTreeMaps
     const filteredKeys = Object.keys(rootMap).filter((key) => {
       const item = categoryMap[key]
       if (!item) return false

@@ -1,6 +1,6 @@
 import { Action, Inject } from '@pv/di'
 import { HistoryService } from '@pv/interface/services/history.service'
-import { Routes } from '@pv/contants/routes'
+import { Routes } from '@pv/constants/routes'
 import { CategoriesService } from '../services/categories.service'
 import { CategoriesStore } from '../stores/categories.store'
 

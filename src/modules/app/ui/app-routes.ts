@@ -1,5 +1,5 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
-import { Routes } from '@pv/contants/routes'
+import { Routes } from '@pv/constants/routes'
 import { NotFoundPage } from './not-found-page'
 import { EmptyPage } from './empty-page'
 

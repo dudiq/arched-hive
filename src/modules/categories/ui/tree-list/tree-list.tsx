@@ -1,38 +1,41 @@
-import { observer } from 'mobx-react-lite'
 import { useCallback } from 'preact/compat'
-import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
-import { Container, extendedClasses, TreeItem } from './tree-list-styles'
+import { TreeListType } from '@pv/modules/categories/interface/stores/types'
+import { Container } from './tree-list-styles'
+import { TreeItem } from './tree-item'
 
-export const TreeList = observer(() => {
-  const { categoriesAction, categoriesStore } = useCategoriesContext()
+type Props = {
+  onClick: (categoryId: string) => void
+  selectedId?: string
+  categoryTree: TreeListType
+}
 
-  const selectedId = categoriesStore.selectedCategoryId
-  const onClick = useCallback(
+export function TreeList({ categoryTree, onClick, selectedId }: Props) {
+  const handleClick = useCallback(
     (e: any) => {
       const categoryId = getAttrFromElement(e.target as HTMLElement, 'data-category-id')
       if (!categoryId) return
-      categoriesAction.toggleSelectedCategoryId(categoryId)
+      onClick(categoryId)
     },
-    [categoriesAction],
+    [onClick],
   )
 
   return (
-    <Container onClick={onClick}>
-      {categoriesStore.categoryTree.map((treeItem) => {
+    <Container onClick={handleClick}>
+      {categoryTree.map((treeItem) => {
         const { item, isRoot } = treeItem
         const isActive = item.id === selectedId
         const key = `${item.id}-${item.title}-${item.catId}`
         return (
           <TreeItem
             key={key}
-            data-category-id={item.id}
-            className={extendedClasses({ isActive, isRoot })}
-          >
-            {item.title}
-          </TreeItem>
+            title={item.title}
+            isActive={isActive}
+            categoryId={item.id}
+            isRoot={isRoot}
+          />
         )
       })}
     </Container>
   )
-})
+}

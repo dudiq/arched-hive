@@ -25,5 +25,5 @@
     "jsxImportSource": "preact",
     "types": ["preact"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "node_modules/@types/jest/index.d.ts"]
 }

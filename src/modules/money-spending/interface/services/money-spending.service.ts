@@ -6,7 +6,8 @@ import { MessageBoxService } from '@pv/modules/message-box'
 import { t } from '@pv/interface/services/i18n'
 import { ExpenseSelectionStore } from '@pv/modules/money-spending/interface/stores/expense-selection.store'
 import { HistoryService } from '@pv/interface/services/history.service'
-import { Routes } from '@pv/contants/routes'
+import { Routes } from '@pv/constants/routes'
+import { isErr } from '@pv/modules/result'
 import { LIMIT_DEFAULT } from '../constants'
 
 @Service()
@@ -37,12 +38,12 @@ export class MoneySpendingService {
       this.pouchService.loadPouches(),
     ])
 
-    if (categoriesResult.isErr()) {
+    if (isErr(categoriesResult)) {
       // TODO: add error processing
       return
     }
 
-    this.moneySpendingStore.setCategories(categoriesResult.getValue())
+    this.moneySpendingStore.setCategories(categoriesResult.data)
     if (this.moneySpendingStore.categories.length === 0) {
       // open empty settings
       this.historyService.push(Routes.empty)
@@ -67,13 +68,13 @@ export class MoneySpendingService {
       limit: LIMIT_DEFAULT,
     })
 
-    if (result.isErr()) {
+    if (isErr(result)) {
       // TODO: add error
       return
     }
 
     this.moneySpendingStore.setOffset(offset + LIMIT_DEFAULT)
-    const nextExpenses = result.getValue()
+    const nextExpenses = result.data
     this.moneySpendingStore.addExpenses(nextExpenses)
   }
 
@@ -84,7 +85,7 @@ export class MoneySpendingService {
     this.moneySpendingStore.setIsLoading(true)
     const result = await this.moneySpendingAdapter.removeExpense(id)
     this.moneySpendingStore.setIsLoading(false)
-    if (result.isErr()) {
+    if (isErr(result)) {
       //TODO: add error processing
       return
     }
@@ -111,7 +112,7 @@ export class MoneySpendingService {
         cost,
         desc,
       })
-      // if (result.isErr()) {
+      // if (isErr(result)) {
       //   //TODO: add error processing
       //   return
       // }
