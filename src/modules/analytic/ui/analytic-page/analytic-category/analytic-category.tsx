@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { analyticContext } from '@pv/modules/analytic/interface/analytic-context'
+import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
 import { getMoney } from '@pv/interface/services/i18n'
 import { useCallback } from 'react'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
@@ -12,7 +12,7 @@ import {
 } from './analytic-category-styles'
 
 export const AnalyticCategory = observer(() => {
-  const { analyticStore, analyticAction } = analyticContext()
+  const { analyticStore, analyticAction } = useAnalyticContext()
   const handleClick = useCallback(
     (e) => {
       const categoryId = getAttrFromElement(e.target as HTMLElement, 'data-id')

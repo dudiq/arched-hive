@@ -22,6 +22,12 @@ export class MoneySpendingAction {
     this.moneySpendingStore.setIsLoading(false)
   }
 
+  async reloadExpenses() {
+    this.moneySpendingStore.setIsLoading(true)
+    await this.moneySpendingService.reloadExpenses()
+    this.moneySpendingStore.setIsLoading(false)
+  }
+
   async handleLoadNextExpenses() {
     this.moneySpendingStore.setIsLoading(true)
     await this.moneySpendingService.loadExpenses(this.moneySpendingStore.offset)

@@ -1,6 +1,7 @@
 import { Action, Inject } from '@pv/di'
 import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
 import { AnalyticReportService } from '@pv/modules/analytic/interface/services/analytic-report.service'
+import { PouchService } from '@pv/modules/pouches'
 import { AnalyticStore } from '../stores/analytic.store'
 
 @Action()
@@ -10,6 +11,8 @@ export class AnalyticAction {
     private analyticReportService: AnalyticReportService,
     @Inject()
     private analyticStore: AnalyticStore,
+    @Inject()
+    private pouchService: PouchService,
   ) {}
 
   handleToggleSelectedCategory(selectedId: string) {
@@ -36,7 +39,14 @@ export class AnalyticAction {
     this.analyticStore.setIsLoading(false)
   }
 
-  async handleLoadReport() {
+  async initialLoadData() {
+    this.analyticStore.setIsLoading(true)
+    await this.pouchService.loadPouches()
+    await this.analyticReportService.handleReport()
+    this.analyticStore.setIsLoading(false)
+  }
+
+  async reloadAnalytic() {
     this.analyticStore.setIsLoading(true)
     await this.analyticReportService.handleReport()
     this.analyticStore.setIsLoading(false)

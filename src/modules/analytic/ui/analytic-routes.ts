@@ -1,8 +1,8 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
 import { Routes } from '@pv/constants/routes'
 import { t } from '@pv/interface/services/i18n'
-import { PouchBlock } from '@pv/modules/pouches'
 import { AnalyticPage } from './analytic-page'
+import { HeaderPouchBlock } from './header-pouch-block'
 
 export const analyticRoutes: RouteEntity[] = [
   {
@@ -12,7 +12,7 @@ export const analyticRoutes: RouteEntity[] = [
     component: AnalyticPage,
     header: {
       title: () => t('pages.analytic'),
-      component: PouchBlock,
+      component: HeaderPouchBlock,
     },
     withNavigation: true,
   },
