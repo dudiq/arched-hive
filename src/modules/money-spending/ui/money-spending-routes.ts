@@ -1,9 +1,9 @@
 import { RouteEntity } from '@pv/core/entities/route.entity'
 import { Routes } from '@pv/constants/routes'
 import { t } from '@pv/interface/services/i18n'
-import { PouchBlock } from '@pv/modules/pouches'
 import { ExpensesPage } from './pages/expenses-page'
 import { ExpenseItemPage } from './pages/expense-item-page'
+import { HeaderPouchBlock } from './header-pouch-block'
 
 export const moneySpendingRoutes: RouteEntity[] = [
   {
@@ -13,7 +13,7 @@ export const moneySpendingRoutes: RouteEntity[] = [
     component: ExpensesPage,
     header: {
       title: () => t('pages.expense'),
-      component: PouchBlock,
+      component: HeaderPouchBlock,
     },
     withNavigation: true,
   },

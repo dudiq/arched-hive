@@ -1,12 +1,12 @@
 import { useLanguageContext } from '@pv/modules/language'
-import { analyticContext } from '@pv/modules/analytic/interface/analytic-context'
+import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
 import { useCallback, useMemo } from 'preact/compat'
 import { titleMap } from '@pv/modules/analytic/ui/analytic-page/header/date-range-select/title-map'
 import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
 
 export function useDateRangeSelect() {
   const { langStore } = useLanguageContext()
-  const { analyticStore, analyticAction } = analyticContext()
+  const { analyticStore, analyticAction } = useAnalyticContext()
 
   const lang = langStore.currentLanguage
 

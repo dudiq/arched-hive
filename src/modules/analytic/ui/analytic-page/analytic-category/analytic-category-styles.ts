@@ -13,6 +13,7 @@ export const CategoryItem = styled.div`
 `
 
 export const CategoryTitle = styled.div`
+  user-select: none;
   text-decoration: underline;
   cursor: pointer;
 `
