@@ -15267,7 +15267,7 @@ function HistoryAdapter() {
   return null;
 }
 
-const baseUrl = "/improved-lamp/".slice(0, -1);
+const baseUrl = {"BASE_URL":"/","MODE":"production","DEV":false,"PROD":true}.VITE_BASE_URL.slice(0, -1);
 function BaseRouter({
   children
 }) {
@@ -17271,15 +17271,58 @@ const categoriesRoutes = [{
   withNavigation: true
 }];
 
+const linkStyles_aqii0v = '';
+
+const Container$f = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "c67ods1"
+});
+const IconWrapper$2 = /*#__PURE__*/styled$1("div")({
+  name: "IconWrapper",
+  class: "i1o8p8ca"
+});
+const ContentWrapper = /*#__PURE__*/styled$1("div")({
+  name: "ContentWrapper",
+  class: "c1hxs3cb"
+});
+
+function Link({
+  children,
+  icon,
+  onClick,
+  isDisabled
+}) {
+  return /*#__PURE__*/e(Container$f, {
+    onClick: onClick,
+    disabled: isDisabled,
+    children: [icon && /*#__PURE__*/e(IconWrapper$2, {
+      children: /*#__PURE__*/e(Icon, {
+        iconName: icon
+      })
+    }), /*#__PURE__*/e(ContentWrapper, {
+      children: children
+    })]
+  });
+}
+
+const expensesPageStyles_3m5f7r = '';
+
+const LoadMoreWrapper = /*#__PURE__*/styled$1("div")({
+  name: "LoadMoreWrapper",
+  class: "l14jmizt"
+});
+
 const {
-  PouchesErrors
-} = errorFactory('PouchesErrors', {
-  GetPouchesResponse: 'Failed load pouches',
-  UnexpectedErrorGetPouches: 'Unexpected load pouches',
-  RemovePouchResponse: 'Failed to remove pouch',
-  UnexpectedErrorRemovePouch: 'Unexpected remove pouch',
-  AddPouchResponse: 'Failed to add pouch',
-  UnexpectedErrorAddPouch: 'Unexpected add pouch'
+  MoneySpendingErrors
+} = errorFactory('MoneySpendingErrors', {
+  GetExpensesResponse: 'Failed load expenses',
+  UnexpectedErrorGetExpenses: 'Unexpected load expenses',
+  GetCategoriesResponse: 'Failed load categories',
+  UnexpectedErrorGetCategories: 'Unexpected load categories',
+  RemoveExpenseResponse: 'Failed remove expense',
+  UnexpectedErrorRemoveExpense: 'Unexpected remove expense',
+  AddExpenseResponse: 'Failed add expense',
+  UnexpectedErrorAddExpense: 'Unexpected add expense'
 });
 
 function asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, key, arg) {
@@ -17325,43 +17368,60 @@ var __decorate$r = globalThis && globalThis.__decorate || function (decorators, 
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-function checkDateEnd$1(item) {
-  return !item.dateEnd;
-}
-
-let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider {
-  getPouches() {
+let MoneySpendingDataProvider = class MoneySpendingDataProvider extends DatabaseDataProvider {
+  getExpenses({
+    offset,
+    pouchId,
+    limit
+  }) {
     var _this = this;
 
     return _asyncToGenerator$i(function* () {
-      const pouches = yield _this.client.pouch.filter(checkDateEnd$1).toArray();
-      return _this.ok(pouches);
+      const expenses = yield _this.client.expense.orderBy('time').reverse().filter(item => {
+        if (item.dateEnd) return false;
+        if (!pouchId && !item.pouchId) return true;
+        if (item.pouchId === pouchId) return true;
+        return false;
+      }).offset(offset).limit(limit).toArray();
+      return _this.ok(expenses);
     })();
   }
 
-  addPouch(pouch) {
+  getCategories() {
     var _this = this;
 
     return _asyncToGenerator$i(function* () {
-      const result = yield _this.client.pouch.add(pouch);
+      const categories = yield _this.client.category.toArray();
+      return _this.ok(categories);
+    })();
+  }
+
+  removeExpense(id) {
+    var _this = this;
+
+    return _asyncToGenerator$i(function* () {
+      const fields = {
+        dateEnd: Date.now()
+      };
+
+      const result = _this.client.expense.where('id').equals(id).modify(fields);
+
       return _this.ok(result);
     })();
   }
 
-  removePouch(pouchId) {
+  addExpense(expense) {
     var _this = this;
 
     return _asyncToGenerator$i(function* () {
-      const result = yield _this.client.pouch.update(pouchId, {
-        dateEnd: Date.now()
-      });
-      return _this.ok(!!result);
+      _this.client.expense.add(expense);
+
+      return _this.ok(true);
     })();
   }
 
 };
-PouchesDataProvider = __decorate$r([DataProvider()], PouchesDataProvider);
+MoneySpendingDataProvider = __decorate$r([DataProvider()], MoneySpendingDataProvider);
 
 function asyncGeneratorStep$h(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -17416,524 +17476,6 @@ var __param$j = globalThis && globalThis.__param || function (paramIndex, decora
     decorator(target, key, paramIndex);
   };
 };
-let PouchesAdapter = class PouchesAdapter {
-  getPouches() {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const result = yield _this.pouchesDataProvider.getPouches();
-        if (isErr(result)) return resultErr(new PouchesErrors.GetPouchesResponse(result.error));
-        return resultOk(result.data);
-      } catch (e) {
-        return resultErr(new PouchesErrors.UnexpectedErrorGetPouches(e));
-      }
-    })();
-  }
-
-  addPouch(title) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const pouch = {
-          id: guid(),
-          name: title
-        };
-        const result = yield _this.pouchesDataProvider.addPouch(pouch);
-        if (isErr(result)) return resultErr(new PouchesErrors.AddPouchResponse(result.error));
-        return resultOk(result.data);
-      } catch (e) {
-        return resultErr(new PouchesErrors.UnexpectedErrorAddPouch(e));
-      }
-    })();
-  }
-
-  removePouch(pouchId) {
-    var _this = this;
-
-    return _asyncToGenerator$h(function* () {
-      try {
-        const result = yield _this.pouchesDataProvider.removePouch(pouchId);
-        if (isErr(result)) return resultErr(new PouchesErrors.RemovePouchResponse(result.error));
-        return resultOk(result.data);
-      } catch (e) {
-        return resultErr(new PouchesErrors.UnexpectedErrorRemovePouch(e));
-      }
-    })();
-  }
-
-  constructor(pouchesDataProvider) {
-    this.pouchesDataProvider = pouchesDataProvider;
-  }
-
-};
-PouchesAdapter = __decorate$q([Adapter(), __param$j(0, Inject()), __metadata$j("design:type", Function), __metadata$j("design:paramtypes", [typeof PouchesDataProvider === "undefined" ? Object : PouchesDataProvider])], PouchesAdapter);
-
-var __decorate$p = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-let PouchStore = class PouchStore {
-  setModalVisible(value) {
-    this.isModalVisible = value;
-  }
-
-  get currentPouch() {
-    const pouchId = this.pouchLocalStorage.value;
-    if (!pouchId) return undefined;
-    return this.pouches.find(({
-      id
-    }) => pouchId === id);
-  }
-
-  get currentPouchId() {
-    const pouch = this.currentPouch;
-    return (pouch === null || pouch === void 0 ? void 0 : pouch.id) || null;
-  }
-
-  get currentPouchName() {
-    var ref;
-    return ((ref = this.currentPouch) === null || ref === void 0 ? void 0 : ref.name) || t('export.pouchMain');
-  }
-
-  setCurrentPouch(id) {
-    this.pouchLocalStorage.set(id);
-  }
-
-  setIsLoading(value) {
-    this.isLoading = value;
-  }
-
-  setPouches(value) {
-    this.pouches = value;
-  }
-
-  dropEntities() {
-    this.setPouches([]);
-  }
-
-  constructor() {
-    this.pouchLocalStorage = new LocalStorageItem('pouch');
-    this.isLoading = true;
-    this.isModalVisible = false;
-    this.pouches = [];
-  }
-
-};
-PouchStore = __decorate$p([Store()], PouchStore);
-
-function asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$g(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$o = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$i = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$i = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let PouchService = class PouchService {
-  loadPouches() {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      _this.pouchStore.setPouches([]);
-
-      const result = yield _this.pouchesAdapter.getPouches();
-
-      if (isErr(result)) {
-        // TODO: add error processing
-        return;
-      }
-
-      _this.pouchStore.setPouches(result.data);
-    })();
-  }
-
-  addPouch() {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      const {
-        isApplied,
-        data
-      } = yield _this.messageBoxService.prompt(t('pouchBlock.removeAsk'), '');
-      if (!isApplied) return;
-      const result = yield _this.pouchesAdapter.addPouch(data);
-      if (isErr(result)) return;
-      return result.data;
-    })();
-  }
-
-  removePouch(pouchId) {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      if (!pouchId) return false;
-      const isConfirmed = yield _this.messageBoxService.confirm(t('pouchBlock.removeAsk'));
-      if (!isConfirmed) return false;
-      const result = yield _this.pouchesAdapter.removePouch(pouchId);
-      if (isErr(result)) return false;
-      return true;
-    })();
-  }
-
-  selectPouch(pouchId) {
-    var _this = this;
-
-    return _asyncToGenerator$g(function* () {
-      _this.pouchStore.setCurrentPouch(pouchId);
-    })();
-  }
-
-  constructor(pouchesAdapter, pouchStore, messageBoxService) {
-    this.pouchesAdapter = pouchesAdapter;
-    this.pouchStore = pouchStore;
-    this.messageBoxService = messageBoxService;
-  }
-
-};
-PouchService = __decorate$o([Service(), __param$i(0, Inject()), __param$i(1, Inject()), __param$i(2, Inject()), __metadata$i("design:type", Function), __metadata$i("design:paramtypes", [typeof PouchesAdapter === "undefined" ? Object : PouchesAdapter, typeof PouchStore === "undefined" ? Object : PouchStore, typeof MessageBoxService === "undefined" ? Object : MessageBoxService])], PouchService);
-
-function Portal({
-  children
-}) {
-  const container = document.getElementById('portal');
-  if (!container) return null;
-  return /*#__PURE__*/e(p$1, {
-    children: V( /*#__PURE__*/e(p$1, {
-      children: children
-    }), container)
-  });
-}
-
-function useSearchLocation() {
-  const [location, setLocation] = useLocation();
-  return [location, setLocation, window.location.search];
-}
-
-const MODAL_PARAM_ID = 'modal';
-
-function useModal({
-  isVisible,
-  onClose
-}) {
-  const [isContainerShown, setContainerShown] = p(isVisible);
-  const idRef = _('');
-  const prevStateRef = _(false);
-
-  if (!idRef.current) {
-    idRef.current = guid();
-  }
-
-  const [usedLocation, setLocation] = useSearchLocation();
-  const hash = window.location.hash;
-  const [basePath, searchLocation] = usedLocation.split('?');
-  h(() => {
-    // on mount
-    const queryParams = new URLSearchParams(searchLocation);
-    queryParams.set(MODAL_PARAM_ID, idRef.current);
-    const newLocation = `${basePath}?${queryParams.toString()}`; // @ts-ignore
-
-    setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  h(() => {
-    const searchFromHash = hash.split('?')[1] || '';
-    const queryParams = new URLSearchParams(searchFromHash);
-    const id = queryParams.get(MODAL_PARAM_ID);
-    const isShown = id === idRef.current;
-    const isStateChanged = prevStateRef.current !== isShown;
-    prevStateRef.current = isShown;
-    if (!isStateChanged) return;
-
-    if (id) {
-      setContainerShown(isShown);
-      return;
-    }
-
-    onClose();
-  }, [hash, onClose]);
-  return {
-    isContainerShown
-  };
-}
-
-const modalStyles_m5w5et = '';
-
-const Container$f = /*#__PURE__*/styled$1("div")({
-  name: "Container",
-  class: "cb00m8k"
-});
-const ContainerBg = /*#__PURE__*/styled$1("div")({
-  name: "ContainerBg",
-  class: "c18gl9yy"
-});
-const Overlay = /*#__PURE__*/styled$1("div")({
-  name: "Overlay",
-  class: "o1do1xz5"
-});
-
-function useModalHandleClose() {
-  const handleClose = T$1(() => {
-    history.go(-1);
-  }, []);
-  return {
-    handleClose
-  };
-}
-
-function ModalContainer({
-  children,
-  isVisible,
-  onClose
-}) {
-  const {
-    isContainerShown
-  } = useModal({
-    onClose,
-    isVisible
-  });
-  const {
-    handleClose
-  } = useModalHandleClose();
-  if (!isContainerShown) return null;
-  return /*#__PURE__*/e(p$1, {
-    children: /*#__PURE__*/e(Container$f, {
-      children: [/*#__PURE__*/e(Overlay, {
-        onClick: handleClose
-      }), /*#__PURE__*/e(ContainerBg, {
-        children: children
-      })]
-    })
-  });
-}
-
-function Modal({
-  children,
-  isVisible,
-  onClose
-}) {
-  if (!isVisible) return null;
-  return /*#__PURE__*/e(Portal, {
-    children: /*#__PURE__*/e(ModalContainer, {
-      isVisible: isVisible,
-      onClose: onClose,
-      children: children
-    })
-  });
-}
-
-const {
-  MoneySpendingErrors
-} = errorFactory('MoneySpendingErrors', {
-  GetExpensesResponse: 'Failed load expenses',
-  UnexpectedErrorGetExpenses: 'Unexpected load expenses',
-  GetCategoriesResponse: 'Failed load categories',
-  UnexpectedErrorGetCategories: 'Unexpected load categories',
-  RemoveExpenseResponse: 'Failed remove expense',
-  UnexpectedErrorRemoveExpense: 'Unexpected remove expense',
-  AddExpenseResponse: 'Failed add expense',
-  UnexpectedErrorAddExpense: 'Unexpected add expense'
-});
-
-function asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$f(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$n = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-let MoneySpendingDataProvider = class MoneySpendingDataProvider extends DatabaseDataProvider {
-  getExpenses({
-    offset,
-    pouchId,
-    limit
-  }) {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const expenses = yield _this.client.expense.orderBy('time').reverse().filter(item => {
-        if (item.dateEnd) return false;
-        if (!pouchId && !item.pouchId) return true;
-        if (item.pouchId === pouchId) return true;
-        return false;
-      }).offset(offset).limit(limit).toArray();
-      return _this.ok(expenses);
-    })();
-  }
-
-  getCategories() {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const categories = yield _this.client.category.toArray();
-      return _this.ok(categories);
-    })();
-  }
-
-  removeExpense(id) {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      const fields = {
-        dateEnd: Date.now()
-      };
-
-      const result = _this.client.expense.where('id').equals(id).modify(fields);
-
-      return _this.ok(result);
-    })();
-  }
-
-  addExpense(expense) {
-    var _this = this;
-
-    return _asyncToGenerator$f(function* () {
-      _this.client.expense.add(expense);
-
-      return _this.ok(true);
-    })();
-  }
-
-};
-MoneySpendingDataProvider = __decorate$n([DataProvider()], MoneySpendingDataProvider);
-
-function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$e(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$m = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$h = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$h = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
 let MoneySpendingAdapter = class MoneySpendingAdapter {
   getExpenses({
     pouchId,
@@ -17942,7 +17484,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }) {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const result = yield _this.moneySpendingDataProvider.getExpenses({
           offset,
@@ -17960,7 +17502,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   getCategories() {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const result = yield _this.moneySpendingDataProvider.getCategories();
         if (isErr(result)) return resultErr(new MoneySpendingErrors.GetCategoriesResponse(result.error));
@@ -17974,7 +17516,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   removeExpense(id) {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const result = yield _this.moneySpendingDataProvider.removeExpense(id);
         if (isErr(result)) return resultErr(new MoneySpendingErrors.RemoveExpenseResponse(result.error));
@@ -17993,7 +17535,7 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }) {
     var _this = this;
 
-    return _asyncToGenerator$e(function* () {
+    return _asyncToGenerator$h(function* () {
       try {
         const expense = {
           id: guid(),
@@ -18018,11 +17560,11 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
   }
 
 };
-MoneySpendingAdapter = __decorate$m([Adapter(), __param$h(0, Inject()), __metadata$h("design:type", Function), __metadata$h("design:paramtypes", [typeof MoneySpendingDataProvider === "undefined" ? Object : MoneySpendingDataProvider])], MoneySpendingAdapter);
+MoneySpendingAdapter = __decorate$q([Adapter(), __param$j(0, Inject()), __metadata$j("design:type", Function), __metadata$j("design:paramtypes", [typeof MoneySpendingDataProvider === "undefined" ? Object : MoneySpendingDataProvider])], MoneySpendingAdapter);
 
 const LIMIT_DEFAULT = 50;
 
-var __decorate$l = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$p = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18130,7 +17672,759 @@ let MoneySpendingStore = class MoneySpendingStore {
   }
 
 };
-MoneySpendingStore = __decorate$l([Store()], MoneySpendingStore);
+MoneySpendingStore = __decorate$p([Store()], MoneySpendingStore);
+
+const {
+  PouchesErrors
+} = errorFactory('PouchesErrors', {
+  GetPouchesResponse: 'Failed load pouches',
+  UnexpectedErrorGetPouches: 'Unexpected load pouches',
+  RemovePouchResponse: 'Failed to remove pouch',
+  UnexpectedErrorRemovePouch: 'Unexpected remove pouch',
+  AddPouchResponse: 'Failed to add pouch',
+  UnexpectedErrorAddPouch: 'Unexpected add pouch'
+});
+
+function asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$g(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$g(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$o = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+function checkDateEnd$1(item) {
+  return !item.dateEnd;
+}
+
+let PouchesDataProvider = class PouchesDataProvider extends DatabaseDataProvider {
+  getPouches() {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const pouches = yield _this.client.pouch.filter(checkDateEnd$1).toArray();
+      return _this.ok(pouches);
+    })();
+  }
+
+  addPouch(pouch) {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const result = yield _this.client.pouch.add(pouch);
+      return _this.ok(result);
+    })();
+  }
+
+  removePouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$g(function* () {
+      const result = yield _this.client.pouch.update(pouchId, {
+        dateEnd: Date.now()
+      });
+      return _this.ok(!!result);
+    })();
+  }
+
+};
+PouchesDataProvider = __decorate$o([DataProvider()], PouchesDataProvider);
+
+function asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$f(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$f(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$n = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$i = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$i = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let PouchesAdapter = class PouchesAdapter {
+  getPouches() {
+    var _this = this;
+
+    return _asyncToGenerator$f(function* () {
+      try {
+        const result = yield _this.pouchesDataProvider.getPouches();
+        if (isErr(result)) return resultErr(new PouchesErrors.GetPouchesResponse(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new PouchesErrors.UnexpectedErrorGetPouches(e));
+      }
+    })();
+  }
+
+  addPouch(title) {
+    var _this = this;
+
+    return _asyncToGenerator$f(function* () {
+      try {
+        const pouch = {
+          id: guid(),
+          name: title
+        };
+        const result = yield _this.pouchesDataProvider.addPouch(pouch);
+        if (isErr(result)) return resultErr(new PouchesErrors.AddPouchResponse(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new PouchesErrors.UnexpectedErrorAddPouch(e));
+      }
+    })();
+  }
+
+  removePouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$f(function* () {
+      try {
+        const result = yield _this.pouchesDataProvider.removePouch(pouchId);
+        if (isErr(result)) return resultErr(new PouchesErrors.RemovePouchResponse(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new PouchesErrors.UnexpectedErrorRemovePouch(e));
+      }
+    })();
+  }
+
+  constructor(pouchesDataProvider) {
+    this.pouchesDataProvider = pouchesDataProvider;
+  }
+
+};
+PouchesAdapter = __decorate$n([Adapter(), __param$i(0, Inject()), __metadata$i("design:type", Function), __metadata$i("design:paramtypes", [typeof PouchesDataProvider === "undefined" ? Object : PouchesDataProvider])], PouchesAdapter);
+
+var __decorate$m = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let PouchStore = class PouchStore {
+  setModalVisible(value) {
+    this.isModalVisible = value;
+  }
+
+  get currentPouch() {
+    const pouchId = this.pouchLocalStorage.value;
+    if (!pouchId) return undefined;
+    return this.pouches.find(({
+      id
+    }) => pouchId === id);
+  }
+
+  get currentPouchId() {
+    const pouch = this.currentPouch;
+    return (pouch === null || pouch === void 0 ? void 0 : pouch.id) || null;
+  }
+
+  get currentPouchName() {
+    var ref;
+    return ((ref = this.currentPouch) === null || ref === void 0 ? void 0 : ref.name) || t('export.pouchMain');
+  }
+
+  setCurrentPouch(id) {
+    this.pouchLocalStorage.set(id);
+  }
+
+  setIsLoading(value) {
+    this.isLoading = value;
+  }
+
+  setPouches(value) {
+    this.pouches = value;
+  }
+
+  dropEntities() {
+    this.setPouches([]);
+  }
+
+  constructor() {
+    this.pouchLocalStorage = new LocalStorageItem('pouch');
+    this.isLoading = true;
+    this.isModalVisible = false;
+    this.pouches = [];
+  }
+
+};
+PouchStore = __decorate$m([Store()], PouchStore);
+
+function asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$e(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$e(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$l = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$h = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$h = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let PouchService = class PouchService {
+  loadPouches() {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      _this.pouchStore.setPouches([]);
+
+      const result = yield _this.pouchesAdapter.getPouches();
+
+      if (isErr(result)) {
+        // TODO: add error processing
+        return;
+      }
+
+      _this.pouchStore.setPouches(result.data);
+    })();
+  }
+
+  addPouch() {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      const {
+        isApplied,
+        data
+      } = yield _this.messageBoxService.prompt(t('pouchBlock.removeAsk'), '');
+      if (!isApplied) return;
+      const result = yield _this.pouchesAdapter.addPouch(data);
+      if (isErr(result)) return;
+      return result.data;
+    })();
+  }
+
+  removePouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      if (!pouchId) return false;
+      const isConfirmed = yield _this.messageBoxService.confirm(t('pouchBlock.removeAsk'));
+      if (!isConfirmed) return false;
+      const result = yield _this.pouchesAdapter.removePouch(pouchId);
+      if (isErr(result)) return false;
+      return true;
+    })();
+  }
+
+  selectPouch(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$e(function* () {
+      _this.pouchStore.setCurrentPouch(pouchId);
+    })();
+  }
+
+  constructor(pouchesAdapter, pouchStore, messageBoxService) {
+    this.pouchesAdapter = pouchesAdapter;
+    this.pouchStore = pouchStore;
+    this.messageBoxService = messageBoxService;
+  }
+
+};
+PouchService = __decorate$l([Service(), __param$h(0, Inject()), __param$h(1, Inject()), __param$h(2, Inject()), __metadata$h("design:type", Function), __metadata$h("design:paramtypes", [typeof PouchesAdapter === "undefined" ? Object : PouchesAdapter, typeof PouchStore === "undefined" ? Object : PouchStore, typeof MessageBoxService === "undefined" ? Object : MessageBoxService])], PouchService);
+
+function Portal({
+  children
+}) {
+  const container = document.getElementById('portal');
+  if (!container) return null;
+  return /*#__PURE__*/e(p$1, {
+    children: V( /*#__PURE__*/e(p$1, {
+      children: children
+    }), container)
+  });
+}
+
+function useSearchLocation() {
+  const [location, setLocation] = useLocation();
+  return [location, setLocation, window.location.search];
+}
+
+const MODAL_PARAM_ID = 'modal';
+
+function useModal({
+  isVisible,
+  onClose
+}) {
+  const [isContainerShown, setContainerShown] = p(isVisible);
+  const idRef = _('');
+  const prevStateRef = _(false);
+
+  if (!idRef.current) {
+    idRef.current = guid();
+  }
+
+  const [usedLocation, setLocation] = useSearchLocation();
+  const hash = window.location.hash;
+  const [basePath, searchLocation] = usedLocation.split('?');
+  h(() => {
+    // on mount
+    const queryParams = new URLSearchParams(searchLocation);
+    queryParams.set(MODAL_PARAM_ID, idRef.current);
+    const newLocation = `${basePath}?${queryParams.toString()}`; // @ts-ignore
+
+    setLocation(newLocation); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  h(() => {
+    const searchFromHash = hash.split('?')[1] || '';
+    const queryParams = new URLSearchParams(searchFromHash);
+    const id = queryParams.get(MODAL_PARAM_ID);
+    const isShown = id === idRef.current;
+    const isStateChanged = prevStateRef.current !== isShown;
+    prevStateRef.current = isShown;
+    if (!isStateChanged) return;
+
+    if (id) {
+      setContainerShown(isShown);
+      return;
+    }
+
+    onClose();
+  }, [hash, onClose]);
+  return {
+    isContainerShown
+  };
+}
+
+const modalStyles_m5w5et = '';
+
+const Container$e = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cb00m8k"
+});
+const ContainerBg = /*#__PURE__*/styled$1("div")({
+  name: "ContainerBg",
+  class: "c18gl9yy"
+});
+const Overlay = /*#__PURE__*/styled$1("div")({
+  name: "Overlay",
+  class: "o1do1xz5"
+});
+
+function useModalHandleClose() {
+  const handleClose = T$1(() => {
+    history.go(-1);
+  }, []);
+  return {
+    handleClose
+  };
+}
+
+function ModalContainer({
+  children,
+  isVisible,
+  onClose
+}) {
+  const {
+    isContainerShown
+  } = useModal({
+    onClose,
+    isVisible
+  });
+  const {
+    handleClose
+  } = useModalHandleClose();
+  if (!isContainerShown) return null;
+  return /*#__PURE__*/e(p$1, {
+    children: /*#__PURE__*/e(Container$e, {
+      children: [/*#__PURE__*/e(Overlay, {
+        onClick: handleClose
+      }), /*#__PURE__*/e(ContainerBg, {
+        children: children
+      })]
+    })
+  });
+}
+
+function Modal({
+  children,
+  isVisible,
+  onClose
+}) {
+  if (!isVisible) return null;
+  return /*#__PURE__*/e(Portal, {
+    children: /*#__PURE__*/e(ModalContainer, {
+      isVisible: isVisible,
+      onClose: onClose,
+      children: children
+    })
+  });
+}
+
+function asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator$d(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+var __decorate$k = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+  var c = arguments.length,
+      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+      d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var __metadata$g = globalThis && globalThis.__metadata || function (k, v) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var __param$g = globalThis && globalThis.__param || function (paramIndex, decorator) {
+  return function (target, key) {
+    decorator(target, key, paramIndex);
+  };
+};
+let PouchAction = class PouchAction {
+  handleOpenPouchesList() {
+    this.pouchStore.setModalVisible(true);
+  }
+
+  handleClosePouchesList() {
+    this.pouchStore.setModalVisible(false);
+  }
+
+  handleRemove(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$d(function* () {
+      const isSame = pouchId === _this.pouchStore.currentPouchId;
+      const isRemoved = yield _this.pouchService.removePouch(pouchId);
+      if (!isRemoved) return;
+      yield _this.pouchService.loadPouches();
+
+      if (isSame) {
+        yield _this.handleSelect(null);
+      }
+    })();
+  }
+
+  handleAdd() {
+    var _this = this;
+
+    return _asyncToGenerator$d(function* () {
+      const newPouchId = yield _this.pouchService.addPouch();
+      if (!newPouchId) return;
+      yield _this.pouchService.loadPouches();
+      yield _this.handleSelect(newPouchId);
+    })();
+  }
+
+  handleSelect(pouchId) {
+    var _this = this;
+
+    return _asyncToGenerator$d(function* () {
+      yield _this.pouchService.selectPouch(pouchId);
+    })();
+  }
+
+  constructor(pouchStore, pouchService) {
+    this.pouchStore = pouchStore;
+    this.pouchService = pouchService;
+  }
+
+};
+PouchAction = __decorate$k([Action(), __param$g(0, Inject()), __param$g(1, Inject()), __metadata$g("design:type", Function), __metadata$g("design:paramtypes", [typeof PouchStore === "undefined" ? Object : PouchStore, typeof PouchService === "undefined" ? Object : PouchService])], PouchAction);
+
+const {
+  useModuleContext: usePouchContext
+} = hookContextFactory({
+  pouchStore: PouchStore,
+  pouchAction: PouchAction
+});
+
+const pouchItemStyles_1i6bhrb = '';
+
+const Row$3 = /*#__PURE__*/styled$1("button")({
+  name: "Row",
+  class: "r1ula01y"
+});
+const Container$d = /*#__PURE__*/styled$1("div")({
+  name: "Container",
+  class: "cqvsgeu"
+});
+const IconWrapper$1 = /*#__PURE__*/styled$1("div")({
+  name: "IconWrapper",
+  class: "i1bw3fr"
+});
+const TitleWrapper = /*#__PURE__*/styled$1("div")({
+  name: "TitleWrapper",
+  class: "t9boept"
+});
+const ActionWrapper = /*#__PURE__*/styled$1("div")({
+  name: "ActionWrapper",
+  class: "auzp478"
+});
+
+function PouchItem({
+  pouch,
+  onRemove,
+  isSelected,
+  onSelect
+}) {
+  const handleRemove = T$1(() => {
+    onRemove && onRemove(pouch.id);
+  }, [onRemove, pouch]);
+  const handleSelect = T$1(() => {
+    onSelect(pouch.id);
+  }, [onSelect, pouch.id]);
+  return /*#__PURE__*/e(Container$d, {
+    children: [/*#__PURE__*/e(Row$3, {
+      onClick: handleSelect,
+      children: [/*#__PURE__*/e(IconWrapper$1, {
+        children: isSelected && /*#__PURE__*/e(Icon, {
+          iconName: "wallet"
+        })
+      }), /*#__PURE__*/e(TitleWrapper, {
+        children: pouch.name
+      })]
+    }), onRemove && /*#__PURE__*/e(ActionWrapper, {
+      children: /*#__PURE__*/e(Button, {
+        variant: "flat",
+        onClick: handleRemove,
+        children: /*#__PURE__*/e(Icon, {
+          iconName: "cross"
+        })
+      })
+    })]
+  });
+}
+
+const PouchModalContent = observer(({
+  onSelect
+}) => {
+  const {
+    pouchStore,
+    pouchAction
+  } = usePouchContext();
+  const currentId = pouchStore.currentPouchId;
+  const handleSelect = T$1(pouchId => {
+    pouchAction.handleSelect(pouchId);
+    onSelect(pouchId);
+  }, [onSelect, pouchAction]);
+  return /*#__PURE__*/e("div", {
+    children: [/*#__PURE__*/e(PouchItem, {
+      isSelected: currentId === null,
+      pouch: {
+        name: t('export.pouchMain'),
+        id: null
+      },
+      onSelect: handleSelect
+    }), pouchStore.pouches.map(pouch => {
+      return /*#__PURE__*/e(PouchItem, {
+        isSelected: currentId === pouch.id,
+        pouch: pouch,
+        onRemove: pouchAction.handleRemove,
+        onSelect: handleSelect
+      }, `${pouch.id}-${pouch.name}`);
+    }), /*#__PURE__*/e(Button, {
+      onClick: pouchAction.handleAdd,
+      children: t('pouchBlock.add')
+    })]
+  });
+});
+
+const PouchModal = observer(({
+  onSelect
+}) => {
+  const {
+    pouchStore,
+    pouchAction
+  } = usePouchContext();
+  return /*#__PURE__*/e(Modal, {
+    onClose: pouchAction.handleClosePouchesList,
+    isVisible: pouchStore.isModalVisible,
+    children: /*#__PURE__*/e(PouchModalContent, {
+      onSelect: onSelect
+    })
+  });
+});
+
+const PouchSelection = observer(() => {
+  const {
+    pouchStore,
+    pouchAction
+  } = usePouchContext();
+  return /*#__PURE__*/e(p$1, {
+    children: /*#__PURE__*/e(Link, {
+      icon: "wallet",
+      onClick: pouchAction.handleOpenPouchesList,
+      children: pouchStore.currentPouchName
+    })
+  });
+});
+
+addBlock({
+  data: {
+    pouchBlock: {
+      modalTitle: ['Wallets', 'Кошельки'],
+      add: ['Add Wallet', 'Добавить кошелек'],
+      addTitle: ['New wallet', 'Новый кошелек'],
+      removeAsk: ['Delete wallet permanently?', 'Удалить кошелек безвозвратно?']
+    }
+  }
+});
+
+function PouchBlock({
+  onSelect
+}) {
+  return /*#__PURE__*/e(p$1, {
+    children: [/*#__PURE__*/e(PouchSelection, {}), /*#__PURE__*/e(PouchModal, {
+      onSelect: onSelect
+    })]
+  });
+}
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -18166,7 +18460,7 @@ function _objectSpread(target) {
   return target;
 }
 
-var __decorate$k = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
+var __decorate$j = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
   var c = arguments.length,
       r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
       d;
@@ -18290,200 +18584,7 @@ let ExpenseSelectionStore = class ExpenseSelectionStore {
   }
 
 };
-ExpenseSelectionStore = __decorate$k([Store()], ExpenseSelectionStore);
-
-function asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator$d(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep$d(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var __decorate$j = globalThis && globalThis.__decorate || function (decorators, target, key, desc) {
-  var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-      d;
-  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-  return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var __metadata$g = globalThis && globalThis.__metadata || function (k, v) {
-  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var __param$g = globalThis && globalThis.__param || function (paramIndex, decorator) {
-  return function (target, key) {
-    decorator(target, key, paramIndex);
-  };
-};
-let MoneySpendingService = class MoneySpendingService {
-  initialLoadData() {
-    var _this = this;
-
-    return _asyncToGenerator$d(function* () {
-      _this.moneySpendingStore.setExpenses([]);
-
-      _this.moneySpendingStore.setOffset(0);
-
-      const [categoriesResult] = yield Promise.all([_this.moneySpendingAdapter.getCategories(), _this.pouchService.loadPouches()]);
-
-      if (isErr(categoriesResult)) {
-        // TODO: add error processing
-        return;
-      }
-
-      _this.moneySpendingStore.setCategories(categoriesResult.data);
-
-      if (_this.moneySpendingStore.categories.length === 0) {
-        // open empty settings
-        _this.historyService.push(Routes.empty);
-
-        return;
-      }
-
-      yield _this.loadExpenses(0);
-    })();
-  }
-
-  reloadExpenses() {
-    var _this = this;
-
-    return _asyncToGenerator$d(function* () {
-      _this.moneySpendingStore.setExpenses([]);
-
-      _this.moneySpendingStore.setOffset(0);
-
-      yield _this.loadExpenses(0);
-    })();
-  }
-
-  loadExpenses(offset) {
-    var _this = this;
-
-    return _asyncToGenerator$d(function* () {
-      const currentPouchId = _this.pouchStore.currentPouchId;
-      const result = yield _this.moneySpendingAdapter.getExpenses({
-        offset,
-        pouchId: currentPouchId,
-        limit: LIMIT_DEFAULT
-      });
-
-      if (isErr(result)) {
-        // TODO: add error
-        return;
-      }
-
-      _this.moneySpendingStore.setOffset(offset + LIMIT_DEFAULT);
-
-      const nextExpenses = result.data;
-
-      _this.moneySpendingStore.addExpenses(nextExpenses);
-    })();
-  }
-
-  removeExpense(id) {
-    var _this = this;
-
-    return _asyncToGenerator$d(function* () {
-      const isConfirmed = yield _this.messageBoxService.confirm(t('expense.confirmRemove'));
-      if (!isConfirmed) return;
-
-      _this.moneySpendingStore.setIsLoading(true);
-
-      const result = yield _this.moneySpendingAdapter.removeExpense(id);
-
-      _this.moneySpendingStore.setIsLoading(false);
-
-      if (isErr(result)) {
-        //TODO: add error processing
-        return;
-      }
-
-      _this.moneySpendingStore.setOffset(_this.moneySpendingStore.offset - 1);
-
-      _this.moneySpendingStore.removeExpenseById(id);
-
-      _this.expenseSelectionStore.setCurrentExpenseView(null);
-    })();
-  }
-
-  handleApply() {
-    var _this = this;
-
-    return _asyncToGenerator$d(function* () {
-      _this.moneySpendingStore.setIsLoading(true);
-
-      const pouchId = _this.pouchStore.currentPouchId;
-      const catId = _this.moneySpendingStore.selectedCategoryId;
-      const desc = _this.expenseSelectionStore.currentDesc;
-
-      const newExpenses = _this.expenseSelectionStore.getExpenses(); // console.log('newExpenses', newExpenses)
-
-
-      for (const cost of newExpenses) {
-        yield _this.moneySpendingAdapter.addExpense({
-          pouchId,
-          catId,
-          cost,
-          desc
-        }); // if (isErr(result)) {
-        //   //TODO: add error processing
-        //   return
-        // }
-      }
-
-      _this.expenseSelectionStore.dropData();
-
-      yield _this.reloadExpenses();
-
-      _this.historyService.push(Routes.expense); // await this.initialLoadData()
-
-
-      _this.moneySpendingStore.setIsLoading(false);
-    })();
-  }
-
-  constructor(messageBoxService, moneySpendingStore, moneySpendingAdapter, expenseSelectionStore, pouchService, pouchStore, historyService) {
-    this.messageBoxService = messageBoxService;
-    this.moneySpendingStore = moneySpendingStore;
-    this.moneySpendingAdapter = moneySpendingAdapter;
-    this.expenseSelectionStore = expenseSelectionStore;
-    this.pouchService = pouchService;
-    this.pouchStore = pouchStore;
-    this.historyService = historyService;
-  }
-
-};
-MoneySpendingService = __decorate$j([Service(), __param$g(0, Inject()), __param$g(1, Inject()), __param$g(2, Inject()), __param$g(3, Inject()), __param$g(4, Inject()), __param$g(5, Inject()), __param$g(6, Inject()), __metadata$g("design:type", Function), __metadata$g("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof MoneySpendingAdapter === "undefined" ? Object : MoneySpendingAdapter, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof PouchService === "undefined" ? Object : PouchService, typeof PouchStore === "undefined" ? Object : PouchStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingService);
+ExpenseSelectionStore = __decorate$j([Store()], ExpenseSelectionStore);
 
 function asyncGeneratorStep$c(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -18538,249 +18639,145 @@ var __param$f = globalThis && globalThis.__param || function (paramIndex, decora
     decorator(target, key, paramIndex);
   };
 };
-let PouchAction = class PouchAction {
-  handleOpenPouchesList() {
-    this.pouchStore.setModalVisible(true);
-  }
-
-  handleClosePouchesList() {
-    this.pouchStore.setModalVisible(false);
-  }
-
-  handleRemove(pouchId) {
+let MoneySpendingService = class MoneySpendingService {
+  initialLoadData() {
     var _this = this;
 
     return _asyncToGenerator$c(function* () {
-      const isSame = pouchId === _this.pouchStore.currentPouchId;
-      const isRemoved = yield _this.pouchService.removePouch(pouchId);
-      if (!isRemoved) return;
+      _this.moneySpendingStore.setExpenses([]);
 
-      _this.moneySpendingStore.setIsLoading(true);
+      _this.moneySpendingStore.setOffset(0);
 
-      yield _this.pouchService.loadPouches();
+      const [categoriesResult] = yield Promise.all([_this.moneySpendingAdapter.getCategories(), _this.pouchService.loadPouches()]);
 
-      _this.moneySpendingStore.setIsLoading(false);
-
-      if (isSame) {
-        yield _this.handleSelect(null);
+      if (isErr(categoriesResult)) {
+        // TODO: add error processing
+        return;
       }
+
+      _this.moneySpendingStore.setCategories(categoriesResult.data);
+
+      if (_this.moneySpendingStore.categories.length === 0) {
+        // open empty settings
+        _this.historyService.push(Routes.empty);
+
+        return;
+      }
+
+      yield _this.loadExpenses(0);
     })();
   }
 
-  handleAdd() {
+  reloadExpenses() {
     var _this = this;
 
     return _asyncToGenerator$c(function* () {
-      const newPouchId = yield _this.pouchService.addPouch();
-      if (!newPouchId) return;
+      _this.moneySpendingStore.setExpenses([]);
+
+      _this.moneySpendingStore.setOffset(0);
+
+      yield _this.loadExpenses(0);
+    })();
+  }
+
+  loadExpenses(offset) {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      const currentPouchId = _this.pouchStore.currentPouchId;
+      const result = yield _this.moneySpendingAdapter.getExpenses({
+        offset,
+        pouchId: currentPouchId,
+        limit: LIMIT_DEFAULT
+      });
+
+      if (isErr(result)) {
+        // TODO: add error
+        return;
+      }
+
+      _this.moneySpendingStore.setOffset(offset + LIMIT_DEFAULT);
+
+      const nextExpenses = result.data;
+
+      _this.moneySpendingStore.addExpenses(nextExpenses);
+    })();
+  }
+
+  removeExpense(id) {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      const isConfirmed = yield _this.messageBoxService.confirm(t('expense.confirmRemove'));
+      if (!isConfirmed) return;
 
       _this.moneySpendingStore.setIsLoading(true);
 
-      yield _this.pouchService.loadPouches();
-      yield _this.handleSelect(newPouchId);
+      const result = yield _this.moneySpendingAdapter.removeExpense(id);
+
+      _this.moneySpendingStore.setIsLoading(false);
+
+      if (isErr(result)) {
+        //TODO: add error processing
+        return;
+      }
+
+      _this.moneySpendingStore.setOffset(_this.moneySpendingStore.offset - 1);
+
+      _this.moneySpendingStore.removeExpenseById(id);
+
+      _this.expenseSelectionStore.setCurrentExpenseView(null);
+    })();
+  }
+
+  handleApply() {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      _this.moneySpendingStore.setIsLoading(true);
+
+      const pouchId = _this.pouchStore.currentPouchId;
+      const catId = _this.moneySpendingStore.selectedCategoryId;
+      const desc = _this.expenseSelectionStore.currentDesc;
+
+      const newExpenses = _this.expenseSelectionStore.getExpenses(); // console.log('newExpenses', newExpenses)
+
+
+      for (const cost of newExpenses) {
+        yield _this.moneySpendingAdapter.addExpense({
+          pouchId,
+          catId,
+          cost,
+          desc
+        }); // if (isErr(result)) {
+        //   //TODO: add error processing
+        //   return
+        // }
+      }
+
+      _this.expenseSelectionStore.dropData();
+
+      yield _this.reloadExpenses();
+
+      _this.historyService.push(Routes.expense); // await this.initialLoadData()
+
 
       _this.moneySpendingStore.setIsLoading(false);
     })();
   }
 
-  handleSelect(pouchId) {
-    var _this = this;
-
-    return _asyncToGenerator$c(function* () {
-      _this.moneySpendingStore.setIsLoading(true);
-
-      yield _this.pouchService.selectPouch(pouchId);
-      yield _this.moneySpendingService.reloadExpenses();
-
-      _this.moneySpendingStore.setIsLoading(false);
-    })();
-  }
-
-  constructor(pouchStore, pouchService, moneySpendingService, moneySpendingStore) {
-    this.pouchStore = pouchStore;
-    this.pouchService = pouchService;
-    this.moneySpendingService = moneySpendingService;
+  constructor(messageBoxService, moneySpendingStore, moneySpendingAdapter, expenseSelectionStore, pouchService, pouchStore, historyService) {
+    this.messageBoxService = messageBoxService;
     this.moneySpendingStore = moneySpendingStore;
+    this.moneySpendingAdapter = moneySpendingAdapter;
+    this.expenseSelectionStore = expenseSelectionStore;
+    this.pouchService = pouchService;
+    this.pouchStore = pouchStore;
+    this.historyService = historyService;
   }
 
 };
-PouchAction = __decorate$i([Action(), __param$f(0, Inject()), __param$f(1, Inject()), __param$f(2, Inject()), __param$f(3, Inject()), __metadata$f("design:type", Function), __metadata$f("design:paramtypes", [typeof PouchStore === "undefined" ? Object : PouchStore, typeof PouchService === "undefined" ? Object : PouchService, typeof MoneySpendingService === "undefined" ? Object : MoneySpendingService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore])], PouchAction);
-
-const {
-  useModuleContext: usePouchContext
-} = hookContextFactory({
-  pouchStore: PouchStore,
-  pouchAction: PouchAction
-});
-
-const pouchItemStyles_1i6bhrb = '';
-
-const Row$3 = /*#__PURE__*/styled$1("button")({
-  name: "Row",
-  class: "r1ula01y"
-});
-const Container$e = /*#__PURE__*/styled$1("div")({
-  name: "Container",
-  class: "cqvsgeu"
-});
-const IconWrapper$2 = /*#__PURE__*/styled$1("div")({
-  name: "IconWrapper",
-  class: "i1bw3fr"
-});
-const TitleWrapper = /*#__PURE__*/styled$1("div")({
-  name: "TitleWrapper",
-  class: "t9boept"
-});
-const ActionWrapper = /*#__PURE__*/styled$1("div")({
-  name: "ActionWrapper",
-  class: "auzp478"
-});
-
-function PouchItem({
-  pouch,
-  onRemove,
-  isSelected,
-  onSelect
-}) {
-  const handleRemove = T$1(() => {
-    onRemove && onRemove(pouch.id);
-  }, [onRemove, pouch]);
-  const handleSelect = T$1(() => {
-    onSelect(pouch.id);
-  }, [onSelect, pouch.id]);
-  return /*#__PURE__*/e(Container$e, {
-    children: [/*#__PURE__*/e(Row$3, {
-      onClick: handleSelect,
-      children: [/*#__PURE__*/e(IconWrapper$2, {
-        children: isSelected && /*#__PURE__*/e(Icon, {
-          iconName: "wallet"
-        })
-      }), /*#__PURE__*/e(TitleWrapper, {
-        children: pouch.name
-      })]
-    }), onRemove && /*#__PURE__*/e(ActionWrapper, {
-      children: /*#__PURE__*/e(Button, {
-        variant: "flat",
-        onClick: handleRemove,
-        children: /*#__PURE__*/e(Icon, {
-          iconName: "cross"
-        })
-      })
-    })]
-  });
-}
-
-const PouchModalContent = observer(() => {
-  const {
-    pouchStore,
-    pouchAction
-  } = usePouchContext();
-  const currentId = pouchStore.currentPouchId;
-  return /*#__PURE__*/e("div", {
-    children: [/*#__PURE__*/e(PouchItem, {
-      isSelected: currentId === null,
-      pouch: {
-        name: t('export.pouchMain'),
-        id: null
-      },
-      onSelect: pouchAction.handleSelect
-    }), pouchStore.pouches.map(pouch => {
-      return /*#__PURE__*/e(PouchItem, {
-        isSelected: currentId === pouch.id,
-        pouch: pouch,
-        onRemove: pouchAction.handleRemove,
-        onSelect: pouchAction.handleSelect
-      }, `${pouch.id}-${pouch.name}`);
-    }), /*#__PURE__*/e(Button, {
-      onClick: pouchAction.handleAdd,
-      children: t('pouchBlock.add')
-    })]
-  });
-});
-
-const PouchModal = observer(() => {
-  const {
-    pouchStore,
-    pouchAction
-  } = usePouchContext();
-  return /*#__PURE__*/e(Modal, {
-    onClose: pouchAction.handleClosePouchesList,
-    isVisible: pouchStore.isModalVisible,
-    children: /*#__PURE__*/e(PouchModalContent, {})
-  });
-});
-
-const linkStyles_aqii0v = '';
-
-const Container$d = /*#__PURE__*/styled$1("div")({
-  name: "Container",
-  class: "c67ods1"
-});
-const IconWrapper$1 = /*#__PURE__*/styled$1("div")({
-  name: "IconWrapper",
-  class: "i1o8p8ca"
-});
-const ContentWrapper = /*#__PURE__*/styled$1("div")({
-  name: "ContentWrapper",
-  class: "c1hxs3cb"
-});
-
-function Link({
-  children,
-  icon,
-  onClick,
-  isDisabled
-}) {
-  return /*#__PURE__*/e(Container$d, {
-    onClick: onClick,
-    disabled: isDisabled,
-    children: [icon && /*#__PURE__*/e(IconWrapper$1, {
-      children: /*#__PURE__*/e(Icon, {
-        iconName: icon
-      })
-    }), /*#__PURE__*/e(ContentWrapper, {
-      children: children
-    })]
-  });
-}
-
-const PouchSelection = observer(() => {
-  const {
-    pouchStore,
-    pouchAction
-  } = usePouchContext();
-  return /*#__PURE__*/e(p$1, {
-    children: /*#__PURE__*/e(Link, {
-      icon: "wallet",
-      onClick: pouchAction.handleOpenPouchesList,
-      children: pouchStore.currentPouchName
-    })
-  });
-});
-
-addBlock({
-  data: {
-    pouchBlock: {
-      modalTitle: ['Wallets', 'Кошельки'],
-      add: ['Add Wallet', 'Добавить кошелек'],
-      addTitle: ['New wallet', 'Новый кошелек'],
-      removeAsk: ['Delete wallet permanently?', 'Удалить кошелек безвозвратно?']
-    }
-  }
-});
-
-function PouchBlock() {
-  return /*#__PURE__*/e(p$1, {
-    children: [/*#__PURE__*/e(PouchSelection, {}), /*#__PURE__*/e(PouchModal, {})]
-  });
-}
-
-const expensesPageStyles_3m5f7r = '';
-
-const LoadMoreWrapper = /*#__PURE__*/styled$1("div")({
-  name: "LoadMoreWrapper",
-  class: "l14jmizt"
-});
+MoneySpendingService = __decorate$i([Service(), __param$f(0, Inject()), __param$f(1, Inject()), __param$f(2, Inject()), __param$f(3, Inject()), __param$f(4, Inject()), __param$f(5, Inject()), __param$f(6, Inject()), __metadata$f("design:type", Function), __metadata$f("design:paramtypes", [typeof MessageBoxService === "undefined" ? Object : MessageBoxService, typeof MoneySpendingStore === "undefined" ? Object : MoneySpendingStore, typeof MoneySpendingAdapter === "undefined" ? Object : MoneySpendingAdapter, typeof ExpenseSelectionStore === "undefined" ? Object : ExpenseSelectionStore, typeof PouchService === "undefined" ? Object : PouchService, typeof PouchStore === "undefined" ? Object : PouchStore, typeof HistoryService === "undefined" ? Object : HistoryService])], MoneySpendingService);
 
 function asyncGeneratorStep$b(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -18845,6 +18842,18 @@ let MoneySpendingAction = class MoneySpendingAction {
       _this.moneySpendingStore.setIsLoading(true);
 
       yield _this.moneySpendingService.initialLoadData();
+
+      _this.moneySpendingStore.setIsLoading(false);
+    })();
+  }
+
+  reloadExpenses() {
+    var _this = this;
+
+    return _asyncToGenerator$b(function* () {
+      _this.moneySpendingStore.setIsLoading(true);
+
+      yield _this.moneySpendingService.reloadExpenses();
 
       _this.moneySpendingStore.setIsLoading(false);
     })();
@@ -19749,6 +19758,17 @@ const ExpenseItemPage = observer(() => {
   });
 });
 
+const HeaderPouchBlock$1 = observer(() => {
+  const {
+    moneySpendingAction
+  } = useMoneySpendingContext();
+  return /*#__PURE__*/e(PouchBlock, {
+    onSelect: () => {
+      moneySpendingAction.reloadExpenses();
+    }
+  });
+});
+
 const moneySpendingRoutes = [{
   route: {
     path: Routes.expense
@@ -19756,7 +19776,7 @@ const moneySpendingRoutes = [{
   component: ExpensesPage,
   header: {
     title: () => t('pages.expense'),
-    component: PouchBlock
+    component: HeaderPouchBlock$1
   },
   withNavigation: true
 }, {
@@ -20403,9 +20423,9 @@ const {
 // //autogenerated by /build-version.js PLEASE, DO NOT MODIFY!!!
 const buildVersion = {
   appName: 'Coinote',
-  version: '5.0.1',
-  changeset: 'f2b3d0570f111d67882145edde7c5e85d4b3540e',
-  buildTime: new Date(1663101961050)
+  version: '5.0.2',
+  changeset: 'bfde075a1d5c8e711c907aecbadd1d40335e82aa',
+  buildTime: new Date(1663185072912)
 };
 
 const buildVersionStyles_1ys16xi = '';
@@ -21263,7 +21283,20 @@ let AnalyticAction = class AnalyticAction {
     })();
   }
 
-  handleLoadReport() {
+  initialLoadData() {
+    var _this = this;
+
+    return _asyncToGenerator$1(function* () {
+      _this.analyticStore.setIsLoading(true);
+
+      yield _this.pouchService.loadPouches();
+      yield _this.analyticReportService.handleReport();
+
+      _this.analyticStore.setIsLoading(false);
+    })();
+  }
+
+  reloadAnalytic() {
     var _this = this;
 
     return _asyncToGenerator$1(function* () {
@@ -21289,16 +21322,17 @@ let AnalyticAction = class AnalyticAction {
     })();
   }
 
-  constructor(analyticReportService, analyticStore) {
+  constructor(analyticReportService, analyticStore, pouchService) {
     this.analyticReportService = analyticReportService;
     this.analyticStore = analyticStore;
+    this.pouchService = pouchService;
   }
 
 };
-AnalyticAction = __decorate$2([Action(), __param$2(0, Inject()), __param$2(1, Inject()), __metadata$2("design:type", Function), __metadata$2("design:paramtypes", [typeof AnalyticReportService === "undefined" ? Object : AnalyticReportService, typeof AnalyticStore === "undefined" ? Object : AnalyticStore])], AnalyticAction);
+AnalyticAction = __decorate$2([Action(), __param$2(0, Inject()), __param$2(1, Inject()), __param$2(2, Inject()), __metadata$2("design:type", Function), __metadata$2("design:paramtypes", [typeof AnalyticReportService === "undefined" ? Object : AnalyticReportService, typeof AnalyticStore === "undefined" ? Object : AnalyticStore, typeof PouchService === "undefined" ? Object : PouchService])], AnalyticAction);
 
 const {
-  useModuleContext: analyticContext
+  useModuleContext: useAnalyticContext
 } = hookContextFactory({
   analyticStore: AnalyticStore,
   analyticAction: AnalyticAction
@@ -21436,7 +21470,7 @@ function useDateRangeSelect() {
   const {
     analyticStore,
     analyticAction
-  } = analyticContext();
+  } = useAnalyticContext();
   const lang = langStore.currentLanguage;
   const dateFormatter = F$1(() => {
     return new Intl.DateTimeFormat(lang, {
@@ -21505,7 +21539,7 @@ const Header = observer(() => {
   const {
     analyticAction,
     analyticStore
-  } = analyticContext();
+  } = useAnalyticContext();
   return /*#__PURE__*/e(Root, {
     children: /*#__PURE__*/e(Container$2, {
       children: [/*#__PURE__*/e(Button, {
@@ -21527,7 +21561,7 @@ const Header = observer(() => {
   });
 });
 
-const analyticCategoryStyles_18zx03y = '';
+const analyticCategoryStyles_1f257w1 = '';
 
 const Container$1 = /*#__PURE__*/styled$1("div")({
   name: "Container",
@@ -21554,7 +21588,7 @@ const AnalyticCategory = observer(() => {
   const {
     analyticStore,
     analyticAction
-  } = analyticContext();
+  } = useAnalyticContext();
   const handleClick = T$1(e => {
     const categoryId = getAttrFromElement(e.target, 'data-id');
     if (!categoryId) return;
@@ -21596,7 +21630,7 @@ const Container = /*#__PURE__*/styled$1("div")({
 const AnalyticExpenses = observer(() => {
   const {
     analyticStore
-  } = analyticContext();
+  } = useAnalyticContext();
   if (!analyticStore.selectedCategoryId) return null;
   return /*#__PURE__*/e(Container, {
     children: analyticStore.expenseListView.map(expense => {
@@ -21627,9 +21661,9 @@ const AnalyticPage = observer(() => {
   const {
     analyticStore,
     analyticAction
-  } = analyticContext();
+  } = useAnalyticContext();
   h(() => {
-    analyticAction.handleLoadReport(); // eslint-disable-next-line react-hooks/exhaustive-deps
+    analyticAction.initialLoadData(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return /*#__PURE__*/e(p$1, {
     children: /*#__PURE__*/e(Container$3, {
@@ -21650,6 +21684,17 @@ const AnalyticPage = observer(() => {
   });
 });
 
+const HeaderPouchBlock = observer(() => {
+  const {
+    analyticAction
+  } = useAnalyticContext();
+  return /*#__PURE__*/e(PouchBlock, {
+    onSelect: () => {
+      analyticAction.reloadAnalytic();
+    }
+  });
+});
+
 const analyticRoutes = [{
   route: {
     path: Routes.analytic
@@ -21657,7 +21702,7 @@ const analyticRoutes = [{
   component: AnalyticPage,
   header: {
     title: () => t('pages.analytic'),
-    component: PouchBlock
+    component: HeaderPouchBlock
   },
   withNavigation: true
 }];

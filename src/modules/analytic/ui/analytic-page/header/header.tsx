@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite'
 import { Button } from '@pv/ui-kit/button'
 import { Icon } from '@pv/ui-kit/icon'
-import { analyticContext } from '@pv/modules/analytic/interface/analytic-context'
+import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
 import { DateRangeSelect } from './date-range-select'
 import { Container, DateSelectContainer, Root } from './header-styles'
 
 export const Header = observer(() => {
-  const { analyticAction, analyticStore } = analyticContext()
+  const { analyticAction, analyticStore } = useAnalyticContext()
   return (
     <Root>
       <Container>

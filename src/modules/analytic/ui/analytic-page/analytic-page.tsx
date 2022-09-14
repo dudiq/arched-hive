@@ -2,7 +2,7 @@ import { ScrollContainer } from '@pv/ui-kit/scroll-container'
 import { observer } from 'mobx-react-lite'
 import { Swap } from '@pv/ui-kit/swap'
 import { Loader } from '@pv/ui-kit/loader'
-import { analyticContext } from '@pv/modules/analytic/interface/analytic-context'
+import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
 import { getMoney, t } from '@pv/interface/services/i18n'
 import { Separator } from '@pv/ui-kit/separator'
 import { useEffect } from 'react'
@@ -14,10 +14,10 @@ import { AnalyticExpenses } from './analytic-expenses'
 import './analytic-page.langs'
 
 export const AnalyticPage = observer(() => {
-  const { analyticStore, analyticAction } = analyticContext()
+  const { analyticStore, analyticAction } = useAnalyticContext()
 
   useEffect(() => {
-    analyticAction.handleLoadReport()
+    analyticAction.initialLoadData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
