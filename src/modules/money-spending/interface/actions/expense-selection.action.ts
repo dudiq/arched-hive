@@ -62,7 +62,7 @@ export class ExpenseSelectionAction {
   }
 
   handleSetFloat() {
-    this.expenseSelectionStore.setFloat(true)
+    this.expenseSelectionStore.setIsFloat(true)
   }
 
   handleApply() {

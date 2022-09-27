@@ -6,73 +6,68 @@ import { getNumber } from 'jr-translate'
 export class ExpenseSelectionStore {
   currentExpenseView: ExpenseViewEntity | null = null
 
-  costList: number[] = []
-
-  currentCost = 0
-
-  isFloat = false
-
-  floatCost = 0
-
   currentDesc = ''
 
+  private totalCostList: number[] = []
+
+  private currentCostList: number[] = []
+
+  private currentDivideCostList: number[] = []
+
+  private isFloat = false
+
   clear() {
-    this.currentCost = 0
-    this.costList = []
-    this.setFloat(false)
+    this.currentCostList = []
+    this.totalCostList = []
+    this.setIsFloat(false)
   }
 
-  setFloat(value: boolean) {
+  setIsFloat(value: boolean) {
     this.isFloat = value
-    this.floatCost = 0
-  }
-
-  setFloatCost(value: number) {
-    if (value < 100) {
-      this.floatCost = value
-      return
-    }
-    const str = String(value).slice(-2)
-    this.floatCost = Number(str)
-  }
-
-  getNextCost(current: number, char: string) {
-    return current * 10 + Number(char)
   }
 
   addNumberToCost(char: string) {
-    if (this.isFloat) {
-      const floatCost = this.getNextCost(this.floatCost, char)
-      this.setFloatCost(floatCost)
+    const value = Number(char)
+    if (isNaN(value)) return
+
+    if (!this.isFloat) {
+      this.currentCostList.push(value)
       return
     }
 
-    const cost = this.getNextCost(this.currentCost, char)
-    this.setCurrentCost(cost)
-  }
-
-  setCurrentCost(value: number) {
-    this.currentCost = value
+    this.currentDivideCostList.push(value)
+    if (this.currentDivideCostList.length > 2) {
+      this.currentDivideCostList.shift()
+    }
   }
 
   setCurrentDesc(value: string) {
     this.currentDesc = value
   }
 
+  get costValue() {
+    const cost =
+      Number(this.currentCostList.join('')) * 100 + Number(this.currentDivideCostList.join(''))
+    return cost
+  }
+
   pushCurrentToCostList() {
-    this.costList.push(this.currentCost * 100 + this.floatCost)
-    this.currentCost = 0
-    this.setFloat(false)
+    const cost = this.costValue
+    this.totalCostList.push(cost)
+    this.currentCostList = []
+    this.currentDivideCostList = []
+    this.setIsFloat(false)
   }
 
   backspaceCostList() {
-    if (this.currentCost !== 0) {
-      this.currentCost = 0
-      this.setFloat(false)
+    if (this.currentDivideCostList.length) {
+      this.currentDivideCostList.pop()
       return
     }
-    this.costList.pop()
-    this.setFloat(false)
+
+    this.setIsFloat(false)
+
+    this.currentCostList.pop()
   }
 
   setCurrentExpenseView(value: ExpenseViewEntity | null) {
@@ -92,34 +87,35 @@ export class ExpenseSelectionStore {
   }
 
   get costsView() {
-    return this.costList.map((item) => getNumber(item / 100, 2)).join(' + ')
+    return this.totalCostList.map((item) => getNumber(item / 100, 2)).join(' + ')
   }
 
   get totalCostView() {
-    const total = this.costList.reduce((acc, item) => {
+    const total = this.totalCostList.reduce((acc, item) => {
       return acc + item
-    }, this.currentCost * 100 + this.floatCost)
+    }, this.costValue)
     return getNumber(total / 100)
   }
 
   get currentCostView() {
+    const num = this.costValue / 100
+
     if (this.isFloat) {
-      const num = ((this.currentCost * 100 + this.floatCost) * 10) / 1000 + 0.0001
       return getNumber(num, 2)
     }
 
-    return getNumber(this.currentCost)
+    return getNumber(num)
   }
 
   getExpenses() {
-    return [...this.costList, this.currentCost * 100 + this.floatCost]
+    return [...this.totalCostList, this.costValue]
   }
 
   dropData() {
-    this.costList = []
-    this.currentCost = 0
+    this.totalCostList = []
+    this.currentCostList = []
+    this.currentDivideCostList = []
     this.isFloat = false
-    this.floatCost = 0
     this.currentDesc = ''
   }
 }
