@@ -10,12 +10,20 @@ export const Row = styled.div`
   width: 100%;
 `
 
-export const PadButton = styled.button<{ viewType?: 'apply' | 'secondary'; widthFill?: 'half' }>`
+export const PadButton = styled.button<{
+  viewType?: 'apply' | 'secondary'
+  widthFill?: 'half'
+  disabled?: boolean
+}>`
   display: table-cell;
   text-align: center;
   vertical-align: middle;
   width: ${(props) => (props.widthFill === 'half' ? '50%' : '25%')};
   height: 52px;
+  opacity: ${(props) => {
+    return props.disabled ? '0.5' : '1'
+  }};
+
   background-color: ${(props) => {
     switch (props.viewType) {
       case 'secondary':

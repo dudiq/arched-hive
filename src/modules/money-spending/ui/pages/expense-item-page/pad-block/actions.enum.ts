@@ -1,8 +1,9 @@
 export enum ACTIONS_ENUM {
-  number = 'number',
-  clear = 'clear',
-  backspace = 'backspace',
-  plus = 'plus',
-  dot = 'dot',
-  apply = 'apply',
+  NUMBER = 'NUMBER',
+  CLEAR = 'CLEAR',
+  BACKSPACE = 'BACKSPACE',
+  PLUS = 'PLUS',
+  DOT = 'DOT',
+  APPLY = 'APPLY',
+  UPDATE = 'UPDATE',
 }

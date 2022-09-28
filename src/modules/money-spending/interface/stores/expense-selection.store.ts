@@ -18,6 +18,7 @@ export class ExpenseSelectionStore {
 
   clear() {
     this.currentCostList = []
+    this.currentDivideCostList = []
     this.totalCostList = []
     this.setIsFloat(false)
   }
@@ -76,6 +77,15 @@ export class ExpenseSelectionStore {
           ...value,
         }
       : null
+
+    if (value) {
+      this.setCurrentDesc(value.desc || '')
+      const numbers = String(value.cost)
+        .split('')
+        .map((num) => Number(num))
+      this.currentDivideCostList = numbers.slice(-2)
+      this.currentCostList = numbers.slice(0, -2)
+    }
   }
 
   get isEditing() {

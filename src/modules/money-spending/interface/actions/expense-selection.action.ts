@@ -17,13 +17,15 @@ export class ExpenseSelectionAction {
     private expensesViewStore: ExpensesViewStore,
   ) {}
 
-  handleToggleSelectedExpense(id: string) {
+  handleSelectExpense(id: string) {
     const nextId = this.expenseSelectionStore.currentExpenseView?.id === id ? '' : id
-    if (!nextId) {
+    const expense = this.expensesViewStore.getExpenseViewById(nextId)
+    if (!expense) {
       this.expenseSelectionStore.setCurrentExpenseView(null)
       return
     }
-    const expense = this.expensesViewStore.getExpenseViewById(nextId)
+
+    this.moneySpendingStore.setSelectedCategoryId(expense.catId)
     this.expenseSelectionStore.setCurrentExpenseView(expense)
   }
 
@@ -67,5 +69,9 @@ export class ExpenseSelectionAction {
 
   handleApply() {
     this.moneySpendingService.handleApply()
+  }
+
+  handleUpdate() {
+    this.moneySpendingService.handleUpdate()
   }
 }

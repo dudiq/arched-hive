@@ -46,4 +46,10 @@ export class MoneySpendingDataProvider extends DatabaseDataProvider {
     this.client.expense.add(expense)
     return this.ok(true)
   }
+
+  async updateExpense(expense: ExpenseEntity) {
+    const result = this.client.expense.where('id').equals(expense.id).modify(expense)
+
+    return this.ok(result)
+  }
 }

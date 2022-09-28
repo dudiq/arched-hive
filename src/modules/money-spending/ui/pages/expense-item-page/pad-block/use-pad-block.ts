@@ -4,7 +4,7 @@ import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
 import { ACTIONS_ENUM } from './actions.enum'
 
 export function usePadBlock() {
-  const { expenseSelectionAction } = useMoneySpendingContext()
+  const { expenseSelectionAction, expenseSelectionStore } = useMoneySpendingContext()
   const handleClick = useCallback(
     (ev: any) => {
       const target = ev.target as HTMLDivElement
@@ -13,22 +13,25 @@ export function usePadBlock() {
       const value = getAttrFromElement(target, 'data-value')
 
       switch (action) {
-        case 'clear':
+        case 'CLEAR':
           expenseSelectionAction.handleClear()
           return
-        case 'backspace':
+        case 'BACKSPACE':
           expenseSelectionAction.handleBackspaceCost()
           return
-        case 'plus':
+        case 'PLUS':
           expenseSelectionAction.handlePushCost()
           return
-        case 'dot':
+        case 'DOT':
           expenseSelectionAction.handleSetFloat()
           return
-        case 'apply':
+        case 'UPDATE':
+          expenseSelectionAction.handleUpdate()
+          return
+        case 'APPLY':
           expenseSelectionAction.handleApply()
           return
-        case 'number':
+        case 'NUMBER':
           value && expenseSelectionAction.handleAddNumber(value)
           return
       }
@@ -38,5 +41,6 @@ export function usePadBlock() {
 
   return {
     handleClick,
+    isEditing: expenseSelectionStore.isEditing,
   }
 }
