@@ -12,6 +12,9 @@ export const { MoneySpendingErrors } = errorFactory('MoneySpendingErrors', {
 
   AddExpenseResponse: 'Failed add expense',
   UnexpectedErrorAddExpense: 'Unexpected add expense',
+
+  UpdateExpenseResponse: 'Failed update expense',
+  UnexpectedErrorUpdateExpense: 'Unexpected update expense',
 })
 
 export type MoneySpendingErrorsInstances = InstanceType<

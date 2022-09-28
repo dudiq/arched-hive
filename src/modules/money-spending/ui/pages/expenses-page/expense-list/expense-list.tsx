@@ -13,7 +13,7 @@ export const ExpenseList = observer(() => {
     (e: any) => {
       const expenseId = getAttrFromElement(e.target as HTMLElement, 'data-expense-id')
       if (!expenseId) return
-      expenseSelectionAction.handleToggleSelectedExpense(expenseId)
+      expenseSelectionAction.handleSelectExpense(expenseId)
     },
     [expenseSelectionAction],
   )

@@ -95,6 +95,31 @@ export class MoneySpendingService {
     this.expenseSelectionStore.setCurrentExpenseView(null)
   }
 
+  async handleUpdate() {
+    const expenseView = this.expenseSelectionStore.currentExpenseView
+    if (!expenseView) return
+
+    this.moneySpendingStore.setIsLoading(true)
+    const pouchId = this.pouchStore.currentPouchId
+
+    await this.moneySpendingAdapter.updateExpense({
+      id: expenseView.id,
+      time: expenseView.time,
+      pouchId,
+      catId: this.moneySpendingStore.selectedCategoryId,
+      cost: this.expenseSelectionStore.costValue,
+      desc: this.expenseSelectionStore.currentDesc,
+    })
+
+    this.expenseSelectionStore.dropData()
+
+    await this.reloadExpenses()
+
+    this.historyService.push(Routes.expense)
+
+    this.moneySpendingStore.setIsLoading(false)
+  }
+
   async handleApply() {
     this.moneySpendingStore.setIsLoading(true)
 

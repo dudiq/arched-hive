@@ -67,6 +67,42 @@ export class MoneySpendingAdapter {
     }
   }
 
+  async updateExpense({
+    id,
+    time,
+    desc,
+    cost,
+    catId,
+    pouchId,
+  }: {
+    id: string
+    time: number
+    desc?: string
+    cost: number
+    catId: string
+    pouchId: PouchId
+  }) {
+    try {
+      const expense = {
+        id,
+        cost,
+        desc,
+        time,
+        state: -1,
+        pouchId,
+        catId,
+      }
+      const result = await this.moneySpendingDataProvider.updateExpense(expense)
+
+      if (isErr(result))
+        return resultErr(new MoneySpendingErrors.UpdateExpenseResponse(result.error))
+
+      return resultOk(result.data)
+    } catch (e) {
+      return resultErr(new MoneySpendingErrors.UnexpectedErrorUpdateExpense(e))
+    }
+  }
+
   async addExpense({
     desc,
     cost,
