@@ -1,33 +1,38 @@
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
 import { useCallback } from 'preact/compat'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
+import { ACTIONS_ENUM } from './actions.enum'
 
 export function usePadBlock() {
-  const { expenseSelectionAction } = useMoneySpendingContext()
+  const { expenseSelectionAction, expenseSelectionStore } = useMoneySpendingContext()
   const handleClick = useCallback(
     (ev: any) => {
       const target = ev.target as HTMLDivElement
-      const action = getAttrFromElement(target, 'data-action')
+      const action = getAttrFromElement(target, 'data-action') as ACTIONS_ENUM
       if (!action) return
-      if (!isNaN(Number(action))) {
-        expenseSelectionAction.handleAddNumber(action)
-        return
-      }
+      const value = getAttrFromElement(target, 'data-value')
+
       switch (action) {
-        case 'clear':
+        case 'CLEAR':
           expenseSelectionAction.handleClear()
           return
-        case 'backspace':
+        case 'BACKSPACE':
           expenseSelectionAction.handleBackspaceCost()
           return
-        case 'plus':
+        case 'PLUS':
           expenseSelectionAction.handlePushCost()
           return
-        case 'dot':
+        case 'DOT':
           expenseSelectionAction.handleSetFloat()
           return
-        case 'apply':
+        case 'UPDATE':
+          expenseSelectionAction.handleUpdate()
+          return
+        case 'APPLY':
           expenseSelectionAction.handleApply()
+          return
+        case 'NUMBER':
+          value && expenseSelectionAction.handleAddNumber(value)
           return
       }
     },
@@ -36,5 +41,6 @@ export function usePadBlock() {
 
   return {
     handleClick,
+    isEditing: expenseSelectionStore.isEditing,
   }
 }

@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 
 export const Container = styled.div`
+  padding: 0 8px;
   margin-right: 8px;
   display: flex;
   flex-direction: column;

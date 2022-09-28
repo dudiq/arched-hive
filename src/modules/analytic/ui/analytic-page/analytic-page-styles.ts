@@ -14,7 +14,7 @@ export const Content = styled.div`
 `
 
 export const TotalMoneyRow = styled.div`
-  margin: 10px 0;
+  margin: 10px 8px;
   font-size: var(--text-size-big);
   display: flex;
   & > *:last-child {
