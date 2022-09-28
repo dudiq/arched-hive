@@ -1,5 +1,9 @@
 This is an example project of frontend architecture. Based on DDD/Hexagon/etc...
 
+Map of layer relations:
+
+![Scheme](./scheme.png 'Scheme')
+
 The main idea of this approach is to try to separate the dependencies of dataflow. And in this approach, it's not a big deal what frontend framework/library will be used here (I hope)
 
 For example, we can drop UI part and create CLI in the same way, because UI just calls handlers from interface and subscribe to actions from it. No direct calls to server/database/etc.
@@ -14,8 +18,6 @@ Top level:
 - Infra. It's external communication level. Like database/server/etc outside
 
 ---
-
-Let's try to go deeper.
 
 Let's try to go deeper.
 
@@ -38,6 +40,3 @@ Let's try to go deeper.
 See an example of how it works here: [https://dudiq.github.io/improved-lamp/](https://dudiq.github.io/improved-lamp/)
 
 And code example in `./src` folder
-
-Map of layer relations:
-![Scheme](./scheme.png 'Scheme')
