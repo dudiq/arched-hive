@@ -17322,7 +17322,9 @@ const {
   RemoveExpenseResponse: 'Failed remove expense',
   UnexpectedErrorRemoveExpense: 'Unexpected remove expense',
   AddExpenseResponse: 'Failed add expense',
-  UnexpectedErrorAddExpense: 'Unexpected add expense'
+  UnexpectedErrorAddExpense: 'Unexpected add expense',
+  UpdateExpenseResponse: 'Failed update expense',
+  UnexpectedErrorUpdateExpense: 'Unexpected update expense'
 });
 
 function asyncGeneratorStep$i(gen, resolve, reject, _next, _throw, key, arg) {
@@ -17417,6 +17419,16 @@ let MoneySpendingDataProvider = class MoneySpendingDataProvider extends Database
       _this.client.expense.add(expense);
 
       return _this.ok(true);
+    })();
+  }
+
+  updateExpense(expense) {
+    var _this = this;
+
+    return _asyncToGenerator$i(function* () {
+      const result = _this.client.expense.where('id').equals(expense.id).modify(expense);
+
+      return _this.ok(result);
     })();
   }
 
@@ -17523,6 +17535,36 @@ let MoneySpendingAdapter = class MoneySpendingAdapter {
         return resultOk(result.data);
       } catch (e) {
         return resultErr(new MoneySpendingErrors.UnexpectedErrorRemoveExpense(e));
+      }
+    })();
+  }
+
+  updateExpense({
+    id,
+    time,
+    desc,
+    cost,
+    catId,
+    pouchId
+  }) {
+    var _this = this;
+
+    return _asyncToGenerator$h(function* () {
+      try {
+        const expense = {
+          id,
+          cost,
+          desc,
+          time,
+          state: -1,
+          pouchId,
+          catId
+        };
+        const result = yield _this.moneySpendingDataProvider.updateExpense(expense);
+        if (isErr(result)) return resultErr(new MoneySpendingErrors.UpdateExpenseResponse(result.error));
+        return resultOk(result.data);
+      } catch (e) {
+        return resultErr(new MoneySpendingErrors.UnexpectedErrorUpdateExpense(e));
       }
     })();
   }
@@ -18469,68 +18511,68 @@ var __decorate$j = globalThis && globalThis.__decorate || function (decorators, 
 };
 let ExpenseSelectionStore = class ExpenseSelectionStore {
   clear() {
-    this.currentCost = 0;
-    this.costList = [];
-    this.setFloat(false);
+    this.currentCostList = [];
+    this.currentDivideCostList = [];
+    this.totalCostList = [];
+    this.setIsFloat(false);
   }
 
-  setFloat(value) {
+  setIsFloat(value) {
     this.isFloat = value;
-    this.floatCost = 0;
-  }
-
-  setFloatCost(value) {
-    if (value < 100) {
-      this.floatCost = value;
-      return;
-    }
-
-    const str = String(value).slice(-2);
-    this.floatCost = Number(str);
-  }
-
-  getNextCost(current, char) {
-    return current * 10 + Number(char);
   }
 
   addNumberToCost(char) {
-    if (this.isFloat) {
-      const floatCost = this.getNextCost(this.floatCost, char);
-      this.setFloatCost(floatCost);
+    const value = Number(char);
+    if (isNaN(value)) return;
+
+    if (!this.isFloat) {
+      this.currentCostList.push(value);
       return;
     }
 
-    const cost = this.getNextCost(this.currentCost, char);
-    this.setCurrentCost(cost);
-  }
+    this.currentDivideCostList.push(value);
 
-  setCurrentCost(value) {
-    this.currentCost = value;
+    if (this.currentDivideCostList.length > 2) {
+      this.currentDivideCostList.shift();
+    }
   }
 
   setCurrentDesc(value) {
     this.currentDesc = value;
   }
 
+  get costValue() {
+    const cost = Number(this.currentCostList.join('')) * 100 + Number(this.currentDivideCostList.join(''));
+    return cost;
+  }
+
   pushCurrentToCostList() {
-    this.costList.push(this.currentCost * 100 + this.floatCost);
-    this.currentCost = 0;
-    this.setFloat(false);
+    const cost = this.costValue;
+    this.totalCostList.push(cost);
+    this.currentCostList = [];
+    this.currentDivideCostList = [];
+    this.setIsFloat(false);
   }
 
   backspaceCostList() {
-    if (this.currentCost !== 0) {
-      this.currentCost = 0;
-      this.setFloat(false);
+    if (this.currentDivideCostList.length) {
+      this.currentDivideCostList.pop();
       return;
     }
 
-    this.costList.pop();
-    this.setFloat(false);
+    this.setIsFloat(false);
+    this.currentCostList.pop();
   }
 
   setCurrentExpenseView(value) {
     this.currentExpenseView = value ? _objectSpread({}, value) : null;
+
+    if (value) {
+      this.setCurrentDesc(value.desc || '');
+      const numbers = String(value.cost).split('').map(num => Number(num));
+      this.currentDivideCostList = numbers.slice(-2);
+      this.currentCostList = numbers.slice(0, -2);
+    }
   }
 
   get isEditing() {
@@ -18543,44 +18585,45 @@ let ExpenseSelectionStore = class ExpenseSelectionStore {
   }
 
   get costsView() {
-    return this.costList.map(item => getNumber(item / 100, 2)).join(' + ');
+    return this.totalCostList.map(item => getNumber(item / 100, 2)).join(' + ');
   }
 
   get totalCostView() {
-    const total = this.costList.reduce((acc, item) => {
+    const total = this.totalCostList.reduce((acc, item) => {
       return acc + item;
-    }, this.currentCost * 100 + this.floatCost);
+    }, this.costValue);
     return getNumber(total / 100);
   }
 
   get currentCostView() {
+    const num = this.costValue / 100;
+
     if (this.isFloat) {
-      const num = (this.currentCost * 100 + this.floatCost) * 10 / 1000 + 0.0001;
       return getNumber(num, 2);
     }
 
-    return getNumber(this.currentCost);
+    return getNumber(num);
   }
 
   getExpenses() {
-    return [...this.costList, this.currentCost * 100 + this.floatCost];
+    return [...this.totalCostList, this.costValue];
   }
 
   dropData() {
-    this.costList = [];
-    this.currentCost = 0;
+    this.totalCostList = [];
+    this.currentCostList = [];
+    this.currentDivideCostList = [];
     this.isFloat = false;
-    this.floatCost = 0;
     this.currentDesc = '';
   }
 
   constructor() {
     this.currentExpenseView = null;
-    this.costList = [];
-    this.currentCost = 0;
-    this.isFloat = false;
-    this.floatCost = 0;
     this.currentDesc = '';
+    this.totalCostList = [];
+    this.currentCostList = [];
+    this.currentDivideCostList = [];
+    this.isFloat = false;
   }
 
 };
@@ -18727,6 +18770,35 @@ let MoneySpendingService = class MoneySpendingService {
       _this.moneySpendingStore.removeExpenseById(id);
 
       _this.expenseSelectionStore.setCurrentExpenseView(null);
+    })();
+  }
+
+  handleUpdate() {
+    var _this = this;
+
+    return _asyncToGenerator$c(function* () {
+      const expenseView = _this.expenseSelectionStore.currentExpenseView;
+      if (!expenseView) return;
+
+      _this.moneySpendingStore.setIsLoading(true);
+
+      const pouchId = _this.pouchStore.currentPouchId;
+      yield _this.moneySpendingAdapter.updateExpense({
+        id: expenseView.id,
+        time: expenseView.time,
+        pouchId,
+        catId: _this.moneySpendingStore.selectedCategoryId,
+        cost: _this.expenseSelectionStore.costValue,
+        desc: _this.expenseSelectionStore.currentDesc
+      });
+
+      _this.expenseSelectionStore.dropData();
+
+      yield _this.reloadExpenses();
+
+      _this.historyService.push(Routes.expense);
+
+      _this.moneySpendingStore.setIsLoading(false);
     })();
   }
 
@@ -19050,16 +19122,17 @@ var __param$c = globalThis && globalThis.__param || function (paramIndex, decora
   };
 };
 let ExpenseSelectionAction = class ExpenseSelectionAction {
-  handleToggleSelectedExpense(id) {
+  handleSelectExpense(id) {
     var ref;
     const nextId = ((ref = this.expenseSelectionStore.currentExpenseView) === null || ref === void 0 ? void 0 : ref.id) === id ? '' : id;
+    const expense = this.expensesViewStore.getExpenseViewById(nextId);
 
-    if (!nextId) {
+    if (!expense) {
       this.expenseSelectionStore.setCurrentExpenseView(null);
       return;
     }
 
-    const expense = this.expensesViewStore.getExpenseViewById(nextId);
+    this.moneySpendingStore.setSelectedCategoryId(expense.catId);
     this.expenseSelectionStore.setCurrentExpenseView(expense);
   }
 
@@ -19103,11 +19176,15 @@ let ExpenseSelectionAction = class ExpenseSelectionAction {
   }
 
   handleSetFloat() {
-    this.expenseSelectionStore.setFloat(true);
+    this.expenseSelectionStore.setIsFloat(true);
   }
 
   handleApply() {
     this.moneySpendingService.handleApply();
+  }
+
+  handleUpdate() {
+    this.moneySpendingService.handleUpdate();
   }
 
   constructor(moneySpendingService, moneySpendingStore, expenseSelectionStore, expensesViewStore) {
@@ -19373,7 +19450,7 @@ const ExpenseList = observer(() => {
   const onClick = T$1(e => {
     const expenseId = getAttrFromElement(e.target, 'data-expense-id');
     if (!expenseId) return;
-    expenseSelectionAction.handleToggleSelectedExpense(expenseId);
+    expenseSelectionAction.handleSelectExpense(expenseId);
   }, [expenseSelectionAction]);
   const selectedId = (ref = expenseSelectionStore.currentExpenseView) === null || ref === void 0 ? void 0 : ref.id;
   const isFocusItem = F$1(() => {
@@ -19572,7 +19649,7 @@ const PadTitle = observer(() => {
   });
 });
 
-const padBlockStyles_kxndoe = '';
+const padBlockStyles_1xsd68u = '';
 
 const Container$7 = /*#__PURE__*/styled$1("div")({
   name: "Container",
@@ -19588,6 +19665,9 @@ const PadButton = /*#__PURE__*/styled$1("button")({
   vars: {
     "pwrvat7-0": [props => props.widthFill === 'half' ? '50%' : '25%'],
     "pwrvat7-1": [props => {
+      return props.disabled ? '0.5' : '1';
+    }],
+    "pwrvat7-2": [props => {
       switch (props.viewType) {
         case 'secondary':
           return 'var(--clr-5)';
@@ -19604,78 +19684,103 @@ const PadButton = /*#__PURE__*/styled$1("button")({
 
 function usePadBlock() {
   const {
-    expenseSelectionAction
+    expenseSelectionAction,
+    expenseSelectionStore
   } = useMoneySpendingContext();
   const handleClick = T$1(ev => {
     const target = ev.target;
     const action = getAttrFromElement(target, 'data-action');
     if (!action) return;
-
-    if (!isNaN(Number(action))) {
-      expenseSelectionAction.handleAddNumber(action);
-      return;
-    }
+    const value = getAttrFromElement(target, 'data-value');
 
     switch (action) {
-      case 'clear':
+      case 'CLEAR':
         expenseSelectionAction.handleClear();
         return;
 
-      case 'backspace':
+      case 'BACKSPACE':
         expenseSelectionAction.handleBackspaceCost();
         return;
 
-      case 'plus':
+      case 'PLUS':
         expenseSelectionAction.handlePushCost();
         return;
 
-      case 'dot':
+      case 'DOT':
         expenseSelectionAction.handleSetFloat();
         return;
 
-      case 'apply':
+      case 'UPDATE':
+        expenseSelectionAction.handleUpdate();
+        return;
+
+      case 'APPLY':
         expenseSelectionAction.handleApply();
+        return;
+
+      case 'NUMBER':
+        value && expenseSelectionAction.handleAddNumber(value);
         return;
     }
   }, [expenseSelectionAction]);
   return {
-    handleClick
+    handleClick,
+    isEditing: expenseSelectionStore.isEditing
   };
 }
 
+var ACTIONS_ENUM;
+
+(function (ACTIONS_ENUM) {
+  ACTIONS_ENUM["NUMBER"] = "NUMBER";
+  ACTIONS_ENUM["CLEAR"] = "CLEAR";
+  ACTIONS_ENUM["BACKSPACE"] = "BACKSPACE";
+  ACTIONS_ENUM["PLUS"] = "PLUS";
+  ACTIONS_ENUM["DOT"] = "DOT";
+  ACTIONS_ENUM["APPLY"] = "APPLY";
+  ACTIONS_ENUM["UPDATE"] = "UPDATE";
+})(ACTIONS_ENUM || (ACTIONS_ENUM = {}));
+
 const PadBlock = observer(() => {
   const {
-    handleClick
+    handleClick,
+    isEditing
   } = usePadBlock();
   return /*#__PURE__*/e(Container$7, {
     onClick: handleClick,
     children: [/*#__PURE__*/e(Row$1, {
       children: [/*#__PURE__*/e(PadButton, {
-        "data-action": "1",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "1",
         children: "1"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "2",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "2",
         children: "2"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "3",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "3",
         children: "3"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "clear",
+        "data-action": ACTIONS_ENUM.CLEAR,
         viewType: "secondary",
         children: "C"
       })]
     }), /*#__PURE__*/e(Row$1, {
       children: [/*#__PURE__*/e(PadButton, {
-        "data-action": "4",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "4",
         children: "4"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "5",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "5",
         children: "5"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "6",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "6",
         children: "6"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "backspace",
+        "data-action": ACTIONS_ENUM.BACKSPACE,
         viewType: "secondary",
         children: /*#__PURE__*/e(Icon, {
           iconName: "a-left",
@@ -19684,17 +19789,21 @@ const PadBlock = observer(() => {
       })]
     }), /*#__PURE__*/e(Row$1, {
       children: [/*#__PURE__*/e(PadButton, {
-        "data-action": "7",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "7",
         children: "7"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "8",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "8",
         children: "8"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "9",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "9",
         children: "9"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "plus",
+        "data-action": isEditing ? '' : ACTIONS_ENUM.PLUS,
         viewType: "secondary",
+        disabled: isEditing,
         children: /*#__PURE__*/e(Icon, {
           iconName: "plus",
           iconSize: "big"
@@ -19702,16 +19811,17 @@ const PadBlock = observer(() => {
       })]
     }), /*#__PURE__*/e(Row$1, {
       children: [/*#__PURE__*/e(PadButton, {
-        "data-action": "dot",
+        "data-action": ACTIONS_ENUM.DOT,
         children: "."
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "0",
+        "data-action": ACTIONS_ENUM.NUMBER,
+        "data-value": "0",
         children: "0"
       }), /*#__PURE__*/e(PadButton, {
-        "data-action": "apply",
+        "data-action": isEditing ? ACTIONS_ENUM.UPDATE : ACTIONS_ENUM.APPLY,
         widthFill: "half",
         viewType: "apply",
-        children: t('moneySpending.add')
+        children: t(isEditing ? 'moneySpending.edit' : 'moneySpending.add')
       })]
     })]
   });
@@ -20424,8 +20534,8 @@ const {
 const buildVersion = {
   appName: 'Coinote',
   version: '5.0.2',
-  changeset: '4fced000937ae07b391ce98c2b498db4a24024de',
-  buildTime: new Date(1663185702862)
+  changeset: 'c9e48e43e7224cae2213999b8583f73f2a3a0d65',
+  buildTime: new Date(1664325583067)
 };
 
 const buildVersionStyles_1ys16xi = '';
@@ -21338,7 +21448,7 @@ const {
   analyticAction: AnalyticAction
 });
 
-const analyticPageStyles_1qzuhg2 = '';
+const analyticPageStyles_1n4jhzb = '';
 
 const Container$3 = /*#__PURE__*/styled$1("div")({
   name: "Container",
@@ -21520,7 +21630,7 @@ const DateRangeSelect = observer(() => {
   });
 });
 
-const headerStyles_ixj6l0 = '';
+const headerStyles_4foisj = '';
 
 const Root = /*#__PURE__*/styled$1("div")({
   name: "Root",
@@ -21561,7 +21671,7 @@ const Header = observer(() => {
   });
 });
 
-const analyticCategoryStyles_1f257w1 = '';
+const analyticCategoryStyles_10b61kw = '';
 
 const Container$1 = /*#__PURE__*/styled$1("div")({
   name: "Container",
