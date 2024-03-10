@@ -1,0 +1,56 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "clean": {
+      "cache": false
+    },
+    "clean:node_modules": {
+      "cache": false
+    },
+    "check-types": {
+      "dependsOn": ["build"],
+      "outputs": [],
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "cache": false
+    },
+    "@repo/coinote#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["api/**", "public/**"],
+      "cache": false
+    },
+    "predev": {
+      "cache": false
+    },
+    "dev": {
+      "dependsOn": ["^predev"],
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "outputs": [],
+      "dependsOn": ["^build"]
+    },
+    "worker:start": {
+      "cache": false
+    },
+    "test:e2e": {
+      "cache": false,
+      "outputs": []
+    },
+    "test:unit": {
+      "cache": false,
+      "outputs": [],
+      "dependsOn": [
+        "@repo/result#build",
+        "@repo/logger#build"
+      ]
+    },
+    "storybook": {
+      "cache": false
+    }
+  }
+}

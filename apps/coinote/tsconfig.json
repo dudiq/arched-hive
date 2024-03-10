@@ -1,0 +1,24 @@
+{
+  "exclude": ["node_modules", "build"],
+  "extends": "@repo/config-typescript/react-app.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pv/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+    },
+  },
+  "types": [
+    "vite/client",
+  ]
+}
