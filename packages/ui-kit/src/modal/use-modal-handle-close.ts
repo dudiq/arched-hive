@@ -1,4 +1,4 @@
-import { useCallback } from 'preact/compat'
+import { useCallback } from 'react'
 
 export function useModalHandleClose() {
   const handleClose = useCallback(() => {

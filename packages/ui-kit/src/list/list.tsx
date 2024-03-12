@@ -1,9 +1,10 @@
-import { ComponentChildren } from 'preact'
-import { ListContainer, ListRow } from './list-styles'
 import { ListCell } from './list-cell'
+import { ListContainer, ListRow } from './list-styles'
+
+import type { ReactNode } from 'react'
 
 type Props = {
-  children: ComponentChildren
+  children: ReactNode
 }
 
 export function List({ children }: Props) {

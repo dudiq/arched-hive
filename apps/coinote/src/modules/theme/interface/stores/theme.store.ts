@@ -1,6 +1,4 @@
-import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
-
-import { Store } from '@repo/service'
+import { LocalStorageItem, Store } from '@repo/service'
 
 import type { ThemeEntity } from '@pv/modules/theme/entities/theme.entity'
 

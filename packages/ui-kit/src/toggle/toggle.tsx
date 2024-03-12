@@ -1,4 +1,5 @@
-import { useMemo } from 'preact/compat'
+import { useMemo } from 'react'
+
 import { Container } from './toggle-styles'
 
 let swId = 1

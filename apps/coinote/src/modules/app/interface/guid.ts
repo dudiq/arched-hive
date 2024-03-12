@@ -1,4 +1,4 @@
-import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
+import { LocalStorageItem } from '@repo/service'
 
 const guidStore = new LocalStorageItem<string>('guid')
 
@@ -29,7 +29,7 @@ export function guid() {
   const d4 = s.toString(16)
   return (
     d4 +
-    // @ts-ignore
+    // @ts-expect-error
     lut[d3 & 0xff] +
     lut[d1 & 0xff] +
     lut[(d1 >> 8) & 0xff] +

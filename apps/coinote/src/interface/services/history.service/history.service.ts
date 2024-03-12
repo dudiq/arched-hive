@@ -1,12 +1,10 @@
-import { Inject, Service } from '@pv/di'
+import { Inject, Service } from '@repo/service'
+
 import { RouterHistory } from './router-history'
 
 @Service()
 export class HistoryService {
-  constructor(
-    @Inject()
-    private routerHistory: RouterHistory,
-  ) {}
+  constructor(private routerHistory = Inject(RouterHistory)) {}
 
   push(route: string) {
     const history = this.routerHistory.history

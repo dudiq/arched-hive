@@ -1,7 +1,6 @@
-import { getLang,setLang } from '@pv/interface/services/i18n'
-import { LocalStorageItem } from '@pv/interface/services/local-storage-item'
+import { getLang, setLang } from '@pv/interface/services/i18n'
 
-import { Store } from '@repo/service'
+import { LocalStorageItem, Store } from '@repo/service'
 
 import type { LanguageEntity } from '@pv/modules/language/core/language.entity'
 

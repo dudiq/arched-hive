@@ -1,5 +1,8 @@
-import { useCallback } from 'preact/compat'
+import { useCallback } from 'react'
+
 import { Container } from './input-styles'
+
+import type { ChangeEvent } from 'react'
 
 type Props = {
   type?: 'text'
@@ -9,8 +12,8 @@ type Props = {
 
 export function Input({ value, type = 'text', onChange }: Props) {
   const handleChange = useCallback(
-    (ev: Event) => {
-      const target = ev.target as HTMLInputElement
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      const target = ev.target
       onChange(target.value)
     },
     [onChange],

@@ -1,11 +1,13 @@
-import { ComponentChildren } from 'preact'
-import { Portal } from '@pv/ui-kit/portal'
+import { Portal } from '../portal'
+
 import { ModalContainer } from './modal-container'
+
+import type { ReactNode } from 'react'
 
 type Props = {
   onClose: () => void
   isVisible: boolean
-  children: ComponentChildren
+  children: ReactNode
 }
 
 export function Modal({ children, isVisible, onClose }: Props) {

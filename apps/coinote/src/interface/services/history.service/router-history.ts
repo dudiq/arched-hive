@@ -1,6 +1,9 @@
-import { Service } from '@pv/di'
+import { Service } from '@repo/service'
 
-type HistoryCb = (to: string, options?: { replace?: boolean | undefined } | undefined) => void
+type HistoryCb = (
+  to: string,
+  options?: { replace?: boolean | undefined } | undefined,
+) => void
 
 @Service()
 export class RouterHistory {

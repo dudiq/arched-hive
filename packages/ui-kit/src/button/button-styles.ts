@@ -1,6 +1,7 @@
-import { styled } from '@linaria/react'
 import { css, cx } from '@linaria/core'
-import { ButtonShape, ButtonVariant } from './types'
+import { styled } from '@linaria/react'
+
+import type { ButtonShape, ButtonVariant } from './types'
 
 const variantClass = (variant?: ButtonVariant) => {
   switch (variant) {
@@ -48,7 +49,10 @@ export const extendedClasses = ({
   return cx(variantClass(variant), shapeClass(shape))
 }
 
-export const Container = styled.button<{ variant?: ButtonVariant; shape?: ButtonShape }>`
+export const Container = styled.button<{
+  variant?: ButtonVariant
+  shape?: ButtonShape
+}>`
   padding: 0 10px;
   border: none;
   box-shadow: 1px 1px 4px 0 var(--clr-shadow);

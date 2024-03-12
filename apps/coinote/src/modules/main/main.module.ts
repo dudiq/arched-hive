@@ -1,14 +1,13 @@
-import { Module, Container, Inject } from '@repo/service'
 import { AppModule } from '@pv/modules/app'
+
+import { Inject } from '@repo/service'
+
 import { ScreensService } from './interface/services/screens.service'
 
-@Module()
 export class MainModule {
   constructor(
-    @Inject()
-    private screensService: ScreensService,
-    @Inject()
-    private appModule: AppModule,
+    private screensService = Inject(ScreensService),
+    private appModule = Inject(AppModule),
   ) {}
 
   async start() {
@@ -20,6 +19,6 @@ export class MainModule {
   }
 
   static getInstance() {
-    return Container.get(MainModule)
+    return Inject(MainModule)
   }
 }

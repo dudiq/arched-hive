@@ -1,4 +1,5 @@
-import { Icon } from '@pv/ui-kit/icon'
+import { Icon } from '../icon'
+
 import { Container, Wrapper } from './loader-styles'
 
 export function Loader() {

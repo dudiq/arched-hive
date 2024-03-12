@@ -1,8 +1,9 @@
-import { extendedClasses, ListCellWrapper } from '@pv/ui-kit/list/list-styles'
-import { ComponentChildren } from 'preact'
+import { extendedClasses, ListCellWrapper } from '../list/list-styles'
+
+import type { ReactNode } from 'react'
 
 type Props = {
-  children: ComponentChildren
+  children: ReactNode
   isCentered?: boolean
   isFullwidth?: boolean
 }

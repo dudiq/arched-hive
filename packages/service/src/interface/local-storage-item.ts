@@ -6,12 +6,15 @@ type OptionsType<T> = {
 
 type Maybe<T> = T | undefined | null
 
-const PREFIX = '@finanso:'
+const PREFIX = '@repo:'
 
 export class LocalStorageItem<T> {
   value: Maybe<T>
 
-  constructor(private readonly key: string, private readonly options?: OptionsType<T>) {
+  constructor(
+    private readonly key: string,
+    private readonly options?: OptionsType<T>,
+  ) {
     this.value = this.getValue()
     window.addEventListener('storage', (event) => {
       if (!event.key || event.key === this.usedKey) {

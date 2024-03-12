@@ -1,8 +1,9 @@
-import { createPortal } from 'preact/compat'
-import { ComponentChildren } from 'preact'
+import { createPortal } from 'react-dom'
+
+import type { ReactNode } from 'react'
 
 type Props = {
-  children: ComponentChildren
+  children: ReactNode
 }
 
 export function Portal({ children }: Props) {

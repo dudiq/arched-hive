@@ -12,15 +12,14 @@
     ".": "./dist/index.js"
   },
   "scripts": {
-    "prepare:css": "node prepare-css.js",
     "types": "tsc",
-    "storybook": "npm run prepare:css && pnpm dev",
+    "copy-css": "node copy-css.mjs",
+    "storybook": "pnpm copy-css && pnpm dev",
     "check-types": "tsc",
     "clean": "rimraf ./dist ./turbo",
     "clean:node_modules": "rimraf ./node_modules",
-    "update-package": "node update-package.js",
-    "build": "npm run prepare:css && tsup",
-    "dev": "npm run prepare:css && tsup --watch",
+    "build": "pnpm copy-css && tsup",
+    "dev": "pnpm copy-css && tsup --watch",
     "lint": "TIMING=1 eslint src --fix"
   },
   "devDependencies": {
@@ -28,8 +27,8 @@
     "@repo/config-typescript": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@storybook/react": "^7.6.15",
-    "@types/react": "~18.2.0",
-    "@types/react-dom": "~18.2.0",
+    "@types/react": "18.2.3",
+    "@types/react-dom": "18.2.3",
     "@types/react-transition-group": "^4.4.10",
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.5"
@@ -37,8 +36,9 @@
   "dependencies": {
     "clsx": "^2.0.0",
     "flowbite-typography": "^1.0.3",
-    "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "react-transition-group": "^4.4.5"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-transition-group": "^4.4.5",
+    "wouter": "^3.0.2"
   }
 }

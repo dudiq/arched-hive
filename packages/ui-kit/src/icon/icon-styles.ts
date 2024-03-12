@@ -1,5 +1,6 @@
 import { styled } from '@linaria/react'
-import { IconSize } from '@pv/ui-kit/icon/types'
+
+import type { IconSize } from '../icon/types'
 
 export const IconWrapper = styled.span<{ size: IconSize }>`
   font-size: ${(props) => {

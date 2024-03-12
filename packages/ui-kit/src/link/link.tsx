@@ -1,10 +1,12 @@
-import { ComponentChildren } from 'preact'
-import { IconNames } from '@pv/ui-kit/icon/types'
-import { Icon } from '@pv/ui-kit/icon'
-import { Container, IconWrapper, ContentWrapper } from './link-styles'
+import { Icon } from '../icon'
+
+import { Container, ContentWrapper, IconWrapper } from './link-styles'
+
+import type { ReactNode } from 'react'
+import type { IconNames } from '../icon/types'
 
 type Props = {
-  children?: ComponentChildren
+  children?: ReactNode
   icon?: IconNames
   isDisabled?: boolean
   onClick?: () => void
@@ -13,7 +15,7 @@ type Props = {
 export function Link({ children, icon, onClick, isDisabled }: Props) {
   return (
     <Container onClick={onClick} disabled={isDisabled}>
-      {icon && (
+      {!!icon && (
         <IconWrapper>
           <Icon iconName={icon} />
         </IconWrapper>

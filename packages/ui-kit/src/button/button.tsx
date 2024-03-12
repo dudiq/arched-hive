@@ -1,11 +1,13 @@
-import { ComponentChildren } from 'preact'
-import { IconNames, IconSize } from '@pv/ui-kit/icon/types'
-import { Icon } from '@pv/ui-kit/icon'
+import { Icon } from '../icon'
+
 import { Container, extendedClasses, Wrapper } from './button-styles'
-import { ButtonShape, ButtonVariant } from './types'
+
+import type { ReactNode } from 'react'
+import type { IconNames, IconSize } from '../icon/types'
+import type { ButtonShape, ButtonVariant } from './types'
 
 type Props = {
-  children?: ComponentChildren
+  children?: ReactNode
   iconName?: IconNames
   iconSize?: IconSize
   variant?: ButtonVariant
@@ -30,8 +32,10 @@ export function Button({
       disabled={isDisabled}
       className={extendedClasses({ variant, shape })}
     >
-      {iconName && <Icon iconName={iconName} iconSize={iconSize} />}
-      {hasChildren && <Wrapper data-has-icon={!!iconName}>{children}</Wrapper>}
+      {!!iconName && <Icon iconName={iconName} iconSize={iconSize} />}
+      {!!hasChildren && (
+        <Wrapper data-has-icon={!!iconName}>{children}</Wrapper>
+      )}
     </Container>
   )
 }

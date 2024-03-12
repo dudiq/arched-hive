@@ -1,9 +1,11 @@
-import { useCallback } from 'preact/compat'
-import { ComponentChildren } from 'preact'
-import { Input, Container, Wrapper } from './upload-button-styles'
+import { useCallback } from 'react'
+
+import { Container, Input, Wrapper } from './upload-button-styles'
+
+import type { ReactNode } from 'react'
 
 type Props = {
-  children: ComponentChildren
+  children: ReactNode
   onChange?: (files: FileList | null) => void
 }
 

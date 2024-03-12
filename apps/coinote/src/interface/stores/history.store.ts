@@ -1,4 +1,4 @@
-import { Store } from '@pv/di'
+import { Store } from '@repo/service'
 
 @Store()
 export class HistoryStore {

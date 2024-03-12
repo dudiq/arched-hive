@@ -24,20 +24,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-      boxShadow: {
-        sm: '0px 1px 2px rgba(0, 0, 0, 0.08)',
-        round: '0px 0px 0px 2px rgba(0, 0, 0, 0.08)',
-        bottom: '0px 1px 1px rgba(0, 0, 0, 0.05)', // deprecated
-        'landing-pricing-item': '4px 4px 0px #000000',
-        'landing-alex-quote': '4px 4px 0px #01CA7A',
-        'landing-burger-menu': '3px 3px 0px #000000',
-      },
       fontFamily: {
         inter: ['Inter'],
         epilogue: ['Epilogue'],
         dm: ['DM Sans'],
       },
       colors: {
+        transparent: 'transparent',
+        white: '#ffffff',
+        black: '#000000',
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -50,9 +45,6 @@ module.exports = {
           800: '#1e40af',
           900: '#1e3a8a',
         },
-        transparent: 'transparent',
-        white: '#ffffff',
-        black: '#000000',
         gray: {
           50: '#F9FAFB',
           100: '#F3F4F6',
@@ -173,11 +165,6 @@ module.exports = {
           800: '#99154B',
           900: '#751A3D',
         },
-        'landing-vivid-blue-40': '#2272FF',
-        'landing-light-grayish-blue-20': '#F1F3FC',
-        'landing-light-grayish-blue-10': '#F4F8FE',
-        'landing-lime-green-60': '#01CA7A',
-        'landing-light-violet-60': '#8D5CFF',
       },
     },
   },

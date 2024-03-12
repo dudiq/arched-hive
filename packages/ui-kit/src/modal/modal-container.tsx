@@ -1,12 +1,13 @@
-import { ComponentChildren } from 'preact'
-import { useModal } from './use-modal'
 import { Container, ContainerBg, Overlay } from './modal-styles'
+import { useModal } from './use-modal'
 import { useModalHandleClose } from './use-modal-handle-close'
+
+import type { ReactNode } from 'react'
 
 type Props = {
   onClose: () => void
   isVisible: boolean
-  children: ComponentChildren
+  children: ReactNode
 }
 
 export function ModalContainer({ children, isVisible, onClose }: Props) {

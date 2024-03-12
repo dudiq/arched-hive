@@ -1,9 +1,9 @@
-import { ComponentChildren } from 'preact'
+import type { ReactNode } from 'react'
 
 type Props = {
   is?: boolean
-  isSlot?: ComponentChildren
-  children?: ComponentChildren
+  isSlot?: ReactNode
+  children?: ReactNode
 }
 
 export function Swap(props: Props) {

@@ -1,19 +1,22 @@
-import { useEffect, useRef, useState } from 'preact/compat'
-import { guid } from '@pv/utils/guid'
-import { useSearchLocation } from '@pv/interface/use-search-location'
+import { useEffect, useRef, useState } from 'react'
+
 import { MODAL_PARAM_ID } from './constants'
+import { useSearchLocation } from './use-search-location'
 
 type Args = {
   isVisible: boolean
   onClose: () => void
 }
 
+let count = 1
+
 export function useModal({ isVisible, onClose }: Args) {
   const [isContainerShown, setContainerShown] = useState(isVisible)
   const idRef = useRef<string>('')
   const prevStateRef = useRef(false)
   if (!idRef.current) {
-    idRef.current = guid()
+    count++
+    idRef.current = String(count)
   }
 
   const [usedLocation, setLocation] = useSearchLocation()
@@ -26,7 +29,7 @@ export function useModal({ isVisible, onClose }: Args) {
     const queryParams = new URLSearchParams(searchLocation)
     queryParams.set(MODAL_PARAM_ID, idRef.current)
     const newLocation = `${basePath}?${queryParams.toString()}`
-    // @ts-ignore
+    // @ts-expect-error
     setLocation(newLocation)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
