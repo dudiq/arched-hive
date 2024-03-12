@@ -1,7 +1,9 @@
-import { ComponentChildren } from 'preact'
-import { Link } from '@pv/ui-kit/link'
-import { IconNames } from '@pv/ui-kit/icon/types'
+import { Link } from '@repo/ui-kit'
+
 import { Row } from './row-block-styles'
+
+import type { IconNames } from '@repo/ui-kit'
+import type { ComponentChildren } from 'preact'
 
 type Props = {
   icon: IconNames

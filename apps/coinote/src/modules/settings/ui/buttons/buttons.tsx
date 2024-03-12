@@ -1,7 +1,9 @@
 import { t } from '@pv/interface/services/i18n'
-import { UploadButton } from '@pv/ui-kit/upload-button'
 import { useSettingsContext } from '@pv/modules/settings/interface/use-settings-context'
+
 import { observer } from '@repo/service'
+import { UploadButton } from '@repo/ui-kit'
+
 import { Container, DangerRow } from './buttons-styles'
 import { RowBlock } from './row-block'
 

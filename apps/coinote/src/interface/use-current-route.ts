@@ -1,4 +1,4 @@
-import { useMemo } from 'preact/compat'
+import { useMemo } from 'react'
 import { useRouter } from 'wouter'
 
 import { useHistoryContext } from './use-history-context'

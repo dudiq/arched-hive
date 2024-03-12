@@ -1,18 +1,17 @@
-import { Toggle } from '@pv/ui-kit/toggle'
-import { observer } from '@repo/service'
-import { useThemeContext } from '@pv/modules/theme'
-import { useLanguageContext } from '@pv/modules/language'
-import { List } from '@pv/ui-kit/list'
+import './settings.langs'
+
 import { t } from '@pv/interface/services/i18n'
+import { useLanguageContext } from '@pv/modules/language'
 import { useSettingsContext } from '@pv/modules/settings/interface/use-settings-context'
-import { BlockLoader } from '@pv/ui-kit/loader'
-import { ScrollContainer } from '@pv/ui-kit/scroll-container'
+import { useThemeContext } from '@pv/modules/theme'
+
+import { observer } from '@repo/service'
+import { BlockLoader, List, ScrollContainer, Toggle } from '@repo/ui-kit'
+
 import { BuildVersion } from './build-version'
+import { Buttons } from './buttons'
 import { ListBlock } from './list-block'
 import { LangSwitch } from './settings-styles'
-import { Buttons } from './buttons'
-
-import './settings.langs'
 
 export const Settings = observer(() => {
   const { themeStore, themeAction } = useThemeContext()
@@ -33,12 +32,12 @@ export const Settings = observer(() => {
           icon="translate"
           title={t('settings.lang.title')}
         >
-          <LangSwitch>{t(`settings.lang.values`)}</LangSwitch>
+          <LangSwitch>{t('settings.lang.values')}</LangSwitch>
         </ListBlock>
       </List>
       <Buttons />
       <BuildVersion />
-      {settingsStore.isLoading && <BlockLoader />}
+      {!!settingsStore.isLoading && <BlockLoader />}
     </ScrollContainer>
   )
 })

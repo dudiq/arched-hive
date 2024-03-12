@@ -1,10 +1,12 @@
-import { observer } from '@repo/service'
+import { useCallback } from 'react'
+import { t } from '@pv/interface/services/i18n'
 import { usePouchContext } from '@pv/modules/pouches/interface/use-pouch-context'
 import { PouchItem } from '@pv/modules/pouches/ui/pouch-modal/pouch-item'
-import { Button } from '@pv/ui-kit/button'
-import { t } from '@pv/interface/services/i18n'
-import { PouchId } from '@pv/modules/pouches/core/pouch.entity'
-import { useCallback } from 'react'
+
+import { observer } from '@repo/service'
+import { Button } from '@repo/ui-kit'
+
+import type { PouchId } from '@pv/modules/pouches/core/pouch.entity'
 
 type Props = {
   onSelect: (pouchId: PouchId) => void

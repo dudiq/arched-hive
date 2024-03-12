@@ -1,17 +1,16 @@
-import { ScrollContainer } from '@pv/ui-kit/scroll-container'
-import { observer } from '@repo/service'
-import { Swap } from '@pv/ui-kit/swap'
-import { Loader } from '@pv/ui-kit/loader'
-import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
-import { getMoney, t } from '@pv/interface/services/i18n'
-import { Separator } from '@pv/ui-kit/separator'
+import './analytic-page.langs'
+
 import { useEffect } from 'react'
-import { Container, Content, TotalMoneyRow } from './analytic-page-styles'
-import { Header } from './header'
+import { getMoney, t } from '@pv/interface/services/i18n'
+import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
+
+import { observer } from '@repo/service'
+import { Loader, ScrollContainer, Separator, Swap } from '@repo/ui-kit'
+
 import { AnalyticCategory } from './analytic-category'
 import { AnalyticExpenses } from './analytic-expenses'
-
-import './analytic-page.langs'
+import { Container, Content, TotalMoneyRow } from './analytic-page-styles'
+import { Header } from './header'
 
 export const AnalyticPage = observer(() => {
   const { analyticStore, analyticAction } = useAnalyticContext()

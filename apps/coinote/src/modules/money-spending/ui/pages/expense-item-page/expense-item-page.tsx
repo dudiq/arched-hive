@@ -1,16 +1,17 @@
-import { ScrollContainer } from '@pv/ui-kit/scroll-container'
-import { observer } from '@repo/service'
-import { Button } from '@pv/ui-kit/button'
+import './expense-item-page.langs'
+
+import { useEffect } from 'react'
 import { useFocusContext } from '@pv/modules/focus'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { useEffect } from 'preact/compat'
-import { Block, ButtonWrapper } from './expense-item-styles'
+
+import { observer } from '@repo/service'
+import { Button, ScrollContainer } from '@repo/ui-kit'
+
 import { Categories } from './categories'
 import { Desc } from './desc'
-import { PadTitle } from './pad-title'
+import { Block, ButtonWrapper } from './expense-item-styles'
 import { PadBlock } from './pad-block'
-
-import './expense-item-page.langs'
+import { PadTitle } from './pad-title'
 
 export const ExpenseItemPage = observer(() => {
   const { moneySpendingAction, expenseSelectionAction, moneySpendingStore } =
@@ -27,7 +28,7 @@ export const ExpenseItemPage = observer(() => {
     <>
       <ScrollContainer>
         <Categories />
-        {moneySpendingStore.isCalculatorVisible && (
+        {!!moneySpendingStore.isCalculatorVisible && (
           <Block>
             <Desc />
             <PadTitle />

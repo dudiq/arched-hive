@@ -1,8 +1,10 @@
-import { useCallback } from 'preact/compat'
+import { useCallback } from 'react'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
-import { TreeListType } from '@pv/modules/categories/interface/stores/types'
-import { Container } from './tree-list-styles'
+
 import { TreeItem } from './tree-item'
+import { Container } from './tree-list-styles'
+
+import type { TreeListType } from '@pv/modules/categories/interface/stores/types'
 
 type Props = {
   onClick: (categoryId: string) => void
@@ -13,7 +15,10 @@ type Props = {
 export function TreeList({ categoryTree, onClick, selectedId }: Props) {
   const handleClick = useCallback(
     (e: any) => {
-      const categoryId = getAttrFromElement(e.target as HTMLElement, 'data-category-id')
+      const categoryId = getAttrFromElement(
+        e.target as HTMLElement,
+        'data-category-id',
+      )
       if (!categoryId) return
       onClick(categoryId)
     },

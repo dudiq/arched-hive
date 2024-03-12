@@ -1,9 +1,11 @@
-import { observer } from '@repo/service'
-import { useCallback } from 'preact/compat'
+import { useCallback } from 'react'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { ExpenseRow } from './expense-row'
+
+import { observer } from '@repo/service'
+
 import { Row, RowsContainer } from './expense-list-styles'
+import { ExpenseRow } from './expense-row'
 
 export const ExpenseList = observer(() => {
   const { expenseSelectionAction, expenseSelectionStore, expensesViewStore } =
@@ -11,7 +13,10 @@ export const ExpenseList = observer(() => {
 
   const onClick = useCallback(
     (e: any) => {
-      const expenseId = getAttrFromElement(e.target as HTMLElement, 'data-expense-id')
+      const expenseId = getAttrFromElement(
+        e.target as HTMLElement,
+        'data-expense-id',
+      )
       if (!expenseId) return
       expenseSelectionAction.handleSelectExpense(expenseId)
     },
@@ -29,7 +34,11 @@ export const ExpenseList = observer(() => {
         const isScrollTo = isSelected && isFocusItem
         return (
           <Row key={key} data-expense-id={expenseView.id}>
-            <ExpenseRow expenseView={expenseView} isSelected={isSelected} isScrollTo={isScrollTo} />
+            <ExpenseRow
+              expenseView={expenseView}
+              isSelected={isSelected}
+              isScrollTo={isScrollTo}
+            />
           </Row>
         )
       })}

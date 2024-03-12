@@ -1,8 +1,9 @@
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { Swap } from '@pv/ui-kit/swap'
-import { observer } from '@repo/service'
-import { Button } from '@pv/ui-kit/button'
 import { t } from '@pv/interface/services/i18n'
+import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+
+import { observer } from '@repo/service'
+import { Button, Swap } from '@repo/ui-kit'
+
 import { CategoryTag, Header } from './categories-styles'
 
 export const Categories = observer(() => {
@@ -14,7 +15,10 @@ export const Categories = observer(() => {
   return (
     <>
       <Header>
-        <Swap is={!isCategorySelected} isSlot={t('moneySpending.selectCategory')}>
+        <Swap
+          is={!isCategorySelected}
+          isSlot={t('moneySpending.selectCategory')}
+        >
           <Button
             iconName="cross"
             iconSize="big"

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'preact/compat'
+import { useCallback, useRef } from 'react'
 
 export type IntersectionStateType = 'visible' | 'hidden'
 

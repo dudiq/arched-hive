@@ -1,9 +1,11 @@
-import { observer } from '@repo/service'
-import { Icon } from '@pv/ui-kit/icon'
 import { t } from '@pv/interface/services/i18n'
+
+import { observer } from '@repo/service'
+import { Icon } from '@repo/ui-kit'
+
+import { ACTIONS_ENUM } from './actions.enum'
 import { Container, PadButton, Row } from './pad-block-styles'
 import { usePadBlock } from './use-pad-block'
-import { ACTIONS_ENUM } from './actions.enum'
 
 export const PadBlock = observer(() => {
   const { handleClick, isEditing } = usePadBlock()
@@ -61,7 +63,7 @@ export const PadBlock = observer(() => {
           0
         </PadButton>
         <PadButton
-          data-action={isEditing ? ACTIONS_ENUM.UPDATE : ACTIONS_ENUM.APPLY}
+          data-action={!!isEditing && ACTIONS_ENUM.UPDATE}
           widthFill="half"
           viewType="apply"
         >

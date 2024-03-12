@@ -1,10 +1,12 @@
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { useCallback } from 'preact/compat'
+import { useCallback } from 'react'
 import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
-import { ACTIONS_ENUM } from './actions.enum'
+import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+
+import type { ACTIONS_ENUM } from './actions.enum'
 
 export function usePadBlock() {
-  const { expenseSelectionAction, expenseSelectionStore } = useMoneySpendingContext()
+  const { expenseSelectionAction, expenseSelectionStore } =
+    useMoneySpendingContext()
   const handleClick = useCallback(
     (ev: any) => {
       const target = ev.target as HTMLDivElement
@@ -33,7 +35,6 @@ export function usePadBlock() {
           return
         case 'NUMBER':
           value && expenseSelectionAction.handleAddNumber(value)
-          return
       }
     },
     [expenseSelectionAction],

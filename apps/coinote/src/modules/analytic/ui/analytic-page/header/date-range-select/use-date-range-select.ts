@@ -1,8 +1,8 @@
-import { useLanguageContext } from '@pv/modules/language'
-import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
-import { useCallback, useMemo } from 'preact/compat'
-import { titleMap } from '@pv/modules/analytic/ui/analytic-page/header/date-range-select/title-map'
+import { useCallback, useMemo } from 'react'
 import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
+import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
+import { titleMap } from '@pv/modules/analytic/ui/analytic-page/header/date-range-select/title-map'
+import { useLanguageContext } from '@pv/modules/language'
 
 export function useDateRangeSelect() {
   const { langStore } = useLanguageContext()

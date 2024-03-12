@@ -1,6 +1,8 @@
-import { observer } from '@repo/service'
+import { useCallback } from 'react'
 import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
-import { useCallback } from 'preact/compat'
+
+import { observer } from '@repo/service'
+
 import { TreeList } from './tree-list'
 
 export const TreeListWrapper = observer(() => {

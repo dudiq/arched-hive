@@ -1,7 +1,8 @@
 import { useCurrentRoute } from '@pv/interface/use-current-route'
-import { observer } from '@repo/service'
-import { Swap } from '@pv/ui-kit/swap'
 import { NotFoundPage } from '@pv/modules/app/ui/not-found-page'
+
+import { observer } from '@repo/service'
+import { Swap } from '@repo/ui-kit'
 
 export const ScreensSwitch = observer(() => {
   const { currentRoute } = useCurrentRoute()
@@ -12,7 +13,7 @@ export const ScreensSwitch = observer(() => {
     <>
       <Swap is={!isPageExist} isSlot={<NotFoundPage />}>
         <Swap is={!currentRoute?.route.path} isSlot={<NotFoundPage />}>
-          {ScreenComponent && <ScreenComponent />}
+          {!!ScreenComponent && <ScreenComponent />}
         </Swap>
       </Swap>
     </>

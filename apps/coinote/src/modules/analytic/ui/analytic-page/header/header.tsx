@@ -1,7 +1,8 @@
-import { observer } from '@repo/service'
-import { Button } from '@pv/ui-kit/button'
-import { Icon } from '@pv/ui-kit/icon'
 import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
+
+import { observer } from '@repo/service'
+import { Button, Icon } from '@repo/ui-kit'
+
 import { DateRangeSelect } from './date-range-select'
 import { Container, DateSelectContainer, Root } from './header-styles'
 

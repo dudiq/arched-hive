@@ -1,6 +1,8 @@
-import { Button } from '@pv/ui-kit/button'
-import { observer } from '@repo/service'
 import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
+
+import { observer } from '@repo/service'
+import { Button } from '@repo/ui-kit'
+
 import { ButtonWrapper, Item } from './controls-styles'
 
 export const Controls = observer(() => {
@@ -12,7 +14,7 @@ export const Controls = observer(() => {
   return (
     <ButtonWrapper>
       <Item>
-        {isSelectedCategory && (
+        {!!isSelectedCategory && (
           <Button
             shape="circle"
             iconName="trash"
@@ -22,7 +24,7 @@ export const Controls = observer(() => {
         )}
       </Item>
       <Item>
-        {isSelectedCategory && (
+        {!!isSelectedCategory && (
           <Button
             shape="circle"
             iconName="edit-l"
@@ -32,7 +34,7 @@ export const Controls = observer(() => {
         )}
       </Item>
       <Item>
-        {isChildCategory && (
+        {!!isChildCategory && (
           <Button
             shape="circle"
             iconName="plus"

@@ -1,6 +1,8 @@
-import { Button } from '@pv/ui-kit/button'
-import { observer } from '@repo/service'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+
+import { observer } from '@repo/service'
+import { Button } from '@repo/ui-kit'
+
 import { ButtonWrapper, Item } from './controls-styles'
 
 export const Controls = observer(() => {
@@ -11,7 +13,7 @@ export const Controls = observer(() => {
   return (
     <ButtonWrapper>
       <Item>
-        {isEditing && (
+        {!!isEditing && (
           <Button
             shape="circle"
             iconName="trash"
@@ -21,7 +23,7 @@ export const Controls = observer(() => {
         )}
       </Item>
       <Item>
-        {isEditing && (
+        {!!isEditing && (
           <Button
             shape="circle"
             iconName="edit-l"

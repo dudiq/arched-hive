@@ -1,8 +1,9 @@
-import { List } from '@pv/ui-kit/list'
-import { Icon } from '@pv/ui-kit/icon'
-import { IconNames } from '@pv/ui-kit/icon/types'
-import { ComponentChildren } from 'preact'
+import { Icon, List } from '@repo/ui-kit'
+
 import { IconWrapper, LastNode } from './list-block-styles'
+
+import type { IconNames } from '@repo/ui-kit'
+import type { ComponentChildren } from 'preact'
 
 type Props = {
   onClick: () => void

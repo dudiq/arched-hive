@@ -1,11 +1,10 @@
-import { Icon } from '@pv/ui-kit/icon'
-
-import {observer} from '@repo/service';
+import { observer } from '@repo/service'
+import { Icon } from '@repo/ui-kit'
 
 import { Container, Title } from './navi-item-styles'
 import { useNaviItem } from './use-navi-item'
 
-import type { IconNames } from '@pv/ui-kit/icon/types'
+import type { IconNames } from '@repo/ui-kit'
 
 type Props = {
   path: string

@@ -1,17 +1,20 @@
-import { ExpenseViewEntity } from '@pv/modules/money-spending/core/expense-view.entity'
+import { useEffect, useRef } from 'react'
 import { getMoney } from '@pv/interface/services/i18n'
 import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { useEffect, useRef } from 'preact/compat'
+
 import { Dot } from '../../dot'
+
 import {
   Container,
-  LeftBlock,
-  RightBlock,
-  Title,
-  SubTitle,
-  Money,
   DateTitle,
+  LeftBlock,
+  Money,
+  RightBlock,
+  SubTitle,
+  Title,
 } from './expense-row-styles'
+
+import type { ExpenseViewEntity } from '@pv/modules/money-spending/core/expense-view.entity'
 
 type Props = {
   expenseView: ExpenseViewEntity
@@ -57,7 +60,7 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
         <Money>{getMoney(expenseView.cost)}</Money>
         <DateTitle>
           {time} | {hours}:{minutes}
-          {isToday && <Dot />}
+          {!!isToday && <Dot />}
         </DateTitle>
       </RightBlock>
     </Container>

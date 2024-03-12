@@ -1,6 +1,7 @@
-import { observer } from '@repo/service'
 import { usePouchContext } from '@pv/modules/pouches/interface/use-pouch-context'
-import { Link } from '@pv/ui-kit/link'
+
+import { observer } from '@repo/service'
+import { Link } from '@repo/ui-kit'
 
 export const PouchSelection = observer(() => {
   const { pouchStore, pouchAction } = usePouchContext()

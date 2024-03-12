@@ -1,6 +1,6 @@
 import { Icon } from '../icon'
 
-import { Container, ContentWrapper, IconWrapper } from './link-styles'
+import { IconWrapper } from './link-styles'
 
 import type { ReactNode } from 'react'
 import type { IconNames } from '../icon/types'
@@ -8,19 +8,18 @@ import type { IconNames } from '../icon/types'
 type Props = {
   children?: ReactNode
   icon?: IconNames
-  isDisabled?: boolean
   onClick?: () => void
 }
 
-export function Link({ children, icon, onClick, isDisabled }: Props) {
+export function Link({ children, icon, onClick }: Props) {
   return (
-    <Container onClick={onClick} disabled={isDisabled}>
+    <div className="flex cursor-pointer items-center" onClick={onClick}>
       {!!icon && (
         <IconWrapper>
           <Icon iconName={icon} />
         </IconWrapper>
       )}
-      <ContentWrapper>{children}</ContentWrapper>
-    </Container>
+      <div className="underline">{children}</div>
+    </div>
   )
 }

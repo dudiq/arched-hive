@@ -1,7 +1,9 @@
-import { observer } from '@repo/service'
-import { Separator } from '@pv/ui-kit/separator'
 import { useCurrentRoute } from '@pv/interface/use-current-route'
-import { Container, Title, SlotContainer } from './header-styles'
+
+import { observer } from '@repo/service'
+import { Separator } from '@repo/ui-kit'
+
+import { Container, SlotContainer, Title } from './header-styles'
 
 export const Header = observer(() => {
   const { currentRoute } = useCurrentRoute()
@@ -11,7 +13,7 @@ export const Header = observer(() => {
     <>
       <Container>
         <Title>{title}</Title>
-        {Component && (
+        {!!Component && (
           <SlotContainer>
             <Component />
           </SlotContainer>

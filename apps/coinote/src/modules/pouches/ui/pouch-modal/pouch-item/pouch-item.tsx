@@ -1,8 +1,19 @@
-import { PouchEntity, PouchId } from '@pv/modules/pouches/core/pouch.entity'
-import { Icon } from '@pv/ui-kit/icon'
-import { useCallback } from 'preact/compat'
-import { Button } from '@pv/ui-kit/button'
-import { ActionWrapper, Container, IconWrapper, Row, TitleWrapper } from './pouch-item-styles'
+import { useCallback } from 'react'
+
+import { Button, Icon } from '@repo/ui-kit'
+
+import {
+  ActionWrapper,
+  Container,
+  IconWrapper,
+  Row,
+  TitleWrapper,
+} from './pouch-item-styles'
+
+import type {
+  PouchEntity,
+  PouchId,
+} from '@pv/modules/pouches/core/pouch.entity'
 
 type Props = {
   isSelected: boolean
@@ -23,10 +34,10 @@ export function PouchItem({ pouch, onRemove, isSelected, onSelect }: Props) {
   return (
     <Container>
       <Row onClick={handleSelect}>
-        <IconWrapper>{isSelected && <Icon iconName="wallet" />}</IconWrapper>
+        <IconWrapper>{!!isSelected && <Icon iconName="wallet" />}</IconWrapper>
         <TitleWrapper>{pouch.name}</TitleWrapper>
       </Row>
-      {onRemove && (
+      {!!onRemove && (
         <ActionWrapper>
           <Button variant="flat" onClick={handleRemove}>
             <Icon iconName="cross" />

@@ -1,8 +1,15 @@
-import { RadioButton } from '@pv/ui-kit/radio-button'
-import { useAppContext } from '@pv/modules/app/interface/use-app-context'
-import { Button } from '@pv/ui-kit/button'
 import { t } from '@pv/interface/services/i18n'
-import { Block, Container, Controls, SubTitle, Title } from './empty-page-styles'
+import { useAppContext } from '@pv/modules/app/interface/use-app-context'
+
+import { Button, RadioButton } from '@repo/ui-kit'
+
+import {
+  Block,
+  Container,
+  Controls,
+  SubTitle,
+  Title,
+} from './empty-page-styles'
 
 const EMPTY_CATEGORY = 'category'
 
@@ -30,9 +37,13 @@ export function EmptyPage() {
         English category set
       </RadioButton>
       <Controls>
-        <Button onClick={emptyAction.handleApplyCategory}>{t('firstView.use')}</Button>
+        <Button onClick={emptyAction.handleApplyCategory}>
+          {t('firstView.use')}
+        </Button>
         <Block>{t('firstView.or')}</Block>
-        <Button onClick={emptyAction.handleOpenSettings}>{t('firstView.import')}</Button>
+        <Button onClick={emptyAction.handleOpenSettings}>
+          {t('firstView.import')}
+        </Button>
       </Controls>
     </Container>
   )

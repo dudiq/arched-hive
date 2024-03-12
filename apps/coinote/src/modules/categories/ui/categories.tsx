@@ -1,13 +1,13 @@
-import { useEffect } from 'preact/compat'
-import { observer } from '@repo/service'
-import { ScrollContainer } from '@pv/ui-kit/scroll-container'
+import './categories.langs'
+
+import { useEffect } from 'react'
 import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
-import { Loader } from '@pv/ui-kit/loader'
-import { Swap } from '@pv/ui-kit/swap'
+
+import { observer } from '@repo/service'
+import { Loader, ScrollContainer, Swap } from '@repo/ui-kit'
+
 import { Controls } from './controls'
 import { TreeListWrapper } from './tree-list-wrapper'
-
-import './categories.langs'
 
 export const Categories = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
