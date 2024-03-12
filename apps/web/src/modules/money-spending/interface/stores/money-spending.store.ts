@@ -2,8 +2,8 @@ import { Store } from '@repo/service'
 
 import { LIMIT_DEFAULT } from '../constants'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
-import type { ExpenseEntity } from '@pv/modules/money-spending/core/expense.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
+import type { ExpenseEntity } from '@pv/money-spending/core/expense.entity'
 
 @Store()
 export class MoneySpendingStore {

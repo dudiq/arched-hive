@@ -7,15 +7,14 @@ type HistoryCb = (
 
 @Service()
 export class RouterHistory {
-  private historyInstance: null | HistoryCb = null
+  private instance: undefined | HistoryCb = undefined
 
   setHistory(history: HistoryCb) {
-    if (this.historyInstance !== history) {
-      this.historyInstance = history
-    }
+    this.instance = history
   }
 
-  get history() {
-    return this.historyInstance
+  history(...args: Parameters<HistoryCb>): void {
+    if (!this.instance) return
+    return this.instance(...args)
   }
 }

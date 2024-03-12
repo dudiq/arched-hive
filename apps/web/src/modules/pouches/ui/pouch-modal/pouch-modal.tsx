@@ -1,11 +1,11 @@
-import { usePouchContext } from '@pv/modules/pouches/interface/use-pouch-context'
+import { usePouchContext } from '@pv/pouches/interface/use-pouch-context'
 
 import { observer } from '@repo/service'
 import { Modal } from '@repo/ui-kit'
 
 import { PouchModalContent } from './pouch-modal-content'
 
-import type { PouchId } from '@pv/modules/pouches/core/pouch.entity'
+import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
 type Props = {
   onSelect: (pouchId: PouchId) => void

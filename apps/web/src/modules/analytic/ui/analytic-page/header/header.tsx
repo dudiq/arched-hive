@@ -1,4 +1,4 @@
-import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
+import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
 
 import { observer } from '@repo/service'
 import { Button, Icon } from '@repo/ui-kit'

@@ -1,6 +1,6 @@
-import { t } from '@pv/interface/services/i18n'
-import { MessageBoxService } from '@pv/modules/message-box'
-import { SettingsAdapter } from '@pv/modules/settings/infra/settings.adapter'
+import { t } from '@pv/i18n'
+import { MessageBoxService } from '@pv/message-box'
+import { SettingsAdapter } from '@pv/settings/infra/settings.adapter'
 import lz from 'lz-string'
 
 import { isErr } from '@repo/result'

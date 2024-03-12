@@ -1,4 +1,4 @@
-import {useInject} from '@pv/modules/app/interface/use-inject';
+import {useInject} from '@pv/app/interface/use-inject';
 
 import { SettingsAction } from './actions/settings.action'
 import { SettingsStore } from './stores/settings.store'

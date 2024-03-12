@@ -1,4 +1,4 @@
-import {guid} from '@pv/modules/app/interface/guid'
+import {guid} from '@pv/app/interface/guid'
 
 import {isErr, resultErr, resultOk} from '@repo/result'
 import {Adapter, Inject} from '@repo/service'
@@ -7,7 +7,7 @@ import {MoneySpendingErrors} from '../core/errors/money-spending.errors'
 
 import {MoneySpendingDataProvider} from './money-spending.data-provider'
 
-import type {PouchId} from '@pv/modules/pouches/core/pouch.entity'
+import type {PouchId} from '@pv/pouches/core/pouch.entity'
 
 export class MoneySpendingAdapter {
   constructor(

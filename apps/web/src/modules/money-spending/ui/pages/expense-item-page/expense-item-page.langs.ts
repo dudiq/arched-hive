@@ -1,4 +1,4 @@
-import { addBlock } from '@pv/interface/services/i18n'
+import { addBlock } from '@pv/i18n'
 
 addBlock({
   data: {

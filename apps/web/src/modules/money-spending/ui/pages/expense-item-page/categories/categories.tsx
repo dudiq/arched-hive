@@ -1,5 +1,5 @@
-import { t } from '@pv/interface/services/i18n'
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { t } from '@pv/i18n'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
 import { Button, Swap } from '@repo/ui-kit'

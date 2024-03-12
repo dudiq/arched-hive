@@ -24,7 +24,7 @@ export default ({ mode }: any) => {
     root: './src',
     resolve: {
       alias: {
-        '@pv': path.resolve(__dirname, './src'),
+        '@pv': path.resolve(__dirname, './src/modules'),
       },
     },
   })

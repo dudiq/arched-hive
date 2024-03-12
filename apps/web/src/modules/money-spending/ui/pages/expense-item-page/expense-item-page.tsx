@@ -1,8 +1,8 @@
 import './expense-item-page.langs'
 
 import { useEffect } from 'react'
-import { useFocusContext } from '@pv/modules/focus'
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { useFocusContext } from '@pv/focus'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
 import { Button, ScrollContainer } from '@repo/ui-kit'

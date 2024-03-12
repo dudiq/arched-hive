@@ -1,4 +1,4 @@
-import { ThemeStore } from '@pv/modules/theme/interface/stores/theme.store'
+import { ThemeStore } from '@pv/theme/interface/stores/theme.store'
 
 import { Action, Inject } from '@repo/service'
 

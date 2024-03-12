@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react'
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
-import { useIntersection } from '@pv/modules/money-spending/ui/pages/expenses-page/use-intersection'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
+import { useIntersection } from '@pv/money-spending/ui/pages/expenses-page/use-intersection'
 
-import type { IntersectionStateType } from '@pv/modules/money-spending/ui/pages/expenses-page/use-intersection'
+import type { IntersectionStateType } from '@pv/money-spending/ui/pages/expenses-page/use-intersection'
 
 export function useExpensesPage() {
   const { moneySpendingAction, moneySpendingStore } = useMoneySpendingContext()

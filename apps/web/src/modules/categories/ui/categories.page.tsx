@@ -1,7 +1,7 @@
 import './categories.langs'
 
 import { useEffect } from 'react'
-import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
+import { useCategoriesContext } from '@pv/categories/interface/use-categories-context'
 
 import { observer } from '@repo/service'
 import { Loader, ScrollContainer, Swap } from '@repo/ui-kit'
@@ -9,7 +9,7 @@ import { Loader, ScrollContainer, Swap } from '@repo/ui-kit'
 import { Controls } from './controls'
 import { TreeListWrapper } from './tree-list-wrapper'
 
-export const Categories = observer(() => {
+export const CategoriesPage = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
 
   useEffect(() => {

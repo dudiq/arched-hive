@@ -1,4 +1,4 @@
-import {useInject} from '@pv/modules/app/interface/use-inject';
+import {useInject} from '@pv/app/interface/use-inject';
 
 import { PouchAction } from './actions/pouch.action'
 import { PouchStore } from './stores/pouch.store'

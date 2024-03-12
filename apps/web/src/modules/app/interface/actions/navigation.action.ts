@@ -1,5 +1,5 @@
 import { Action, Inject } from '@repo/service'
-import { HistoryService } from '@pv/interface/services/history.service'
+import { HistoryService } from '@pv/history/interface/history.service'
 
 @Action()
 export class NavigationAction {

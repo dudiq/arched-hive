@@ -1,5 +1,5 @@
 import { Action, Inject } from '@repo/service'
-import { getLang } from '@pv/interface/services/i18n'
+import { getLang } from '@pv/i18n'
 import { LangStore } from '../stores/lang.store'
 
 @Action()

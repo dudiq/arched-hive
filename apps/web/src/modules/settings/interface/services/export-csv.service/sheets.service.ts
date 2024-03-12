@@ -1,12 +1,12 @@
 import './export-csv.langs'
 
-import { t } from '@pv/interface/services/i18n'
-import { ExpenseViewListService } from '@pv/modules/view-list'
+import { t } from '@pv/i18n'
+import { ExpenseViewListService } from '@pv/view-list'
 
 import { Inject, Service } from '@repo/service'
 
-import type { ExpenseViewEntity } from '@pv/modules/money-spending/core/expense-view.entity'
-import type { ImportDataValueObject } from '@pv/modules/settings/core/value-object/import-data.value-object'
+import type { ExpenseViewEntity } from '@pv/money-spending/core/expense-view.entity'
+import type { ImportDataValueObject } from '@pv/settings/core/value-object/import-data.value-object'
 
 type PouchSheetItem = {
   id: string | null

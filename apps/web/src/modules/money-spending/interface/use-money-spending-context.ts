@@ -1,4 +1,4 @@
-import {useInject} from '@pv/modules/app/interface/use-inject';
+import {useInject} from '@pv/app/interface/use-inject';
 
 import { ExpenseSelectionAction } from './actions/expense-selection.action'
 import { MoneySpendingAction } from './actions/money-spending.action'

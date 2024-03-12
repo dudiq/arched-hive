@@ -1,6 +1,6 @@
-import { t } from '@pv/interface/services/i18n'
-import { guid } from '@pv/modules/app/interface/guid'
-import { MessageBoxService } from '@pv/modules/message-box'
+import { t } from '@pv/i18n'
+import { guid } from '@pv/app/interface/guid'
+import { MessageBoxService } from '@pv/message-box'
 
 import { isErr } from '@repo/result'
 import { Inject, Service } from '@repo/service'
@@ -8,7 +8,7 @@ import { Inject, Service } from '@repo/service'
 import { CategoriesAdapter } from '../../infra/categories.adapter'
 import { CategoriesStore } from '../../interface/stores/categories.store'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
 
 @Service()
 export class CategoriesService {

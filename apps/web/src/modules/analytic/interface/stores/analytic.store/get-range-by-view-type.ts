@@ -1,6 +1,6 @@
-import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
-import { getMonthEnd } from '@pv/modules/date/interface/get-month-end'
-import { getMonthStart } from '@pv/modules/date/interface/get-month-start'
+import { REPORT_VIEW } from '@pv/analytic/core/constants'
+import { getMonthEnd } from '@pv/date/interface/get-month-end'
+import { getMonthStart } from '@pv/date/interface/get-month-start'
 
 const monthToEndSeason: Record<number, number> = {
   11: 11,

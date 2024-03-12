@@ -3,7 +3,7 @@ import { Action, Inject } from '@repo/service'
 import { PouchService } from '../services/pouch.service'
 import { PouchStore } from '../stores/pouch.store'
 
-import type { PouchId } from '@pv/modules/pouches/core/pouch.entity'
+import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
 @Action()
 export class PouchAction {

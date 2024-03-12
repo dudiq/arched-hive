@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { useHistoryContext } from '@pv/interface/use-history-context'
-import { useAppContext } from '@pv/modules/app/interface/use-app-context'
+import { useHistoryContext } from '@pv/history/interface/use-history-context'
+import { useAppContext } from '@pv/app/interface/use-app-context'
 
 type Args = {
   path: string

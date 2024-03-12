@@ -1,4 +1,4 @@
-import { PouchId } from '@pv/modules/pouches/core/pouch.entity'
+import { PouchId } from '@pv/pouches/core/pouch.entity'
 import { PouchModal } from './pouch-modal'
 import { PouchSelection } from './pouch-selection'
 

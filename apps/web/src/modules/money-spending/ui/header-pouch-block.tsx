@@ -1,6 +1,6 @@
-import { PouchBlock } from '@pv/modules/pouches'
+import { PouchBlock } from '@pv/pouches'
 import { observer } from '@repo/service'
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 export const HeaderPouchBlock = observer(() => {
   const { moneySpendingAction } = useMoneySpendingContext()

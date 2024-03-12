@@ -1,4 +1,4 @@
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
 import { Button } from '@repo/ui-kit'

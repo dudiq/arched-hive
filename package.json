@@ -12,7 +12,7 @@
   "scripts": {
     "clean:reset:all": "git clean -fdx -e .vercel .",
     "clean": "turbo run clean",
-    "clean:node_modules": "node ./scripts/clean-node-modules.js",
+    "clean:node_modules": "turbo run clean:node_modules && rimraf ./node_modules",
     "check-types": "turbo run check-types",
     "build": "turbo run build check-types",
     "build:coinote": "turbo run build check-types --filter=web... --color",

@@ -1,7 +1,7 @@
-import { RouteEntity } from '@pv/modules/app/core/route.entity'
-import { Routes } from '@pv/constants/routes'
-import { t } from '@pv/interface/services/i18n'
-import { Categories } from './categories'
+import { RouteEntity } from '@pv/app/core/route.entity'
+import { Routes } from '@pv/route/interface/routes'
+import { t } from '@pv/i18n'
+import { CategoriesPage } from './categories.page'
 
 export const categoriesRoutes: RouteEntity[] = [
   {
@@ -11,7 +11,7 @@ export const categoriesRoutes: RouteEntity[] = [
     header: {
       title: () => t('pages.category'),
     },
-    component: Categories,
+    component: CategoriesPage,
     withHeader: true,
     withNavigation: true,
   },

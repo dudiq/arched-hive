@@ -1,4 +1,4 @@
-import {useInject} from '@pv/modules/app/interface/use-inject';
+import {useInject} from '@pv/app/interface/use-inject';
 
 import { ThemeAction } from './actions/theme.action'
 import { ThemeStore } from './stores/theme.store'

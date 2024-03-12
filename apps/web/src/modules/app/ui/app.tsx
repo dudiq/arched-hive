@@ -1,33 +1,43 @@
 import './app.langs'
 
-import { useFocus } from '@pv/modules/focus'
-import { useLanguageContext } from '@pv/modules/language'
-import { ThemeDefine } from '@pv/modules/theme'
+import {Fragment} from 'react';
+import {AnalyticPage} from '@pv/analytic/ui/analytic-page';
+import {EmptyPage} from '@pv/app/ui/empty-page';
+import {NotFoundPage} from '@pv/app/ui/not-found-page';
+import {CategoriesPage} from '@pv/categories/ui/categories.page';
+import { useFocus } from '@pv/focus'
+import { useLanguageContext } from '@pv/language'
+import {ExpenseItemPage} from '@pv/money-spending/ui/pages/expense-item-page';
+import {ExpensesPage} from '@pv/money-spending/ui/pages/expenses-page';
+import {Routes} from '@pv/route/interface/routes';
+import { BaseRouter } from '@pv/route/ui/base-router'
+import {SettingsPage} from '@pv/settings/ui/settings.page';
+import { ThemeDefine } from '@pv/theme'
+import {Route, Switch} from 'wouter';
 
 import {observer} from '@repo/service';
 
-import { BaseRouter } from './base-router'
-import { Header } from './header'
-import { Layout } from './layout'
 import { Loader } from './loader'
-import { Navigation } from './navigation'
-import { ScreensSwitch } from './screens-switch'
 
 export const App = observer(() => {
   const { langStore } = useLanguageContext()
   useFocus()
+
   return (
-    <>
+    <Fragment key={langStore.currentLanguage}>
       <Loader />
       <ThemeDefine />
       <BaseRouter>
-        <Layout
-          key={langStore.currentLanguage}
-          headerSlot={<Header />}
-          contentSlot={<ScreensSwitch />}
-          footerSlot={<Navigation />}
-        />
+        <Switch>
+          <Route path={Routes.expense} component={ExpensesPage} />
+          <Route path={Routes.expenseItem} component={ExpenseItemPage} />
+          <Route path={Routes.analytic} component={AnalyticPage} />
+          <Route path={Routes.categories} component={CategoriesPage} />
+          <Route path={Routes.settings} component={SettingsPage} />
+          <Route path={Routes.empty} component={EmptyPage} />
+          <Route><NotFoundPage/></Route>
+        </Switch>
       </BaseRouter>
-    </>
+    </Fragment>
   )
 })

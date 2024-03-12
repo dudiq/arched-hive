@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useThemeContext } from '@pv/modules/theme'
+import { useThemeContext } from '@pv/theme'
 
 import { getClassName, getClearedClass } from './classes'
 

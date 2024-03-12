@@ -1,5 +1,5 @@
-import {getRangeReportAdapter} from '@pv/modules/analytic/infra/get-range-report.adapter';
-import { PouchStore } from '@pv/modules/pouches'
+import {getRangeReportAdapter} from '@pv/analytic/infra/get-range-report.adapter';
+import { PouchStore } from '@pv/pouches'
 
 import { Inject, Service } from '@repo/service'
 

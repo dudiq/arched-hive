@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
-import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
+import { getAttrFromElement } from '@pv/dom/interface/get-attr-from-element'
 
 import { TreeItem } from './tree-item'
 import { Container } from './tree-list-styles'
 
-import type { TreeListType } from '@pv/modules/categories/interface/stores/types'
+import type { TreeListType } from '@pv/categories/interface/stores/types'
 
 type Props = {
   onClick: (categoryId: string) => void

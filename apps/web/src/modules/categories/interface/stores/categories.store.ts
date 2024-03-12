@@ -1,6 +1,6 @@
 import { DataState,Store } from '@repo/service'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
 import type { TreeListType } from './types'
 
 type FilterCbType = (value: CategoryEntity) => boolean

@@ -1,8 +1,8 @@
-import { DatabaseDataProvider } from '@pv/modules/database-provider'
+import { DatabaseDataProvider } from '@pv/database-provider'
 
 import {DataProvider, Inject} from '@repo/service'
 
-import type { PouchEntity } from '@pv/modules/pouches/core/pouch.entity'
+import type { PouchEntity } from '@pv/pouches/core/pouch.entity'
 
 function checkDateEnd(item: PouchEntity) {
   return !item.dateEnd

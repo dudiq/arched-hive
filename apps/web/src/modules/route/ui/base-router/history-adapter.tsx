@@ -1,5 +1,5 @@
+import { useHistoryContext } from '@pv/history/interface/use-history-context'
 import { useLocation } from 'wouter'
-import { useHistoryContext } from '@pv/interface/use-history-context'
 
 export function HistoryAdapter() {
   const [pathname, setLocation] = useLocation()

@@ -1,12 +1,12 @@
-import {guid} from '@pv/modules/app/interface/guid'
-import {PouchesErrors} from '@pv/modules/pouches/core/errors/pouches.errors'
+import {guid} from '@pv/app/interface/guid'
+import {PouchesErrors} from '@pv/pouches/core/errors/pouches.errors'
 
 import {isErr, resultErr, resultOk} from '@repo/result'
 import {Adapter, Inject} from '@repo/service'
 
 import {PouchesDataProvider} from './pouches.data-provider'
 
-import type {PouchEntity} from '@pv/modules/pouches/core/pouch.entity'
+import type {PouchEntity} from '@pv/pouches/core/pouch.entity'
 
 export class PouchesAdapter {
   constructor(

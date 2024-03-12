@@ -1,9 +1,9 @@
 import './settings.langs'
 
-import { t } from '@pv/interface/services/i18n'
-import { useLanguageContext } from '@pv/modules/language'
-import { useSettingsContext } from '@pv/modules/settings/interface/use-settings-context'
-import { useThemeContext } from '@pv/modules/theme'
+import { t } from '@pv/i18n'
+import { useLanguageContext } from '@pv/language'
+import { useSettingsContext } from '@pv/settings/interface/use-settings-context'
+import { useThemeContext } from '@pv/theme'
 
 import { observer } from '@repo/service'
 import { BlockLoader, List, ScrollContainer, Toggle } from '@repo/ui-kit'
@@ -13,7 +13,7 @@ import { Buttons } from './buttons'
 import { ListBlock } from './list-block'
 import { LangSwitch } from './settings-styles'
 
-export const Settings = observer(() => {
+export const SettingsPage = observer(() => {
   const { themeStore, themeAction } = useThemeContext()
   const { langAction } = useLanguageContext()
   const { settingsStore } = useSettingsContext()

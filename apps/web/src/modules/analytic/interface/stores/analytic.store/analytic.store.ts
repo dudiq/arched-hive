@@ -1,12 +1,12 @@
-import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
-import { ExpenseViewListService } from '@pv/modules/view-list'
+import { REPORT_VIEW } from '@pv/analytic/core/constants'
+import { ExpenseViewListService } from '@pv/view-list'
 
 import { DataState,Inject, Store } from '@repo/service'
 
 import { getRangeByViewType } from './get-range-by-view-type'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
-import type { ExpenseEntity } from '@pv/modules/money-spending/core/expense.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
+import type { ExpenseEntity } from '@pv/money-spending/core/expense.entity'
 
 type Category = {
   id: string

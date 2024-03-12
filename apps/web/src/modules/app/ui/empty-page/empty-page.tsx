@@ -1,5 +1,5 @@
-import { t } from '@pv/interface/services/i18n'
-import { useAppContext } from '@pv/modules/app/interface/use-app-context'
+import { t } from '@pv/i18n'
+import { useAppContext } from '@pv/app/interface/use-app-context'
 
 import { Button, RadioButton } from '@repo/ui-kit'
 

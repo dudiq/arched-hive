@@ -1,5 +1,5 @@
-import { Routes } from '@pv/constants/routes'
-import { t } from '@pv/interface/services/i18n'
+import { Routes } from '@pv/route/interface/routes'
+import { t } from '@pv/i18n'
 
 import { Separator } from '@repo/ui-kit'
 

@@ -1,13 +1,13 @@
 import {
   CategoriesErrors
-} from '@pv/modules/categories/core/categories.errors'
+} from '@pv/categories/core/categories.errors'
 
 import {isErr, resultErr, resultOk} from '@repo/result'
 import {Adapter, Inject} from '@repo/service'
 
 import {CategoriesDataProvider} from './categories.data-provider'
 
-import type {CategoryEntity} from '@pv/modules/categories/core/category.entity'
+import type {CategoryEntity} from '@pv/categories/core/category.entity'
 
 export class CategoriesAdapter {
   constructor(

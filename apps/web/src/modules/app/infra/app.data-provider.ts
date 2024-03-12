@@ -1,8 +1,8 @@
-import { DatabaseDataProvider } from '@pv/modules/database-provider'
+import { DatabaseDataProvider } from '@pv/database-provider'
 
 import {DataProvider, Inject} from '@repo/service'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
 
 @DataProvider()
 export class AppDataProvider {

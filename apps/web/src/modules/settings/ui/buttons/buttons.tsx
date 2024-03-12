@@ -1,5 +1,5 @@
-import { t } from '@pv/interface/services/i18n'
-import { useSettingsContext } from '@pv/modules/settings/interface/use-settings-context'
+import { t } from '@pv/i18n'
+import { useSettingsContext } from '@pv/settings/interface/use-settings-context'
 
 import { observer } from '@repo/service'
 import { UploadButton } from '@repo/ui-kit'

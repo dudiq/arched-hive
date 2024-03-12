@@ -1,11 +1,11 @@
-import { AnalyticReportService } from '@pv/modules/analytic/interface/services/analytic-report.service'
-import { PouchService } from '@pv/modules/pouches'
+import { AnalyticReportService } from '@pv/analytic/interface/services/analytic-report.service'
+import { PouchService } from '@pv/pouches'
 
 import { Action, Inject } from '@repo/service'
 
 import { AnalyticStore } from '../stores/analytic.store'
 
-import type { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
+import type { REPORT_VIEW } from '@pv/analytic/core/constants'
 
 @Action()
 export class AnalyticAction {

@@ -13,7 +13,7 @@ import {
 import type {
   PouchEntity,
   PouchId,
-} from '@pv/modules/pouches/core/pouch.entity'
+} from '@pv/pouches/core/pouch.entity'
 
 type Props = {
   isSelected: boolean

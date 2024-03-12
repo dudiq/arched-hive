@@ -1,8 +1,8 @@
 import Dexie from 'dexie'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
-import type { ExpenseEntity } from '@pv/modules/money-spending/core/expense.entity'
-import type { PouchEntity } from '@pv/modules/pouches/core/pouch.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
+import type { ExpenseEntity } from '@pv/money-spending/core/expense.entity'
+import type { PouchEntity } from '@pv/pouches/core/pouch.entity'
 import type { Table } from 'dexie';
 
 const DB_NAME = 'finansoDb'

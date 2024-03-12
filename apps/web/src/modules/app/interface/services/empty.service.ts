@@ -1,11 +1,11 @@
-import {defineCategoriesAdapter} from '@pv/modules/app/infra/define-categories.adapter';
-import { LangStore } from '@pv/modules/language'
+import {defineCategoriesAdapter} from '@pv/app/infra/define-categories.adapter';
+import { LangStore } from '@pv/language'
 
 import { Inject, Service } from '@repo/service'
 
 import { EmptyStore } from '../stores/empty.store'
 
-import type { CategoriesDefaultEntity } from '@pv/modules/app/core/categories-default.entity'
+import type { CategoriesDefaultEntity } from '@pv/app/core/categories-default.entity'
 
 @Service()
 export class EmptyService {

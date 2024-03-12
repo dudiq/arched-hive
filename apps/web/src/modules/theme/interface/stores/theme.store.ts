@@ -1,6 +1,6 @@
 import { LocalStorageItem, Store } from '@repo/service'
 
-import type { ThemeEntity } from '@pv/modules/theme/entities/theme.entity'
+import type { ThemeEntity } from '@pv/theme/entities/theme.entity'
 
 const DEFAULT_VALUE = 'light'
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { getMoney } from '@pv/interface/services/i18n'
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { getMoney } from '@pv/i18n'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { Dot } from '../../dot'
 
@@ -14,7 +14,7 @@ import {
   Title,
 } from './expense-row-styles'
 
-import type { ExpenseViewEntity } from '@pv/modules/money-spending/core/expense-view.entity'
+import type { ExpenseViewEntity } from '@pv/money-spending/core/expense-view.entity'
 
 type Props = {
   expenseView: ExpenseViewEntity

@@ -1,4 +1,4 @@
-import { ImportDataValueObject } from '@pv/modules/settings/core/value-object/import-data.value-object'
+import { ImportDataValueObject } from '@pv/settings/core/value-object/import-data.value-object'
 
 export type ExportDatabaseValueObject = {
   dbVersion: number

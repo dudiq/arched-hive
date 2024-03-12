@@ -1,9 +1,9 @@
-import { DatabaseDataProvider } from '@pv/modules/database-provider'
+import { DatabaseDataProvider } from '@pv/database-provider'
 
 import {DataProvider, Inject} from '@repo/service'
 
-import type { ExpenseEntity } from '@pv/modules/money-spending/core/expense.entity'
-import type { PouchId } from '@pv/modules/pouches/core/pouch.entity'
+import type { ExpenseEntity } from '@pv/money-spending/core/expense.entity'
+import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
 type GetExpensesType = {
   pouchId: PouchId

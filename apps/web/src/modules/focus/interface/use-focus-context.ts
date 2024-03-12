@@ -1,4 +1,4 @@
-import {useInject} from '@pv/modules/app/interface/use-inject';
+import {useInject} from '@pv/app/interface/use-inject';
 
 import { FocusAction } from './action/focus.action'
 import { FocusStore } from './stores/focus.store'

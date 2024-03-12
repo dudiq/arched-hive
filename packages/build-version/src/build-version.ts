@@ -1,4 +1,4 @@
-const time = Number(process.env['_TIME_ENTRY_']) || Date.now()
+const time = Number(process.env._TIME_ENTRY_) || Date.now()
 
 export const buildVersion = {
   time,

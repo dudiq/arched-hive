@@ -1,6 +1,6 @@
-import { PouchBlock } from '@pv/modules/pouches'
+import { PouchBlock } from '@pv/pouches'
 import { observer } from '@repo/service'
-import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
+import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
 
 export const HeaderPouchBlock = observer(() => {
   const { analyticAction } = useAnalyticContext()

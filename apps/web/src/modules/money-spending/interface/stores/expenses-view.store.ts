@@ -1,6 +1,6 @@
-import { getMoney } from '@pv/interface/services/i18n'
-import { LangStore } from '@pv/modules/language'
-import { ExpenseViewListService } from '@pv/modules/view-list'
+import { getMoney } from '@pv/i18n'
+import { LangStore } from '@pv/language'
+import { ExpenseViewListService } from '@pv/view-list'
 
 import { Inject, Store } from '@repo/service'
 

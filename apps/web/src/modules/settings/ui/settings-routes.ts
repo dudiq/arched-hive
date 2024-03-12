@@ -1,7 +1,7 @@
-import { RouteEntity } from '@pv/modules/app/core/route.entity'
-import { Routes } from '@pv/constants/routes'
-import { t } from '@pv/interface/services/i18n'
-import { Settings } from './settings'
+import { RouteEntity } from '@pv/app/core/route.entity'
+import { Routes } from '@pv/route/interface/routes'
+import { t } from '@pv/i18n'
+import { SettingsPage } from './settings.page'
 
 export const settingsRoutes: RouteEntity[] = [
   {
@@ -11,7 +11,7 @@ export const settingsRoutes: RouteEntity[] = [
     header: {
       title: () => t('pages.settings'),
     },
-    component: Settings,
+    component: SettingsPage,
     withHeader: true,
     withNavigation: true,
   },

@@ -1,4 +1,4 @@
-import { t } from '@pv/interface/services/i18n'
+import { t } from '@pv/i18n'
 
 import { buildVersion } from '@repo/build-version'
 

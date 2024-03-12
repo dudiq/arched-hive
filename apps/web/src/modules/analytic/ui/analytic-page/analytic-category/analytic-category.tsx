@@ -1,6 +1,6 @@
-import { useContainerClick } from '@pv/interface/get-attr-from-element'
-import { getMoney } from '@pv/interface/services/i18n'
-import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
+import { useContainerClick } from '@pv/dom/interface/get-attr-from-element'
+import { getMoney } from '@pv/i18n'
+import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
 
 import { observer } from '@repo/service'
 

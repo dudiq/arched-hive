@@ -1,8 +1,8 @@
-import { DatabaseDataProvider } from '@pv/modules/database-provider'
+import { DatabaseDataProvider } from '@pv/database-provider'
 
 import {DataProvider, Inject} from '@repo/service'
 
-import type { ImportDataValueObject } from '@pv/modules/settings/core/value-object/import-data.value-object'
+import type { ImportDataValueObject } from '@pv/settings/core/value-object/import-data.value-object'
 
 @DataProvider()
 export class SettingsDataProvider {

@@ -1,5 +1,5 @@
-import { useAnalyticContext } from '@pv/modules/analytic/interface/use-analytic-context'
-import { ExpenseRow } from '@pv/modules/money-spending'
+import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
+import { ExpenseRow } from '@pv/money-spending'
 
 import {observer} from '@repo/service';
 

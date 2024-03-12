@@ -1,12 +1,12 @@
-import { t } from '@pv/interface/services/i18n'
-import { MessageBoxService } from '@pv/modules/message-box'
-import { PouchesAdapter } from '@pv/modules/pouches/infra/pouches.adapter'
-import { PouchStore } from '@pv/modules/pouches/interface/stores/pouch.store'
+import { t } from '@pv/i18n'
+import { MessageBoxService } from '@pv/message-box'
+import { PouchesAdapter } from '@pv/pouches/infra/pouches.adapter'
+import { PouchStore } from '@pv/pouches/interface/stores/pouch.store'
 
 import { isErr } from '@repo/result'
 import { Inject, Service } from '@repo/service'
 
-import type { PouchId } from '@pv/modules/pouches/core/pouch.entity'
+import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
 @Service()
 export class PouchService {

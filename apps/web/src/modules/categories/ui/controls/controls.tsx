@@ -1,4 +1,4 @@
-import { useCategoriesContext } from '@pv/modules/categories/interface/use-categories-context'
+import { useCategoriesContext } from '@pv/categories/interface/use-categories-context'
 
 import { observer } from '@repo/service'
 import { Button } from '@repo/ui-kit'

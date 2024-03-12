@@ -1,7 +1,7 @@
-import { t } from '@pv/interface/services/i18n'
-import { CategoriesStore } from '@pv/modules/categories'
-import { MessageBoxService } from '@pv/modules/message-box'
-import { MoneySpendingStore } from '@pv/modules/money-spending'
+import { t } from '@pv/i18n'
+import { CategoriesStore } from '@pv/categories'
+import { MessageBoxService } from '@pv/message-box'
+import { MoneySpendingStore } from '@pv/money-spending'
 
 import { isErr } from '@repo/result'
 import { Inject, Service } from '@repo/service'

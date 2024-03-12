@@ -2,7 +2,7 @@ import { getNumber } from 'jr-translate'
 
 import { Store } from '@repo/service'
 
-import type { ExpenseViewEntity } from '@pv/modules/money-spending/core/expense-view.entity'
+import type { ExpenseViewEntity } from '@pv/money-spending/core/expense-view.entity'
 
 @Store()
 export class ExpenseSelectionStore {

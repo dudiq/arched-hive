@@ -1,17 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {App} from '@pv/modules/app/ui/app';
+import {App} from '@pv/app/ui/app';
 
 function start() {
-  new Promise<void>((resolve) => {
-    ReactDOM.createRoot(document.getElementById('root')!).render(
+  setTimeout(() => {
+    const node = document.getElementById('root')
+    if (!node) {
+      console.error('Node not found')
+      return
+    }
+
+    ReactDOM.createRoot(node).render(
       <React.StrictMode>
         <App />
       </React.StrictMode>,
     )
-    resolve()
-  })
+  }, 0)
 }
 
 start()
-

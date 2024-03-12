@@ -1,11 +1,11 @@
-import { t } from '@pv/interface/services/i18n'
+import { t } from '@pv/i18n'
 
 import { LocalStorageItem, Store } from '@repo/service'
 
 import type {
   PouchEntity,
   PouchId,
-} from '@pv/modules/pouches/core/pouch.entity'
+} from '@pv/pouches/core/pouch.entity'
 
 @Store()
 export class PouchStore {

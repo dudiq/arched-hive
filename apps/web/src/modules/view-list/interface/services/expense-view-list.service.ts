@@ -1,8 +1,8 @@
 import { Service } from '@repo/service'
 
-import type { CategoryEntity } from '@pv/modules/categories/core/category.entity'
-import type { ExpenseEntity } from '@pv/modules/money-spending/core/expense.entity'
-import type { ExpenseViewEntity } from '@pv/modules/money-spending/core/expense-view.entity'
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
+import type { ExpenseEntity } from '@pv/money-spending/core/expense.entity'
+import type { ExpenseViewEntity } from '@pv/money-spending/core/expense-view.entity'
 
 @Service()
 export class ExpenseViewListService {

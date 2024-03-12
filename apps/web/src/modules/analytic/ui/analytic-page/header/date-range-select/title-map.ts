@@ -1,5 +1,5 @@
-import { t } from '@pv/interface/services/i18n'
-import { REPORT_VIEW } from '@pv/modules/analytic/core/constants'
+import { t } from '@pv/i18n'
+import { REPORT_VIEW } from '@pv/analytic/core/constants'
 
 const seasonCodeMap: Record<number, () => string> = {
   0() {

@@ -1,10 +1,10 @@
-import { Routes } from '@pv/constants/routes'
-import { HistoryService } from '@pv/interface/services/history.service'
-import { EmptyService } from '@pv/modules/app/interface/services/empty.service'
+import { Routes } from '@pv/route/interface/routes'
+import { HistoryService } from '@pv/history/interface/history.service'
+import { EmptyService } from '@pv/app/interface/services/empty.service'
 
 import { Action, Inject } from '@repo/service'
 
-import type { CategoriesDefaultEntity } from '@pv/modules/app/core/categories-default.entity'
+import type { CategoriesDefaultEntity } from '@pv/app/core/categories-default.entity'
 
 @Action()
 export class EmptyAction {

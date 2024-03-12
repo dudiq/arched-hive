@@ -1,6 +1,6 @@
 import './expenses-page.langs'
 
-import { t } from '@pv/interface/services/i18n'
+import { t } from '@pv/i18n'
 
 import { observer } from '@repo/service'
 import {

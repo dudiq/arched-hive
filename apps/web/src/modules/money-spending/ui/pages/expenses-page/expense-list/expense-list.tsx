@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { getAttrFromElement } from '@pv/interface/get-attr-from-element'
-import { useMoneySpendingContext } from '@pv/modules/money-spending/interface/use-money-spending-context'
+import { getAttrFromElement } from '@pv/dom/interface/get-attr-from-element'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
 

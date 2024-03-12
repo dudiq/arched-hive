@@ -1,4 +1,4 @@
-import type { PouchId } from '@pv/modules/pouches/core/pouch.entity'
+import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
 export type ExpenseViewEntity = {
   id: string
