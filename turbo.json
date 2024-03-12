@@ -17,7 +17,7 @@
       "outputs": ["dist/**"],
       "cache": false
     },
-    "@repo/coinote#build": {
+    "@repo/web#build": {
       "dependsOn": ["^build"],
       "outputs": ["api/**", "public/**"],
       "cache": false

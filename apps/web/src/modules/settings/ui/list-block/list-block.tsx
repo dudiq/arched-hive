@@ -3,13 +3,13 @@ import { Icon, List } from '@repo/ui-kit'
 import { IconWrapper, LastNode } from './list-block-styles'
 
 import type { IconNames } from '@repo/ui-kit'
-import type { ComponentChildren } from 'preact'
+import type { ReactNode } from 'react'
 
 type Props = {
   onClick: () => void
   icon: IconNames
   title: string
-  children: ComponentChildren
+  children: ReactNode
 }
 
 export function ListBlock({ onClick, icon, title, children }: Props) {

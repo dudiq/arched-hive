@@ -8,7 +8,7 @@ import {
   Loader,
   ScrollContainer,
   Swap,
-} from '@repo/ui-kit/scroll-container'
+} from '@repo/ui-kit'
 
 import { Controls } from './controls'
 import { ExpenseList } from './expense-list'

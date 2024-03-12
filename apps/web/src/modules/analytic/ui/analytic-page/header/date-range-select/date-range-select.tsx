@@ -1,4 +1,4 @@
-import { Select } from '@repo/ui-kit/select'
+import { Select } from '@repo/ui-kit'
 import { useDateRangeSelect } from './use-date-range-select'
 import {observer} from "@repo/service";
 

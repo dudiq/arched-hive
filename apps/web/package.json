@@ -1,10 +1,10 @@
 {
-  "name": "@repo/coinote",
+  "name": "@repo/web",
   "private": "true",
   "scripts": {
     "dev": "vite",
     "check-types": "tsc",
-    "build": "pnpm check-types && tsc && vite build",
+    "build": "pnpm check-types && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,15 +1,17 @@
 import { t } from '@pv/interface/services/i18n'
-import { buildVersion } from '@pv/build-version'
+
+import { buildVersion } from '@repo/build-version'
+
 import { Container } from './build-version-styles'
 
-const buildTime = buildVersion.buildTime
-const hash = buildVersion.changeset.substring(0, 6)
+const buildTime = buildVersion.date
+const hash = buildVersion.hash.substring(0, 6)
 
 export function BuildVersion() {
   return (
     <Container>
       <div>
-        {t(`settings.version`)}: {buildVersion.version}
+        {t('settings.version')}: {buildVersion.version}
         {' | '}
         {hash || ''}
       </div>
