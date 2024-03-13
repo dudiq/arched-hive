@@ -1,7 +1,5 @@
 import { Icon } from '../icon'
 
-import { Container, extendedClasses, Wrapper } from './button-styles'
-
 import type { ReactNode } from 'react'
 import type { IconNames, IconSize } from '../icon/types'
 import type { ButtonShape, ButtonVariant } from './types'
@@ -25,17 +23,14 @@ export function Button({
   isDisabled,
   shape = 'rect',
 }: Props) {
-  const hasChildren = !!children
   return (
-    <Container
+    <button
       onClick={onClick}
       disabled={isDisabled}
-      className={extendedClasses({ variant, shape })}
+      // className={extendedClasses({ variant, shape })}
     >
       {!!iconName && <Icon iconName={iconName} iconSize={iconSize} />}
-      {!!hasChildren && (
-        <Wrapper data-has-icon={!!iconName}>{children}</Wrapper>
-      )}
-    </Container>
+      {children}
+    </button>
   )
 }

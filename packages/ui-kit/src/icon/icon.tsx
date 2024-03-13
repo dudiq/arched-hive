@@ -1,4 +1,4 @@
-import { IconWrapper } from './icon-styles'
+// import { IconWrapper } from './icon-styles'
 
 import './icons.css'
 
@@ -10,5 +10,5 @@ type Props = {
 }
 
 export function Icon({ iconName, iconSize = 'normal' }: Props) {
-  return <IconWrapper className={`x-icon-${iconName}`} size={iconSize} />
+  return <span className={`x-icon-${iconName}`} />
 }

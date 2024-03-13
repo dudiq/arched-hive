@@ -1,14 +1,30 @@
-import '!style-loader!css-loader!postcss-loader!../../../apps/web/app/styles.css'
+import { withThemeByClassName } from '@storybook/addon-themes'
+import type { Preview } from '@storybook/react'
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+import '../../../packages/ui-kit/src/tailwind.base.css'
+import '../../../apps/web/src/styles/normalize.css'
+
+const preview: Preview = {
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
     },
   },
-  previewTabs: {
-    'storybook/docs/panel': { index: -1 },
-  },
 }
+
+/* snipped for brevity */
+
+export const decorators = [
+  withThemeByClassName({
+    themes: {
+      light: 'light',
+      dark: 'dark',
+    },
+    defaultTheme: 'light',
+  }),
+]
+
+export default preview

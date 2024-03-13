@@ -72,4 +72,4 @@ package-lock.json
 /*.log
 .cache
 
-src/build-version.ts
+packages/storybook/public
