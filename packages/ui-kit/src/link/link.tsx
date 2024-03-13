@@ -1,4 +1,4 @@
-import { Icon } from '../icon'
+// import { Icon } from '../icon'
 
 import { IconWrapper } from './link-styles'
 
@@ -14,11 +14,7 @@ type Props = {
 export function Link({ children, icon, onClick }: Props) {
   return (
     <div className="flex cursor-pointer items-center" onClick={onClick}>
-      {!!icon && (
-        <IconWrapper>
-          <Icon iconName={icon} />
-        </IconWrapper>
-      )}
+      {!!icon && <IconWrapper>{/* <Icon iconName={icon} />*/}</IconWrapper>}
       <div className="underline">{children}</div>
     </div>
   )

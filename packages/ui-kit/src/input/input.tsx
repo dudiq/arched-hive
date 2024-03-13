@@ -1,7 +1,6 @@
 import { useCallback } from 'react'
 
-import { Container } from './input-styles'
-
+// import { Container } from './input-styles'
 import type { ChangeEvent } from 'react'
 
 type Props = {
@@ -20,8 +19,8 @@ export function Input({ value, type = 'text', onChange }: Props) {
   )
 
   return (
-    <Container>
+    <div>
       <input type={type} value={value} onChange={handleChange} />
-    </Container>
+    </div>
   )
 }
