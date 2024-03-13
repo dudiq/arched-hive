@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import inspect from 'vite-plugin-inspect'
-import { VitePWA } from 'vite-plugin-pwa'
+// import { VitePWA } from 'vite-plugin-pwa'
 
 export default ({ mode }: any) => {
   // Load app-level env vars to node-level env vars.
@@ -16,7 +16,11 @@ export default ({ mode }: any) => {
       emptyOutDir: true,
     },
     base: process.env.VITE_BASE_URL,
-    plugins: [VitePWA({ registerType: 'autoUpdate' }), inspect(), react()],
+    plugins: [
+      // VitePWA({ registerType: 'autoUpdate' }),
+      inspect(),
+      react()
+    ],
     root: './src',
     resolve: {
       alias: {

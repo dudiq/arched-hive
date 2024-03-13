@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {App} from '@pv/app/ui/app';
 
+import '@repo/ui-kit/tailwind.base.css'
+import './styles/normalize.css'
+
 function start() {
   setTimeout(() => {
     const node = document.getElementById('root')

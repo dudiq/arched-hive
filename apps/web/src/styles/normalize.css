@@ -18,10 +18,6 @@ body {
 
 a {
   background: transparent;
-
-  .theme-dark & {
-    color: #1687ff;
-  }
 }
 
 a:focus {
@@ -94,7 +90,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 textarea {
   overflow: auto;
-  -webkit-overflow-scrolling: touch; //ios bug
+  -webkit-overflow-scrolling: touch; /*ios bug*/
   vertical-align: top
 }
 
@@ -103,9 +99,9 @@ table {
   border-spacing: 0
 }
 
-//html {
-//  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-//}
+/*html {*/
+/*  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)*/
+/*}*/
 
 input, button, select, textarea {
   font-family: inherit;

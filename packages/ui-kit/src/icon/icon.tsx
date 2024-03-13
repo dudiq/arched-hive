@@ -1,6 +1,8 @@
-import { IconNames, IconSize } from './types'
 import { IconWrapper } from './icon-styles'
+
 import './icons.css'
+
+import type { IconNames, IconSize } from './types'
 
 type Props = {
   iconName: IconNames
