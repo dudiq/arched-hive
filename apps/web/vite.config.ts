@@ -9,18 +9,14 @@ export default ({ mode }: any) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return defineConfig({
-    esbuild: false,
+    // esbuild: false,
     cacheDir: './.cache',
     build: {
       outDir: './dist',
       emptyOutDir: true,
     },
     base: process.env.VITE_BASE_URL,
-    plugins: [
-      VitePWA({ registerType: 'autoUpdate' }),
-      inspect(),
-      react(),
-    ],
+    plugins: [VitePWA({ registerType: 'autoUpdate' }), inspect(), react()],
     root: './src',
     resolve: {
       alias: {
