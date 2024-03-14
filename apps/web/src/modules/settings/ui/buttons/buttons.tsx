@@ -2,7 +2,7 @@ import { t } from '@pv/i18n'
 import { useSettingsContext } from '@pv/settings/interface/use-settings-context'
 
 import { observer } from '@repo/service'
-import { UploadButton } from '@repo/ui-kit'
+import { UploadArea } from '@repo/ui-kit'
 
 import { Container, DangerRow } from './buttons-styles'
 import { RowBlock } from './row-block'
@@ -12,9 +12,9 @@ export const Buttons = observer(() => {
   return (
     <Container>
       <RowBlock icon="upload">
-        <UploadButton onChange={settingsAction.handleImportFiles}>
+        <UploadArea onChange={settingsAction.handleImportFiles}>
           {t('settings.importFin')}
-        </UploadButton>
+        </UploadArea>
       </RowBlock>
       <RowBlock icon="download" onClick={settingsAction.handleExportAsFin}>
         {t('settings.exportFin')}

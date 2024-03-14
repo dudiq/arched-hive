@@ -132,7 +132,15 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 input[type="file"] {
-  display: block
+  /*display: block;*/
+  /*appearance: none;*/
+  /*background-color: initial;*/
+  /*cursor: pointer;*/
+  /*align-items: baseline;*/
+  /*text-overflow: ellipsis;*/
+  /*text-align: start !important;*/
+  /*white-space: pre;*/
+  /*overflow: hidden !important;*/
 }
 
 select[multiple], select[size] {
