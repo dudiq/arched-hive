@@ -7,6 +7,7 @@ import * as assets from './icon-assets'
 
 import type { Meta, StoryFn } from '@storybook/react'
 import type { IconName } from './icon'
+import type { IconSize } from './types'
 
 const meta: Meta = {
   title: 'ui-kit / Icon',
@@ -16,9 +17,11 @@ const meta: Meta = {
 const Icons = ({
   filter,
   containerSize,
+  iconSize,
 }: {
   filter: string
   containerSize: number
+  iconSize: IconSize
 }) => {
   const lowerFilter = filter.toLowerCase()
   return (
@@ -38,7 +41,7 @@ const Icons = ({
             }}
             title={key}
           >
-            <Icon name={key as IconName} />
+            <Icon name={key as IconName} size={iconSize} />
           </div>
         )
       })}
@@ -52,10 +55,10 @@ export const Default: StoryFn<typeof Icon> = () => {
     <div className="flex-col flex gap-6">
       <Input value={value} onChange={setValue} />
       <div className="flex text-gray-400">
-        <Icons containerSize={24} filter={value} />
+        <Icons containerSize={24} filter={value} iconSize="normal" />
       </div>
       <div className="flex text-gray-400">
-        <Icons containerSize={52} filter={value} />
+        <Icons containerSize={52} filter={value} iconSize="huge" />
       </div>
     </div>
   )

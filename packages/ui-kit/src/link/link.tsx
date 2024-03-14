@@ -1,21 +1,19 @@
-// import { Icon } from '../icon'
-
-import { IconWrapper } from './link-styles'
+import { Icon } from '../icon'
 
 import type { ReactNode } from 'react'
-import type { IconNames } from '../icon/types'
+import type { IconName } from '../icon'
 
 type Props = {
   children?: ReactNode
-  icon?: IconNames
+  icon?: IconName
   onClick?: () => void
 }
 
 export function Link({ children, icon, onClick }: Props) {
   return (
-    <div className="flex cursor-pointer items-center" onClick={onClick}>
-      {!!icon && <IconWrapper>{/* <Icon iconName={icon} />*/}</IconWrapper>}
+    <a className="flex cursor-pointer items-center gap-2" onClick={onClick}>
+      {!!icon && <Icon name={icon} />}
       <div className="underline">{children}</div>
-    </div>
+    </a>
   )
 }
