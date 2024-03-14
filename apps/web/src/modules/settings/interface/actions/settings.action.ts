@@ -9,14 +9,14 @@ import { SettingsStore } from '../stores/settings.store'
 @Action()
 export class SettingsAction {
   constructor(
-    private importFinService= Inject(ImportFinService),
-    private exportFinService= Inject(ExportFinService),
-    private exportCsvService= Inject(ExportCsvService),
-    private dropAllService= Inject(DropAllService),
-    private settingsStore= Inject(SettingsStore),
+    private importFinService = Inject(ImportFinService),
+    private exportFinService = Inject(ExportFinService),
+    private exportCsvService = Inject(ExportCsvService),
+    private dropAllService = Inject(DropAllService),
+    private settingsStore = Inject(SettingsStore),
   ) {}
 
-  async handleImportFiles(files: FileList | null) {
+  async handleImportFiles(files: FileList | undefined) {
     this.settingsStore.setIsLoading(true)
     await this.importFinService.importFiles(files)
     this.settingsStore.setIsLoading(false)

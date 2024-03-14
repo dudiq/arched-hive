@@ -10,10 +10,7 @@ import {
   TitleWrapper,
 } from './pouch-item-styles'
 
-import type {
-  PouchEntity,
-  PouchId,
-} from '@pv/pouches/core/pouch.entity'
+import type { PouchEntity, PouchId } from '@pv/pouches/core/pouch.entity'
 
 type Props = {
   isSelected: boolean
@@ -34,13 +31,13 @@ export function PouchItem({ pouch, onRemove, isSelected, onSelect }: Props) {
   return (
     <Container>
       <Row onClick={handleSelect}>
-        <IconWrapper>{!!isSelected && <Icon iconName="wallet" />}</IconWrapper>
+        <IconWrapper>{!!isSelected && <Icon name="Wallet" />}</IconWrapper>
         <TitleWrapper>{pouch.name}</TitleWrapper>
       </Row>
       {!!onRemove && (
         <ActionWrapper>
           <Button variant="flat" onClick={handleRemove}>
-            <Icon iconName="cross" />
+            <Icon name="Cross" />
           </Button>
         </ActionWrapper>
       )}

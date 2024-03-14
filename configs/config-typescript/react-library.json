@@ -5,7 +5,7 @@
   "compilerOptions": {
     "lib": ["ES2019"],
     "module": "ESNext",
-    "target": "ES6",
+    "target": "ES2022",
     "jsx": "react-jsx",
     "noEmit": true
   }

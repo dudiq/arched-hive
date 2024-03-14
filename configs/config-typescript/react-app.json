@@ -6,12 +6,11 @@
     "allowJs": true,
     "declaration": false,
     "declarationMap": false,
-    "incremental": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "noEmit": true,
     "resolveJsonModule": true,
-    "target": "ES2019"
+    "target": "ESNext"
   }
 }

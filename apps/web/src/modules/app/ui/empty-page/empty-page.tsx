@@ -1,5 +1,5 @@
-import { t } from '@pv/i18n'
 import { useAppContext } from '@pv/app/interface/use-app-context'
+import { t } from '@pv/i18n'
 
 import { Button, RadioButton } from '@repo/ui-kit'
 
@@ -21,7 +21,7 @@ export function EmptyPage() {
       <Title>{t('firstView.t')}</Title>
       <SubTitle>{t('firstView.select')}</SubTitle>
       <RadioButton
-        isChecked={emptyStore.selectedDefaultCategories === 'ru'}
+        checkValue={emptyStore.selectedDefaultCategories}
         name={EMPTY_CATEGORY}
         value={'ru'}
         onChange={emptyAction.handleChangeCategory}
@@ -29,7 +29,7 @@ export function EmptyPage() {
         Русский набор категорий
       </RadioButton>
       <RadioButton
-        isChecked={emptyStore.selectedDefaultCategories === 'en'}
+        checkValue={emptyStore.selectedDefaultCategories}
         name={EMPTY_CATEGORY}
         value={'en'}
         onChange={emptyAction.handleChangeCategory}

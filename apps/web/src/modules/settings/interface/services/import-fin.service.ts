@@ -1,20 +1,24 @@
-import lz from 'lz-string'
-import { Inject, Service } from '@repo/service'
-import { MessageBoxService } from '@pv/message-box'
 import { t } from '@pv/i18n'
+import { MessageBoxService } from '@pv/message-box'
+import lz from 'lz-string'
+
 import { isErr } from '@repo/result'
-import { ExportDatabaseValueObject } from '../../core/value-object/export-database.value-object'
+import { Inject, Service } from '@repo/service'
+
 import { SettingsAdapter } from '../../infra/settings.adapter'
-import { FileService } from './file.service'
+
 import { DropAllService } from './drop-all.service'
+import { FileService } from './file.service'
+
+import type { ExportDatabaseValueObject } from '../../core/value-object/export-database.value-object'
 
 @Service()
 export class ImportFinService {
   constructor(
-    private messageBoxService= Inject(MessageBoxService),
-    private fileService= Inject(FileService),
-    private settingsAdapter= Inject(SettingsAdapter),
-    private dropAllService= Inject(DropAllService),
+    private messageBoxService = Inject(MessageBoxService),
+    private fileService = Inject(FileService),
+    private settingsAdapter = Inject(SettingsAdapter),
+    private dropAllService = Inject(DropAllService),
   ) {}
 
   private static decompressFromBase64<T>(data: string): T | null {
@@ -29,11 +33,12 @@ export class ImportFinService {
     }
   }
 
-  async importFiles(files: FileList | null) {
+  async importFiles(files: FileList | undefined) {
     if (!files || files.length === 0) return
 
     const content = await this.fileService.readTextFile<string>(files[0])
-    const result = ImportFinService.decompressFromBase64<ExportDatabaseValueObject>(content)
+    const result =
+      ImportFinService.decompressFromBase64<ExportDatabaseValueObject>(content)
     if (!result) return
     if (!result.dbVersion) return
     if (!result.data) return
@@ -47,6 +52,6 @@ export class ImportFinService {
 
     await this.messageBoxService.alert(t('settings.importDone'))
 
-    //TODO: add reload data to pouch and all other pages
+    // TODO: add reload data to pouch and all other pages
   }
 }

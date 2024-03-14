@@ -8,7 +8,7 @@ export const PouchSelection = observer(() => {
 
   return (
     <>
-      <Link icon="wallet" onClick={pouchAction.handleOpenPouchesList}>
+      <Link icon="Wallet" onClick={pouchAction.handleOpenPouchesList}>
         {pouchStore.currentPouchName}
       </Link>
     </>

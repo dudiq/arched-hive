@@ -11,19 +11,19 @@ export const Buttons = observer(() => {
   const { settingsAction } = useSettingsContext()
   return (
     <Container>
-      <RowBlock icon="upload">
+      <RowBlock icon="Upload">
         <UploadArea onChange={settingsAction.handleImportFiles}>
           {t('settings.importFin')}
         </UploadArea>
       </RowBlock>
-      <RowBlock icon="download" onClick={settingsAction.handleExportAsFin}>
+      <RowBlock icon="Download" onClick={settingsAction.handleExportAsFin}>
         {t('settings.exportFin')}
       </RowBlock>
-      <RowBlock icon="download" onClick={settingsAction.handleExportAsCsv}>
+      <RowBlock icon="Download" onClick={settingsAction.handleExportAsCsv}>
         {t('settings.exportCsv')}
       </RowBlock>
       <DangerRow onClick={settingsAction.handleDropAllData}>
-        <RowBlock icon="trash">{t('settings.dropAll')}</RowBlock>
+        <RowBlock icon="Trash">{t('settings.dropAll')}</RowBlock>
       </DangerRow>
     </Container>
   )
