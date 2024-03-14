@@ -5,7 +5,7 @@ module.exports = {
   content: [
     '../../packages/ui-kit/src/**/*.{ts,tsx}',
   ],
-  darkMode: 'class',
+  darkMode: ['class'],
   safelist: [
     'w-64',
     'w-1/2',

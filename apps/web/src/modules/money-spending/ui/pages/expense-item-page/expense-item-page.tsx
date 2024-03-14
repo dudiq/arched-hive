@@ -1,7 +1,8 @@
 import './expense-item-page.langs'
 
 import { useEffect } from 'react'
-import { useFocusContext } from '@pv/focus'
+import { useInject } from '@pv/app/interface/use-inject'
+import { FocusStore } from '@pv/focus/interface/stores/focus.store'
 import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
@@ -14,9 +15,12 @@ import { PadBlock } from './pad-block'
 import { PadTitle } from './pad-title'
 
 export const ExpenseItemPage = observer(() => {
+  const { focusStore } = useInject({
+    focusStore: FocusStore,
+  })
+
   const { moneySpendingAction, expenseSelectionAction, moneySpendingStore } =
     useMoneySpendingContext()
-  const { focusStore } = useFocusContext()
 
   useEffect(() => {
     return () => {

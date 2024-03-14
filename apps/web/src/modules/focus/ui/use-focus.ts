@@ -1,15 +1,27 @@
 import { useEffect } from 'react'
+import { useInject } from '@pv/app/interface/use-inject'
 
-import { useFocusContext } from '../interface/use-focus-context'
+import { FocusAction } from '../interface/action/focus.action'
 
 export function useFocus() {
-  const { focusAction } = useFocusContext()
+  const { focusAction } = useInject({
+    focusAction: FocusAction,
+  })
+
   useEffect(() => {
     document.body.addEventListener('focus', focusAction.handleStartTyping, true)
     document.body.addEventListener('blur', focusAction.handleStopTyping, true)
     return () => {
-      document.body.removeEventListener('focus', focusAction.handleStartTyping, true)
-      document.body.removeEventListener('blur', focusAction.handleStopTyping, true)
+      document.body.removeEventListener(
+        'focus',
+        focusAction.handleStartTyping,
+        true,
+      )
+      document.body.removeEventListener(
+        'blur',
+        focusAction.handleStopTyping,
+        true,
+      )
     }
   }, [focusAction.handleStartTyping, focusAction.handleStopTyping])
 }

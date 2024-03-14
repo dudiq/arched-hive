@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
 export const Default: StoryFn<typeof Button> = (args) => {
   return (
     <div className="flex gap-2">
-      <div className="flex gap-2 flex-col w-36">
+      <div className="flex gap-2 w-36">
         <Button>default</Button>
         <Button shape="circle">circle</Button>
       </div>

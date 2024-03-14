@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply dark:bg-black dark:text-white min-h-screen relative;
+  }
+}
+
 input[type="range"]::-webkit-slider-runnable-track {
   background-color: transparent;
   background: transparent;
