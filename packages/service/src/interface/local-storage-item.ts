@@ -2,6 +2,7 @@ import { makeObservable, observable } from 'mobx'
 
 type OptionsType<T> = {
   initialValue: T
+  prefix?: string
 }
 
 type Maybe<T> = T | undefined | null
@@ -28,7 +29,7 @@ export class LocalStorageItem<T> {
   }
 
   get usedKey() {
-    return `${PREFIX}-${this.key}`
+    return `${this.options?.prefix || PREFIX}-${this.key}`
   }
 
   set(value: T) {

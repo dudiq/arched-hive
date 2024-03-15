@@ -4,7 +4,7 @@ const annotationsSymbol = Symbol('annotationsSymbol')
 const objectPrototype = Object.prototype
 
 // see details in https://github.com/mobxjs/mobx/discussions/2850
-function makeSimpleAutoObservable(target: any): void {
+export function makeSimpleAutoObserv(target: any): void {
   // These could be params but we hard-code them
   const overrides = {} as any
   const options = {}
@@ -21,7 +21,11 @@ function makeSimpleAutoObservable(target: any): void {
     while (current && current !== objectPrototype) {
       Reflect.ownKeys(current).forEach((key) => {
         if (key === $mobx || key === 'constructor') return
-        annotations[key] = !overrides ? true : key in overrides ? overrides[key] : true
+        annotations[key] = !overrides
+          ? true
+          : key in overrides
+            ? overrides[key]
+            : true
       })
       current = Object.getPrototypeOf(current)
     }
@@ -33,26 +37,4 @@ function makeSimpleAutoObservable(target: any): void {
   }
 
   return makeObservable(target, annotations, options)
-}
-
-export function Store() {
-  return function extend<T extends { new (...args: any[]): {} }>(Context: T) {
-    let instance: SubClass
-
-    class SubClass extends Context {
-      constructor(...args: any[]) {
-        super(...args)
-        makeSimpleAutoObservable(this)
-      }
-
-      static instance(): SubClass {
-        if (!instance) instance = new SubClass();
-        return instance;
-      }
-    }
-
-    Object.defineProperty(SubClass, 'name', { value: Context.name })
-
-    return SubClass
-  }
 }
