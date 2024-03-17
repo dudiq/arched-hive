@@ -7,10 +7,6 @@ import { NaviItem } from './navi-item'
 export function Footer() {
   const [location, setLocation] = useLocation()
 
-  console.log('location', {
-    location,
-  })
-
   return (
     <div className="flex w-full">
       <NaviItem

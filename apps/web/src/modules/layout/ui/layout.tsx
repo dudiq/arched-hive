@@ -12,14 +12,17 @@ export const Layout = ({ children, headerSlot, footerSlot }: Props) => {
   return (
     <div className="max-w-2xl flex flex-col overflow-x-hidden mx-auto w-full h-screen">
       <Swap has={!!headerSlot}>
-        <div className="">
+        <div>
           {headerSlot}
           <Separator />
         </div>
       </Swap>
       <div className="flex flex-col relative flex-1">{children}</div>
       <Swap has={!!footerSlot}>
-        <div>{footerSlot}</div>
+        <div>
+          <Separator />
+          {footerSlot}
+        </div>
       </Swap>
     </div>
   )

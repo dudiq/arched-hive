@@ -17,8 +17,8 @@
     "./vitest.config": "./vitest.config.ts"
   },
   "dependencies": {
-    "vite-tsconfig-paths": "4.3.1",
-    "vitest": "1.3.1"
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "1.4.0"
   },
   "devDependencies": {
     "@repo/config-typescript": "workspace:*",

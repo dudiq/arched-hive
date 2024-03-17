@@ -1,5 +1,3 @@
-// import { styled } from '@linaria/react'
-
 export const Dot = () => {
   return <div></div>
 }

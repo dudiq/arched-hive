@@ -8,11 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@repo/service": "workspace:*",
-    "@repo/result": "workspace:*",
-    "@repo/logger": "workspace:*",
-    "@repo/errors": "workspace:*",
     "@repo/build-version": "workspace:*",
+    "@repo/errors": "workspace:*",
+    "@repo/logger": "workspace:*",
+    "@repo/result": "workspace:*",
+    "@repo/service": "workspace:*",
     "@repo/ui-kit": "workspace:*",
     "dexie": "^3.2.6",
     "jr-translate": "^2.0.1",
@@ -22,21 +22,18 @@
     "wouter": "^3.0.2"
   },
   "devDependencies": {
-    "@repo/environment": "workspace:*",
-    "@repo/unit-test": "workspace:*",
     "@repo/config-typescript": "workspace:*",
+    "@repo/environment": "workspace:*",
     "@repo/eslint-config": "workspace:*",
-    "@linaria/core": "^6.1.0",
-    "@linaria/react": "^6.1.0",
-    "@preact/preset-vite": "^2.8.1",
+    "@repo/unit-test": "workspace:*",
+    "@swc/core": "^1.4.8",
     "@types/react": "18.2.3",
     "@types/react-dom": "18.2.3",
     "@vitejs/plugin-react": "^4.2.1",
     "vite": "^5.1.6",
     "vite-plugin-inspect": "^0.8.3",
     "vite-plugin-linaria": "^1.0.0",
-    "vite-plugin-pwa": "^0.19.2",
-    "vite-plugin-swc-react": "^0.1.12",
-    "@swc/core": "^1.4.8"
+    "vite-plugin-pwa": "^0.19.4",
+    "vite-plugin-swc-react": "^0.1.12"
   }
 }
