@@ -18,7 +18,7 @@ export const Categories = observer(() => {
           isSlot={t('moneySpending.selectCategory')}
         >
           <Button
-            iconName="cross"
+            iconName="Cross"
             iconSize="big"
             variant="flat"
             onClick={moneySpendingAction.handleDropSelectedCategory}

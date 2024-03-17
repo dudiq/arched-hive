@@ -1,12 +1,13 @@
 import { Icon } from '../icon'
+import { Swap } from '../swap'
 
 import type { ReactNode } from 'react'
-import type { IconNames, IconSize } from '../icon'
+import type { IconName, IconSize } from '../icon'
 import type { ButtonShape, ButtonVariant } from './types'
 
 type Props = {
   children?: ReactNode
-  iconName?: IconNames
+  iconName?: IconName
   iconSize?: IconSize
   variant?: ButtonVariant
   shape?: ButtonShape
@@ -46,7 +47,9 @@ export function Button({
   const buttonClass = `${baseClass} ${baseColors} ${shapeClass} ${variantClass}`
   return (
     <button onClick={onClick} disabled={isDisabled} className={buttonClass}>
-      {!!iconName && <Icon iconName={iconName} iconSize={iconSize} />}
+      <Swap has={!!iconName}>
+        <Icon name={iconName} iconSize={iconSize} />
+      </Swap>
       {children}
     </button>
   )

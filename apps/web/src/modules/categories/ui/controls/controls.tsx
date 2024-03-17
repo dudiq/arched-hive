@@ -15,7 +15,7 @@ export const Controls = observer(() => {
         {!!isSelectedCategory && (
           <Button
             shape="circle"
-            iconName="trash"
+            iconName="Trash"
             iconSize="huge"
             onClick={categoriesAction.handleRemoveCategory}
           />
@@ -25,7 +25,7 @@ export const Controls = observer(() => {
         {!!isSelectedCategory && (
           <Button
             shape="circle"
-            iconName="edit-l"
+            iconName="EditL"
             iconSize="huge"
             onClick={categoriesAction.handleEditCategory}
           />
@@ -35,7 +35,7 @@ export const Controls = observer(() => {
         {!!isChildCategory && (
           <Button
             shape="circle"
-            iconName="plus"
+            iconName="Plus"
             iconSize="huge"
             variant={plusButtonVariant}
             onClick={categoriesAction.handleAddCategory}

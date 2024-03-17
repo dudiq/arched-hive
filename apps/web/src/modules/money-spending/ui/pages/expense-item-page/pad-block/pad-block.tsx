@@ -52,7 +52,7 @@ export const PadBlock = observer(() => {
           6
         </PadButton>
         <PadButton data-action={ACTIONS_ENUM.BACKSPACE} viewType="secondary">
-          <Icon iconName="a-left" iconSize="big" />
+          <Icon name="Aleft" iconSize="big" />
         </PadButton>
       </Row>
       <Row>
@@ -70,7 +70,7 @@ export const PadBlock = observer(() => {
           viewType="secondary"
           disabled={isEditing}
         >
-          <Icon iconName="plus" iconSize="big" />
+          <Icon name="Plus" iconSize="big" />
         </PadButton>
       </Row>
       <Row>

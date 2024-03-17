@@ -1,12 +1,11 @@
 import * as assets from './icon-assets'
 
-import type { IconNames, IconSize } from './types'
+import type { IconSize } from './types'
 
 export type IconName = keyof typeof assets
 
 type Props = {
-  iconName?: IconNames
-  name?: IconName
+  name: IconName
   size?: IconSize
   /**
    * @deprecated use size instead
@@ -27,6 +26,7 @@ export function Icon({ name, size = 'normal' }: Props) {
   if (!assets[name]) {
     console.error('-icon not defined name', name)
   }
+
   const sizeClass = iconSizeMap[size]
   const IconComponent = assets[name] || null
 

@@ -30,13 +30,13 @@ export const ExpensesPage = observer(() => {
           <TodayCost />
           <ExpenseList />
           <div ref={anchorRef} />
-          {!!moneySpendingStore.isShowMoreVisible && (
+          <Swap has={moneySpendingStore.isShowMoreVisible}>
             <div>
               <Link onClick={moneySpendingAction.handleLoadNextExpenses}>
                 {t('expense.loadMore')}
               </Link>
             </div>
-          )}
+          </Swap>
         </Swap>
       </ScrollContainer>
       <Controls />

@@ -14,7 +14,7 @@ export const Controls = observer(() => {
         {!!isEditing && (
           <Button
             shape="circle"
-            iconName="trash"
+            iconName="Trash"
             iconSize="huge"
             onClick={expenseSelectionAction.handleRemoveExpense}
           />
@@ -24,7 +24,7 @@ export const Controls = observer(() => {
         {!!isEditing && (
           <Button
             shape="circle"
-            iconName="edit-l"
+            iconName="EditL"
             iconSize="huge"
             onClick={moneySpendingAction.handleOpenExpense}
           />
@@ -34,7 +34,7 @@ export const Controls = observer(() => {
         {!isEditing && (
           <Button
             shape="circle"
-            iconName="plus"
+            iconName="Plus"
             iconSize="huge"
             onClick={moneySpendingAction.handleOpenExpense}
           />

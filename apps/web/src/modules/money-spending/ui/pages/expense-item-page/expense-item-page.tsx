@@ -43,7 +43,7 @@ export const ExpenseItemPage = observer(() => {
         <div>
           <Button
             shape="circle"
-            iconName="a-left"
+            iconName="ALeft"
             iconSize="huge"
             onClick={moneySpendingAction.handleOpenExpenseList}
           />

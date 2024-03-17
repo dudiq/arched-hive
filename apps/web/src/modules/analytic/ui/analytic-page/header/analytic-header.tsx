@@ -14,7 +14,7 @@ export const AnalyticHeader = observer(() => {
           onClick={analyticAction.handlePrevReport}
           isDisabled={!analyticStore.isPrevAvailable}
         >
-          <Icon iconName="a-left" />
+          <Icon name="ALeft" />
         </Button>
         <div>
           <DateRangeSelect />
@@ -23,7 +23,7 @@ export const AnalyticHeader = observer(() => {
           onClick={analyticAction.handleNextReport}
           isDisabled={!analyticStore.isNextAvailable}
         >
-          <Icon iconName="a-right" />
+          <Icon name="ARight" />
         </Button>
       </div>
     </div>
