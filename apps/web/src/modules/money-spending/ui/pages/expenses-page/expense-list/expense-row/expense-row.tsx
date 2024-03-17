@@ -4,16 +4,6 @@ import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-
 
 import { Dot } from '../../dot'
 
-import {
-  Container,
-  DateTitle,
-  LeftBlock,
-  Money,
-  RightBlock,
-  SubTitle,
-  Title,
-} from './expense-row-styles'
-
 import type { ExpenseViewEntity } from '@pv/money-spending/core/expense-view.entity'
 
 type Props = {
@@ -48,21 +38,21 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
   }, [])
 
   return (
-    <Container data-is-selected={isSelected} ref={refEl}>
-      <LeftBlock>
-        <Title>
+    <div className="flex" data-is-selected={isSelected} ref={refEl}>
+      <div>
+        <div>
           {expenseView.catParentTitle ? `${expenseView.catParentTitle} / ` : ''}{' '}
           {expenseView.catTitle}
-        </Title>
-        <SubTitle>{expenseView.desc}</SubTitle>
-      </LeftBlock>
-      <RightBlock>
-        <Money>{getMoney(expenseView.cost)}</Money>
-        <DateTitle>
+        </div>
+        <div>{expenseView.desc}</div>
+      </div>
+      <div>
+        <div>{getMoney(expenseView.cost)}</div>
+        <div>
           {time} | {hours}:{minutes}
           {!!isToday && <Dot />}
-        </DateTitle>
-      </RightBlock>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }

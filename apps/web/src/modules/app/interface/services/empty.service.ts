@@ -1,4 +1,4 @@
-import {defineCategoriesAdapter} from '@pv/app/infra/define-categories.adapter';
+import { defineCategoriesAdapter } from '@pv/app/infra/define-categories.adapter'
 import { LangStore } from '@pv/language'
 
 import { Inject, Service } from '@repo/service'
@@ -10,15 +10,15 @@ import type { CategoriesDefaultEntity } from '@pv/app/core/categories-default.en
 @Service()
 export class EmptyService {
   constructor(
-    private emptyStore= Inject(EmptyStore),
-    private langStore= Inject(LangStore),
+    private emptyStore = Inject(EmptyStore),
+    private langStore = Inject(LangStore),
   ) {}
 
-  changeDefaultCategory(selectedCategory: CategoriesDefaultEntity) {
+  changeDefaultCategory(selectedCategory: CategoriesDefaultEntity): void {
     this.emptyStore.changeDefaultCategory(selectedCategory)
   }
 
-  async applyDefaultCategory() {
+  async applyDefaultCategory(): Promise<void> {
     const lang = this.emptyStore.selectedDefaultCategories
     this.langStore.changeLanguage(lang)
     const categories = this.emptyStore.defaultCategories

@@ -1,20 +1,21 @@
-import { observer } from '@repo/service'
-import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 import { t } from '@pv/i18n'
+import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
+
+import { observer } from '@repo/service'
+
 import { Dot } from '../dot'
-import { Container, Item, Money } from './today-cost-styles'
 
 export const TodayCost = observer(() => {
   const { expensesViewStore } = useMoneySpendingContext()
   return (
-    <Container>
-      <Item>{t('expense.today')}</Item>
-      <Item>
-        <Money>
+    <div>
+      <div>{t('expense.today')}</div>
+      <div>
+        <div>
           {expensesViewStore.todayCost}
           <Dot />
-        </Money>
-      </Item>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 })

@@ -1,9 +1,7 @@
 import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
 import { ExpenseRow } from '@pv/money-spending'
 
-import {observer} from '@repo/service';
-
-import { Container } from './analytic-expenses-styles'
+import { observer } from '@repo/service'
 
 export const AnalyticExpenses = observer(() => {
   const { analyticStore } = useAnalyticContext()
@@ -11,10 +9,16 @@ export const AnalyticExpenses = observer(() => {
   if (!analyticStore.selectedCategoryId) return null
 
   return (
-    <Container>
+    <div>
       {analyticStore.expenseListView.map((expense) => {
-        return <ExpenseRow key={expense.id} expenseView={expense} isSelected={false} />
+        return (
+          <ExpenseRow
+            key={expense.id}
+            expenseView={expense}
+            isSelected={false}
+          />
+        )
       })}
-    </Container>
+    </div>
   )
 })

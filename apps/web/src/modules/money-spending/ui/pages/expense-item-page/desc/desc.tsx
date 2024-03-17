@@ -3,18 +3,16 @@ import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-
 import { observer } from '@repo/service'
 import { Input } from '@repo/ui-kit'
 
-import { Container } from './desc-styles'
-
 export const Desc = observer(() => {
   const { expenseSelectionAction, expenseSelectionStore } =
     useMoneySpendingContext()
 
   return (
-    <Container>
+    <div className="flex items-center">
       <Input
         value={expenseSelectionStore.currentDesc}
         onChange={expenseSelectionAction.handleChangeDesc}
       />
-    </Container>
+    </div>
   )
 })

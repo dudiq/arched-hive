@@ -1,15 +1,14 @@
 import './analytic-page.langs'
 
 import { useEffect } from 'react'
-import { getMoney, t } from '@pv/i18n'
 import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
+import { getMoney, t } from '@pv/i18n'
 
 import { observer } from '@repo/service'
 import { Loader, ScrollContainer, Separator, Swap } from '@repo/ui-kit'
 
 import { AnalyticCategory } from './analytic-category'
 import { AnalyticExpenses } from './analytic-expenses'
-import { Container, Content, TotalMoneyRow } from './analytic-page-styles'
 import { Header } from './header'
 
 export const AnalyticPage = observer(() => {
@@ -22,22 +21,22 @@ export const AnalyticPage = observer(() => {
 
   return (
     <>
-      <Container>
+      <div>
         <Header />
         <Swap is={analyticStore.isLoading} isSlot={<Loader />}>
-          <TotalMoneyRow>
+          <div>
             {t('analytic.total')}
             <div>{getMoney(analyticStore.totalCost)}</div>
-          </TotalMoneyRow>
+          </div>
           <Separator />
-          <Content>
+          <div>
             <ScrollContainer>
               <AnalyticCategory />
               <AnalyticExpenses />
             </ScrollContainer>
-          </Content>
+          </div>
         </Swap>
-      </Container>
+      </div>
     </>
   )
 })

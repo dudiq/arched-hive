@@ -12,7 +12,7 @@ function ListRow({
   onClick?: () => void
 }) {
   return (
-    <div className="flex min-h-8 items-center" onClick={onClick}>
+    <div className="flex min-h-10 items-center gap-2" onClick={onClick}>
       {children}
     </div>
   )

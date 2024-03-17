@@ -4,17 +4,25 @@ import { LocalStorageItem, Store } from '@repo/service'
 
 import type { LanguageEntity } from '@pv/language/core/language.entity'
 
+const DEFAULT_LANG: LanguageEntity = 'en'
+
+const langStorage = new LocalStorageItem<LanguageEntity>('lang', {
+  initialValue: (getLang() as LanguageEntity) || DEFAULT_LANG,
+})
+
+if (langStorage.value) {
+  setLang(langStorage.value)
+}
+
 @Store()
 export class LangStore {
-  private langStorage = new LocalStorageItem<LanguageEntity>('lang', {
-    initialValue: getLang() as LanguageEntity,
-  })
+  private langStorage = langStorage
 
   get currentLanguage(): LanguageEntity {
-    return this.langStorage.value || (getLang() as LanguageEntity)
+    return this.langStorage.value || DEFAULT_LANG
   }
 
-  changeLanguage(newLang: LanguageEntity) {
+  changeLanguage(newLang: LanguageEntity): void {
     this.langStorage.set(newLang)
     setLang(newLang)
   }

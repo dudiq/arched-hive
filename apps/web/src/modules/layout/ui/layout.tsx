@@ -1,25 +1,26 @@
-import { useCurrentRoute } from '@pv/dom/interface/use-current-route'
+import { Separator, Swap } from '@repo/ui-kit'
 
-import {observer} from '@repo/service';
-
-import { Container, Content,FooterContainer, HeaderContainer } from './layout-styles'
-
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react'
 
 type Props = {
   headerSlot?: ReactNode
   footerSlot?: ReactNode
-  contentSlot: ReactNode
+  children: ReactNode
 }
 
-export const Layout = observer(({ contentSlot, headerSlot, footerSlot }: Props) => {
-  // const { currentRoute } = useCurrentRoute()
-  // const isHeaderVisible = currentRoute?.withHeader || currentRoute?.header
+export const Layout = ({ children, headerSlot, footerSlot }: Props) => {
   return (
-    <Container>
-      {/*{!!isHeaderVisible && <HeaderContainer>{headerSlot}</HeaderContainer>}*/}
-      {/*<Content>{contentSlot}</Content>*/}
-      {/*{!!currentRoute?.withNavigation && <FooterContainer>{footerSlot}</FooterContainer>}*/}
-    </Container>
+    <div className="max-w-2xl flex flex-col overflow-x-hidden mx-auto w-full h-screen">
+      <Swap has={!!headerSlot}>
+        <div className="">
+          {headerSlot}
+          <Separator />
+        </div>
+      </Swap>
+      <div className="flex flex-col relative flex-1">{children}</div>
+      <Swap has={!!footerSlot}>
+        <div>{footerSlot}</div>
+      </Swap>
+    </div>
   )
-})
+}

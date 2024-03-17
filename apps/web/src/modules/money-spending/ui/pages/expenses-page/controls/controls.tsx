@@ -3,16 +3,14 @@ import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-
 import { observer } from '@repo/service'
 import { Button } from '@repo/ui-kit'
 
-import { ButtonWrapper, Item } from './controls-styles'
-
 export const Controls = observer(() => {
   const { expenseSelectionStore, moneySpendingAction, expenseSelectionAction } =
     useMoneySpendingContext()
   const { isEditing } = expenseSelectionStore
 
   return (
-    <ButtonWrapper>
-      <Item>
+    <div className="">
+      <div>
         {!!isEditing && (
           <Button
             shape="circle"
@@ -21,8 +19,8 @@ export const Controls = observer(() => {
             onClick={expenseSelectionAction.handleRemoveExpense}
           />
         )}
-      </Item>
-      <Item>
+      </div>
+      <div>
         {!!isEditing && (
           <Button
             shape="circle"
@@ -31,8 +29,8 @@ export const Controls = observer(() => {
             onClick={moneySpendingAction.handleOpenExpense}
           />
         )}
-      </Item>
-      <Item>
+      </div>
+      <div>
         {!isEditing && (
           <Button
             shape="circle"
@@ -41,7 +39,7 @@ export const Controls = observer(() => {
             onClick={moneySpendingAction.handleOpenExpense}
           />
         )}
-      </Item>
-    </ButtonWrapper>
+      </div>
+    </div>
   )
 })

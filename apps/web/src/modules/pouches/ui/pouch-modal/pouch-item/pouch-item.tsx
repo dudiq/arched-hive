@@ -2,14 +2,6 @@ import { useCallback } from 'react'
 
 import { Button, Icon } from '@repo/ui-kit'
 
-import {
-  ActionWrapper,
-  Container,
-  IconWrapper,
-  Row,
-  TitleWrapper,
-} from './pouch-item-styles'
-
 import type { PouchEntity, PouchId } from '@pv/pouches/core/pouch.entity'
 
 type Props = {
@@ -29,18 +21,20 @@ export function PouchItem({ pouch, onRemove, isSelected, onSelect }: Props) {
   }, [onSelect, pouch.id])
 
   return (
-    <Container>
-      <Row onClick={handleSelect}>
-        <IconWrapper>{!!isSelected && <Icon name="Wallet" />}</IconWrapper>
-        <TitleWrapper>{pouch.name}</TitleWrapper>
-      </Row>
+    <div className="flex items-center">
+      <div className="flex items-center" onClick={handleSelect}>
+        <div className="my-1 mx-2">
+          {!!isSelected && <Icon name="Wallet" />}
+        </div>
+        <div className="cursor-pointer">{pouch.name}</div>
+      </div>
       {!!onRemove && (
-        <ActionWrapper>
+        <div className="ml-auto">
           <Button variant="flat" onClick={handleRemove}>
             <Icon name="Cross" />
           </Button>
-        </ActionWrapper>
+        </div>
       )}
-    </Container>
+    </div>
   )
 }

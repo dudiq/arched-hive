@@ -4,13 +4,29 @@ import { observer } from '@repo/service'
 import { Icon } from '@repo/ui-kit'
 
 import { ACTIONS_ENUM } from './actions.enum'
-import { Container, PadButton, Row } from './pad-block-styles'
 import { usePadBlock } from './use-pad-block'
+
+import type { ReactNode } from 'react'
+
+function Row({ children }: { children: ReactNode }) {
+  return <>{children}</>
+}
+
+function PadButton({
+  children,
+}: {
+  children: ReactNode
+  viewType?: string
+  disabled?: boolean
+  widthFill?: string
+}) {
+  return <>{children}</>
+}
 
 export const PadBlock = observer(() => {
   const { handleClick, isEditing } = usePadBlock()
   return (
-    <Container onClick={handleClick}>
+    <div onClick={handleClick}>
       <Row>
         <PadButton data-action={ACTIONS_ENUM.NUMBER} data-value="1">
           1
@@ -70,6 +86,6 @@ export const PadBlock = observer(() => {
           {t(isEditing ? 'moneySpending.edit' : 'moneySpending.add')}
         </PadButton>
       </Row>
-    </Container>
+    </div>
   )
 })

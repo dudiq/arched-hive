@@ -58,6 +58,8 @@ addBlock({
           'Language',
           'Язык',
         ],
+        en: 'English',
+        ru: 'Русский',
         values: [
           'English',
           'Русский'

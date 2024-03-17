@@ -4,8 +4,6 @@ import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-
 import { observer } from '@repo/service'
 import { Button, Swap } from '@repo/ui-kit'
 
-import { CategoryTag, Header } from './categories-styles'
-
 export const Categories = observer(() => {
   const { moneySpendingStore, moneySpendingAction, expenseSelectionAction } =
     useMoneySpendingContext()
@@ -14,7 +12,7 @@ export const Categories = observer(() => {
 
   return (
     <>
-      <Header>
+      <div>
         <Swap
           is={!isCategorySelected}
           isSlot={t('moneySpending.selectCategory')}
@@ -28,19 +26,19 @@ export const Categories = observer(() => {
             {moneySpendingStore.parentCategoryTitle}
           </Button>
         </Swap>
-      </Header>
+      </div>
       {moneySpendingStore.visibleCategories.map((category) => {
         const isSelected = category.id === selectedCategoryId
         return (
-          <CategoryTag
+          <div
             key={category.id}
             onClick={() => {
               expenseSelectionAction.handleSelectCategoryId(category.id)
             }}
-            isSelected={isSelected}
+            // isSelected={isSelected}
           >
             {category.title}
-          </CategoryTag>
+          </div>
         )
       })}
     </>

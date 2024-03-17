@@ -1,9 +1,13 @@
-import type { Constructable } from '../core/constructable';
+import type { Constructable } from '../core/constructable'
 
 export function Inject<T>(ClassDefinition: Constructable<T>): T {
-  if ('instance' in ClassDefinition && typeof ClassDefinition.instance === 'function') {
-    return ClassDefinition.instance();
+  if (
+    'instance' in ClassDefinition &&
+    typeof ClassDefinition.instance === 'function'
+  ) {
+    return ClassDefinition.instance()
   }
 
-  throw new Error('Class definition must be instantiated');
+  debugger
+  throw new Error('Class definition must be instantiated')
 }

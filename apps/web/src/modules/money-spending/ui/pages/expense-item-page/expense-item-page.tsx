@@ -10,7 +10,6 @@ import { Button, ScrollContainer } from '@repo/ui-kit'
 
 import { Categories } from './categories'
 import { Desc } from './desc'
-import { Block, ButtonWrapper } from './expense-item-styles'
 import { PadBlock } from './pad-block'
 import { PadTitle } from './pad-title'
 
@@ -33,22 +32,22 @@ export const ExpenseItemPage = observer(() => {
       <ScrollContainer>
         <Categories />
         {!!moneySpendingStore.isCalculatorVisible && (
-          <Block>
+          <div>
             <Desc />
             <PadTitle />
             <PadBlock />
-          </Block>
+          </div>
         )}
       </ScrollContainer>
       {!focusStore.isTyping && (
-        <ButtonWrapper>
+        <div>
           <Button
             shape="circle"
             iconName="a-left"
             iconSize="huge"
             onClick={moneySpendingAction.handleOpenExpenseList}
           />
-        </ButtonWrapper>
+        </div>
       )}
     </>
   )

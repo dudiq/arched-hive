@@ -4,7 +4,6 @@ import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-
 
 import { observer } from '@repo/service'
 
-import { Row, RowsContainer } from './expense-list-styles'
 import { ExpenseRow } from './expense-row'
 
 export const ExpenseList = observer(() => {
@@ -27,21 +26,21 @@ export const ExpenseList = observer(() => {
   const isFocusItem = !!selectedId
 
   return (
-    <RowsContainer onClick={onClick}>
+    <div onClick={onClick}>
       {expensesViewStore.expensesView.map((expenseView) => {
         const key = `${expenseView.id}-${expenseView.cost}-${expenseView.catParentTitle}-${expenseView.catTitle}`
         const isSelected = expenseView.id === selectedId
         const isScrollTo = isSelected && isFocusItem
         return (
-          <Row key={key} data-expense-id={expenseView.id}>
+          <div key={key} data-expense-id={expenseView.id}>
             <ExpenseRow
               expenseView={expenseView}
               isSelected={isSelected}
               isScrollTo={isScrollTo}
             />
-          </Row>
+          </div>
         )
       })}
-    </RowsContainer>
+    </div>
   )
 })

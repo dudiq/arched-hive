@@ -1,1 +1,1 @@
-export * from './ui/analytic-routes'
+export * from './ui/analytic-page'

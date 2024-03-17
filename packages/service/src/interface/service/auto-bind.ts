@@ -8,12 +8,12 @@ function bindContext(context: Object, field: string) {
   }
 }
 
-function getAllMethodNames(obj: any) {
-  const methods = new Set()
+function getAllMethodNames(obj: any): Set<string> {
+  const methods = new Set<string>()
   while ((obj = Reflect.getPrototypeOf(obj))) {
     if (obj.constructor === Object) return methods
     const keys = Reflect.ownKeys(obj)
-    keys.forEach((k) => methods.add(k))
+    keys.forEach((k) => typeof k === 'string' && methods.add(k))
   }
   return methods
 }
@@ -21,7 +21,7 @@ function getAllMethodNames(obj: any) {
 export function autoBind(context: Object) {
   const allMethods = Array.from(getAllMethodNames(context))
   // console.log('allMethods', allMethods)
-  allMethods.forEach((method) => {
+  allMethods.forEach((method: string) => {
     bindContext(context, method)
   })
 

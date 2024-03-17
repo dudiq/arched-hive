@@ -3,7 +3,7 @@ import { useThemeContext } from '@pv/theme'
 
 import { getClassName, getClearedClass } from './classes'
 
-const THEME_PREFIX = 'theme-'
+const THEME_PREFIX = ''
 const ANIMATE_CLASS = 'theme-animate'
 const CHANGE_TIMEOUT = 1200
 
@@ -21,7 +21,11 @@ export function useTheme() {
       `${THEME_PREFIX}${oldTheme}`,
       `${THEME_PREFIX}${themeValue}`,
     )
-    root.className = getClassName(newThemeClassNames, ANIMATE_CLASS, ANIMATE_CLASS)
+    root.className = getClassName(
+      newThemeClassNames,
+      ANIMATE_CLASS,
+      ANIMATE_CLASS,
+    )
 
     const timerId = window.setTimeout(() => {
       root.className = newThemeClassNames

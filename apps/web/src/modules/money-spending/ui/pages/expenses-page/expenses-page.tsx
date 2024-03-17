@@ -3,16 +3,10 @@ import './expenses-page.langs'
 import { t } from '@pv/i18n'
 
 import { observer } from '@repo/service'
-import {
-  Link,
-  Loader,
-  ScrollContainer,
-  Swap,
-} from '@repo/ui-kit'
+import { Link, Loader, ScrollContainer, Swap } from '@repo/ui-kit'
 
 import { Controls } from './controls'
 import { ExpenseList } from './expense-list'
-import { LoadMoreWrapper } from './expenses-page-styles'
 import { TodayCost } from './today-cost'
 import { useExpensesPage } from './use-expenses-page'
 
@@ -28,11 +22,11 @@ export const ExpensesPage = observer(() => {
           <ExpenseList />
           <div ref={anchorRef} />
           {!!moneySpendingStore.isShowMoreVisible && (
-            <LoadMoreWrapper>
+            <div>
               <Link onClick={moneySpendingAction.handleLoadNextExpenses}>
                 {t('expense.loadMore')}
               </Link>
-            </LoadMoreWrapper>
+            </div>
           )}
         </Swap>
       </ScrollContainer>

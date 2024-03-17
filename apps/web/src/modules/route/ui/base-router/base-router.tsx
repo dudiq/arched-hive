@@ -1,5 +1,4 @@
 import { Router } from 'wouter'
-// import { useHashLocation } from './use-hash-location'
 import { useHashLocation } from 'wouter/use-hash-location'
 
 import { HistoryAdapter } from './history-adapter'
@@ -12,8 +11,6 @@ type Props = {
 
 // @ts-expect-error
 const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
-
-console.log('baseUrl', baseUrl)
 
 export function BaseRouter({ children }: Props) {
   return (

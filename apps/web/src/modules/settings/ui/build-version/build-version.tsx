@@ -7,7 +7,7 @@ const hash = buildVersion.hash.substring(0, 6)
 
 export function BuildVersion() {
   return (
-    <div>
+    <div className="text-xs text-gray-500">
       <div>
         {t('settings.version')}: {buildVersion.version}
         {' | '}
