@@ -6,6 +6,7 @@ import { Footer } from '@pv/footer/ui'
 import { Header } from '@pv/header/ui'
 import { getMoney, t } from '@pv/i18n'
 import { Layout } from '@pv/layout/ui'
+import { HeaderPouchBlock } from '@pv/pouches/ui/header-pouch-block'
 
 import { observer } from '@repo/service'
 import { Loader, ScrollContainer, Separator, Swap } from '@repo/ui-kit'
@@ -24,7 +25,9 @@ export const AnalyticPage = observer(() => {
 
   return (
     <Layout
-      headerSlot={<Header title={t('pages.analytic')} />}
+      headerSlot={
+        <Header title={t('pages.analytic')} rightSlot={<HeaderPouchBlock />} />
+      }
       footerSlot={<Footer />}
     >
       <div>

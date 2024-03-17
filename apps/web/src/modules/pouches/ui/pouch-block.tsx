@@ -1,8 +1,9 @@
-import { PouchId } from '@pv/pouches/core/pouch.entity'
+import './pouch.langs'
+
 import { PouchModal } from './pouch-modal'
 import { PouchSelection } from './pouch-selection'
 
-import './pouch.langs'
+import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
 type Props = {
   onSelect: (pouchId: PouchId) => void

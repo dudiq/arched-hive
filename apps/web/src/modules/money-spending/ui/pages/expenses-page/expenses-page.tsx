@@ -4,6 +4,7 @@ import { Footer } from '@pv/footer/ui'
 import { Header } from '@pv/header/ui'
 import { t } from '@pv/i18n'
 import { Layout } from '@pv/layout/ui'
+import { HeaderPouchBlock } from '@pv/pouches/ui/header-pouch-block'
 
 import { observer } from '@repo/service'
 import { Link, Loader, ScrollContainer, Swap } from '@repo/ui-kit'
@@ -19,7 +20,9 @@ export const ExpensesPage = observer(() => {
 
   return (
     <Layout
-      headerSlot={<Header title={t('pages.expense')} />}
+      headerSlot={
+        <Header title={t('pages.expense')} rightSlot={<HeaderPouchBlock />} />
+      }
       footerSlot={<Footer />}
     >
       <ScrollContainer>
