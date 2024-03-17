@@ -3,8 +3,6 @@ import { useCategoriesContext } from '@pv/categories/interface/use-categories-co
 import { observer } from '@repo/service'
 import { Button } from '@repo/ui-kit'
 
-import { ButtonWrapper, Item } from './controls-styles'
-
 export const Controls = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
   const isChildCategory = !categoriesStore.selectedCategory?.catId
@@ -12,8 +10,8 @@ export const Controls = observer(() => {
   const plusButtonVariant = isSelectedCategory ? 'primary' : 'secondary'
 
   return (
-    <ButtonWrapper>
-      <Item>
+    <div>
+      <div>
         {!!isSelectedCategory && (
           <Button
             shape="circle"
@@ -22,8 +20,8 @@ export const Controls = observer(() => {
             onClick={categoriesAction.handleRemoveCategory}
           />
         )}
-      </Item>
-      <Item>
+      </div>
+      <div>
         {!!isSelectedCategory && (
           <Button
             shape="circle"
@@ -32,8 +30,8 @@ export const Controls = observer(() => {
             onClick={categoriesAction.handleEditCategory}
           />
         )}
-      </Item>
-      <Item>
+      </div>
+      <div>
         {!!isChildCategory && (
           <Button
             shape="circle"
@@ -43,7 +41,7 @@ export const Controls = observer(() => {
             onClick={categoriesAction.handleAddCategory}
           />
         )}
-      </Item>
-    </ButtonWrapper>
+      </div>
+    </div>
   )
 })

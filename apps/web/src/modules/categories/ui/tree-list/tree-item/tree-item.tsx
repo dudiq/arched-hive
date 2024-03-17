@@ -1,5 +1,3 @@
-import { TreeItemContainer, extendedClasses } from './tree-item-styles'
-
 type Props = {
   categoryId: string
   title: string
@@ -9,11 +7,8 @@ type Props = {
 
 export function TreeItem({ isActive, isRoot, title, categoryId }: Props) {
   return (
-    <TreeItemContainer
-      data-category-id={categoryId}
-      className={extendedClasses({ isActive, isRoot })}
-    >
+    <div className="p-2" data-category-id={categoryId}>
       {title}
-    </TreeItemContainer>
+    </div>
   )
 }

@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import { getAttrFromElement } from '@pv/dom/interface/get-attr-from-element'
 
 import { TreeItem } from './tree-item'
-import { Container } from './tree-list-styles'
 
 import type { TreeListType } from '@pv/categories/interface/stores/types'
 
@@ -26,7 +25,7 @@ export function TreeList({ categoryTree, onClick, selectedId }: Props) {
   )
 
   return (
-    <Container onClick={handleClick}>
+    <div onClick={handleClick}>
       {categoryTree.map((treeItem) => {
         const { item, isRoot } = treeItem
         const isActive = item.id === selectedId
@@ -41,6 +40,6 @@ export function TreeList({ categoryTree, onClick, selectedId }: Props) {
           />
         )
       })}
-    </Container>
+    </div>
   )
 }

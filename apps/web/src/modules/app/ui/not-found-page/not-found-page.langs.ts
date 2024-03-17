@@ -4,8 +4,8 @@ addBlock({
   data: {
     notFound: {
       title: [
-        'Seems nothing found here',
-        'Похоже ничего не нашлось',
+        'Seems page not found',
+        'Похоже страницы не существует',
       ]
     },
   },

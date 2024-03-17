@@ -11,7 +11,6 @@ import { BlockLoader, List, ScrollContainer, Toggle } from '@repo/ui-kit'
 import { BuildVersion } from './build-version'
 import { Buttons } from './buttons'
 import { ListBlock } from './list-block'
-import { LangSwitch } from './settings-styles'
 
 export const SettingsPage = observer(() => {
   const { themeStore, themeAction } = useThemeContext()
@@ -32,7 +31,7 @@ export const SettingsPage = observer(() => {
           icon="translate"
           title={t('settings.lang.title')}
         >
-          <LangSwitch>{t('settings.lang.values')}</LangSwitch>
+          {t('settings.lang.values')}
         </ListBlock>
       </List>
       <Buttons />

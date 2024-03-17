@@ -1,50 +1,52 @@
-import { useAppContext } from '@pv/app/interface/use-app-context'
+import { EmptyAction } from '@pv/app/interface/actions/empty.action'
+import { EmptyStore } from '@pv/app/interface/stores/empty.store'
+import { useInject } from '@pv/app/interface/use-inject'
 import { t } from '@pv/i18n'
 
+import { observer } from '@repo/service'
 import { Button, RadioButton } from '@repo/ui-kit'
-
-import {
-  Block,
-  Container,
-  Controls,
-  SubTitle,
-  Title,
-} from './empty-page-styles'
 
 const EMPTY_CATEGORY = 'category'
 
-export function EmptyPage() {
-  const { emptyAction, emptyStore } = useAppContext()
+export const EmptyPage = observer(() => {
+  const { emptyAction, emptyStore } = useInject({
+    emptyAction: EmptyAction,
+    emptyStore: EmptyStore,
+  })
 
   return (
-    <Container>
-      <Title>{t('firstView.t')}</Title>
-      <SubTitle>{t('firstView.select')}</SubTitle>
-      <RadioButton
-        checkValue={emptyStore.selectedDefaultCategories}
-        name={EMPTY_CATEGORY}
-        value={'ru'}
-        onChange={emptyAction.handleChangeCategory}
-      >
-        Русский набор категорий
-      </RadioButton>
-      <RadioButton
-        checkValue={emptyStore.selectedDefaultCategories}
-        name={EMPTY_CATEGORY}
-        value={'en'}
-        onChange={emptyAction.handleChangeCategory}
-      >
-        English category set
-      </RadioButton>
-      <Controls>
-        <Button onClick={emptyAction.handleApplyCategory}>
-          {t('firstView.use')}
-        </Button>
-        <Block>{t('firstView.or')}</Block>
+    <div className="m-2 flex flex-col gap-4 max-w-80 mx-auto w-full">
+      <div className="text-2xl">{t('firstView.t')}</div>
+      <div>{t('firstView.select')}</div>
+      <div className="flex flex-col gap-2">
+        <RadioButton
+          checkValue={emptyStore.selectedDefaultCategories}
+          name={EMPTY_CATEGORY}
+          value={'ru'}
+          onChange={emptyAction.handleChangeCategory}
+        >
+          Русский набор категорий
+        </RadioButton>
+        <RadioButton
+          checkValue={emptyStore.selectedDefaultCategories}
+          name={EMPTY_CATEGORY}
+          value={'en'}
+          onChange={emptyAction.handleChangeCategory}
+        >
+          English category set
+        </RadioButton>
+        <div>
+          <Button onClick={emptyAction.handleApplyCategory}>
+            {t('firstView.use')}
+          </Button>
+        </div>
+      </div>
+      <div>
+        <div>{t('firstView.or')}</div>
         <Button onClick={emptyAction.handleOpenSettings}>
-          {t('firstView.import')}
+          {t('firstView.import')} and upload
         </Button>
-      </Controls>
-    </Container>
+      </div>
+    </div>
   )
-}
+})

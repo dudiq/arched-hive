@@ -8,10 +8,22 @@ function bindContext(context: Object, field: string) {
   }
 }
 
-export function autoBind(context: Object) {
-  for (const key in context) {
-    bindContext(context, key)
+function getAllMethodNames(obj: any) {
+  const methods = new Set()
+  while ((obj = Reflect.getPrototypeOf(obj))) {
+    if (obj.constructor === Object) return methods
+    const keys = Reflect.ownKeys(obj)
+    keys.forEach((k) => methods.add(k))
   }
+  return methods
+}
+
+export function autoBind(context: Object) {
+  const allMethods = Array.from(getAllMethodNames(context))
+  // console.log('allMethods', allMethods)
+  allMethods.forEach((method) => {
+    bindContext(context, method)
+  })
 
   // eslint-disable-next-line no-proto
   const proto = Object.getPrototypeOf(context.constructor.prototype)

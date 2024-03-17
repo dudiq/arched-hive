@@ -13,6 +13,7 @@ export function Service() {
       }
     }
 
-    return declareClass(SubClass, Context.name)
+    const res = declareClass(SubClass, Context.name)
+    return res
   }
 }

@@ -1,15 +1,32 @@
-import { ListCell } from './list-cell'
-import { ListContainer, ListRow } from './list-styles'
-
 import type { ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
 }
 
-export function List({ children }: Props) {
-  return <ListContainer>{children}</ListContainer>
+function ListRow({
+  children,
+  onClick,
+}: {
+  children: ReactNode
+  onClick?: () => void
+}) {
+  return (
+    <div className="flex min-h-8 items-center" onClick={onClick}>
+      {children}
+    </div>
+  )
 }
 
-List.Row = ListRow
-List.Cell = ListCell
+function ListCell({ children }: Props) {
+  return <div className="flex">{children}</div>
+}
+
+export function ListRoot({ children }: Props) {
+  return <div>{children}</div>
+}
+
+export const List = Object.assign(ListRoot, {
+  Row: ListRow,
+  Cell: ListCell,
+})

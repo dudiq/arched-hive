@@ -7,6 +7,10 @@ export function declareClass<T extends ExtendClass>(
   class InstanceClass extends Context {
     static instanceLink: InstanceClass
 
+    constructor(...args: any[]) {
+      super(...args)
+    }
+
     static instance(): InstanceClass {
       if (!InstanceClass.instanceLink)
         InstanceClass.instanceLink = new InstanceClass()

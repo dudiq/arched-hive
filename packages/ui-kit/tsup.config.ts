@@ -4,5 +4,5 @@ export default defineConfig({
   entry: ['./src/index.ts'],
   format: ['esm', 'cjs'],
   dts: true,
-  external: ['react'],
+  inject: ['./react-import.js'],
 })

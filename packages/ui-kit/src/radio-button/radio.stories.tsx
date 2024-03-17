@@ -12,7 +12,7 @@ const meta: Meta<typeof RadioButton> = {
 export const Default: StoryFn<typeof RadioButton> = (args) => {
   const [state, setState] = useState('first')
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-col">
       <RadioButton
         name="check"
         value="first"

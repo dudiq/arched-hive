@@ -2,8 +2,10 @@ import './not-found-page.langs'
 
 import { t } from '@pv/i18n'
 
-import { Container } from './not-found-page-styles'
-
 export function NotFoundPage() {
-  return <Container>{t('notFound.title')}</Container>
+  return (
+    <div className="flex my-10 justify-center items-center text-sm">
+      {t('notFound.title')}
+    </div>
+  )
 }

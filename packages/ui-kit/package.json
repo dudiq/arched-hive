@@ -6,10 +6,11 @@
   "types": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "sideEffects": false,
   "exports": {
     "./tailwind.base.css": "./dist/tailwind.base.css",
     "./default.tailwind.config": "./default.tailwind.config.cjs",
-    ".": "./dist/index.js"
+    ".": "./dist/index.mjs"
   },
   "scripts": {
     "types": "tsc",
