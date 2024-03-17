@@ -33,13 +33,10 @@ Its role is to subscribe to the store and call actions, without containing any b
 Its main purpose is to provide the necessary functionality to allow the UI to call actions and subscribe to changes in the store, without directly accessing the application logic.
 This is just an ordinary hook to give the ability to get an instance of classes for `UI` level from `Interface`
 
-**Store** - The reactive store is a type of state management system based on MobX.
+**Store** - The reactive store is a type of state management system based on MobX. Should be sync. Store should not have any async methods with logic. All async methods should be inside `Action`
 
 **Action** - This layer is responsible for defining the handlers and the logic of the callbacks that are invoked when certain events occur.
 It is similar to the useCallback hook in React, where you define a function that you want to memoize and pass it down to a child component to avoid unnecessary re-renders. In this layer, you define the functions that should be called when specific actions are dispatched to the store, and you can also define any other business logic that should be executed as a result of the action.
-
-**Service** - This layer is a special module for grouping related handlers together. These handlers can be called from any action module.
-It's designed to provide a way to organize and isolate related logic in a separate module, making it easier to maintain and test.
 
 **Adapter** - This layer is responsible for handling data mapping and error handling while communicating with external services such as databases or APIs.
 It ensures that the data received from external sources is properly mapped to the core structures of the application and handles any errors that may occur during the process.
@@ -48,14 +45,6 @@ It ensures that the data received from external sources is properly mapped to th
 By isolating the direct calls to external services within this layer, it becomes easier to manage and test these interactions. This layer can also handle things like error handling and response parsing, making it easier for the rest of the application to consume the data returned from the service.
 Examples of external services that may be wrapped in this layer include REST APIs, GraphQL APIs, databases, and third-party libraries.
 For simplify `Data-provider` can be part of `Adapter`
-
----
-
-## Pitfalls
-
-- `Store` should be sync. Store should not have any async methods with logic. All async methods should be inside `Action`
-- If `Infra` is needed in other modules, then need to create `Service` with calls of `Infra` methods and share this new `Service`. Not obvious in some cases
-- Now related only to MobX store. But MobX can be replaced to something else.
 
 ---
 

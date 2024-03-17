@@ -17,7 +17,7 @@ export const PouchModal = observer(({ onSelect }: Props) => {
   return (
     <Modal
       onClose={pouchAction.handleClosePouchesList}
-      isVisible={pouchStore.isModalVisible}
+      isOpen={pouchStore.isModalVisible}
     >
       <PouchModalContent onSelect={onSelect} />
     </Modal>
