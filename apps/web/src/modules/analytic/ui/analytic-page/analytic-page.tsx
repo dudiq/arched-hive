@@ -2,14 +2,17 @@ import './analytic-page.langs'
 
 import { useEffect } from 'react'
 import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
+import { Footer } from '@pv/footer/ui'
+import { Header } from '@pv/header/ui'
 import { getMoney, t } from '@pv/i18n'
+import { Layout } from '@pv/layout/ui'
 
 import { observer } from '@repo/service'
 import { Loader, ScrollContainer, Separator, Swap } from '@repo/ui-kit'
 
 import { AnalyticCategory } from './analytic-category'
 import { AnalyticExpenses } from './analytic-expenses'
-import { Header } from './header'
+import { AnalyticHeader } from './header'
 
 export const AnalyticPage = observer(() => {
   const { analyticStore, analyticAction } = useAnalyticContext()
@@ -20,9 +23,12 @@ export const AnalyticPage = observer(() => {
   }, [])
 
   return (
-    <>
+    <Layout
+      headerSlot={<Header title={t('pages.analytic')} />}
+      footerSlot={<Footer />}
+    >
       <div>
-        <Header />
+        <AnalyticHeader />
         <Swap is={analyticStore.isLoading} isSlot={<Loader />}>
           <div>
             {t('analytic.total')}
@@ -37,6 +43,6 @@ export const AnalyticPage = observer(() => {
           </div>
         </Swap>
       </div>
-    </>
+    </Layout>
   )
 })

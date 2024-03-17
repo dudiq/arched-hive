@@ -20,7 +20,10 @@ export const SettingsPage = observer(() => {
   const { settingsStore } = useSettingsContext()
 
   return (
-    <Layout headerSlot={<Header title="Settings" />} footerSlot={<Footer />}>
+    <Layout
+      headerSlot={<Header title={t('pages.settings')} />}
+      footerSlot={<Footer />}
+    >
       <div className="flex flex-col gap-4">
         <div
           className="flex gap-2 items-center mt-4 cursor-pointer"

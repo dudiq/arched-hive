@@ -5,7 +5,7 @@ import { Button, Icon } from '@repo/ui-kit'
 
 import { DateRangeSelect } from './date-range-select'
 
-export const Header = observer(() => {
+export const AnalyticHeader = observer(() => {
   const { analyticAction, analyticStore } = useAnalyticContext()
   return (
     <div>
