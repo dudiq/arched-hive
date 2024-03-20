@@ -4,8 +4,16 @@ addBlock({
   data: {
     moneySpending: {
       selectCategory: [
-        'Please select category',
+        'Select category',
         'Выберите категорию'
+      ],
+      selectSubCategory: [
+        'Select sub category',
+        'Выберите подкатегорию'
+      ],
+      typeValue: [
+        'Type value',
+        'Введите данные'
       ],
       add: [
         'Add',

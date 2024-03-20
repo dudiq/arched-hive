@@ -3,6 +3,7 @@ import './expense-item-page.langs'
 import { useEffect } from 'react'
 import { useInject } from '@pv/app/interface/use-inject'
 import { FocusStore } from '@pv/focus/interface/stores/focus.store'
+import { Layout } from '@pv/layout/ui'
 import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
@@ -28,11 +29,11 @@ export const ExpenseItemPage = observer(() => {
   }, [expenseSelectionAction])
 
   return (
-    <>
+    <Layout>
       <ScrollContainer>
         <Categories />
         {!!moneySpendingStore.isCalculatorVisible && (
-          <div>
+          <div className="mt-2 mx-2">
             <Desc />
             <PadTitle />
             <PadBlock />
@@ -40,7 +41,7 @@ export const ExpenseItemPage = observer(() => {
         )}
       </ScrollContainer>
       {!focusStore.isTyping && (
-        <div>
+        <div className="absolute bottom-4 right-4">
           <Button
             shape="circle"
             iconName="ALeft"
@@ -49,6 +50,6 @@ export const ExpenseItemPage = observer(() => {
           />
         </div>
       )}
-    </>
+    </Layout>
   )
 })

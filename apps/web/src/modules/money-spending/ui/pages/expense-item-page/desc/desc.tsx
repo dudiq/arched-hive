@@ -8,7 +8,7 @@ export const Desc = observer(() => {
     useMoneySpendingContext()
 
   return (
-    <div className="flex items-center">
+    <div className="w-full mx-auto">
       <Input
         value={expenseSelectionStore.currentDesc}
         onChange={expenseSelectionAction.handleChangeDesc}

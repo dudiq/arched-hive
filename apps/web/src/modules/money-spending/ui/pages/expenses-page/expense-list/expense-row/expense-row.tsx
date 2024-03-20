@@ -37,9 +37,11 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const selectedClass = isSelected ? 'bg-gray-200 dark:bg-gray-800' : ''
+
   return (
     <div
-      className="flex w-full py-2 px-4 border-b dark:border-gray-800 border-gray-200"
+      className={`flex w-full py-2 px-4 border-b dark:border-gray-800 border-gray-200 ${selectedClass}`}
       data-is-selected={isSelected}
       ref={refEl}
     >

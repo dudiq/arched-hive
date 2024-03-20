@@ -10,15 +10,24 @@ export const Categories = observer(() => {
   const { selectedCategoryId } = moneySpendingStore
   const isCategorySelected = !!selectedCategoryId
 
+  const isCalcVisible = moneySpendingStore.isCalculatorVisible
+
   return (
-    <>
-      <div>
-        <Swap
-          is={!isCategorySelected}
-          isSlot={t('moneySpending.selectCategory')}
-        >
+    <div>
+      <div className="flex items-center justify-between py-3 text-xl">
+        <Swap is={isCalcVisible} isSlot={t('moneySpending.typeValue')}>
+          <Swap
+            is={!isCategorySelected}
+            isSlot={t('moneySpending.selectCategory')}
+          >
+            {t('moneySpending.selectSubCategory')}
+          </Swap>
+        </Swap>
+      </div>
+      <div className="flex gap-2 flex-wrap px-2">
+        <Swap has={isCategorySelected}>
           <Button
-            iconName="Cross"
+            iconName="ALeft"
             iconSize="big"
             variant="flat"
             onClick={moneySpendingAction.handleDropSelectedCategory}
@@ -26,21 +35,28 @@ export const Categories = observer(() => {
             {moneySpendingStore.parentCategoryTitle}
           </Button>
         </Swap>
+        <div className="flex gap-2 flex-wrap">
+          {moneySpendingStore.visibleCategories.map((category) => {
+            const isSelected = category.id === selectedCategoryId
+            const isSingleCategory =
+              isCategorySelected && isSelected && !category.catId
+            if (isSingleCategory) return null
+
+            return (
+              <Button
+                key={category.id}
+                iconName={isSelected ? 'ALeft' : undefined}
+                iconSize="big"
+                onClick={() => {
+                  expenseSelectionAction.handleSelectCategoryId(category.id)
+                }}
+              >
+                {category.title}
+              </Button>
+            )
+          })}
+        </div>
       </div>
-      {moneySpendingStore.visibleCategories.map((category) => {
-        const isSelected = category.id === selectedCategoryId
-        return (
-          <div
-            key={category.id}
-            onClick={() => {
-              expenseSelectionAction.handleSelectCategoryId(category.id)
-            }}
-            // isSelected={isSelected}
-          >
-            {category.title}
-          </div>
-        )
-      })}
-    </>
+    </div>
   )
 })
