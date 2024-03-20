@@ -2,10 +2,7 @@ import { t } from '@pv/i18n'
 
 import { LocalStorageItem, Store } from '@repo/service'
 
-import type {
-  PouchEntity,
-  PouchId,
-} from '@pv/pouches/core/pouch.entity'
+import type { PouchEntity, PouchId } from '@pv/pouches/core/pouch.entity'
 
 @Store()
 export class PouchStore {
@@ -13,13 +10,7 @@ export class PouchStore {
 
   isLoading = true
 
-  isModalVisible = false
-
   pouches: PouchEntity[] = []
-
-  setModalVisible(value: boolean) {
-    this.isModalVisible = value
-  }
 
   get currentPouch() {
     const pouchId = this.pouchLocalStorage.value

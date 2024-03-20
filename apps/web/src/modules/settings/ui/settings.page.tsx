@@ -47,7 +47,7 @@ export const SettingsPage = observer(() => {
               checkValue={langStore.currentLanguage}
               name="lang"
               value="en"
-              onChange={langAction.handleChangeLanguage}
+              onChange={langAction.handleToggleLanguage}
             >
               {t('settings.lang.en')}
             </RadioButton>
@@ -55,7 +55,7 @@ export const SettingsPage = observer(() => {
               checkValue={langStore.currentLanguage}
               name="lang"
               value="ru"
-              onChange={langAction.handleChangeLanguage}
+              onChange={langAction.handleToggleLanguage}
             >
               {t('settings.lang.ru')}
             </RadioButton>

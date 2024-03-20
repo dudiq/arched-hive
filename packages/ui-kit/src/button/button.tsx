@@ -16,7 +16,7 @@ type Props = {
 }
 
 const shapeMap: Record<ButtonShape, string> = {
-  circle: 'rounded-full w-14 h-14',
+  circle: 'rounded-full w-14 h-14 flex items-center justify-center',
   rect: ' rounded-lg',
 }
 
@@ -48,7 +48,7 @@ export function Button({
   return (
     <button onClick={onClick} disabled={isDisabled} className={buttonClass}>
       <Swap has={!!iconName}>
-        <Icon name={iconName} iconSize={iconSize} />
+        {!!iconName && <Icon name={iconName} size={iconSize} />}
       </Swap>
       {children}
     </button>

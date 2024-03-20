@@ -27,8 +27,8 @@ export const ExpenseList = observer(() => {
 
   return (
     <div onClick={onClick}>
-      {expensesViewStore.expensesView.map((expenseView) => {
-        const key = `${expenseView.id}-${expenseView.cost}-${expenseView.catParentTitle}-${expenseView.catTitle}`
+      {expensesViewStore.expensesView.map((expenseView, index) => {
+        const key = `${expenseView.id}-${index}`
         const isSelected = expenseView.id === selectedId
         const isScrollTo = isSelected && isFocusItem
         return (

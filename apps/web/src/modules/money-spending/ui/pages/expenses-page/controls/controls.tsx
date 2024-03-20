@@ -9,37 +9,31 @@ export const Controls = observer(() => {
   const { isEditing } = expenseSelectionStore
 
   return (
-    <div className="">
-      <div>
-        {!!isEditing && (
-          <Button
-            shape="circle"
-            iconName="Trash"
-            iconSize="huge"
-            onClick={expenseSelectionAction.handleRemoveExpense}
-          />
-        )}
-      </div>
-      <div>
-        {!!isEditing && (
-          <Button
-            shape="circle"
-            iconName="EditL"
-            iconSize="huge"
-            onClick={moneySpendingAction.handleOpenExpense}
-          />
-        )}
-      </div>
-      <div>
-        {!isEditing && (
-          <Button
-            shape="circle"
-            iconName="Plus"
-            iconSize="huge"
-            onClick={moneySpendingAction.handleOpenExpense}
-          />
-        )}
-      </div>
+    <div className="absolute right-6 bottom-3 flex flex-col gap-2">
+      {!!isEditing && (
+        <Button
+          shape="circle"
+          iconName="Trash"
+          iconSize="huge"
+          onClick={expenseSelectionAction.handleRemoveExpense}
+        />
+      )}
+      {!!isEditing && (
+        <Button
+          shape="circle"
+          iconName="EditL"
+          iconSize="huge"
+          onClick={moneySpendingAction.handleOpenExpense}
+        />
+      )}
+      {!isEditing && (
+        <Button
+          shape="circle"
+          iconName="Plus"
+          iconSize="huge"
+          onClick={moneySpendingAction.handleOpenExpense}
+        />
+      )}
     </div>
   )
 })

@@ -7,10 +7,6 @@ export type IconName = keyof typeof assets
 type Props = {
   name: IconName
   size?: IconSize
-  /**
-   * @deprecated use size instead
-   */
-  iconSize?: IconSize
 }
 
 const iconSizeMap: Record<IconSize, string> = {

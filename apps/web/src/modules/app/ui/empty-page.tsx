@@ -6,6 +6,8 @@ import { t } from '@pv/i18n'
 import { observer } from '@repo/service'
 import { Button, RadioButton } from '@repo/ui-kit'
 
+import type { CategoriesDefaultEntity } from '@pv/app/core/categories-default.entity'
+
 const EMPTY_CATEGORY = 'category'
 
 export const EmptyPage = observer(() => {

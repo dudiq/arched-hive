@@ -10,38 +10,32 @@ export const Controls = observer(() => {
   const plusButtonVariant = isSelectedCategory ? 'primary' : 'secondary'
 
   return (
-    <div>
-      <div>
-        {!!isSelectedCategory && (
-          <Button
-            shape="circle"
-            iconName="Trash"
-            iconSize="huge"
-            onClick={categoriesAction.handleRemoveCategory}
-          />
-        )}
-      </div>
-      <div>
-        {!!isSelectedCategory && (
-          <Button
-            shape="circle"
-            iconName="EditL"
-            iconSize="huge"
-            onClick={categoriesAction.handleEditCategory}
-          />
-        )}
-      </div>
-      <div>
-        {!!isChildCategory && (
-          <Button
-            shape="circle"
-            iconName="Plus"
-            iconSize="huge"
-            variant={plusButtonVariant}
-            onClick={categoriesAction.handleAddCategory}
-          />
-        )}
-      </div>
+    <div className="absolute right-6 bottom-3 flex flex-col gap-2">
+      {!!isSelectedCategory && (
+        <Button
+          shape="circle"
+          iconName="Trash"
+          iconSize="huge"
+          onClick={categoriesAction.handleRemoveCategory}
+        />
+      )}
+      {!!isSelectedCategory && (
+        <Button
+          shape="circle"
+          iconName="EditL"
+          iconSize="huge"
+          onClick={categoriesAction.handleEditCategory}
+        />
+      )}
+      {!!isChildCategory && (
+        <Button
+          shape="circle"
+          iconName="Plus"
+          iconSize="huge"
+          variant={plusButtonVariant}
+          onClick={categoriesAction.handleAddCategory}
+        />
+      )}
     </div>
   )
 })

@@ -1,9 +1,13 @@
+import { AnalyticAction } from '@pv/analytic/interface/actions/analytic.action'
+import { useInject } from '@pv/app/interface/use-inject'
 import { PouchBlock } from '@pv/pouches'
+
 import { observer } from '@repo/service'
-import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
 
 export const HeaderPouchBlock = observer(() => {
-  const { analyticAction } = useAnalyticContext()
+  const { analyticAction } = useInject({
+    analyticAction: AnalyticAction,
+  })
 
   return (
     <PouchBlock

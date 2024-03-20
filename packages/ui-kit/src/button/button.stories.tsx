@@ -21,7 +21,7 @@ export const Default: StoryFn<typeof Button> = (args) => {
         </div>
         <div>
           <Button shape="circle">
-            <Icon name="Plus" />
+            <Icon name="Plus" size="huge" />
           </Button>
         </div>
       </div>

@@ -2,21 +2,21 @@ import { useCallback } from 'react'
 
 import type { ReactNode } from 'react'
 
-type Props = {
+type Props<TValue extends string = string> = {
   name: string
-  value: string
-  checkValue?: string
-  onChange: (value: string) => void
+  value: TValue
+  checkValue?: TValue
+  onChange: (value: TValue) => void
   children: ReactNode
 }
 
-export function RadioButton({
+export function RadioButton<T extends string>({
   name,
   value,
   checkValue,
   children,
   onChange,
-}: Props) {
+}: Props<T>) {
   const handleChange = useCallback(
     (ev: any) => {
       const value = ev.target.value

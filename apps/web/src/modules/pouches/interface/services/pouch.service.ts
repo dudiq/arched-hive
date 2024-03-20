@@ -11,9 +11,9 @@ import type { PouchId } from '@pv/pouches/core/pouch.entity'
 @Service()
 export class PouchService {
   constructor(
-    private pouchesAdapter= Inject(PouchesAdapter),
-    private pouchStore= Inject(PouchStore),
-    private messageBoxService= Inject(MessageBoxService),
+    private pouchesAdapter = Inject(PouchesAdapter),
+    private pouchStore = Inject(PouchStore),
+    private messageBoxService = Inject(MessageBoxService),
   ) {}
 
   async loadPouches() {
@@ -29,7 +29,10 @@ export class PouchService {
   }
 
   async addPouch() {
-    const { isApplied, data } = await this.messageBoxService.prompt(t('pouchBlock.removeAsk'), '')
+    const { isApplied, data } = await this.messageBoxService.prompt(
+      t('pouchBlock.addTitle'),
+      '',
+    )
     if (!isApplied) return
 
     const result = await this.pouchesAdapter.addPouch(data)
@@ -39,7 +42,9 @@ export class PouchService {
 
   async removePouch(pouchId: PouchId) {
     if (!pouchId) return false
-    const isConfirmed = await this.messageBoxService.confirm(t('pouchBlock.removeAsk'))
+    const isConfirmed = await this.messageBoxService.confirm(
+      t('pouchBlock.removeAsk'),
+    )
     if (!isConfirmed) return false
     const result = await this.pouchesAdapter.removePouch(pouchId)
     if (isErr(result)) return false

@@ -8,17 +8,9 @@ import type { PouchId } from '@pv/pouches/core/pouch.entity'
 @Action()
 export class PouchAction {
   constructor(
-    private pouchStore= Inject(PouchStore),
-    private pouchService= Inject(PouchService),
+    private pouchStore = Inject(PouchStore),
+    private pouchService = Inject(PouchService),
   ) {}
-
-  handleOpenPouchesList() {
-    this.pouchStore.setModalVisible(true)
-  }
-
-  handleClosePouchesList() {
-    this.pouchStore.setModalVisible(false)
-  }
 
   async handleRemove(pouchId: PouchId) {
     const isSame = pouchId === this.pouchStore.currentPouchId

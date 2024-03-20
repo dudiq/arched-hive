@@ -29,9 +29,12 @@ export const App = observer(() => {
       <ThemeDefine />
       <BaseRouter>
         <Switch>
-          <Route path={Routes.expense} component={ExpensesPage} />
-          <Route path={Routes.expenseItem} component={ExpenseItemPage} />
-          <Route path={Routes.analytic} component={AnalyticPage} />
+          <Route path={`${Routes.expense}:?params`} component={ExpensesPage} />
+          <Route path={`${Routes.expenseItem}`} component={ExpenseItemPage} />
+          <Route
+            path={`${Routes.analytic}/:?params`}
+            component={AnalyticPage}
+          />
           <Route path={Routes.categories} component={CategoriesPage} />
           <Route path={Routes.settings} component={SettingsPage} />
           <Route path={Routes.empty} component={EmptyPage} />

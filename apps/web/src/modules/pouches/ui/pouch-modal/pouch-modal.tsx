@@ -1,7 +1,9 @@
+import { useModal } from '@pv/app/interface/use-modal'
+import { t } from '@pv/i18n'
 import { usePouchContext } from '@pv/pouches/interface/use-pouch-context'
 
 import { observer } from '@repo/service'
-import { Modal } from '@repo/ui-kit'
+import { Link, Modal } from '@repo/ui-kit'
 
 import { PouchModalContent } from './pouch-modal-content'
 
@@ -14,12 +16,22 @@ type Props = {
 export const PouchModal = observer(({ onSelect }: Props) => {
   const { pouchStore, pouchAction } = usePouchContext()
 
+  const { isOpen, handleOpen, handleClose } = useModal('pouch-modal')
+
   return (
-    <Modal
-      onClose={pouchAction.handleClosePouchesList}
-      isOpen={pouchStore.isModalVisible}
-    >
-      <PouchModalContent onSelect={onSelect} />
-    </Modal>
+    <>
+      <Link icon="Wallet" onClick={handleOpen}>
+        {pouchStore.currentPouchName}
+      </Link>
+      <Modal onClose={handleClose} isOpen={isOpen}>
+        <Modal.Header
+          title={t('pouchBlock.modalTitle')}
+          onClose={handleClose}
+        />
+        <Modal.Body>
+          <PouchModalContent onSelect={onSelect} />
+        </Modal.Body>
+      </Modal>
+    </>
   )
 })
