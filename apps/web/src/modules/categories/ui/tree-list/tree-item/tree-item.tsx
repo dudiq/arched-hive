@@ -6,8 +6,15 @@ type Props = {
 }
 
 export function TreeItem({ isActive, isRoot, title, categoryId }: Props) {
+  const activeClass = isActive
+    ? 'underline text-gray-400 dark:text-gray-600'
+    : ''
+  const rootClass = isRoot ? '' : 'pl-6'
   return (
-    <div className="p-2" data-category-id={categoryId}>
+    <div
+      className={`p-2 cursor-pointer ${activeClass} ${rootClass}`}
+      data-category-id={categoryId}
+    >
       {title}
     </div>
   )

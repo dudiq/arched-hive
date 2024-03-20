@@ -25,7 +25,7 @@ export const PouchModalContent = observer(({ onSelect }: Props) => {
   )
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <PouchItem
         isSelected={currentId === null}
         pouch={{ name: t('export.pouchMain'), id: null }}

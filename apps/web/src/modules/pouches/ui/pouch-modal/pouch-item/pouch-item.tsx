@@ -23,7 +23,7 @@ export function PouchItem({ pouch, onRemove, isSelected, onSelect }: Props) {
   return (
     <div className="flex items-center">
       <div className="flex items-center" onClick={handleSelect}>
-        <div className="my-1 mx-2">
+        <div className="my-1 mx-2 w-4">
           {!!isSelected && <Icon name="Wallet" />}
         </div>
         <div className="cursor-pointer">{pouch.name}</div>
@@ -31,7 +31,9 @@ export function PouchItem({ pouch, onRemove, isSelected, onSelect }: Props) {
       {!!onRemove && (
         <div className="ml-auto">
           <Button variant="flat" onClick={handleRemove}>
-            <Icon name="Cross" />
+            <div className="text-red-500">
+              <Icon name="Trash" />
+            </div>
           </Button>
         </div>
       )}
