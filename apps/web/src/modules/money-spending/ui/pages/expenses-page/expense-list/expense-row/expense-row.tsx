@@ -38,7 +38,11 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
   }, [])
 
   return (
-    <div className="flex" data-is-selected={isSelected} ref={refEl}>
+    <div
+      className="flex w-full py-2 px-4 border-b dark:border-gray-800 border-gray-200"
+      data-is-selected={isSelected}
+      ref={refEl}
+    >
       <div>
         <div>
           {expenseView.catParentTitle ? `${expenseView.catParentTitle} / ` : ''}{' '}
@@ -46,9 +50,9 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
         </div>
         <div>{expenseView.desc}</div>
       </div>
-      <div>
-        <div>{getMoney(expenseView.cost)}</div>
-        <div>
+      <div className="ml-auto text-right">
+        <div className="text-xl">{getMoney(expenseView.cost)}</div>
+        <div className="text-xs dark:text-gray-500 text-gray-400">
           {time} | {hours}:{minutes}
           {!!isToday && <Dot />}
         </div>

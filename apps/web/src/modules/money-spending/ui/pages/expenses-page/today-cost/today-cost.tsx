@@ -8,10 +8,12 @@ import { Dot } from '../dot'
 export const TodayCost = observer(() => {
   const { expensesViewStore } = useMoneySpendingContext()
   return (
-    <div>
-      <div>{t('expense.today')}</div>
-      <div>
-        <div>
+    <div className="flex items-center justify-center w-full h-10 border-b dark:border-gray-800 border-gray-200">
+      <div className="flex w-full items-center justify-center text-gray-500">
+        {t('expense.today')}
+      </div>
+      <div className="flex w-full items-center justify-center">
+        <div className="flex items-center gap-2">
           {expensesViewStore.todayCost}
           <Dot />
         </div>

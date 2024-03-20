@@ -1,18 +1,7 @@
 export const Dot = () => {
-  return <div></div>
+  return (
+    <div className="relative">
+      <span className="-top-1 left-0 absolute shadow w-2 h-2 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+    </div>
+  )
 }
-//
-// export const Dot = styled.span`
-//   &:after {
-//     content: '';
-//     display: inline-block;
-//     width: 5px;
-//     height: 5px;
-//     border-radius: 5px;
-//     margin-left: -5px;
-//     position: relative;
-//     left: 10px;
-//     margin-bottom: 2px;
-//     background-color: var(--clr-primary-text);
-//   }
-// `
