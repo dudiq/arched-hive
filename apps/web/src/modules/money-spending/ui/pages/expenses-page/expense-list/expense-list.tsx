@@ -32,13 +32,13 @@ export const ExpenseList = observer(() => {
         const isSelected = expenseView.id === selectedId
         const isScrollTo = isSelected && isFocusItem
         return (
-          <div key={key} data-expense-id={expenseView.id}>
+          <button className="w-full" key={key} data-expense-id={expenseView.id}>
             <ExpenseRow
               expenseView={expenseView}
               isSelected={isSelected}
               isScrollTo={isScrollTo}
             />
-          </div>
+          </button>
         )
       })}
     </div>

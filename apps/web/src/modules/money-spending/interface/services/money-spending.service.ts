@@ -1,4 +1,3 @@
-import { Routes } from '@pv/route/interface/routes'
 import { HistoryService } from '@pv/history/interface/history.service'
 import { t } from '@pv/i18n'
 import { MessageBoxService } from '@pv/message-box'
@@ -6,6 +5,7 @@ import { MoneySpendingAdapter } from '@pv/money-spending/infra/money-spending.ad
 import { ExpenseSelectionStore } from '@pv/money-spending/interface/stores/expense-selection.store'
 import { MoneySpendingStore } from '@pv/money-spending/interface/stores/money-spending.store'
 import { PouchService, PouchStore } from '@pv/pouches'
+import { Routes } from '@pv/route/interface/routes'
 
 import { isErr } from '@repo/result'
 import { Inject, Service } from '@repo/service'
@@ -15,13 +15,13 @@ import { LIMIT_DEFAULT } from '../constants'
 @Service()
 export class MoneySpendingService {
   constructor(
-    private messageBoxService= Inject(MessageBoxService),
-    private moneySpendingStore= Inject(MoneySpendingStore),
-    private moneySpendingAdapter= Inject(MoneySpendingAdapter),
-    private expenseSelectionStore= Inject(ExpenseSelectionStore),
-    private pouchService= Inject(PouchService),
-    private pouchStore= Inject(PouchStore),
-    private historyService= Inject(HistoryService),
+    private messageBoxService = Inject(MessageBoxService),
+    private moneySpendingStore = Inject(MoneySpendingStore),
+    private moneySpendingAdapter = Inject(MoneySpendingAdapter),
+    private expenseSelectionStore = Inject(ExpenseSelectionStore),
+    private pouchService = Inject(PouchService),
+    private pouchStore = Inject(PouchStore),
+    private historyService = Inject(HistoryService),
   ) {}
 
   async initialLoadData() {
@@ -74,7 +74,9 @@ export class MoneySpendingService {
   }
 
   async removeExpense(id: string) {
-    const isConfirmed = await this.messageBoxService.confirm(t('expense.confirmRemove'))
+    const isConfirmed = await this.messageBoxService.confirm(
+      t('expense.confirmRemove'),
+    )
     if (!isConfirmed) return
 
     this.moneySpendingStore.setIsLoading(true)
@@ -138,6 +140,7 @@ export class MoneySpendingService {
       // }
     }
     this.expenseSelectionStore.dropData()
+    this.moneySpendingStore.setSelectedCategoryId('')
 
     await this.reloadExpenses()
 

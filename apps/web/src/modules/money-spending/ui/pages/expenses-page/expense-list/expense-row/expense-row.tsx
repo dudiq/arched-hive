@@ -45,12 +45,14 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
       data-is-selected={isSelected}
       ref={refEl}
     >
-      <div>
+      <div className="flex flex-col items-start">
         <div>
           {expenseView.catParentTitle ? `${expenseView.catParentTitle} / ` : ''}{' '}
           {expenseView.catTitle}
         </div>
-        <div>{expenseView.desc}</div>
+        <div className="text-gray-400 dark:text-gray-500">
+          {expenseView.desc}
+        </div>
       </div>
       <div className="ml-auto text-right">
         <div className="text-xl">{getMoney(expenseView.cost)}</div>

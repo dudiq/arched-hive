@@ -15,7 +15,8 @@ export class ExpenseSelectionAction {
   ) {}
 
   handleSelectExpense(id: string) {
-    const nextId = this.expenseSelectionStore.currentExpenseView?.id === id ? '' : id
+    const nextId =
+      this.expenseSelectionStore.currentExpenseView?.id === id ? '' : id
     const expense = this.expensesViewStore.getExpenseViewById(nextId)
     if (!expense) {
       this.expenseSelectionStore.setCurrentExpenseView(null)
@@ -34,10 +35,6 @@ export class ExpenseSelectionAction {
 
   handleSelectCategoryId(id: string) {
     this.moneySpendingStore.setSelectedCategoryId(id)
-  }
-
-  handleDropSelectedCategory() {
-    this.moneySpendingStore.setSelectedCategoryId('')
   }
 
   handleAddNumber(value: string) {

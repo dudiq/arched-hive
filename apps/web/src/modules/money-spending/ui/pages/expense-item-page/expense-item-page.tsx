@@ -7,7 +7,7 @@ import { Layout } from '@pv/layout/ui'
 import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
 
 import { observer } from '@repo/service'
-import { Button, ScrollContainer } from '@repo/ui-kit'
+import { Button, ScrollContainer, Swap } from '@repo/ui-kit'
 
 import { Categories } from './categories'
 import { Desc } from './desc'
@@ -22,25 +22,19 @@ export const ExpenseItemPage = observer(() => {
   const { moneySpendingAction, expenseSelectionAction, moneySpendingStore } =
     useMoneySpendingContext()
 
-  useEffect(() => {
-    return () => {
-      expenseSelectionAction.handleSelectCategoryId('')
-    }
-  }, [expenseSelectionAction])
-
   return (
     <Layout>
       <ScrollContainer>
         <Categories />
-        {!!moneySpendingStore.isCalculatorVisible && (
-          <div className="mt-2 mx-2">
+        <Swap has={moneySpendingStore.isCalculatorVisible}>
+          <div className="mt-2 mx-2 flex flex-col gap-2">
             <Desc />
             <PadTitle />
             <PadBlock />
           </div>
-        )}
+        </Swap>
       </ScrollContainer>
-      {!focusStore.isTyping && (
+      <Swap has={!focusStore.isTyping}>
         <div className="absolute bottom-4 right-4">
           <Button
             shape="circle"
@@ -49,7 +43,7 @@ export const ExpenseItemPage = observer(() => {
             onClick={moneySpendingAction.handleOpenExpenseList}
           />
         </div>
-      )}
+      </Swap>
     </Layout>
   )
 })
