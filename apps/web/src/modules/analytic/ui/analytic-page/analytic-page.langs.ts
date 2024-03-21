@@ -11,6 +11,10 @@ addBlock({
         'All data',
         'Все данные',
       ],
+      details: [
+        'Details',
+        'Детали'
+      ],
       seasons: {
         winter: [
           'Winter',

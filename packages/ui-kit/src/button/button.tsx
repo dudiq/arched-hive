@@ -30,7 +30,7 @@ const variantMap: Record<ButtonVariant, string> = {
 }
 
 const baseClass =
-  'shadow-lg dark:shadow-slate-950 py-2.5 px-3 text-sm font-medium focus:outline-none border focus:z-10 focus:ring-4 focus:ring-gray-100 inline-flex gap-2'
+  'shadow-lg dark:shadow-slate-950 py-2.5 px-3 text-sm font-medium focus:outline-none border focus:z-10 focus:ring-4 focus:ring-gray-100 inline-flex gap-2 items-center'
 
 export function Button({
   children,

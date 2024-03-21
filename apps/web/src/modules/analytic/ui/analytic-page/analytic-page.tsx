@@ -14,7 +14,7 @@ import { HeaderPouchBlock } from '../header-pouch-block'
 
 import { AnalyticCategory } from './analytic-category'
 import { AnalyticExpenses } from './analytic-expenses'
-import { AnalyticHeader } from './header'
+import { AnalyticControl } from './header'
 
 export const AnalyticPage = observer(() => {
   const { analyticStore, analyticAction } = useAnalyticContext()
@@ -27,26 +27,36 @@ export const AnalyticPage = observer(() => {
   return (
     <Layout
       headerSlot={
-        <Header title={t('pages.analytic')} rightSlot={<HeaderPouchBlock />} />
+        <>
+          <Header
+            title={t('pages.analytic')}
+            rightSlot={<HeaderPouchBlock />}
+          />
+          <Separator />
+          <div className="mt-2">
+            <AnalyticControl />
+            <div className="flex h-12 items-center text-xl">
+              {t('analytic.total')}
+              <div className="ml-auto">{getMoney(analyticStore.totalCost)}</div>
+            </div>
+          </div>
+        </>
       }
       footerSlot={<Footer />}
     >
-      <div>
-        <AnalyticHeader />
-        <Swap is={analyticStore.isLoading} isSlot={<Loader />}>
-          <div>
-            {t('analytic.total')}
-            <div>{getMoney(analyticStore.totalCost)}</div>
-          </div>
-          <Separator />
-          <div>
-            <ScrollContainer>
-              <AnalyticCategory />
-              <AnalyticExpenses />
-            </ScrollContainer>
-          </div>
+      <ScrollContainer>
+        <Swap
+          is={analyticStore.isLoading}
+          isSlot={
+            <div className="w-full flex items-center justify-center min-h-64">
+              <Loader />
+            </div>
+          }
+        >
+          <AnalyticCategory />
+          <AnalyticExpenses />
         </Swap>
-      </div>
+      </ScrollContainer>
     </Layout>
   )
 })

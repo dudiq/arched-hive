@@ -1,1 +1,1 @@
-export * from './analytic-header'
+export * from './analytic-control'

@@ -3,6 +3,7 @@ import { useContainerClick } from '@pv/dom/interface/get-attr-from-element'
 import { getMoney } from '@pv/i18n'
 
 import { observer } from '@repo/service'
+import { Button, Icon, Swap } from '@repo/ui-kit'
 
 export const AnalyticCategory = observer(() => {
   const { analyticStore, analyticAction } = useAnalyticContext()
@@ -12,22 +13,44 @@ export const AnalyticCategory = observer(() => {
   )
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className="flex flex-col gap-4">
       {analyticStore.categoryReportView.map((item) => {
+        const isSelected = analyticStore.selectedCategoryId === item.node.id
+        const icon = isSelected ? 'ALeft' : 'Plus'
         return (
           <div key={item.node.id}>
-            <div data-id={item.node.id}>
-              <div>{item.node.title}</div>
-              <div>{getMoney(item.node.cost)}</div>
-            </div>
-            {item.children.map((child) => {
-              return (
-                <div key={child.id} data-id={child.id}>
-                  <div>{child.title}</div>
-                  <div>{getMoney(child.cost)}</div>
-                </div>
-              )
-            })}
+            <button
+              className="w-full flex text-lg text-gray-500 pr-2 border-b border-gray-300 dark:border-gray-800 py-1"
+              data-id={item.node.id}
+            >
+              <div className="flex items-center gap-2">
+                <Icon name={icon} />
+                {item.node.title}
+              </div>
+              <div className="ml-auto">{getMoney(item.node.cost)}</div>
+            </button>
+            <Swap has={!isSelected}>
+              <div className="flex flex-col mr-6">
+                {item.children.map((child) => {
+                  const isSelected =
+                    analyticStore.selectedCategoryId === child.id
+                  const icon = isSelected ? 'ALeft' : 'Plus'
+                  return (
+                    <button
+                      className="w-full flex ml-4 py-2 border-b border-gray-300 dark:border-gray-800"
+                      key={child.id}
+                      data-id={child.id}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon name={icon} />
+                        {child.title}
+                      </div>
+                      <div className="ml-auto">{getMoney(child.cost)}</div>
+                    </button>
+                  )
+                })}
+              </div>
+            </Swap>
           </div>
         )
       })}
