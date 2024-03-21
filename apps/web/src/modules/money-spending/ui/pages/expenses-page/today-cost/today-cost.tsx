@@ -13,7 +13,7 @@ export const TodayCost = observer(() => {
         {t('expense.today')}
       </div>
       <div className="flex w-full items-center justify-center">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           {expensesViewStore.todayCost}
           <Dot />
         </div>

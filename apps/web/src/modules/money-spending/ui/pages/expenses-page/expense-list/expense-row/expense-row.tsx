@@ -54,7 +54,7 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
       </div>
       <div className="ml-auto text-right">
         <div className="text-xl">{getMoney(expenseView.cost)}</div>
-        <div className="text-xs dark:text-gray-500 text-gray-400">
+        <div className="text-xs dark:text-gray-500 text-gray-400 flex items-center">
           {time} | {hours}:{minutes}
           {!!isToday && <Dot />}
         </div>

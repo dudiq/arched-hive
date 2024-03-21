@@ -10,7 +10,7 @@ export function Loader() {
 
 export function BlockLoader() {
   return (
-    <div className="fixed inset-0 flex items-center justify-center opacity-10">
+    <div className="fixed inset-0 flex items-center justify-center opacity-80 text-black bg-white dark:bg-gray-800 dark:text-white">
       <Loader />
     </div>
   )

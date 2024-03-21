@@ -9,24 +9,53 @@ import { usePadBlock } from './use-pad-block'
 import type { ReactNode } from 'react'
 
 function Row({ children }: { children: ReactNode }) {
-  return <>{children}</>
+  return (
+    <div className="flex items-center justify-center gap-1">{children}</div>
+  )
+}
+
+type ViewType = 'secondary' | 'apply'
+
+const viewMap: Record<ViewType, string> = {
+  secondary: 'bg-gray-100 dark:bg-gray-600',
+  apply: 'bg-green-300 dark:bg-green-600',
 }
 
 function PadButton({
   children,
+  disabled,
+  widthFill,
+  viewType,
+  'data-action': dataAction,
+  'data-value': dataValue,
 }: {
+  'data-action'?: ACTIONS_ENUM
+  'data-value'?: string
   children: ReactNode
-  viewType?: string
+  viewType?: ViewType
   disabled?: boolean
-  widthFill?: string
+  widthFill?: 'half'
 }) {
-  return <>{children}</>
+  const widthClass = widthFill === 'half' ? 'w-56' : 'w-28'
+  const bgClass = viewType ? viewMap[viewType] : ''
+  return (
+    <button
+      className={`h-12 border flex items-center justify-center border-gray-200 active:bg-gray-300 active:text-gray-600 active:border-gray-500 dark:border-gray-700 dark:active:bg-gray-600 dark:active:text-gray-800 dark:active:border-gray-500 ${widthClass} ${bgClass}`}
+      disabled={disabled}
+      data-action={dataAction}
+      data-value={dataValue}
+    >
+      {children}
+    </button>
+  )
 }
 
 export const PadBlock = observer(() => {
   const { handleClick, isEditing } = usePadBlock()
+  const updateAction = isEditing ? ACTIONS_ENUM.UPDATE : ACTIONS_ENUM.APPLY
+  const plusAction = isEditing ? undefined : ACTIONS_ENUM.PLUS
   return (
-    <div onClick={handleClick}>
+    <div className="flex flex-col mx-auto max-w-80 gap-1" onClick={handleClick}>
       <Row>
         <PadButton data-action={ACTIONS_ENUM.NUMBER} data-value="1">
           1
@@ -66,7 +95,7 @@ export const PadBlock = observer(() => {
           9
         </PadButton>
         <PadButton
-          data-action={isEditing ? '' : ACTIONS_ENUM.PLUS}
+          data-action={plusAction}
           viewType="secondary"
           disabled={isEditing}
         >
@@ -78,11 +107,7 @@ export const PadBlock = observer(() => {
         <PadButton data-action={ACTIONS_ENUM.NUMBER} data-value="0">
           0
         </PadButton>
-        <PadButton
-          data-action={!!isEditing && ACTIONS_ENUM.UPDATE}
-          widthFill="half"
-          viewType="apply"
-        >
+        <PadButton data-action={updateAction} widthFill="half" viewType="apply">
           {t(isEditing ? 'moneySpending.edit' : 'moneySpending.add')}
         </PadButton>
       </Row>
