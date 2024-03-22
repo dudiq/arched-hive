@@ -1,7 +1,7 @@
 import { guid } from '@pv/app/interface/guid'
 
 import { isErr, resultErr, resultOk } from '@repo/result'
-import { Adapter, AdapterClass, Inject } from '@repo/service'
+import { AdapterService, Inject } from '@repo/service'
 
 import { MoneySpendingErrors } from '../core/errors/money-spending.errors'
 
@@ -9,14 +9,13 @@ import { MoneySpendingDataProvider } from './money-spending.data-provider'
 
 import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
-@AdapterClass()
-export class MoneySpendingAdapter {
-  constructor(
-    private moneySpendingDataProvider = Inject(MoneySpendingDataProvider),
-  ) {}
+export const MoneySpendingAdapter = AdapterService(
+  class MoneySpendingAdapter {
+    constructor(
+      private moneySpendingDataProvider = Inject(MoneySpendingDataProvider),
+    ) {}
 
-  getExpenses = Adapter(
-    async ({
+    async getExpenses({
       pouchId,
       offset,
       limit,
@@ -24,7 +23,7 @@ export class MoneySpendingAdapter {
       pouchId: PouchId
       offset: number
       limit: number
-    }) => {
+    }) {
       const result = await this.moneySpendingDataProvider.getExpenses({
         offset,
         limit,
@@ -35,29 +34,27 @@ export class MoneySpendingAdapter {
           new MoneySpendingErrors.GetExpensesResponse(result.error),
         )
       return resultOk(result.data)
-    },
-  )
+    }
 
-  getCategories = Adapter(async () => {
-    const result = await this.moneySpendingDataProvider.getCategories()
-    if (isErr(result))
-      return resultErr(
-        new MoneySpendingErrors.GetCategoriesResponse(result.error),
-      )
-    return resultOk(result.data)
-  })
+    async getCategories() {
+      const result = await this.moneySpendingDataProvider.getCategories()
+      if (isErr(result))
+        return resultErr(
+          new MoneySpendingErrors.GetCategoriesResponse(result.error),
+        )
+      return resultOk(result.data)
+    }
 
-  removeExpense = Adapter(async (id: string) => {
-    const result = await this.moneySpendingDataProvider.removeExpense(id)
-    if (isErr(result))
-      return resultErr(
-        new MoneySpendingErrors.RemoveExpenseResponse(result.error),
-      )
-    return resultOk(result.data)
-  })
+    async removeExpense(id: string) {
+      const result = await this.moneySpendingDataProvider.removeExpense(id)
+      if (isErr(result))
+        return resultErr(
+          new MoneySpendingErrors.RemoveExpenseResponse(result.error),
+        )
+      return resultOk(result.data)
+    }
 
-  updateExpense = Adapter(
-    async ({
+    async updateExpense({
       id,
       time,
       desc,
@@ -71,7 +68,7 @@ export class MoneySpendingAdapter {
       cost: number
       catId: string
       pouchId: PouchId
-    }) => {
+    }) {
       const expense = {
         id,
         cost,
@@ -87,11 +84,9 @@ export class MoneySpendingAdapter {
           new MoneySpendingErrors.UpdateExpenseResponse(result.error),
         )
       return resultOk(result.data)
-    },
-  )
+    }
 
-  addExpense = Adapter(
-    async ({
+    async addExpense({
       desc,
       cost,
       catId,
@@ -101,7 +96,7 @@ export class MoneySpendingAdapter {
       cost: number
       catId: string
       pouchId: PouchId
-    }) => {
+    }) {
       const expense = {
         id: guid(),
         cost,
@@ -117,6 +112,6 @@ export class MoneySpendingAdapter {
           new MoneySpendingErrors.AddExpenseResponse(result.error),
         )
       return resultOk(result.data)
-    },
-  )
-}
+    }
+  },
+)

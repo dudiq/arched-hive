@@ -1,12 +1,15 @@
-import { Inject, Service } from '@repo/service'
+import './export-csv.langs'
+
 import { t } from '@pv/i18n'
 import { MessageBoxService } from '@pv/message-box'
 import { SettingsAdapter } from '@pv/settings/infra/settings.adapter'
-import { isErr } from '@repo/result'
-import { FileService } from '../file.service'
-import { SheetsService } from './sheets.service'
 
-import './export-csv.langs'
+import { isErr } from '@repo/result'
+import { Inject, Service } from '@repo/service'
+
+import { FileService } from '../file.service'
+
+import { SheetsService } from './sheets.service'
 
 @Service()
 export class ExportCsvService {
@@ -28,6 +31,7 @@ export class ExportCsvService {
   async exportData() {
     const result = await this.settingsAdapter.getAllData()
     if (isErr(result)) {
+      console.log('result', result)
       await this.messageBoxService.alert(t('settings.exportError'))
       return
     }

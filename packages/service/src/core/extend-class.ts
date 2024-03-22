@@ -1,1 +1,3 @@
-export type ExtendClass = { new (..._: any[]): {} }
+export type ExtendClass = {
+  new (..._: any[]): {}
+}
