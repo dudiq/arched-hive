@@ -1,6 +1,6 @@
-import { getAllMethodNames } from './service/get-all-method-names'
+import { declareClass } from './class/declare-class'
+import { getAllMethodNames } from './class/get-all-method-names'
 import { Adapter } from './adapter'
-import { declareClass } from './declare-class'
 
 import type { ExtendClass } from '../core/extend-class'
 

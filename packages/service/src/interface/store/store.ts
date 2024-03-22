@@ -1,4 +1,4 @@
-import { declareClass } from '../declare-class'
+import { declareClass } from '../class/declare-class'
 
 import { makeSimpleAutoObserv } from './make-simple-auto-observ'
 

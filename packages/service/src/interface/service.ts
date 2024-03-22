@@ -1,8 +1,7 @@
-import { declareClass } from '../declare-class'
+import { autoBind } from './class/auto-bind'
+import { declareClass } from './class/declare-class'
 
-import { autoBind } from './auto-bind'
-
-import type { ExtendClass } from '../../core/extend-class'
+import type { ExtendClass } from '../core/extend-class'
 
 export function Service() {
   return function extend<T extends ExtendClass>(Context: T) {

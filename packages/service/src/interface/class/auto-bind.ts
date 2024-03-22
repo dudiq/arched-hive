@@ -1,6 +1,6 @@
 import { getAllMethodNames } from './get-all-method-names'
 
-function bindContext(context: Object, field: string): void {
+function bindContext(context: object, field: string): void {
   // @ts-expect-error
   if (typeof context[field] === 'function') {
     // @ts-expect-error
@@ -8,10 +8,8 @@ function bindContext(context: Object, field: string): void {
   }
 }
 
-export function autoBind(context: Object): void {
+export function autoBind<T extends object>(context: T): void {
   const allMethods = getAllMethodNames(context)
-
-  // console.log('allMethods', context.constructor.name, allMethods)
 
   allMethods.forEach((method: string) => {
     bindContext(context, method)

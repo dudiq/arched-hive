@@ -1,5 +1,5 @@
-import { Routes } from '@pv/route/interface/routes'
 import { HistoryService } from '@pv/history/interface/history.service'
+import { Routes } from '@pv/route/interface/routes'
 
 import { Action, Inject } from '@repo/service'
 
@@ -37,7 +37,8 @@ export class CategoriesAction {
   }
 
   toggleSelectedCategoryId(categoryId: string) {
-    const nextCatId = this.categoriesStore.selectedCategoryId === categoryId ? '' : categoryId
+    const nextCatId =
+      this.categoriesStore.selectedCategoryId === categoryId ? '' : categoryId
 
     this.categoriesStore.setSelectedCategoryId(nextCatId)
   }

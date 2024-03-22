@@ -1,4 +1,4 @@
-import type { ExtendClass } from '../core/extend-class'
+import type { ExtendClass } from '../../core/extend-class'
 
 export function declareClass<T extends ExtendClass>(
   Context: T,

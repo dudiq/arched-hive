@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import inspect from 'vite-plugin-inspect'
-// import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 // @ts-expect-error
 import swcReact from 'vite-plugin-swc-react'
 
@@ -17,13 +17,16 @@ export default ({ mode }: any) => {
     // esbuild: false,
     cacheDir: './.cache',
     build: {
-      outDir: './dist',
+      outDir: '../dist',
       emptyOutDir: true,
     },
     clearScreen: false,
     base: process.env.VITE_BASE_URL,
     plugins: [
-      // VitePWA({ registerType: 'autoUpdate' }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        workbox: {},
+      }),
       swcReact({
         reactFresh: false,
         swcOptions: swcConf,
@@ -37,14 +40,5 @@ export default ({ mode }: any) => {
         '@pv': path.resolve(__dirname, './src/modules'),
       },
     },
-    // optimizeDeps: {
-    //   esbuildOptions: {
-    //     tsconfigRaw: {
-    //       compilerOptions: {
-    //         experimentalDecorators: true
-    //       }
-    //     }
-    //   }
-    // }
   })
 }

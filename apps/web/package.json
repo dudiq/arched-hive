@@ -1,5 +1,5 @@
 {
-  "name": "@repo/web",
+  "name": "coinote",
   "private": "true",
   "scripts": {
     "dev": "vite",
