@@ -7,7 +7,7 @@ const meta: Meta<typeof Link> = {
   component: Link,
 }
 
-export const Default: StoryFn<typeof Link> = (args) => {
+export const Default: StoryFn<typeof Link> = () => {
   return (
     <div className="flex gap-2">
       <Link icon="Plus">this is link with icon</Link>

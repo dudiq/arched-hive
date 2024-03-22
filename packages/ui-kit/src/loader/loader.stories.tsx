@@ -7,7 +7,7 @@ const meta: Meta<typeof Loader> = {
   component: Loader,
 }
 
-export const Default: StoryFn<typeof Loader> = (args) => {
+export const Default: StoryFn<typeof Loader> = () => {
   return (
     <div className="flex gap-2">
       <Loader />

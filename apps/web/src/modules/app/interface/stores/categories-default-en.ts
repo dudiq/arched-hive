@@ -1,8 +1,10 @@
-export const categoriesDefaultEn = [
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
+
+export const categoriesDefaultEn: CategoryEntity[] = [
   {
     id: '5a29b6a142c84c408b60f441',
     title: 'Clothes, shoes',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142784f408c024722',
@@ -19,7 +21,7 @@ export const categoriesDefaultEn = [
     title: 'clothes',
     catId: '5a29b6a142c84c408b60f441',
   },
-  { id: '5a29b6a1420afd40b28f75ea', title: 'Food', catId: null },
+  { id: '5a29b6a1420afd40b28f75ea', title: 'Food', catId: undefined },
   {
     id: '5a29b6a1426c004093476371',
     title: 'cafe/restaurant',
@@ -40,7 +42,7 @@ export const categoriesDefaultEn = [
     title: 'dinner',
     catId: '5a29b6a1420afd40b28f75ea',
   },
-  { id: '5a29b6a142ef4040992cbaca', title: 'Other', catId: null },
+  { id: '5a29b6a142ef4040992cbaca', title: 'Other', catId: undefined },
   {
     id: '5a29b6a142bd5b409db65b1d',
     title: 'help',
@@ -56,7 +58,7 @@ export const categoriesDefaultEn = [
     title: 'not planned',
     catId: '5a29b6a142ef4040992cbaca',
   },
-  { id: '5a29b6a142cd6740a567c3e2', title: 'Travels', catId: null },
+  { id: '5a29b6a142cd6740a567c3e2', title: 'Travels', catId: undefined },
   {
     id: '5a29b6a1420dc84090489cee',
     title: 'transport',
@@ -90,7 +92,7 @@ export const categoriesDefaultEn = [
   {
     id: '5a29b6a1426c2640b230815c',
     title: 'Personal transport',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142970240b329d8e3',
@@ -132,7 +134,11 @@ export const categoriesDefaultEn = [
     title: 'car wash',
     catId: '5a29b6a1426c2640b230815c',
   },
-  { id: '5a29b6a142539c40b39d5ec6', title: 'Public transport', catId: null },
+  {
+    id: '5a29b6a142539c40b39d5ec6',
+    title: 'Public transport',
+    catId: undefined,
+  },
   {
     id: '5a29b6a142eed840a39539ec',
     title: 'taxi',
@@ -163,7 +169,7 @@ export const categoriesDefaultEn = [
     title: 'ship',
     catId: '5a29b6a142539c40b39d5ec6',
   },
-  { id: '5a29b6a142d994408e7c13dd', title: 'House', catId: null },
+  { id: '5a29b6a142d994408e7c13dd', title: 'House', catId: undefined },
   {
     id: '5a29b6a142624940a849393e',
     title: 'household chemicals',
@@ -192,7 +198,7 @@ export const categoriesDefaultEn = [
   {
     id: '5a29b6a14218fc4086045f3a',
     title: 'Accounts and Services',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142764d409a6b5e24',
@@ -239,7 +245,11 @@ export const categoriesDefaultEn = [
     title: 'credit',
     catId: '5a29b6a14218fc4086045f3a',
   },
-  { id: '5a29b6a14227124082b4e98b', title: 'Beauty and care', catId: null },
+  {
+    id: '5a29b6a14227124082b4e98b',
+    title: 'Beauty and care',
+    catId: undefined,
+  },
   {
     id: '5a29b6a1428d8c40a7b51345',
     title: 'cosmetics',
@@ -265,7 +275,7 @@ export const categoriesDefaultEn = [
     title: 'procedures',
     catId: '5a29b6a14227124082b4e98b',
   },
-  { id: '5a29b6a14272fb4086aaed1a', title: 'Health', catId: null },
+  { id: '5a29b6a14272fb4086aaed1a', title: 'Health', catId: undefined },
   {
     id: '5a29b6a142543c408678b32d',
     title: 'pharmacy',
@@ -281,7 +291,7 @@ export const categoriesDefaultEn = [
     title: 'insurance',
     catId: '5a29b6a14272fb4086aaed1a',
   },
-  { id: '5a29b6a14260a0409d9c683f', title: 'Children', catId: null },
+  { id: '5a29b6a14260a0409d9c683f', title: 'Children', catId: undefined },
   {
     id: '5a29b6a14268cd4095b72250',
     title: 'toys',
@@ -292,7 +302,7 @@ export const categoriesDefaultEn = [
     title: 'kindergarten, school, university',
     catId: '5a29b6a14260a0409d9c683f',
   },
-  { id: '5a29b6a142798a408c797782', title: 'Education', catId: null },
+  { id: '5a29b6a142798a408c797782', title: 'Education', catId: undefined },
   {
     id: '5a29b6a142464a40b9929469',
     title: 'courses, trainings',
@@ -311,11 +321,11 @@ export const categoriesDefaultEn = [
   {
     id: '5a29b6a142cc1140a64d322f',
     title: 'Hobbies',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142d7f540b4f08a1a',
     title: 'Entertainment',
-    catId: null,
+    catId: undefined,
   },
 ]

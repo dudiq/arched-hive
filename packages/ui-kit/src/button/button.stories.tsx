@@ -9,7 +9,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
 }
 
-export const Default: StoryFn<typeof Button> = (args) => {
+export const Default: StoryFn<typeof Button> = () => {
   return (
     <div className="flex gap-2">
       <div className="flex gap-2 w-36 flex-col">

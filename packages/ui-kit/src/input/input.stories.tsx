@@ -9,7 +9,7 @@ const meta: Meta<typeof Input> = {
   component: Input,
 }
 
-export const Default: StoryFn<typeof Input> = (args) => {
+export const Default: StoryFn<typeof Input> = () => {
   const [value, setValue] = useState('')
   return (
     <div className="flex gap-2">

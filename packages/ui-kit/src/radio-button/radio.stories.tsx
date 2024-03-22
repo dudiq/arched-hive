@@ -9,7 +9,7 @@ const meta: Meta<typeof RadioButton> = {
   component: RadioButton,
 }
 
-export const Default: StoryFn<typeof RadioButton> = (args) => {
+export const Default: StoryFn<typeof RadioButton> = () => {
   const [state, setState] = useState('first')
   return (
     <div className="flex gap-2 flex-col">

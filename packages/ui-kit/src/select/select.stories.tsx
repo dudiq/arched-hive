@@ -9,7 +9,7 @@ const meta: Meta<typeof Select> = {
   component: Select,
 }
 
-export const Default: StoryFn<typeof Select> = (args) => {
+export const Default: StoryFn<typeof Select> = () => {
   const [state, setState] = useState('1')
   return (
     <div className="flex gap-2">

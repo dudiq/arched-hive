@@ -3,7 +3,7 @@ import { useContainerClick } from '@pv/dom/interface/get-attr-from-element'
 import { getMoney } from '@pv/i18n'
 
 import { observer } from '@repo/service'
-import { Button, Icon, Swap } from '@repo/ui-kit'
+import { Icon, Swap } from '@repo/ui-kit'
 
 export const AnalyticCategory = observer(() => {
   const { analyticStore, analyticAction } = useAnalyticContext()

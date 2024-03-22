@@ -1,8 +1,10 @@
-export const categoriesDefaultRu = [
+import type { CategoryEntity } from '@pv/categories/core/category.entity'
+
+export const categoriesDefaultRu: CategoryEntity[] = [
   {
     id: '5a29b6a142c84c408b60f441',
     title: 'Одежда, обувь',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142784f408c024722',
@@ -19,7 +21,7 @@ export const categoriesDefaultRu = [
     title: 'одежда',
     catId: '5a29b6a142c84c408b60f441',
   },
-  { id: '5a29b6a1420afd40b28f75ea', title: 'Питание', catId: null },
+  { id: '5a29b6a1420afd40b28f75ea', title: 'Питание', catId: undefined },
   {
     id: '5a29b6a1426c004093476371',
     title: 'кафе/ресторан',
@@ -40,7 +42,7 @@ export const categoriesDefaultRu = [
     title: 'обед',
     catId: '5a29b6a1420afd40b28f75ea',
   },
-  { id: '5a29b6a142ef4040992cbaca', title: 'Разное', catId: null },
+  { id: '5a29b6a142ef4040992cbaca', title: 'Разное', catId: undefined },
   {
     id: '5a29b6a142bd5b409db65b1d',
     title: 'помощь',
@@ -56,7 +58,7 @@ export const categoriesDefaultRu = [
     title: 'незапланированое',
     catId: '5a29b6a142ef4040992cbaca',
   },
-  { id: '5a29b6a142cd6740a567c3e2', title: 'Путешествия', catId: null },
+  { id: '5a29b6a142cd6740a567c3e2', title: 'Путешествия', catId: undefined },
   {
     id: '5a29b6a1420dc84090489cee',
     title: 'транспорт',
@@ -90,7 +92,7 @@ export const categoriesDefaultRu = [
   {
     id: '5a29b6a1426c2640b230815c',
     title: 'Личный транспорт',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142970240b329d8e3',
@@ -132,7 +134,7 @@ export const categoriesDefaultRu = [
     title: 'мойка',
     catId: '5a29b6a1426c2640b230815c',
   },
-  { id: '5a29b6a142539c40b39d5ec6', title: 'Транспорт', catId: null },
+  { id: '5a29b6a142539c40b39d5ec6', title: 'Транспорт', catId: undefined },
   {
     id: '5a29b6a142eed840a39539ec',
     title: 'такси',
@@ -163,7 +165,7 @@ export const categoriesDefaultRu = [
     title: 'корабль',
     catId: '5a29b6a142539c40b39d5ec6',
   },
-  { id: '5a29b6a142d994408e7c13dd', title: 'Дом', catId: null },
+  { id: '5a29b6a142d994408e7c13dd', title: 'Дом', catId: undefined },
   {
     id: '5a29b6a142624940a849393e',
     title: 'быт. химия',
@@ -189,7 +191,7 @@ export const categoriesDefaultRu = [
     title: 'канц. товары',
     catId: '5a29b6a142d994408e7c13dd',
   },
-  { id: '5a29b6a14218fc4086045f3a', title: 'Счета и услуги', catId: null },
+  { id: '5a29b6a14218fc4086045f3a', title: 'Счета и услуги', catId: undefined },
   {
     id: '5a29b6a142764d409a6b5e24',
     title: 'ипотека',
@@ -235,7 +237,7 @@ export const categoriesDefaultRu = [
     title: 'кредит',
     catId: '5a29b6a14218fc4086045f3a',
   },
-  { id: '5a29b6a14227124082b4e98b', title: 'Красота и уход', catId: null },
+  { id: '5a29b6a14227124082b4e98b', title: 'Красота и уход', catId: undefined },
   {
     id: '5a29b6a1428d8c40a7b51345',
     title: 'косметика',
@@ -261,7 +263,7 @@ export const categoriesDefaultRu = [
     title: 'процедуры',
     catId: '5a29b6a14227124082b4e98b',
   },
-  { id: '5a29b6a14272fb4086aaed1a', title: 'Здоровье', catId: null },
+  { id: '5a29b6a14272fb4086aaed1a', title: 'Здоровье', catId: undefined },
   {
     id: '5a29b6a142543c408678b32d',
     title: 'аптека',
@@ -277,7 +279,7 @@ export const categoriesDefaultRu = [
     title: 'страхование',
     catId: '5a29b6a14272fb4086aaed1a',
   },
-  { id: '5a29b6a14260a0409d9c683f', title: 'Дети', catId: null },
+  { id: '5a29b6a14260a0409d9c683f', title: 'Дети', catId: undefined },
   {
     id: '5a29b6a14268cd4095b72250',
     title: 'игрушки',
@@ -288,7 +290,7 @@ export const categoriesDefaultRu = [
     title: 'садик, школа, универ',
     catId: '5a29b6a14260a0409d9c683f',
   },
-  { id: '5a29b6a142798a408c797782', title: 'Образование', catId: null },
+  { id: '5a29b6a142798a408c797782', title: 'Образование', catId: undefined },
   {
     id: '5a29b6a142464a40b9929469',
     title: 'курсы, тренинги',
@@ -307,11 +309,11 @@ export const categoriesDefaultRu = [
   {
     id: '5a29b6a142cc1140a64d322f',
     title: 'Хобби',
-    catId: null,
+    catId: undefined,
   },
   {
     id: '5a29b6a142d7f540b4f08a1a',
     title: 'Развлечения',
-    catId: null,
+    catId: undefined,
   },
 ]

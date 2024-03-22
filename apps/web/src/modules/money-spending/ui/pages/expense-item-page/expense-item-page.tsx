@@ -1,10 +1,10 @@
 import './expense-item-page.langs'
 
-import { useEffect } from 'react'
 import { useInject } from '@pv/app/interface/use-inject'
 import { FocusStore } from '@pv/focus/interface/stores/focus.store'
 import { Layout } from '@pv/layout/ui'
-import { useMoneySpendingContext } from '@pv/money-spending/interface/use-money-spending-context'
+import { MoneySpendingAction } from '@pv/money-spending/interface/actions/money-spending.action'
+import { MoneySpendingStore } from '@pv/money-spending/interface/stores/money-spending.store'
 
 import { observer } from '@repo/service'
 import { Button, ScrollContainer, Swap } from '@repo/ui-kit'
@@ -19,8 +19,10 @@ export const ExpenseItemPage = observer(() => {
     focusStore: FocusStore,
   })
 
-  const { moneySpendingAction, expenseSelectionAction, moneySpendingStore } =
-    useMoneySpendingContext()
+  const { moneySpendingAction, moneySpendingStore } = useInject({
+    moneySpendingAction: MoneySpendingAction,
+    moneySpendingStore: MoneySpendingStore,
+  })
 
   return (
     <Layout>

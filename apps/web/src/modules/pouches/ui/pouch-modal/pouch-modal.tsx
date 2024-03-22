@@ -1,6 +1,7 @@
+import { useInject } from '@pv/app/interface/use-inject'
 import { useModal } from '@pv/app/interface/use-modal'
 import { t } from '@pv/i18n'
-import { usePouchContext } from '@pv/pouches/interface/use-pouch-context'
+import { PouchStore } from '@pv/pouches'
 
 import { observer } from '@repo/service'
 import { Link, Modal } from '@repo/ui-kit'
@@ -14,7 +15,9 @@ type Props = {
 }
 
 export const PouchModal = observer(({ onSelect }: Props) => {
-  const { pouchStore, pouchAction } = usePouchContext()
+  const { pouchStore } = useInject({
+    pouchStore: PouchStore,
+  })
 
   const { isOpen, handleOpen, handleClose } = useModal('pouch-modal')
 

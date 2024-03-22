@@ -1,10 +1,14 @@
 import { useCallback } from 'react'
+import { useInject } from '@pv/app/interface/use-inject'
 import { t } from '@pv/i18n'
-import { usePouchContext } from '@pv/pouches/interface/use-pouch-context'
-import { PouchItem } from '@pv/pouches/ui/pouch-modal/pouch-item'
 
 import { observer } from '@repo/service'
 import { Button } from '@repo/ui-kit'
+
+import { PouchAction } from '../../interface/actions/pouch.action'
+import { PouchStore } from '../../interface/stores/pouch.store'
+
+import { PouchItem } from './pouch-item'
 
 import type { PouchId } from '@pv/pouches/core/pouch.entity'
 
@@ -13,7 +17,10 @@ type Props = {
 }
 
 export const PouchModalContent = observer(({ onSelect }: Props) => {
-  const { pouchStore, pouchAction } = usePouchContext()
+  const { pouchStore, pouchAction } = useInject({
+    pouchStore: PouchStore,
+    pouchAction: PouchAction,
+  })
   const currentId = pouchStore.currentPouchId
 
   const handleSelect = useCallback(

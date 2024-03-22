@@ -9,7 +9,7 @@ const meta: Meta<typeof Toggle> = {
   component: Toggle,
 }
 
-export const Default: StoryFn<typeof Toggle> = (args) => {
+export const Default: StoryFn<typeof Toggle> = () => {
   const [state, setState] = useState(false)
   return (
     <div className="flex gap-2">
