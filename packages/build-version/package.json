@@ -1,0 +1,20 @@
+{
+  "name": "@repo/build-version",
+  "version": "0.0.1",
+  "private": true,
+  "source": "src/index.ts",
+  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "scripts": {
+    "clean": "rimraf dist ./.turbo",
+    "clean:node_modules": "rimraf ./node_modules",
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "devDependencies": {
+    "@repo/config-typescript": "workspace:*",
+    "@repo/eslint-config": "workspace:*"
+  },
+  "sideEffects": false
+}

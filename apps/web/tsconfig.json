@@ -1,0 +1,25 @@
+{
+  "extends": "@repo/config-typescript/react-app.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pv/*": ["./src/modules/*"]
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+    },
+  },
+  "types": [
+    "vite/client",
+  ],
+  "include": [
+    "tailwind.config.js",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["node_modules", "build"]
+}

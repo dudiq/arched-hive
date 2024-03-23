@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Coinote</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png" />
+    <!--<link rel="icon" type="image/png" sizes="32x32" href="layout/assets/favicon-32x32.png">-->
+    <!--<link rel="icon" type="image/png" sizes="16x16" href="layout/assets/favicon-16x16.png">-->
+    <!--<link rel="mask-icon" href="layout/assets/safari-pinned-tab.svg" color="#21374b">-->
+
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167x167.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-starturl" content="/" />
+    <link rel="icon" type="image/png" href="icons/favicon.png" />
+
+    <meta name="apple-mobile-web-app-title" content="Example" />
+    <meta name="application-name" content="Example" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta property="og:title" content="Example" />
+    <meta property="og:description" content="Example" />
+    <meta property="og:type" content="website" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+<!--    <link rel="stylesheet" href="./styles/styles.scss" />-->
+
+    <style>
+      html {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-size: 16px;
+        line-height: 1.428571429;
+      }
+    </style>
+    <style data-type="loader">
+      body {
+        background-color: #4d4d4d;
+      }
+      #loader {
+        background-color: #4d4d4d;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: #f0f0f0;
+        font-size: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #root,
+      #portal {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader">loading...</div>
+    <div id="root"></div>
+    <div id="portal"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>
