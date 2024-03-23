@@ -7,7 +7,6 @@ export const Controls = observer(() => {
   const { categoriesAction, categoriesStore } = useCategoriesContext()
   const isChildCategory = !categoriesStore.selectedCategory?.catId
   const isSelectedCategory = !!categoriesStore.selectedCategoryId
-  const plusButtonVariant = isSelectedCategory ? 'primary' : 'secondary'
 
   return (
     <div className="absolute right-6 bottom-3 flex flex-col gap-2">
@@ -32,7 +31,6 @@ export const Controls = observer(() => {
           shape="circle"
           iconName="Plus"
           iconSize="huge"
-          variant={plusButtonVariant}
           onClick={categoriesAction.handleAddCategory}
         />
       )}
