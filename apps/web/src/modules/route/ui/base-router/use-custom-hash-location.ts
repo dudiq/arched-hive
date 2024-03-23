@@ -6,13 +6,21 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import type { BaseLocationHook } from 'wouter'
 
-const currentLocation = (base: string, path = window.location.hash.replace('#', '')) =>
-  !path.toLowerCase().indexOf(base.toLowerCase()) ? path.slice(base.length) || '/' : `~${path}`
+const currentLocation = (
+  base: string,
+  path = window.location.hash.replace('#', ''),
+) =>
+  !path.toLowerCase().indexOf(base.toLowerCase())
+    ? path.slice(base.length) || '/'
+    : `~${path}`
 
 const base = ''
 
-export const useHashLocation: BaseLocationHook = () => {
-  const [{ path }, setState] = useState({ path: currentLocation(base), search: '' })
+export const useCustomHashLocation: BaseLocationHook = () => {
+  const [{ path }, setState] = useState({
+    path: currentLocation(base),
+    search: '',
+  })
   const prevHash = useRef(path)
 
   useEffect(() => {

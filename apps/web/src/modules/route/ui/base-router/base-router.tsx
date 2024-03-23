@@ -1,7 +1,7 @@
 import { Router } from 'wouter'
-import { useHashLocation } from 'wouter/use-hash-location'
 
 import { HistoryAdapter } from './history-adapter'
+import { useCustomHashLocation } from './use-custom-hash-location'
 
 import type { ReactNode } from 'react'
 
@@ -14,7 +14,7 @@ const baseUrl = import.meta.env.BASE_URL.slice(0, -1)
 
 export function BaseRouter({ children }: Props) {
   return (
-    <Router base={baseUrl} hook={useHashLocation}>
+    <Router base={baseUrl} hook={useCustomHashLocation}>
       <HistoryAdapter />
       {children}
     </Router>
