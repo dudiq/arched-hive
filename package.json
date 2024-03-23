@@ -14,7 +14,7 @@
     "clean": "turbo run clean",
     "clean:node_modules": "turbo run clean:node_modules && rimraf ./node_modules",
     "check-types": "turbo run check-types",
-    "build": "turbo run build check-types NODE_",
+    "build": "turbo run build check-types",
     "build:coinote": "turbo run build check-types --filter=coinote... --color",
     "dev": "turbo run dev --concurrency=25 --filter=coinote... --color",
     "lint": "turbo run lint",
