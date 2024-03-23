@@ -1,0 +1,28 @@
+{
+  "name": "@repo/unit-test",
+  "version": "0.0.4",
+  "private": true,
+  "bin": {
+    "repo-unit": "./cli.js"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist && rimraf .turbo",
+    "clean:node_modules": "rimraf node_modules"
+  },
+  "source": "./index.ts",
+  "types": "./index.ts",
+  "module": "./index",
+  "exports": {
+    ".": "./index.ts",
+    "./vitest.config": "./vitest.config.ts"
+  },
+  "dependencies": {
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "1.4.0"
+  },
+  "devDependencies": {
+    "@repo/config-typescript": "workspace:*",
+    "@repo/eslint-config": "workspace:*"
+  },
+  "sideEffects": false
+}

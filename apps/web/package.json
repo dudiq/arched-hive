@@ -1,0 +1,39 @@
+{
+  "name": "coinote",
+  "private": "true",
+  "scripts": {
+    "dev": "vite",
+    "check-types": "tsc",
+    "build": "pnpm check-types && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@repo/build-version": "workspace:*",
+    "@repo/errors": "workspace:*",
+    "@repo/logger": "workspace:*",
+    "@repo/result": "workspace:*",
+    "@repo/service": "workspace:*",
+    "@repo/ui-kit": "workspace:*",
+    "dexie": "^3.2.6",
+    "jr-translate": "^2.0.1",
+    "lz-string": "^1.5.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "wouter": "^3.0.2"
+  },
+  "devDependencies": {
+    "@repo/config-typescript": "workspace:*",
+    "@repo/environment": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/unit-test": "workspace:*",
+    "@swc/core": "^1.4.8",
+    "@types/react": "18.2.3",
+    "@types/react-dom": "18.2.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.1.6",
+    "vite-plugin-inspect": "^0.8.3",
+    "vite-plugin-linaria": "^1.0.0",
+    "vite-plugin-pwa": "^0.19.4",
+    "vite-plugin-swc-react": "^0.1.12"
+  }
+}

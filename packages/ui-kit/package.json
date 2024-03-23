@@ -1,0 +1,45 @@
+{
+  "name": "@repo/ui-kit",
+  "version": "0.0.2",
+  "private": true,
+  "source": "src/index.ts",
+  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "sideEffects": false,
+  "exports": {
+    "./tailwind.base.css": "./dist/tailwind.base.css",
+    "./default.tailwind.config": "./default.tailwind.config.cjs",
+    ".": "./dist/index.mjs"
+  },
+  "scripts": {
+    "types": "tsc",
+    "copy-css": "node copy-css.mjs",
+    "storybook": "pnpm copy-css && pnpm dev",
+    "check-types": "tsc",
+    "clean": "rimraf ./dist ./turbo",
+    "clean:node_modules": "rimraf ./node_modules",
+    "build": "pnpm copy-css && tsup",
+    "dev": "pnpm copy-css && tsup --watch",
+    "lint": "TIMING=1 eslint src --fix"
+  },
+  "devDependencies": {
+    "@repo/config-typescript": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/unit-test": "workspace:*",
+    "@storybook/react": "^8.0.0",
+    "@types/react": "18.2.3",
+    "@types/react-dom": "18.2.3",
+    "@types/react-transition-group": "^4.4.10",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.5"
+  },
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "flowbite-typography": "^1.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-transition-group": "^4.4.5",
+    "wouter": "^3.0.2"
+  }
+}

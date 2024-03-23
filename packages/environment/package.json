@@ -1,0 +1,24 @@
+{
+  "name": "@repo/environment",
+  "version": "0.0.4",
+  "bin": {
+    "repo-env": "./cli.js"
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "dotenv-expand": "^11.0.6",
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "standard": "^17.1.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "preferGlobal": true,
+  "scripts": {
+    "lint": "standard",
+    "clean:node_modules": "rimraf ./node_modules"
+  }
+}

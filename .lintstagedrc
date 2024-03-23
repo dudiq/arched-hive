@@ -1,0 +1,13 @@
+{
+    "apps/**/*.{js,jsx,ts,tsx,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "packages/!(environment)/**/*.{js,jsx,ts,tsx,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+}

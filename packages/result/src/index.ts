@@ -1,0 +1,6 @@
+export * from './core/types'
+export * from './interface/get-error-results'
+export * from './interface/get-ok-results'
+export * from './interface/is-err'
+export * from './interface/result-err'
+export * from './interface/result-ok'
