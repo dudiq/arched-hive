@@ -8,6 +8,5 @@ export function Inject<T>(ClassDefinition: Constructable<T>): T {
     return ClassDefinition.instance()
   }
 
-  debugger
   throw new Error('Class definition must be instantiated')
 }

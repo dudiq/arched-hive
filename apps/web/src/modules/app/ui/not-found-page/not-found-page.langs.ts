@@ -5,7 +5,11 @@ addBlock({
     notFound: {
       title: [
         'Seems page not found',
-        'Похоже страницы не существует',
+        'Похоже такой страницы не существует',
+      ],
+      goToMain: [
+        'Return to main',
+        'Вернуться на главную'
       ]
     },
   },

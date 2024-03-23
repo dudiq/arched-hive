@@ -29,7 +29,6 @@ export const Categories = observer(() => {
           <Button
             iconName="ALeft"
             iconSize="big"
-            variant="flat"
             onClick={moneySpendingAction.handleDropSelectedCategory}
           >
             {moneySpendingStore.parentCategoryTitle}

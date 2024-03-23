@@ -30,7 +30,7 @@ export function PouchItem({ pouch, onRemove, isSelected, onSelect }: Props) {
       </div>
       {!!onRemove && (
         <div className="ml-auto">
-          <Button variant="flat" onClick={handleRemove}>
+          <Button onClick={handleRemove}>
             <div className="text-red-500">
               <Icon name="Trash" />
             </div>
