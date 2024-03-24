@@ -21,7 +21,7 @@ export default ({ mode }: any) => {
     // esbuild: false,
     cacheDir: './.cache',
     build: {
-      outDir: '../dist',
+      outDir: '../../../docs',
       emptyOutDir: true,
     },
     clearScreen: false,
