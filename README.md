@@ -2,7 +2,9 @@
 
 `Arched Hive` - is a proposed approach for organizing a frontend application based on DDD, Hexagon, and other similar practices.
 
-With example of working project
+With example [https://dudiq.github.io/arched-hive/](https://dudiq.github.io/improved-lamp/)
+
+See this monorepo source code to understand, how to implement this approach
 
 Map of layer relations:
 
@@ -94,7 +96,3 @@ In this example, Module A and Module B both depend on shared logic provided by M
 This helps break the circular dependency between Module A and Module B and provides a more modular and maintainable codebase.
 
 ![Scheme](scheme/modules-relation.png 'Modules relation')
-
-Here's an example of how this approach works in practice: [https://dudiq.github.io/improved-lamp/](https://dudiq.github.io/improved-lamp/)
-
-And code example in `./src` folder
