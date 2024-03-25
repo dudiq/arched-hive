@@ -1,7 +1,7 @@
 {
   "name": "arched-hive",
   "appName": "Coinote",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "private": true,
   "packageManager": "pnpm@8.15.4",
   "workspaces": [

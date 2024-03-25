@@ -1,4 +1,4 @@
-import { Link } from '@repo/ui-kit'
+import { Button } from '@repo/ui-kit'
 
 import type { IconName } from '@repo/ui-kit'
 import type { ReactNode } from 'react'
@@ -10,8 +10,10 @@ type Props = {
 }
 export function RowBlock({ children, icon, onClick }: Props) {
   return (
-    <div onClick={onClick}>
-      <Link icon={icon}>{children}</Link>
+    <div>
+      <Button iconName={icon} onClick={onClick}>
+        {children}
+      </Button>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { t } from '@pv/i18n'
 import { PouchStore } from '@pv/pouches'
 
 import { observer } from '@repo/service'
-import { Link, Modal } from '@repo/ui-kit'
+import { Icon, Modal } from '@repo/ui-kit'
 
 import { PouchModalContent } from './pouch-modal-content'
 
@@ -23,9 +23,13 @@ export const PouchModal = observer(({ onSelect }: Props) => {
 
   return (
     <>
-      <Link icon="Wallet" onClick={handleOpen}>
+      <button
+        className="flex items-center gap-2 text-gray-400 underline"
+        onClick={handleOpen}
+      >
+        <Icon name="Wallet" />
         {pouchStore.currentPouchName}
-      </Link>
+      </button>
       <Modal onClose={handleClose} isOpen={isOpen}>
         <Modal.Header
           title={t('pouchBlock.modalTitle')}

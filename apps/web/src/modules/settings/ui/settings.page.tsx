@@ -63,7 +63,7 @@ export const SettingsPage = observer(() => {
             </div>
           </div>
           <Buttons />
-          <div className="text-right">
+          <div className="text-right mt-4">
             <BuildVersion />
           </div>
         </div>
