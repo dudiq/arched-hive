@@ -13,7 +13,7 @@ export const AnalyticCategory = observer(() => {
   )
 
   return (
-    <div onClick={handleClick} className="flex flex-col gap-4">
+    <div onClick={handleClick} className="flex flex-col gap-4 px-4">
       {analyticStore.categoryReportView.map((item) => {
         const isSelected = analyticStore.selectedCategoryId === item.node.id
         const icon = isSelected ? 'ALeft' : 'Plus'

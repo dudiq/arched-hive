@@ -9,7 +9,7 @@ export function TreeItem({ isActive, isRoot, title, categoryId }: Props) {
   const activeClass = isActive
     ? 'underline text-gray-400 dark:text-gray-600'
     : ''
-  const rootClass = isRoot ? '' : 'pl-6'
+  const rootClass = isRoot ? 'pl-4' : 'pl-8'
   return (
     <div
       className={`p-2 cursor-pointer ${activeClass} ${rootClass}`}
