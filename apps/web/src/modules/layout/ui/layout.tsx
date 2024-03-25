@@ -17,7 +17,7 @@ export const Layout = ({ children, headerSlot, footerSlot }: Props) => {
           <Separator />
         </div>
       </Swap>
-      <div className="flex flex-1 px-2">
+      <div className="flex flex-1">
         <div className="flex flex-col relative flex-1 w-full">{children}</div>
       </div>
       <Swap has={!!footerSlot}>

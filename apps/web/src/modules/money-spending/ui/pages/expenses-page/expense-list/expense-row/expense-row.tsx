@@ -41,11 +41,11 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
 
   return (
     <div
-      className={`flex w-full py-2 px-1 border-b dark:border-gray-800 border-gray-200 ${selectedClass}`}
+      className={`flex w-full py-2 px-2 border-b dark:border-gray-800 border-gray-200 ${selectedClass}`}
       data-is-selected={isSelected}
       ref={refEl}
     >
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start pl-2">
         <div className="text-left">
           {expenseView.catParentTitle ? `${expenseView.catParentTitle} / ` : ''}{' '}
           {expenseView.catTitle}
@@ -54,7 +54,7 @@ export function ExpenseRow({ expenseView, isSelected, isScrollTo }: Props) {
           {expenseView.desc}
         </div>
       </div>
-      <div className="ml-auto text-right">
+      <div className="ml-auto text-right pr-2">
         <div className="text-xl">{getMoney(expenseView.cost)}</div>
         <div className="text-xs dark:text-gray-500 text-gray-400 flex items-center">
           {time} | {hours}:{minutes}
