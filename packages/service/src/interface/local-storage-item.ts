@@ -9,6 +9,8 @@ type Maybe<T> = T | undefined | null
 
 const PREFIX = '@repo:'
 
+const cache: Record<string, boolean> = {}
+
 export class LocalStorageItem<T> {
   value: Maybe<T>
 
@@ -16,6 +18,13 @@ export class LocalStorageItem<T> {
     private readonly key: string,
     private readonly options?: OptionsType<T>,
   ) {
+    if (cache[this.usedKey]) {
+      throw new Error(
+        `Cache key "${key}" is already in use for "LocalStorageItem"`,
+      )
+    }
+    cache[this.usedKey] = true
+
     this.value = this.getValue()
     window.addEventListener('storage', (event) => {
       if (!event.key || event.key === this.usedKey) {

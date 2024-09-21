@@ -4,20 +4,6 @@ export function declareClass<T extends ExtendClass>(
   Context: T,
   name: string,
 ): T {
-  class InstanceClass extends Context {
-    static instanceLink: InstanceClass
-
-    constructor(...args: any[]) {
-      super(...args)
-    }
-
-    static instance(): InstanceClass {
-      if (!InstanceClass.instanceLink)
-        InstanceClass.instanceLink = new InstanceClass()
-      return InstanceClass.instanceLink
-    }
-  }
-
-  Object.defineProperty(InstanceClass, 'name', { value: name })
-  return InstanceClass
+  Object.defineProperty(Context, 'name', { value: name })
+  return Context
 }
