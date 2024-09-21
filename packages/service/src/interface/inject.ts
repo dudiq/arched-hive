@@ -1,36 +1,26 @@
 import type { Constructable } from '../core/constructable'
 
-export function Inject<T>(ClassDefinition: Constructable<T>): T {
-  if (
-    'instance' in ClassDefinition &&
-    typeof ClassDefinition.instance === 'function'
-  ) {
+type InjectClassType<T> = {
+  instance?: () => T
+  instanceLink?: T
+}
+
+type TClass<T> = Constructable<T> & InjectClassType<T>
+
+export function Inject<T>(ClassDefinition: TClass<T>): T {
+  if (typeof ClassDefinition.instance === 'function') {
     return ClassDefinition.instance()
   }
 
-  // eslint-disable-next-line eslint-comments/no-restricted-disable
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  ClassDefinition.instance = function () {
-    if ('instanceLink' in ClassDefinition) {
+  function instance(): T {
+    if (ClassDefinition.instanceLink) {
       return ClassDefinition.instanceLink
     }
-    // eslint-disable-next-line eslint-comments/no-restricted-disable
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     ClassDefinition.instanceLink = new ClassDefinition()
-    // eslint-disable-next-line eslint-comments/no-restricted-disable
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     return ClassDefinition.instanceLink
   }
 
-  if (
-    'instance' in ClassDefinition &&
-    typeof ClassDefinition.instance === 'function'
-  ) {
-    return ClassDefinition.instance()
-  }
+  ClassDefinition.instance = instance
 
-  throw new Error('Class definition must be instantiated')
+  return ClassDefinition.instance()
 }
