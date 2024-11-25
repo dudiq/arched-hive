@@ -1,6 +1,6 @@
 import { AnalyticAction } from '@pv/analytic/interface/actions/analytic.action'
 import { AnalyticStore } from '@pv/analytic/interface/stores/analytic.store'
-import { useInject } from '@pv/app/interface/use-inject'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 import { Button, Icon } from '@repo/ui-kit'

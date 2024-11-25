@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useInject } from '@pv/app/interface/use-inject'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { FocusAction } from '../interface/action/focus.action'
 

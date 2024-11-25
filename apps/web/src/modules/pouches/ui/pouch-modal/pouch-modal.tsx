@@ -1,7 +1,7 @@
-import { useInject } from '@pv/app/interface/use-inject'
-import { useModal } from '@pv/app/interface/use-modal'
 import { t } from '@pv/i18n'
 import { PouchStore } from '@pv/pouches'
+import { useInject } from '@pv/service/interface/use-inject'
+import { useModal } from '@pv/service/interface/use-modal'
 
 import { observer } from '@repo/service'
 import { Icon, Modal } from '@repo/ui-kit'

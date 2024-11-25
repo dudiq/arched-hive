@@ -1,6 +1,6 @@
-import { useInject } from '@pv/app/interface/use-inject'
 import { RouterHistory } from '@pv/history/interface/history.service/router-history'
 import { HistoryStore } from '@pv/history/interface/history.store'
+import { useInject } from '@pv/service/interface/use-inject'
 import { useLocation } from 'wouter'
 
 export function HistoryAdapter() {

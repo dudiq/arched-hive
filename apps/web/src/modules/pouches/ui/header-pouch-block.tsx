@@ -1,6 +1,6 @@
-import { useInject } from '@pv/app/interface/use-inject'
 import { MoneySpendingAction } from '@pv/money-spending/interface/actions/money-spending.action'
 import { PouchBlock } from '@pv/pouches'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 

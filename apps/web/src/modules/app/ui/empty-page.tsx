@@ -1,7 +1,7 @@
 import { EmptyAction } from '@pv/app/interface/actions/empty.action'
 import { EmptyStore } from '@pv/app/interface/stores/empty.store'
-import { useInject } from '@pv/app/interface/use-inject'
 import { t } from '@pv/i18n'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 import { Button, RadioButton } from '@repo/ui-kit'

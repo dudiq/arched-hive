@@ -1,7 +1,7 @@
 import { AnalyticStore } from '@pv/analytic/interface/stores/analytic.store'
-import { useInject } from '@pv/app/interface/use-inject'
 import { t } from '@pv/i18n'
 import { ExpenseRow } from '@pv/money-spending'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 import { Separator } from '@repo/ui-kit'

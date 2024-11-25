@@ -1,5 +1,5 @@
-import { useInject } from '@pv/app/interface/use-inject'
 import { t } from '@pv/i18n'
+import { useInject } from '@pv/service/interface/use-inject'
 import { SettingsAction } from '@pv/settings/interface/actions/settings.action'
 
 import { observer } from '@repo/service'

@@ -1,5 +1,5 @@
-import { guid } from '@pv/app/interface/guid'
 import { PouchesErrors } from '@pv/pouches/core/errors/pouches.errors'
+import { guid } from '@pv/service/interface/guid'
 
 import { isErr, resultErr, resultOk } from '@repo/result'
 import { AdapterService, Inject } from '@repo/service'

@@ -1,4 +1,4 @@
-import {useInject} from '@pv/app/interface/use-inject';
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { AnalyticAction } from './actions/analytic.action'
 import { AnalyticStore } from './stores/analytic.store'

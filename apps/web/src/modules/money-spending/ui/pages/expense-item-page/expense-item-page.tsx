@@ -1,10 +1,10 @@
 import './expense-item-page.langs'
 
-import { useInject } from '@pv/app/interface/use-inject'
 import { FocusStore } from '@pv/focus/interface/stores/focus.store'
 import { Layout } from '@pv/layout/ui'
 import { MoneySpendingAction } from '@pv/money-spending/interface/actions/money-spending.action'
 import { MoneySpendingStore } from '@pv/money-spending/interface/stores/money-spending.store'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 import { Button, ScrollContainer, Swap } from '@repo/ui-kit'

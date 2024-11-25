@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { useInject } from '@pv/app/interface/use-inject'
 import { t } from '@pv/i18n'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 import { Button } from '@repo/ui-kit'

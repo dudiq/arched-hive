@@ -1,6 +1,6 @@
 import { t } from '@pv/i18n'
-import { guid } from '@pv/app/interface/guid'
 import { MessageBoxService } from '@pv/message-box'
+import { guid } from '@pv/service/interface/guid'
 
 import { isErr } from '@repo/result'
 import { Inject, Service } from '@repo/service'
@@ -22,7 +22,9 @@ export class CategoriesService {
     const category = this.categoriesStore.selectedCategory
     if (!category) return
 
-    const isConfirmed = await this.messageBoxService.confirm(t('category.confirmRemove'))
+    const isConfirmed = await this.messageBoxService.confirm(
+      t('category.confirmRemove'),
+    )
     if (!isConfirmed) return
 
     const result = await this.categoriesAdapter.removeCategory(category.id)
@@ -44,7 +46,10 @@ export class CategoriesService {
     )
     if (!isApplied) return
 
-    const result = await this.categoriesAdapter.updateCategoryTitle(category.id, newTitle)
+    const result = await this.categoriesAdapter.updateCategoryTitle(
+      category.id,
+      newTitle,
+    )
     if (isErr(result)) {
       // TODO: add error processing
       return
@@ -54,9 +59,10 @@ export class CategoriesService {
 
   async addCategory() {
     const parentCategoryId = this.categoriesStore.selectedCategoryId
-    const { isApplied, data: categoryName } = await this.messageBoxService.prompt(
-      parentCategoryId ? t('category.addSubNew') : t('category.addNew'),
-    )
+    const { isApplied, data: categoryName } =
+      await this.messageBoxService.prompt(
+        parentCategoryId ? t('category.addSubNew') : t('category.addNew'),
+      )
     if (!isApplied) return
 
     const node: CategoryEntity = {

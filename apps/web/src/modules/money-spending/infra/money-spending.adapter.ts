@@ -1,4 +1,4 @@
-import { guid } from '@pv/app/interface/guid'
+import { guid } from '@pv/service/interface/guid'
 
 import { isErr, resultErr, resultOk } from '@repo/result'
 import { AdapterService, Inject } from '@repo/service'
