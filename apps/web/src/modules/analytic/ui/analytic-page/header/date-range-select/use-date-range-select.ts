@@ -2,10 +2,13 @@ import { useCallback, useMemo } from 'react'
 import { REPORT_VIEW } from '@pv/analytic/core/constants'
 import { useAnalyticContext } from '@pv/analytic/interface/use-analytic-context'
 import { titleMap } from '@pv/analytic/ui/analytic-page/header/date-range-select/title-map'
-import { useLanguageContext } from '@pv/language'
+import { LangStore } from '@pv/language'
+import { useInject } from '@pv/service/interface/use-inject'
 
 export function useDateRangeSelect() {
-  const { langStore } = useLanguageContext()
+  const { langStore } = useInject({
+    langStore: LangStore,
+  })
   const { analyticStore, analyticAction } = useAnalyticContext()
 
   const lang = langStore.currentLanguage

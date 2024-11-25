@@ -1,3 +1,4 @@
 export * from './entities/theme.entity'
-export * from './interface/use-theme-context'
+export * from './interface/actions/handle-toggle-theme'
+export * from './interface/stores/theme.store'
 export * from './ui/theme-define'

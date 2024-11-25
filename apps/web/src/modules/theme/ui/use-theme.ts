@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
-import { useThemeContext } from '@pv/theme'
+import { useInject } from '@pv/service/interface/use-inject'
+
+import { ThemeStore } from '../interface/stores/theme.store'
 
 import { getClassName, getClearedClass } from './classes'
 
@@ -8,7 +10,9 @@ const ANIMATE_CLASS = 'theme-animate'
 const CHANGE_TIMEOUT = 1200
 
 export function useTheme() {
-  const { themeStore } = useThemeContext()
+  const { themeStore } = useInject({
+    themeStore: ThemeStore,
+  })
 
   useEffect(() => {
     const themeValue = themeStore.currentTheme

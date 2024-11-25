@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
-import { useLanguageContext } from '@pv/language'
+import { LangStore } from '@pv/language'
+import { useInject } from '@pv/service/interface/use-inject'
 
 import { observer } from '@repo/service'
 
@@ -10,6 +11,9 @@ type Props = {
 }
 
 export const Lang = observer(({ children }: Props) => {
-  const { langStore } = useLanguageContext()
+  const { langStore } = useInject({
+    langStore: LangStore,
+  })
+
   return <Fragment key={langStore.currentLanguage}>{children}</Fragment>
 })
