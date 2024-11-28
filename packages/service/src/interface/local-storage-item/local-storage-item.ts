@@ -1,5 +1,9 @@
 import { makeObservable, observable } from 'mobx'
 
+import { Container } from '../container'
+
+import { getStorage } from './storage/get-storage'
+
 type OptionsType<T> = {
   initialValue: T
   prefix?: string
@@ -9,7 +13,16 @@ type Maybe<T> = T | undefined | null
 
 const PREFIX = '@repo:'
 
-const cache: Record<string, boolean> = {}
+const cache: Record<string, LocalStorageItem<unknown>> = {}
+
+Container.addCleaner(() => {
+  Object.keys(cache).forEach((key) => {
+    cache[key].dispose()
+    delete cache[key]
+  })
+})
+
+const storage = getStorage()
 
 export class LocalStorageItem<T> {
   value: Maybe<T>
@@ -23,34 +36,36 @@ export class LocalStorageItem<T> {
         `Cache key "${key}" is already in use for "LocalStorageItem"`,
       )
     }
-    cache[this.usedKey] = true
+    cache[this.usedKey] = this
 
     this.value = this.getValue()
-    window.addEventListener('storage', (event) => {
-      if (!event.key || event.key === this.usedKey) {
-        this.value = this.getValue()
-      }
-    })
+    storage.onStorage(this.onStorage)
 
     makeObservable(this, {
       value: observable,
     })
   }
 
-  get usedKey() {
+  private onStorage = (event: StorageEvent): void => {
+    if (!event.key || event.key === this.usedKey) {
+      this.value = this.getValue()
+    }
+  }
+
+  get usedKey(): string {
     return `${this.options?.prefix || PREFIX}-${this.key}`
   }
 
-  set(value: T) {
+  set(value: T): void {
     this.value = value
     try {
       const storedValue = JSON.stringify({ value })
-      window.localStorage.setItem(this.usedKey, storedValue)
+      storage.setItem(this.usedKey, storedValue)
     } catch (e) {}
   }
 
   private getValue(): Maybe<T> {
-    const storedValue = window.localStorage.getItem(this.usedKey)
+    const storedValue = storage.getItem(this.usedKey)
     if (!storedValue) {
       return this.options?.initialValue
     }
@@ -61,7 +76,11 @@ export class LocalStorageItem<T> {
     } catch (e) {}
   }
 
-  remove() {
-    return window.localStorage.removeItem(this.usedKey)
+  remove(): void {
+    return storage.removeItem(this.usedKey)
+  }
+
+  dispose(): void {
+    storage.offStorage(this.onStorage)
   }
 }

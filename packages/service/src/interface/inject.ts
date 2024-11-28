@@ -1,11 +1,29 @@
+import { Container } from './container'
+
 import type { Constructable } from '../core/constructable'
 
 type InjectClassType<T> = {
   instance?: () => T
-  instanceLink?: T
+  instanceKey?: string
 }
 
 type TClass<T> = Constructable<T> & InjectClassType<T>
+
+type TCache<T> = Record<string, T>
+
+const cache: TCache<Constructable<unknown>> = {}
+
+let id = 0
+function genKey() {
+  id++
+  return String(id)
+}
+
+Container.addCleaner(() => {
+  Object.keys(cache).forEach((key) => {
+    delete cache[key]
+  })
+})
 
 export function Inject<T>(ClassDefinition: TClass<T>): T {
   if (typeof ClassDefinition.instance === 'function') {
@@ -13,11 +31,17 @@ export function Inject<T>(ClassDefinition: TClass<T>): T {
   }
 
   function instance(): T {
-    if (ClassDefinition.instanceLink) {
-      return ClassDefinition.instanceLink
+    if (!ClassDefinition.instanceKey) {
+      ClassDefinition.instanceKey = genKey()
     }
-    ClassDefinition.instanceLink = new ClassDefinition()
-    return ClassDefinition.instanceLink
+    if (cache[ClassDefinition.instanceKey]) {
+      return cache[ClassDefinition.instanceKey] as T
+    }
+
+    const instance = new ClassDefinition()
+    // @ts-expect-error
+    cache[ClassDefinition.instanceKey] = instance
+    return instance
   }
 
   ClassDefinition.instance = instance
