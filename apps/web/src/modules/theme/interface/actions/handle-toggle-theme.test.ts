@@ -25,4 +25,14 @@ describe('toggle-theme', () => {
 
     expect(themeStore.currentTheme).toBe('light')
   })
+
+  it('should mock theme store', () => {
+    Container.replace(ThemeStore, {
+      currentTheme: 'dark',
+    })
+
+    const themeStore = Inject(ThemeStore)
+
+    expect(themeStore.currentTheme).toBe('dark')
+  })
 })

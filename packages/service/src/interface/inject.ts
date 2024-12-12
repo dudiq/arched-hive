@@ -38,7 +38,7 @@ export function Inject<T>(ClassDefinition: TClass<T>): T {
       return cache[ClassDefinition.instanceKey] as T
     }
 
-    const instance = new ClassDefinition()
+    const instance = Container.getInstance(ClassDefinition)
     // @ts-expect-error
     cache[ClassDefinition.instanceKey] = instance
     return instance
