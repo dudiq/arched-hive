@@ -19,6 +19,8 @@ export class Container {
 
   static clear(): void {
     cleaners.forEach((cleaner) => cleaner())
+    declarations.isEnabled = false
+    declarations.list = []
   }
 
   static replace<T>(base: Constructable<T>, replacer: Partial<T>): void {

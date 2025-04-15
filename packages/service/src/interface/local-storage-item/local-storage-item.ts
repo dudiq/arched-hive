@@ -77,7 +77,8 @@ export class LocalStorageItem<T> {
   }
 
   remove(): void {
-    return storage.removeItem(this.usedKey)
+    storage.removeItem(this.usedKey)
+    this.value = this.getValue()
   }
 
   dispose(): void {

@@ -85,6 +85,5 @@ export function getRangeByViewType({
   viewDate: number
   viewType: REPORT_VIEW
 }) {
-  const res = startDateByView[viewType](viewDate)
-  return res
+  return startDateByView[viewType](viewDate)
 }
