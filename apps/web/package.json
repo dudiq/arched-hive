@@ -5,7 +5,8 @@
     "dev": "vite",
     "check-types": "tsc",
     "build": "pnpm check-types && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:unit": "repo-unit"
   },
   "dependencies": {
     "@repo/build-version": "workspace:*",
