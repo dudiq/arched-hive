@@ -19,7 +19,7 @@ making direct calls to the server or database.
 
 Top level:
 
-- `Core`. It's entities, value-objects, errors, enums, and etc types
+- `Core`. It's entities, value-objects, errors, domain mappers, enums, and etc types
 - `UI`. This is just the user interface layer, which **only** handles components and their related functionality. It should not contain any business logic. If you need to include some logic, it should be encapsulated within actions.
 - `Interface`. This part of the application focuses on managing the logic and control of data structures through UI actions. It serves as the main point of interaction with other modules in the system.
 - `Infra`. This level is responsible for handling external communication with services such as databases, servers, and other modules. It acts as an interface between the module and the outside world. Other modules cannot access this level directly, and instead, they use services or actions to access the infrastructure.
